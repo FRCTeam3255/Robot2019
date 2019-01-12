@@ -24,9 +24,9 @@ public class Intake extends Subsystem {
  private DoubleSolenoid rightSolenoid = null;
 
 public Intake(){
-intakeTalon = new SN_TalonSRX(RobotMap.INTAKE_TALON); 
-leftSolenoid = new DoubleSolenoid(RobotMap.INTAKE_LEFT_SOLENOID_A, RobotMap.INTAKE_LEFT_SOLENOID_B);
-rightSolenoid = new DoubleSolenoid(RobotMap.INTAKE_RIGHT_SOLENOID_A, RobotMap.INTAKE_RIGHT_SOLENOID_B);
+  intakeTalon = new SN_TalonSRX(RobotMap.INTAKE_TALON); 
+  leftSolenoid = new DoubleSolenoid(RobotMap.INTAKE_LEFT_SOLENOID_A, RobotMap.INTAKE_LEFT_SOLENOID_B);
+  rightSolenoid = new DoubleSolenoid(RobotMap.INTAKE_RIGHT_SOLENOID_A, RobotMap.INTAKE_RIGHT_SOLENOID_B);
 }
 
 public void deployLeftSolenoid(){
