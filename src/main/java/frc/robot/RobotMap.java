@@ -20,6 +20,8 @@ public class RobotMap {
   // following variables to use with your drivetrain subsystem.
   // public static int leftMotor = 1;
   // public static int rightMotor = 2;
+
+  //Talons
   public static final int DRIVETRAIN_LEFT_FRONT_TALON = 1;
   public static final int DRIVETRAIN_LEFT_MID_TALON = 2;
   public static final int DRIVETRAIN_LEFT_BACK_TALON = 3;
@@ -28,17 +30,20 @@ public class RobotMap {
   public static final int DRIVETRAIN_RIGHT_BACK_TALON = 6;
   public static final int INTAKE_TALON = 7;
 
+  //Joysticks
   public static final int JOYSTICK_DRIVER = 0;
   public static final int JOYSTICK_MANIPULATOR =  1;
 
   public static final int DRIVER_MOVE_AXIS = 1;
   public static final int DRIVER_ROTATE_AXIS = 2;
 
+  //Encoders
   public static final int DRIVETRAIN_LEFT_ENCODER_B = 0;
   public static final int DRIVETRAIN_LEFT_ENCODER_A = 1;
   public static final int DRIVETRAIN_RIGHT_ENCODER_B = 2;
   public static final int DRIVETRAIN_RIGHT_ENCODER_A = 3;
 
+  //Solenoids
   public static final int INTAKE_LEFT_SOLENOID_A = 0;
   public static final int INTAKE_LEFT_SOLENOID_B = 1;
   public static final int INTAKE_RIGHT_SOLENOID_A = 2;
@@ -47,6 +52,4 @@ public class RobotMap {
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
-
-
 }

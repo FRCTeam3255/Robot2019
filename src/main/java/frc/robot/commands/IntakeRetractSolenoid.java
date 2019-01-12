@@ -30,5 +30,4 @@ public class IntakeRetractSolenoid extends InstantCommand {
     Robot.m_intake.retractLeftSolenoid();
     Robot.m_intake.retractRightSolenoid();
   }
-
 }

@@ -7,8 +7,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.GroupMotorControllers;
-
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -50,11 +48,11 @@ public class Drivetrain extends Subsystem {
     rightBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK_TALON);
     rightTalons = new SpeedControllerGroup(rightFrontTalon, rightMidTalon, rightBackTalon);
 
-    differentialDrive = new DifferentialDrive(leftTalons, rightTalons);
-    differentialDrive.setSafetyEnabled(false);
-
     leftEncoder = new Encoder(RobotMap.DRIVETRAIN_LEFT_ENCODER_A, RobotMap.DRIVETRAIN_LEFT_ENCODER_B);
     rightEncoder = new Encoder(RobotMap.DRIVETRAIN_RIGHT_ENCODER_A, RobotMap.DRIVETRAIN_RIGHT_ENCODER_B);
+
+    differentialDrive = new DifferentialDrive(leftTalons, rightTalons);
+    differentialDrive.setSafetyEnabled(false);
   }
 
   public void arcadeDrive(double moveSpeed, double rotateSpeed){
@@ -81,5 +79,4 @@ public class Drivetrain extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new DriveArcade());
   }
-
 }

@@ -17,7 +17,6 @@ import frcteam3255.robotbase.SN_TalonSRX;
  * Add your docs here.
  */
 public class Intake extends Subsystem {
-
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
  private SN_TalonSRX intakeTalon = null;

@@ -29,5 +29,4 @@ public class IntakeDeployRightSolenoid extends InstantCommand {
   protected void initialize() {
     Robot.m_intake.deployRightSolenoid();
   }
-
 }
