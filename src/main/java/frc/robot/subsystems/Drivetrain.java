@@ -9,11 +9,13 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.GroupMotorControllers;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveArcade;
+import frcteam3255.robotbase.RobotPreferences;
 import frcteam3255.robotbase.SN_TalonSRX;
 
 /**
@@ -34,6 +36,9 @@ public class Drivetrain extends Subsystem {
 
   private DifferentialDrive differentialDrive = null;
 
+  private Encoder leftEncoder = null; 
+  private Encoder rightEncoder = null;
+
   public Drivetrain(){
     leftFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT_TALON);
     leftMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_MID_TALON);
@@ -47,17 +52,34 @@ public class Drivetrain extends Subsystem {
 
     differentialDrive = new DifferentialDrive(leftTalons, rightTalons);
     differentialDrive.setSafetyEnabled(false);
+
+    leftEncoder = new Encoder(RobotMap.DRIVETRAIN_LEFT_ENCODER_A, RobotMap.DRIVETRAIN_LEFT_ENCODER_B);
+    rightEncoder = new Encoder(RobotMap.DRIVETRAIN_RIGHT_ENCODER_A, RobotMap.DRIVETRAIN_RIGHT_ENCODER_B);
   }
 
   public void arcadeDrive(double moveSpeed, double rotateSpeed){
     differentialDrive.arcadeDrive(moveSpeed, rotateSpeed, true);
-
-
   }
+
+  public double getEncoderCount() {
+     double count = ((leftEncoder.get() + (-rightEncoder.get()))/2);
+     return count;
+  } 
+
+  public void resetEncoderCount(){
+    leftEncoder.reset();
+    rightEncoder.reset();
+  }
+
+  public double getEncoderDistance() {
+    return getEncoderCount()/RobotPreferences.encoderPulsesPerFoot();
+  }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new DriveArcade());
   }
+
 }

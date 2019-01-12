@@ -8,6 +8,14 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.IntakeDeployLeftSolenoid;
+import frc.robot.commands.IntakeDeployRightSolenoid;
+import frc.robot.commands.IntakeDeploySolenoid;
+import frc.robot.commands.IntakeRetractLeftSolenoid;
+import frc.robot.commands.IntakeRetractRightSolenoid;
+import frc.robot.commands.IntakeRetractSolenoid;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -22,7 +30,30 @@ public class OI {
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
     public Joystick driverStick = new Joystick(0);
-    public Joystick manipulaterStick =  new Joystick(1);
+    public Joystick manipulatorStick =  new Joystick(1);
+
+    Button M1 = new JoystickButton(manipulatorStick, 1);
+    Button M2 = new JoystickButton(manipulatorStick, 2);
+    Button M3 = new JoystickButton(manipulatorStick, 3);
+    Button M4 = new JoystickButton(manipulatorStick, 4);
+    Button M5 = new JoystickButton(manipulatorStick, 5);
+    Button M6 = new JoystickButton(manipulatorStick, 6);
+    Button M7 = new JoystickButton(manipulatorStick, 7);
+    Button M8 = new JoystickButton(manipulatorStick, 8);
+    Button M9 = new JoystickButton(manipulatorStick, 9);
+    Button M10 = new JoystickButton(manipulatorStick, 10);
+    Button M11 = new JoystickButton(manipulatorStick, 11);
+    Button M12 = new JoystickButton(manipulatorStick, 12);
+
+    public OI() {
+      M1.whileHeld(new IntakeDeployRightSolenoid());
+      M1.whenReleased(new IntakeRetractRightSolenoid());
+      M2.whileHeld(new IntakeDeployLeftSolenoid());
+      M2.whenReleased(new IntakeRetractLeftSolenoid());
+      M3.whileHeld(new IntakeDeploySolenoid());
+      M3.whenReleased(new IntakeRetractSolenoid());
+    }
+
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
   // commands the same as any other Button.

@@ -16,5 +16,9 @@ public class RobotPreferences {
         return Preferences.getInstance().getDouble(name, defaultValue);
     }
 
+	public static double encoderPulsesPerFoot() {
+		return 5;
+	}
+
     // TODO: Need to add similar methods for getting integers and booleans
 }
