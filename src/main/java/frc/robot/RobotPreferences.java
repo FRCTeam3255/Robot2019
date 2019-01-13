@@ -7,7 +7,8 @@
 
 package frc.robot;
 
-import frcteam3255.robotbase.SN_Preference;
+import frcteam3255.robotbase.SN_DoublePreference;
+import frcteam3255.robotbase.SN_IntPreference;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -17,18 +18,18 @@ import frcteam3255.robotbase.SN_Preference;
  */
 public class RobotPreferences {
   // Drivetrain preferences
-  public static final SN_Preference DRIVETRAIN_PULSES_PER_FOOT = new SN_Preference("driveTrainPulsesPerFoot", 5);
+  public static final SN_IntPreference DRIVETRAIN_PULSES_PER_FOOT = new SN_IntPreference("driveTrainPulsesPerFoot", 5);
 
-  public static final SN_Preference DRIVETRAIN_P = new SN_Preference("driveP", 1);
-  public static final SN_Preference DRIVETRAIN_I = new SN_Preference("driveI", 0);
-  public static final SN_Preference DRIVETRAIN_D = new SN_Preference("driveD", 0);
+  public static final SN_DoublePreference DRIVETRAIN_P = new SN_DoublePreference("driveP", 1.0);
+  public static final SN_DoublePreference DRIVETRAIN_I = new SN_DoublePreference("driveI", 0.0);
+  public static final SN_DoublePreference DRIVETRAIN_D = new SN_DoublePreference("driveD", 0.0);
 
-  public static final SN_Preference DRIVETRAIN_MAX_CHANGE = new SN_Preference("driveMaxChange", 1);
-  public static final SN_Preference DRIVETRAIN_MIN = new SN_Preference("driveMin", 0);
-  public static final SN_Preference DRIVETRAIN_MAX = new SN_Preference("driveMax", 1);
+  public static final SN_DoublePreference DRIVETRAIN_MAX_CHANGE = new SN_DoublePreference("driveMaxChange", 1);
+  public static final SN_DoublePreference DRIVETRAIN_MIN = new SN_DoublePreference("driveMin", 0);
+  public static final SN_DoublePreference DRIVETRAIN_MAX = new SN_DoublePreference("driveMax", 1);
 
-  public static final SN_Preference DRIVETRAIN_TARGET_COUNT = new SN_Preference("driveTargetCount", 5000);
-  public static final SN_Preference DRIVETRAIN_TARGET_TOLERANCE = new SN_Preference("driveTargetTolerance", 0);
+  public static final SN_IntPreference DRIVETRAIN_TARGET_COUNT = new SN_IntPreference("driveTargetCount", 5000);
+  public static final SN_IntPreference DRIVETRAIN_TARGET_TOLERANCE = new SN_IntPreference("driveTargetTolerance", 0);
 
-  public static final SN_Preference DRIVETRAIN_TIMEOUT = new SN_Preference("driveTimeout", 10);
+  public static final SN_IntPreference DRIVETRAIN_TIMEOUT = new SN_IntPreference("driveTimeout", 10);
 }

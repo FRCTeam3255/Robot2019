@@ -8,20 +8,20 @@
 package frcteam3255.robotbase;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import frcteam3255.robotbase.SN_Preference;
+import frcteam3255.robotbase.SN_DoublePreference;
 
 /**
  * Add your docs here.
  */
 public abstract class SN_PID extends PIDSubsystem {
-  protected SN_Preference preferenceP;
-  protected SN_Preference preferenceI;
-  protected SN_Preference preferenceD;
+  protected SN_DoublePreference preferenceP;
+  protected SN_DoublePreference preferenceI;
+  protected SN_DoublePreference preferenceD;
   
-  protected SN_Preference preferenceMaxChange;
-  protected SN_Preference preferenceMin;
-  protected SN_Preference preferenceMax;
-  protected SN_Preference preferenceTargetCount;
+  protected SN_DoublePreference preferenceMaxChange;
+  protected SN_DoublePreference preferenceMin;
+  protected SN_DoublePreference preferenceMax;
+  protected SN_IntPreference preferenceTargetCount;
   
   protected double output = 0.0;
   protected boolean outputValid = false;
@@ -52,16 +52,16 @@ public abstract class SN_PID extends PIDSubsystem {
   @Override
   public void enable() {
     this.getPIDController().setPID(
-      preferenceP.getDouble(),
-      preferenceI.getDouble(),
-      preferenceD.getDouble());
+      preferenceP.get(),
+      preferenceI.get(),
+      preferenceD.get());
 
-      outputMaxChange = preferenceMaxChange.getDouble();
+      outputMaxChange = preferenceMaxChange.get();
       previousOutput = 0.0;
       outputValid = false;
 
-      minPIDSpeed = preferenceMin.getDouble();
-      maxPIDSpeed = preferenceMax.getDouble();
+      minPIDSpeed = preferenceMin.get();
+      maxPIDSpeed = preferenceMax.get();
 
       super.enable();
   }
@@ -123,7 +123,7 @@ public abstract class SN_PID extends PIDSubsystem {
     else{
       targetCounter = 0;
     }
-    return(targetCounter >= preferenceTargetCount.getDouble());
+    return(targetCounter >= preferenceTargetCount.get());
   }
 
   @Override

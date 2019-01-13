@@ -66,7 +66,7 @@ public class Drivetrain extends Subsystem {
   }
 
   public double getEncoderDistance() {
-    return getEncoderCount() / RobotPreferences.DRIVETRAIN_PULSES_PER_FOOT.getDouble();
+    return getEncoderCount() / RobotPreferences.DRIVETRAIN_PULSES_PER_FOOT.get();
   }
 
   @Override

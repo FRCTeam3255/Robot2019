@@ -25,12 +25,12 @@ public class DrivetrainDistance extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    double timeout = RobotPreferences.DRIVETRAIN_TIMEOUT.getDouble();
+    double timeout = RobotPreferences.DRIVETRAIN_TIMEOUT.get();
     expireTime = timeSinceInitialized() + timeout;
 
     Robot.m_drivetrain.resetEncoderCount();
 
-    double tolerance = RobotPreferences.DRIVETRAIN_TARGET_TOLERANCE.getDouble();
+    double tolerance = RobotPreferences.DRIVETRAIN_TARGET_TOLERANCE.get();
 
     Robot.m_driveDistanceEncoderPID.setRawTolerance(tolerance);
     Robot.m_driveDistanceEncoderPID.setSetpoint(distance);
