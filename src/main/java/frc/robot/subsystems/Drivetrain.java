@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
+import frc.robot.RobotPreferenceValues;
 import frc.robot.commands.DriveArcade;
 import frcteam3255.robotbase.RobotPreferences;
 import frcteam3255.robotbase.SN_TalonSRX;
@@ -66,7 +67,7 @@ public class Drivetrain extends Subsystem {
   }
 
   public double getEncoderDistance() {
-    return getEncoderCount()/RobotPreferences.encoderPulsesPerFoot();
+    return getEncoderCount() / RobotPreferences.getDouble(RobotPreferenceValues.DRIVETRAIN_PULSES_PER_FOOT_NAME, RobotPreferenceValues.DRIVETRAIN_PULSES_PER_FOOT_DEFAULT);
   }
 
   @Override

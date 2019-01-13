@@ -14,6 +14,27 @@ import frcteam3255.robotbase.RobotPreferences;
  * Add your docs here.
  */
 public abstract class DrivetrainDistancePID extends PIDSubsystem {
+  protected String preferencePName = "";
+  protected double preferencePDefault = 0;
+
+  protected String preferenceIName = "";
+  protected double preferenceIDefault = 0;
+  
+  protected String preferenceDName = "";
+  protected double preferenceDDefault = 0;
+  
+  protected String preferenceMaxChangeName = "";
+  protected double preferenceMaxChangeDefault = 0;
+  
+  protected String preferenceMinName = "";
+  protected double preferenceMinDefault = 0;
+  
+  protected String preferenceMaxName = "";
+  protected double preferenceMaxDefault = 0;
+
+  protected String preferenceTargetCountName = "";
+  protected double preferenceTargetCountDefault = 0;
+  
   protected double output = 0.0;
   protected boolean outputValid = false;
   protected double outputMaxChange = 1.0;
@@ -24,6 +45,7 @@ public abstract class DrivetrainDistancePID extends PIDSubsystem {
 
   protected double minPIDSpeed = 0.0;
   protected double maxPIDSpeed = 1.0;
+  
   /**
    * Add your docs here.
    */
@@ -41,16 +63,16 @@ public abstract class DrivetrainDistancePID extends PIDSubsystem {
   @Override
   public void enable() {
     this.getPIDController().setPID(
-      RobotPreferences.drivetrainP(), 
-      RobotPreferences.drivetrainI(),
-      RobotPreferences.drivetrainD());
+      RobotPreferences.getDouble(preferencePName, preferencePDefault),
+      RobotPreferences.getDouble(preferenceIName, preferenceIDefault),
+      RobotPreferences.getDouble(preferenceDName, preferenceDDefault));
 
-      outputMaxChange = RobotPreferences.distancePIDMaxChange();
+      outputMaxChange = RobotPreferences.getDouble(preferenceMaxChangeName, preferenceMaxChangeDefault);
       previousOutput = 0.0;
       outputValid = false;
 
-      minPIDSpeed = RobotPreferences.distancePIDMinSpeed();
-      maxPIDSpeed = RobotPreferences.distancePIDMaxSpeed();
+      minPIDSpeed = RobotPreferences.getDouble(preferenceMinName, preferenceMinDefault);
+      maxPIDSpeed = RobotPreferences.getDouble(preferenceMaxName, preferenceMaxDefault);
 
       super.enable();
   }
@@ -104,8 +126,6 @@ public abstract class DrivetrainDistancePID extends PIDSubsystem {
     if((this.getPIDController().isEnabled() == false) || (outputValid == false)) {
       return 0.0;
     }
-    System.err.println("DrivetrainDistancePID.getOutput = " + output);
-    System.err.println("DrivetrainDistancePID.getOutput " + outputValid);
     return output;
   }
 
@@ -120,6 +140,6 @@ public abstract class DrivetrainDistancePID extends PIDSubsystem {
     else{
       targetCounter = 0;
     }
-    return(targetCounter >= RobotPreferences.drivetrainTargetCount());
+    return(targetCounter >= RobotPreferences.getDouble(preferenceTargetCountName, preferenceTargetCountDefault));
   }
 }
