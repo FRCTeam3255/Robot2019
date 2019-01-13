@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveDistanceEncoderPID;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.DrivetrainDistancePID;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Telemetry;
 

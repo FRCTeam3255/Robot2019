@@ -9,8 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotPreferenceValues;
-import frcteam3255.robotbase.RobotPreferences;
+import frc.robot.RobotPreferences;
 
 public class DrivetrainDistance extends Command {
   private double distance;
@@ -26,12 +25,12 @@ public class DrivetrainDistance extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    double timeout = RobotPreferences.getDouble(RobotPreferenceValues.DRIVETRAIN_TIMEOUT_NAME, RobotPreferenceValues.DRIVETRAIN_TIMEOUT_DEFAULT);
+    double timeout = RobotPreferences.DRIVETRAIN_TIMEOUT.getDouble();
     expireTime = timeSinceInitialized() + timeout;
 
     Robot.m_drivetrain.resetEncoderCount();
 
-    double tolerance = RobotPreferences.getDouble(RobotPreferenceValues.DRIVETRAIN_TARGET_TOLERANCE_NAME, RobotPreferenceValues.DRIVETRAIN_TARGET_TOLERANCE_DEFAULT);
+    double tolerance = RobotPreferences.DRIVETRAIN_TARGET_TOLERANCE.getDouble();
 
     Robot.m_driveDistanceEncoderPID.setRawTolerance(tolerance);
     Robot.m_driveDistanceEncoderPID.setSetpoint(distance);

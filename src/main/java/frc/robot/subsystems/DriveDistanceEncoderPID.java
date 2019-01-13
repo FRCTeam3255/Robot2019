@@ -8,37 +8,27 @@
 package frc.robot.subsystems;
 
 import frc.robot.Robot;
-import frc.robot.RobotPreferenceValues;
+import frc.robot.RobotPreferences;
+import frcteam3255.robotbase.SN_PID;
 
 /**
  * Add your docs here.
  */
-public class DriveDistanceEncoderPID extends DrivetrainDistancePID {
+public class DriveDistanceEncoderPID extends SN_PID {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public DriveDistanceEncoderPID() {
-    super();
+    super("DrivetrainDistancePID");
 
-    this.preferencePName = RobotPreferenceValues.DRIVETRAIN_P_NAME;
-    this.preferencePDefault = RobotPreferenceValues.DRIVETRAIN_P_DEFAULT;
+    this.preferenceP = RobotPreferences.DRIVETRAIN_P;
+    this.preferenceI = RobotPreferences.DRIVETRAIN_I;
+    this.preferenceD = RobotPreferences.DRIVETRAIN_D;
 
-    this.preferenceIName = RobotPreferenceValues.DRIVETRAIN_I_NAME;
-    this.preferenceIDefault = RobotPreferenceValues.DRIVETRAIN_I_DEFAULT;
+    this.preferenceMaxChange = RobotPreferences.DRIVETRAIN_MAX_CHANGE;
+    this.preferenceMin = RobotPreferences.DRIVETRAIN_MIN;
+    this.preferenceMax = RobotPreferences.DRIVETRAIN_MAX;
 
-    this.preferenceDName = RobotPreferenceValues.DRIVETRAIN_D_NAME;
-    this.preferenceDDefault = RobotPreferenceValues.DRIVETRAIN_D_DEFAULT;
-
-    this.preferenceMaxChangeName = RobotPreferenceValues.DRIVETRAIN_MAX_CHANGE_NAME;
-    this.preferenceMaxChangeDefault = RobotPreferenceValues.DRIVETRAIN_MAX_CHANGE_DEFAULT;
-
-    this.preferenceMinName = RobotPreferenceValues.DRIVETRAIN_MIN_NAME;
-    this.preferenceMinDefault = RobotPreferenceValues.DRIVETRAIN_MIN_DEFAULT;
-
-    this.preferenceMaxName = RobotPreferenceValues.DRIVETRAIN_MAX_NAME;
-    this.preferenceMaxDefault = RobotPreferenceValues.DRIVETRAIN_MAX_DEFAULT;
-
-    this.preferenceTargetCountName = RobotPreferenceValues.DRIVETRAIN_TARGET_COUNT_NAME;
-    this.preferenceTargetCountDefault = RobotPreferenceValues.DRIVETRAIN_TARGET_COUNT_DEFAULT;
+    this.preferenceTargetCount = RobotPreferences.DRIVETRAIN_TARGET_COUNT;
   }
 
   @Override

@@ -5,35 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frcteam3255.robotbase;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import frcteam3255.robotbase.RobotPreferences;
+import frcteam3255.robotbase.SN_Preference;
 
 /**
  * Add your docs here.
  */
-public abstract class DrivetrainDistancePID extends PIDSubsystem {
-  protected String preferencePName = "";
-  protected double preferencePDefault = 0;
-
-  protected String preferenceIName = "";
-  protected double preferenceIDefault = 0;
+public abstract class SN_PID extends PIDSubsystem {
+  protected SN_Preference preferenceP;
+  protected SN_Preference preferenceI;
+  protected SN_Preference preferenceD;
   
-  protected String preferenceDName = "";
-  protected double preferenceDDefault = 0;
-  
-  protected String preferenceMaxChangeName = "";
-  protected double preferenceMaxChangeDefault = 0;
-  
-  protected String preferenceMinName = "";
-  protected double preferenceMinDefault = 0;
-  
-  protected String preferenceMaxName = "";
-  protected double preferenceMaxDefault = 0;
-
-  protected String preferenceTargetCountName = "";
-  protected double preferenceTargetCountDefault = 0;
+  protected SN_Preference preferenceMaxChange;
+  protected SN_Preference preferenceMin;
+  protected SN_Preference preferenceMax;
+  protected SN_Preference preferenceTargetCount;
   
   protected double output = 0.0;
   protected boolean outputValid = false;
@@ -47,11 +35,12 @@ public abstract class DrivetrainDistancePID extends PIDSubsystem {
   protected double maxPIDSpeed = 1.0;
   
   /**
-   * Add your docs here.
+   * SuperNURDs encapsulation of PIDSubsystem
+   * @param name the name of the PID Subsystem
    */
-  public DrivetrainDistancePID() {
+  public SN_PID(String name) {
     // Intert a subsystem name and PID values here
-    super("DrivetrainDistancePID", 0, 0, 0);
+    super(name, 0, 0, 0);
 
     this.setSetpoint(0.0);
 
@@ -63,31 +52,25 @@ public abstract class DrivetrainDistancePID extends PIDSubsystem {
   @Override
   public void enable() {
     this.getPIDController().setPID(
-      RobotPreferences.getDouble(preferencePName, preferencePDefault),
-      RobotPreferences.getDouble(preferenceIName, preferenceIDefault),
-      RobotPreferences.getDouble(preferenceDName, preferenceDDefault));
+      preferenceP.getDouble(),
+      preferenceI.getDouble(),
+      preferenceD.getDouble());
 
-      outputMaxChange = RobotPreferences.getDouble(preferenceMaxChangeName, preferenceMaxChangeDefault);
+      outputMaxChange = preferenceMaxChange.getDouble();
       previousOutput = 0.0;
       outputValid = false;
 
-      minPIDSpeed = RobotPreferences.getDouble(preferenceMinName, preferenceMinDefault);
-      maxPIDSpeed = RobotPreferences.getDouble(preferenceMaxName, preferenceMaxDefault);
+      minPIDSpeed = preferenceMin.getDouble();
+      maxPIDSpeed = preferenceMax.getDouble();
 
       super.enable();
-  }
-
-  @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
   }
 
   @Override
   protected void usePIDOutput(double output) {
     // Use output to drive your system, like a motor
     // e.g. yourMotor.set(output);
-    //Change by Maximum CHange
+    //Change by Maximum Change
     if(Math.abs(output - previousOutput) > outputMaxChange) {
       if(output - previousOutput > 0) {
         output = previousOutput + outputMaxChange;
@@ -140,6 +123,12 @@ public abstract class DrivetrainDistancePID extends PIDSubsystem {
     else{
       targetCounter = 0;
     }
-    return(targetCounter >= RobotPreferences.getDouble(preferenceTargetCountName, preferenceTargetCountDefault));
+    return(targetCounter >= preferenceTargetCount.getDouble());
+  }
+
+  @Override
+  public void initDefaultCommand() {
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
   }
 }
