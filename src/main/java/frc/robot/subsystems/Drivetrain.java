@@ -34,8 +34,7 @@ public class Drivetrain extends Subsystem {
 
   private DifferentialDrive differentialDrive = null;
 
-  private Encoder leftEncoder = null; 
-  private Encoder rightEncoder = null;
+  private Encoder encoder = null;
 
   public Drivetrain(){
     leftFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT_TALON);
@@ -48,25 +47,22 @@ public class Drivetrain extends Subsystem {
     rightBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK_TALON);
     rightTalons = new SpeedControllerGroup(rightFrontTalon, rightMidTalon, rightBackTalon);
 
-    leftEncoder = new Encoder(RobotMap.DRIVETRAIN_LEFT_ENCODER_A, RobotMap.DRIVETRAIN_LEFT_ENCODER_B);
-    rightEncoder = new Encoder(RobotMap.DRIVETRAIN_RIGHT_ENCODER_A, RobotMap.DRIVETRAIN_RIGHT_ENCODER_B);
+    encoder = new Encoder(RobotMap.DRIVETRAIN_ENCODER_A, RobotMap.DRIVETRAIN_ENCODER_B);
 
     differentialDrive = new DifferentialDrive(leftTalons, rightTalons);
     differentialDrive.setSafetyEnabled(false);
   }
 
-  public void arcadeDrive(double moveSpeed, double rotateSpeed){
+  public void arcadeDrive(double moveSpeed, double rotateSpeed, boolean squaredInputs){
     differentialDrive.arcadeDrive(moveSpeed, rotateSpeed, true);
   }
 
   public double getEncoderCount() {
-     double count = ((leftEncoder.get() + (-rightEncoder.get()))/2);
-     return count;
+     return encoder.get();
   } 
 
   public void resetEncoderCount(){
-    leftEncoder.reset();
-    rightEncoder.reset();
+    encoder.reset();
   }
 
   public double getEncoderDistance() {

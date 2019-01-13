@@ -38,10 +38,8 @@ public class RobotMap {
   public static final int DRIVER_ROTATE_AXIS = 2;
 
   //Encoders
-  public static final int DRIVETRAIN_LEFT_ENCODER_B = 0;
-  public static final int DRIVETRAIN_LEFT_ENCODER_A = 1;
-  public static final int DRIVETRAIN_RIGHT_ENCODER_B = 2;
-  public static final int DRIVETRAIN_RIGHT_ENCODER_A = 3;
+  public static final int DRIVETRAIN_ENCODER_B = 0;
+  public static final int DRIVETRAIN_ENCODER_A = 1;
 
   //Solenoids
   public static final int INTAKE_LEFT_SOLENOID_A = 0;
