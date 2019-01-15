@@ -20,7 +20,7 @@ public class SN_IntPreference extends SN_Preferences {
 		m_defaultValue = defaultValue;
 	}
 	public int get(){
-		if(m_useDefaults) {
+		if(useDefaults) {
 			return m_defaultValue;
 		}
 		return Preferences.getInstance().getInt(m_name, m_defaultValue);
