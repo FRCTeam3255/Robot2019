@@ -11,10 +11,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotPreferences;
 
-public class DrivetrainDistance extends Command {
+public class DriveDistance extends Command {
   private double distance;
   private double expireTime;
-  public DrivetrainDistance(double inches) {
+  public DriveDistance(double inches) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_driveDistanceEncoderPID);

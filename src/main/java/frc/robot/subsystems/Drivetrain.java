@@ -58,7 +58,7 @@ public class Drivetrain extends Subsystem {
   }
 
   public double getEncoderCount() {
-     return encoder.get();
+     return -encoder.get();
   } 
 
   public void resetEncoderCount(){

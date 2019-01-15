@@ -10,14 +10,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.DrivetrainDistance;
+import frc.robot.commands.DriveDistance;
 import frc.robot.commands.IntakeDeployLeftSolenoid;
 import frc.robot.commands.IntakeDeployRightSolenoid;
 import frc.robot.commands.IntakeDeploySolenoid;
 import frc.robot.commands.IntakeRetractLeftSolenoid;
 import frc.robot.commands.IntakeRetractRightSolenoid;
 import frc.robot.commands.IntakeRetractSolenoid;
-import frcteam3255.robotbase.SN_Preferences;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -54,7 +53,7 @@ public class OI {
       M2.whenReleased(new IntakeRetractLeftSolenoid());
       M3.whileHeld(new IntakeDeploySolenoid());
       M3.whenReleased(new IntakeRetractSolenoid());
-	  M4.whenPressed(new DrivetrainDistance(100.0));
+	  M4.whenPressed(new DriveDistance(100.0));
     }
 
   // There are a few additional built in buttons you can use. Additionally,

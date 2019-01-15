@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.Preferences;
  */
 public class SN_DoublePreference extends SN_Preferences {
 	private double m_defaultValue;
-
+	
 	public SN_DoublePreference(String name, double defaultValue){
 		m_name = name;
 		m_defaultValue = defaultValue;
