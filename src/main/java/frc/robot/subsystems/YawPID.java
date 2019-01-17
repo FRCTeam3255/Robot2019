@@ -14,21 +14,15 @@ import frcteam3255.robotbase.SN_PID;
 /**
  * Add your docs here.
  */
-public class DriveDistanceEncoderPID extends SN_PID {
+public class YawPID extends SN_PID {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public DriveDistanceEncoderPID() {
-    super("DrivetrainDistancePID");
+  public YawPID() {
+    super("YawPID");
 
-    this.preferenceP = RobotPreferences.DRIVETRAIN_P;
-    this.preferenceI = RobotPreferences.DRIVETRAIN_I;
-    this.preferenceD = RobotPreferences.DRIVETRAIN_D;
-
-    this.preferenceMaxChange = RobotPreferences.DRIVETRAIN_MAX_CHANGE;
-    this.preferenceMin = RobotPreferences.DRIVETRAIN_MIN;
-    this.preferenceMax = RobotPreferences.DRIVETRAIN_MAX;
-
-    this.preferenceTargetCount = RobotPreferences.DRIVETRAIN_TARGET_COUNT;
+    setPIDPreferences(RobotPreferences.YAW_P, RobotPreferences.YAW_I, RobotPreferences.YAW_D);
+    setMinMaxPreferences(RobotPreferences.YAW_MIN, RobotPreferences.YAW_MAX, RobotPreferences.YAW_MAX_CHANGE);
+    setTargetCount(RobotPreferences.YAW_TARGET_COUNT);
   }
 
   @Override
@@ -36,6 +30,6 @@ public class DriveDistanceEncoderPID extends SN_PID {
     // Return your input value for the PID loop
     // e.g. a sensor, like a potentiometer:
     // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    return Robot.m_drivetrain.getEncoderDistance();
+    return Robot.m_navigation.getYaw();
   }
 }

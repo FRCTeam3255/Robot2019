@@ -11,6 +11,8 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -24,7 +26,48 @@ public class Navigation extends Subsystem {
   public static NetworkTable visionData = null;
 
   public Navigation() {
+    // NavX
+      try{
+          ahrs = new AHRS(SPI.Port.kMXP);
+      } catch (RuntimeException ex) {
+          DriverStation.reportError("Error installing navX MXP: " + ex.getMessage(), true);
+      }
+
+    //Vision
     visionData = NetworkTableInstance.getDefault().getTable("limelight");
+  }
+
+  //NavX
+  public double getYaw(){
+    return ahrs.getYaw();
+  }
+
+  public double getPitch(){
+    return ahrs.getPitch();
+  }
+
+  public double getRoll(){
+    return ahrs.getRoll();
+  }
+
+  public void resetYaw(){
+    ahrs.reset();
+
+    try {
+      Thread.sleep(250);
+    }
+    catch (InterruptedException e) {
+    }
+
+    ahrs.zeroYaw();
+  }
+
+  public void resetPitch(){
+    ahrs.reset();
+  }
+
+  public boolean isCalibrating(){
+    return ahrs.isCalibrating();
   }
 
   public boolean targetFound() {
@@ -40,7 +83,7 @@ public class Navigation extends Subsystem {
   }
 
   public double getWidth() {
-    return visionData.getEntry("thoriz").getDouble(-99.9);
+    return visionData.getEntry("thor").getDouble(-99.9);
   }
 
   public double getTargetArea() {
@@ -49,6 +92,9 @@ public class Navigation extends Subsystem {
 
   public double getRotation() {
     return visionData.getEntry("ts").getDouble(-99.9);
+  }
+  public double getDistance(){
+    return (8*265)/getWidth();
   }
   
   @Override

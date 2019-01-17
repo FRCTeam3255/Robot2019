@@ -49,6 +49,23 @@ public abstract class SN_PID extends PIDSubsystem {
     // to
     // enable() - Enables the PID controller.
   }
+
+  public void setPIDPreferences(SN_DoublePreference p, SN_DoublePreference i, SN_DoublePreference d) {
+    preferenceP = p;
+    preferenceI = i;
+    preferenceD = d;
+  }
+
+  public void setMinMaxPreferences(SN_DoublePreference min, SN_DoublePreference max, SN_DoublePreference maxChange) {
+    preferenceMin = min;
+    preferenceMax = max;
+    preferenceMaxChange = maxChange;
+  }
+
+  public void setTargetCount(SN_IntPreference targetCount) {
+    preferenceTargetCount = targetCount;
+  }
+
   @Override
   public void enable() {
     this.getPIDController().setPID(

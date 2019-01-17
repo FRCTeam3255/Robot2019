@@ -20,6 +20,7 @@ public class RobotPreferences {
   // Drivetrain preferences
   public static final SN_IntPreference DRIVETRAIN_PULSES_PER_FOOT = new SN_IntPreference("driveTrainPulsesPerFoot", 5);
 
+  //Drive PID
   public static final SN_DoublePreference DRIVETRAIN_P = new SN_DoublePreference("driveP", 1.0);
   public static final SN_DoublePreference DRIVETRAIN_I = new SN_DoublePreference("driveI", 0.0);
   public static final SN_DoublePreference DRIVETRAIN_D = new SN_DoublePreference("driveD", 0.0);
@@ -32,4 +33,16 @@ public class RobotPreferences {
   public static final SN_IntPreference DRIVETRAIN_TARGET_TOLERANCE = new SN_IntPreference("driveTargetTolerance", 0);
 
   public static final SN_IntPreference DRIVETRAIN_TIMEOUT = new SN_IntPreference("driveTimeout", 10);
+
+  //Yaw PID
+  public static final SN_DoublePreference YAW_P = new SN_DoublePreference("yawP", 1.0);
+  public static final SN_DoublePreference YAW_I = new SN_DoublePreference("yawI", 0.0);
+  public static final SN_DoublePreference YAW_D = new SN_DoublePreference("yawD", 0.0);
+
+  public static final SN_DoublePreference YAW_MAX_CHANGE = new SN_DoublePreference("yawMaxChange", 1);
+  public static final SN_DoublePreference YAW_MIN = new SN_DoublePreference("yawMin", 0);
+  public static final SN_DoublePreference YAW_MAX = new SN_DoublePreference("yawMax", 1);
+  
+  public static final SN_DoublePreference YAW_TARGET_TOLERANCE = new SN_DoublePreference("yawTargetTolerance", 0);
+  public static final SN_IntPreference YAW_TARGET_COUNT = new SN_IntPreference("yawTargetCount", 5000);
 }

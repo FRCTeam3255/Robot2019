@@ -11,38 +11,46 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotPreferences;
 
-public class DriveDistance extends Command {
-  private double distance;
-  private double expireTime;
-  public DriveDistance(double inches) {
+public class DriveStraightDistance extends Command {
+private double distance;
+private double expireTime;
+  public DriveStraightDistance(double inches) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_distanceEncoderPID);
     requires(Robot.m_drivetrain);
-    distance = inches;
+    requires(Robot.m_navigation);
+    inches = distance;
   }
 
-  // Called just before this Command runs the first time
+// Called just before this Command runs the first time
   @Override
   protected void initialize() {
     double timeout = RobotPreferences.DRIVETRAIN_TIMEOUT.get();
     expireTime = timeSinceInitialized() + timeout;
 
     Robot.m_drivetrain.resetEncoderCount();
+    Robot.m_navigation.resetYaw();
 
     double tolerance = RobotPreferences.DRIVETRAIN_TARGET_TOLERANCE.get();
+    double yawTolerance = RobotPreferences.YAW_TARGET_TOLERANCE.get();
 
     Robot.m_distanceEncoderPID.setRawTolerance(tolerance);
     Robot.m_distanceEncoderPID.setSetpoint(distance);
+    Robot.m_yawPID.setRawTolerance(yawTolerance);
+    Robot.m_yawPID.setSetpoint(0.0);
+
     Robot.m_distanceEncoderPID.enable();
+    Robot.m_yawPID.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     double moveSpeed = Robot.m_distanceEncoderPID.getOutput();
+    double rotateSpeed = Robot.m_yawPID.getOutput();
 
-    Robot.m_drivetrain.arcadeDrive(moveSpeed, 0.0, false);
+    Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed, false);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -60,6 +68,7 @@ public class DriveDistance extends Command {
   @Override
   protected void end() {
     Robot.m_distanceEncoderPID.disable();
+    Robot.m_yawPID.disable();
     Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
   }
 

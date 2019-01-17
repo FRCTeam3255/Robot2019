@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.DriveDistance;
+import frc.robot.commands.DriveRotate;
+import frc.robot.commands.DriveStraightDistance;
 import frc.robot.commands.IntakeDeployLeftSolenoid;
 import frc.robot.commands.IntakeDeployRightSolenoid;
 import frc.robot.commands.IntakeDeploySolenoid;
@@ -53,7 +55,10 @@ public class OI {
       M2.whenReleased(new IntakeRetractLeftSolenoid());
       M3.whileHeld(new IntakeDeploySolenoid());
       M3.whenReleased(new IntakeRetractSolenoid());
-	  M4.whenPressed(new DriveDistance(100.0));
+      M4.whenPressed(new DriveDistance(100.0));
+      M5.whenPressed(new DriveStraightDistance(100.0));
+      M6.whenPressed(new DriveRotate(90.0));
+
     }
 
   // There are a few additional built in buttons you can use. Additionally,
