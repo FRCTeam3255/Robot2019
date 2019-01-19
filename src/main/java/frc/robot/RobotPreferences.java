@@ -19,6 +19,10 @@ import frcteam3255.robotbase.SN_IntPreference;
 public class RobotPreferences {
   // Drivetrain preferences
   public static final SN_IntPreference DRIVETRAIN_PULSES_PER_FOOT = new SN_IntPreference("driveTrainPulsesPerFoot", 5);
+  
+  //Intake Preferences
+  public static final SN_DoublePreference INTAKE_CARGO_SPEED = new SN_DoublePreference("intakeCargoSpeed", 1.0);
+  public static final SN_DoublePreference EJECT_CARGO_SPEED = new SN_DoublePreference("ejectCargoSpeed", -1.0);
 
   //Drive PID
   public static final SN_DoublePreference DRIVETRAIN_P = new SN_DoublePreference("driveP", 1.0);

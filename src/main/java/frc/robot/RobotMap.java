@@ -26,19 +26,20 @@ public class RobotMap {
   public static final int DRIVETRAIN_RIGHT_FRONT_TALON = 4;
   public static final int DRIVETRAIN_RIGHT_MID_TALON = 5;
   public static final int DRIVETRAIN_RIGHT_BACK_TALON = 6;
-  public static final int INTAKE_TALON = 7;
+  public static final int INTAKE_TALON = 8;
 
   //Encoders
   public static final int DRIVETRAIN_ENCODER_B = 0;
   public static final int DRIVETRAIN_ENCODER_A = 1;
+  public static final int INTAKE_HATCH_SWITCH = 2;
+  public static final int INTAKE_CARGO_SWITCH = 3;
 
   //Solenoids
-  public static final int INTAKE_LEFT_SOLENOID_A = 0;
-  public static final int INTAKE_LEFT_SOLENOID_B = 1;
-  public static final int INTAKE_RIGHT_SOLENOID_A = 2;
-  public static final int INTAKE_RIGHT_SOLENOID_B = 3;
-  // If you are using multiple modules, make sure to define both the port
-  // number and the module. For example you with a rangefinder:
-  // public static int rangefinderPort = 1;
-  // public static int rangefinderModule = 1;
+  public static final int INTAKE_EJECT_SOLENOID_A = 0;
+  public static final int INTAKE_EJECT_SOLENOID_B = 1;
+  public static final int INTAKE_HATCH_SOLENOID_A = 2;
+  public static final int INTAKE_HATCH_SOLENOID_B = 3;
+  public static final int INTAKE_DEPLOY_SOLENOID_A = 4;
+  public static final int INTAKE_DEPLOY_SOLENOID_B = 5;
+
 }

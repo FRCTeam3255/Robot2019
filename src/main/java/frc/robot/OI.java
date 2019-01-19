@@ -7,15 +7,12 @@
 
 package frc.robot;
 
-import frc.robot.commands.DriveDistance;
-import frc.robot.commands.DriveRotate;
-import frc.robot.commands.DriveStraightDistance;
-import frc.robot.commands.IntakeDeployLeftSolenoid;
-import frc.robot.commands.IntakeDeployRightSolenoid;
-import frc.robot.commands.IntakeDeploySolenoid;
-import frc.robot.commands.IntakeRetractLeftSolenoid;
-import frc.robot.commands.IntakeRetractRightSolenoid;
-import frc.robot.commands.IntakeRetractSolenoid;
+import frc.robot.commands.IntakeCollectCargo;
+import frc.robot.commands.IntakeDeployHatch;
+import frc.robot.commands.IntakeEjectCargo;
+import frc.robot.commands.IntakeEjectHatch;
+import frc.robot.commands.IntakeReloadHatch;
+import frc.robot.commands.IntakeRetractHatch;
 import frcteam3255.robotbase.SN_DriverStick;
 import frcteam3255.robotbase.SN_ManipulatorStick;
 
@@ -35,16 +32,15 @@ public class OI {
     public SN_ManipulatorStick manipulatorStick =  new SN_ManipulatorStick(1);
 	
     public OI() {
-	  manipulatorStick.btn_1.whileHeld(new IntakeDeployRightSolenoid());
-      manipulatorStick.btn_1.whenReleased(new IntakeRetractRightSolenoid());
-      manipulatorStick.btn_2.whileHeld(new IntakeDeployLeftSolenoid());
-      manipulatorStick.btn_2.whenReleased(new IntakeRetractLeftSolenoid());
-      manipulatorStick.btn_3.whileHeld(new IntakeDeploySolenoid());
-      manipulatorStick.btn_3.whenReleased(new IntakeRetractSolenoid());
-      manipulatorStick.btn_4.whenPressed(new DriveDistance(100.0));
-      manipulatorStick.btn_5.whenPressed(new DriveStraightDistance(100.0));
-      manipulatorStick.btn_6.whenPressed(new DriveRotate(90.0));
-
+      manipulatorStick.btn_1.whileHeld(new IntakeEjectCargo());
+      manipulatorStick.btn_2.whenPressed(new IntakeCollectCargo());
+      manipulatorStick.btn_3.whenPressed(new IntakeDeployHatch());
+      manipulatorStick.btn_4.whenPressed(new IntakeRetractHatch());
+      manipulatorStick.btn_5.whenPressed(new IntakeEjectHatch());
+      manipulatorStick.btn_5.whenReleased(new IntakeReloadHatch());
+      // manipulatorStick.btn_4.whenPressed(new DriveDistance(100.0));
+      // manipulatorStick.btn_5.whenPressed(new DriveStraightDistance(100.0));
+      // manipulatorStick.btn_6.whenPressed(new DriveRotate(90.0));
     }
 
   // There are a few additional built in buttons you can use. Additionally,

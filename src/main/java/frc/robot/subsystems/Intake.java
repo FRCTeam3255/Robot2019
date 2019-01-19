@@ -7,10 +7,12 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.RobotPreferences;
 import frcteam3255.robotbase.SN_TalonSRX;
 
 /**
@@ -20,28 +22,65 @@ public class Intake extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
  private SN_TalonSRX intakeTalon = null;
- private DoubleSolenoid leftSolenoid = null;
- private DoubleSolenoid rightSolenoid = null;
+
+ private DoubleSolenoid ejectSolenoid = null;
+ private DoubleSolenoid hatchSolenoid = null;
+ private DoubleSolenoid deploySolenoid = null;
+ private DigitalInput hatchSwitch = null;
+ private DigitalInput cargoSwitch = null;
 
 public Intake(){
   intakeTalon = new SN_TalonSRX(RobotMap.INTAKE_TALON); 
-  leftSolenoid = new DoubleSolenoid(RobotMap.INTAKE_LEFT_SOLENOID_A, RobotMap.INTAKE_LEFT_SOLENOID_B);
-  rightSolenoid = new DoubleSolenoid(RobotMap.INTAKE_RIGHT_SOLENOID_A, RobotMap.INTAKE_RIGHT_SOLENOID_B);
+
+  ejectSolenoid = new DoubleSolenoid(RobotMap.INTAKE_EJECT_SOLENOID_A, RobotMap.INTAKE_EJECT_SOLENOID_B);
+  hatchSolenoid = new DoubleSolenoid(RobotMap.INTAKE_HATCH_SOLENOID_A, RobotMap.INTAKE_HATCH_SOLENOID_B);
+  deploySolenoid = new DoubleSolenoid(RobotMap.INTAKE_DEPLOY_SOLENOID_A, RobotMap.INTAKE_DEPLOY_SOLENOID_B);
+  hatchSwitch = new DigitalInput(RobotMap.INTAKE_HATCH_SWITCH);
+  cargoSwitch = new DigitalInput(RobotMap.INTAKE_CARGO_SWITCH);
 }
 
-public void deployLeftSolenoid(){
-  leftSolenoid.set(Value.kForward);
+public void intakeCargo() {
+  intakeTalon.set(RobotPreferences.INTAKE_CARGO_SPEED.get());
 }
 
-public void deployRightSolenoid(){
-  rightSolenoid.set(Value.kForward);
-}
-public void retractLeftSolenoid(){
-  leftSolenoid.set(Value.kReverse);
+public void ejectCargo() {
+  intakeTalon.set(RobotPreferences.EJECT_CARGO_SPEED.get());
 }
 
-public void retractRightSolenoid(){
-  rightSolenoid.set(Value.kReverse);
+public void holdCargo() {
+  intakeTalon.set(0.0);
+}
+
+public void deployIntake() {
+  deploySolenoid.set(Value.kForward);
+}
+
+public void retractIntake() {
+  deploySolenoid.set(Value.kReverse);
+}
+
+public void deployHatch() {
+  hatchSolenoid.set(Value.kForward);
+}
+
+public void retractHatch() {
+  hatchSolenoid.set(Value.kReverse);
+}
+
+public void ejectHatch() {
+  ejectSolenoid.set(Value.kForward);
+}
+
+public void reloadHatch() {
+  ejectSolenoid.set(Value.kReverse);
+}
+
+public boolean isHatchCollected() {
+  return hatchSwitch.get();
+}
+
+public boolean isCargoCollected() {
+  return cargoSwitch.get();
 }
 
   @Override
