@@ -9,7 +9,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
 public class DriveArcade extends Command {
   public DriveArcade() {
@@ -26,8 +25,8 @@ public class DriveArcade extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double moveSpeed = -Robot.m_oi.driverStick.getRawAxis(RobotMap.DRIVER_MOVE_AXIS);
-    double rotateSpeed = Robot.m_oi.driverStick.getRawAxis(RobotMap.DRIVER_ROTATE_AXIS);
+    double moveSpeed = Robot.m_oi.driverStick.getArcadeMove();
+    double rotateSpeed = Robot.m_oi.driverStick.getArcadeRotate();
     Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed, true);
   }
 

@@ -28,13 +28,6 @@ public class RobotMap {
   public static final int DRIVETRAIN_RIGHT_BACK_TALON = 6;
   public static final int INTAKE_TALON = 7;
 
-  //Joysticks
-  public static final int JOYSTICK_DRIVER = 0;
-  public static final int JOYSTICK_MANIPULATOR =  1;
-
-  public static final int DRIVER_MOVE_AXIS = 1;
-  public static final int DRIVER_ROTATE_AXIS = 2;
-
   //Encoders
   public static final int DRIVETRAIN_ENCODER_B = 0;
   public static final int DRIVETRAIN_ENCODER_A = 1;
