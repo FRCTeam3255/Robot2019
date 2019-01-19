@@ -96,7 +96,19 @@ public class Navigation extends Subsystem {
   public double getDistance(){
     return (8*265)/getWidth();
   }
-  
+  public void toggleLEDs(){
+    if(visionData.getEntry("ledMode").getDouble(0) == 0){
+        visionData.getEntry("ledMode").setDouble(1);
+    }
+    else{
+      visionData.getEntry("ledMode").setDouble(0);
+    }
+    try {
+      Thread.sleep(250);
+    }
+    catch (InterruptedException e) {
+    }
+  }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
