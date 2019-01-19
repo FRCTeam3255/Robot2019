@@ -49,4 +49,26 @@ public class RobotPreferences {
   
   public static final SN_DoublePreference YAW_TARGET_TOLERANCE = new SN_DoublePreference("yawTargetTolerance", 0);
   public static final SN_IntPreference YAW_TARGET_COUNT = new SN_IntPreference("yawTargetCount", 5000);
+
+  //Vision Distance PID
+  // public static final SN_DoublePreference VISION_DISTANCE_P = new SN_DoublePreference("visionDistanceP", 0.0);
+  public static final SN_DoublePreference VISION_DISTANCE_P = new SN_DoublePreference("visionDistanceP", 0.04);
+  public static final SN_DoublePreference VISION_DISTANCE_I = new SN_DoublePreference("visionDistanceI", 0.0);
+  public static final SN_DoublePreference VISION_DISTANCE_D = new SN_DoublePreference("visionDistanceD", 0.0);
+
+  public static final SN_DoublePreference VISION_MIN = new SN_DoublePreference("visionMin", 0.0);
+  public static final SN_DoublePreference VISION_MAX = new SN_DoublePreference("visionMax", 1.0);
+
+  public static final SN_DoublePreference VISION_MAX_CHANGE = new SN_DoublePreference("visionMaxChange", 1.0);
+  public static final SN_IntPreference VISION_TARGET_COUNT = new SN_IntPreference("visionTargetCount", 1000);
+  public static final SN_IntPreference VISION_TIMEOUT = new SN_IntPreference("visionTimeout", 1000);
+  public static final SN_DoublePreference VISION_TOLERANCE = new SN_DoublePreference("visionTolerance", 0.0);
+
+  //Vision Rotate PID
+  public static final SN_DoublePreference VISION_ROTATE_P = new SN_DoublePreference("visionRotateP", 0.037);
+  // public static final SN_DoublePreference VISION_ROTATE_P = new SN_DoublePreference("visionRotateP", 0.0);
+  public static final SN_DoublePreference VISION_ROTATE_I = new SN_DoublePreference("visionRotateI", 0.0);
+  public static final SN_DoublePreference VISION_ROTATE_D = new SN_DoublePreference("visionRotateD", 0.0);
+
+  public static final SN_DoublePreference VISION_ROTATE_TOLERANCE = new SN_DoublePreference("visionRotateTolerance", 0.0);
 }

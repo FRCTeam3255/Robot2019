@@ -18,6 +18,9 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Navigation;
 import frc.robot.subsystems.Telemetry;
+import frc.robot.subsystems.Vision;
+import frc.robot.subsystems.VisionDistancePID;
+import frc.robot.subsystems.VisionRotatePID;
 import frc.robot.subsystems.YawPID;
 
 /**
@@ -33,6 +36,9 @@ public class Robot extends TimedRobot {
   public static Intake m_intake = null;
   public static YawPID m_yawPID = null;
   public static Navigation m_navigation = null;
+  public static Vision m_vision = null;
+  public static VisionDistancePID m_visionDistancePID = null;
+  public static VisionRotatePID m_visionRotatePID = null;
 
   public static Telemetry m_telemetry = null;
 
@@ -54,6 +60,9 @@ public class Robot extends TimedRobot {
     m_intake = new Intake();
     m_yawPID = new YawPID();
     m_navigation = new Navigation();
+    m_vision = new Vision();
+    m_visionDistancePID = new VisionDistancePID();
+    m_visionRotatePID = new VisionRotatePID();
     m_telemetry = new Telemetry();
     m_oi = new OI();
   }
@@ -69,7 +78,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     if(RobotController.getUserButton() == true){
-      Robot.m_navigation.toggleLEDs();
+      Robot.m_vision.toggleLEDs();
     }
     m_telemetry.update();
   }

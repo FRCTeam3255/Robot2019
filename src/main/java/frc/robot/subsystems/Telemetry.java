@@ -24,7 +24,9 @@ public class Telemetry extends Subsystem {
   public void update() {
     SmartDashboard.putNumber("Drivetrain Encoder Count", Robot.m_drivetrain.getEncoderCount());
     SmartDashboard.putNumber("Drivetrain Encoder Distance", Robot.m_drivetrain.getEncoderDistance());
-    SmartDashboard.putNumber("Vision Distance From Target", Robot.m_navigation.getDistance());
+    SmartDashboard.putNumber("Vision Distance From Target", Robot.m_vision.getDistance());
+    SmartDashboard.putNumber("Vision Rotation", Robot.m_vision.getRotation());
+    SmartDashboard.putNumber("Vision Horizontal Offset", Robot.m_vision.getHorizontalOffset());
   }
 
   @Override

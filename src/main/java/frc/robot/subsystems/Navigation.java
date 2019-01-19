@@ -9,8 +9,6 @@ package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -23,7 +21,7 @@ public class Navigation extends Subsystem {
   // here. Call these from Commands.
 
   public static AHRS ahrs = null;
-  public static NetworkTable visionData = null;
+
 
   public Navigation() {
     // NavX
@@ -32,9 +30,6 @@ public class Navigation extends Subsystem {
       } catch (RuntimeException ex) {
           DriverStation.reportError("Error installing navX MXP: " + ex.getMessage(), true);
       }
-
-    //Vision
-    visionData = NetworkTableInstance.getDefault().getTable("limelight");
   }
 
   //NavX
@@ -70,45 +65,6 @@ public class Navigation extends Subsystem {
     return ahrs.isCalibrating();
   }
 
-  public boolean targetFound() {
-    return visionData.getEntry("tv").getBoolean(false);
-  }
-
-  public double getVerticalOffset() {
-    return visionData.getEntry("tx").getDouble(-99.9);
-  }
-
-  public double getHorizontalOffset() {
-    return visionData.getEntry("ty").getDouble(-99.9);
-  }
-
-  public double getWidth() {
-    return visionData.getEntry("thor").getDouble(-99.9);
-  }
-
-  public double getTargetArea() {
-    return visionData.getEntry("ta").getDouble(-99.9);
-  }
-
-  public double getRotation() {
-    return visionData.getEntry("ts").getDouble(-99.9);
-  }
-  public double getDistance(){
-    return (8*265)/getWidth();
-  }
-  public void toggleLEDs(){
-    if(visionData.getEntry("ledMode").getDouble(0) == 0){
-        visionData.getEntry("ledMode").setDouble(1);
-    }
-    else{
-      visionData.getEntry("ledMode").setDouble(0);
-    }
-    try {
-      Thread.sleep(250);
-    }
-    catch (InterruptedException e) {
-    }
-  }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
