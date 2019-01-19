@@ -20,7 +20,7 @@ public class SN_BooleanPreference extends SN_Preferences{
 		m_defaultValue = defaultValue;
 	}
 	public boolean get(){
-		if(useDefaults) {
+		if(isUsingDefaults()) {
 			return m_defaultValue;
 		}
 		return Preferences.getInstance().getBoolean(m_name, m_defaultValue);

@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frcteam3255.robotbase.SN_Preferences;
 
 /**
  * Add your docs here.
@@ -22,6 +23,7 @@ public class Telemetry extends Subsystem {
   }
 
   public void update() {
+    SmartDashboard.putBoolean("Is Debug", !SN_Preferences.isUsingDefaults());
     SmartDashboard.putNumber("Drivetrain Encoder Count", Robot.m_drivetrain.getEncoderCount());
     SmartDashboard.putNumber("Drivetrain Encoder Distance", Robot.m_drivetrain.getEncoderDistance());
     SmartDashboard.putNumber("Vision Distance From Target", Robot.m_vision.getDistance());

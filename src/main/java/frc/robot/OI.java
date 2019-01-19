@@ -7,15 +7,10 @@
 
 package frc.robot;
 
-import frc.robot.commands.IntakeCollectCargo;
-import frc.robot.commands.IntakeDeployHatch;
-import frc.robot.commands.IntakeEjectCargo;
-import frc.robot.commands.IntakeEjectHatch;
-import frc.robot.commands.IntakeReloadHatch;
-import frc.robot.commands.IntakeRetractHatch;
-import frc.robot.commands.VisionDistance;
+import frc.robot.commands.*;
 import frcteam3255.robotbase.SN_DriverStick;
 import frcteam3255.robotbase.SN_ManipulatorStick;
+import frcteam3255.robotbase.SN_SwitchboardStick;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -31,8 +26,10 @@ public class OI {
   // Button button = new JoystickButton(stick, buttonNumber);
     public SN_DriverStick driverStick = new SN_DriverStick(0);
     public SN_ManipulatorStick manipulatorStick =  new SN_ManipulatorStick(1);
+    public SN_SwitchboardStick switchboardStick = new SN_SwitchboardStick(2);
 	
     public OI() {
+      //Manipulator Stick
       manipulatorStick.btn_1.whileHeld(new IntakeEjectCargo());
       manipulatorStick.btn_2.whenPressed(new IntakeCollectCargo());
       manipulatorStick.btn_3.whenPressed(new IntakeDeployHatch());
@@ -43,6 +40,9 @@ public class OI {
       // manipulatorStick.btn_4.whenPressed(new DriveDistance(100.0));
       // manipulatorStick.btn_5.whenPressed(new DriveStraightDistance(100.0));
       // manipulatorStick.btn_6.whenPressed(new DriveRotate(90.0));
+
+      //Switchboard Stick
+      switchboardStick.btn_1.whileHeld(new SetDebugMode());
     }
 
   // There are a few additional built in buttons you can use. Additionally,

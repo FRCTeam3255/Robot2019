@@ -20,7 +20,7 @@ public class SN_DoublePreference extends SN_Preferences {
 		m_defaultValue = defaultValue;
 	}
 	public double get(){
-		if(useDefaults) {
+		if(isUsingDefaults()) {
 			return m_defaultValue;
 		}
 		return Preferences.getInstance().getDouble(m_name, m_defaultValue);

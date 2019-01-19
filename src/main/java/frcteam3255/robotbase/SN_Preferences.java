@@ -4,6 +4,18 @@ package frcteam3255.robotbase;
  * SuperNURDs encapsulation of RobotPreferences
  */
 public abstract class SN_Preferences {
-	public static boolean useDefaults = true;
+	private static boolean useDefaults = true;
 	protected String m_name;
+
+	public static void useDefaults() {
+		useDefaults = true;
+	}
+
+	public static void usePreferences() {
+		useDefaults = false;
+	}
+
+	public static boolean isUsingDefaults() {
+		return useDefaults;
+	}
 }
