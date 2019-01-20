@@ -15,7 +15,7 @@ import frcteam3255.robotbase.SN_DoublePreference;
 public class DriveDistanceVision extends Command {
   
   private VisionDistancePID pid;
-  private SN_DoublePreference pref_timeout = new SN_DoublePreference("VisionDistance_timeout", 0.0);
+  private SN_DoublePreference pref_timeout = new SN_DoublePreference("VisionDistance_timeout", 10.0);
 
   private double expireTime = 0.0;
 

@@ -8,6 +8,7 @@
 package frc.robot;
 
 import frc.robot.commands.*;
+import frcteam3255.robotbase.SN_DoublePreference;
 import frcteam3255.robotbase.SN_DriverStick;
 import frcteam3255.robotbase.SN_ManipulatorStick;
 import frcteam3255.robotbase.SN_SwitchboardStick;
@@ -37,7 +38,7 @@ public class OI {
       manipulatorStick.btn_5.whenPressed(new IntakeHatchEject());
       manipulatorStick.btn_5.whenReleased(new IntakeHatchReload());
       // manipulatorStick.btn_11.whenPressed(new VisionRotateDistance(60.0 , 0.0));
-      // manipulatorStick.btn_4.whenPressed(new DriveDistance(100.0));
+      manipulatorStick.btn_7.whenPressed(new DriveDistance(new SN_DoublePreference("testPID", 100.0)));
       // manipulatorStick.btn_5.whenPressed(new DriveStraightDistance(100.0));
       // manipulatorStick.btn_6.whenPressed(new DriveRotate(90.0));
 

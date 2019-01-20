@@ -17,7 +17,7 @@ public class DriveDistanceRotateVision extends Command {
   
   private VisionDistancePID distancePID;
   private VisionRotatePID rotatePID;
-  private SN_DoublePreference pref_timeout = new SN_DoublePreference("VisionRotateDistance_timeout", 0.0);
+  private SN_DoublePreference pref_timeout = new SN_DoublePreference("VisionRotateDistance_timeout", 10.0);
 
   private double expireTime = 0.0;
 
