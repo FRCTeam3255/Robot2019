@@ -13,15 +13,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.DistanceEncoderPID;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Navigation;
 import frc.robot.subsystems.Telemetry;
 import frc.robot.subsystems.Vision;
-import frc.robot.subsystems.VisionDistancePID;
-import frc.robot.subsystems.VisionRotatePID;
-import frc.robot.subsystems.YawPID;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,13 +28,9 @@ import frc.robot.subsystems.YawPID;
  */
 public class Robot extends TimedRobot {
   public static Drivetrain m_drivetrain = null;
-  public static DistanceEncoderPID m_distanceEncoderPID = null;
   public static Intake m_intake = null;
-  public static YawPID m_yawPID = null;
   public static Navigation m_navigation = null;
   public static Vision m_vision = null;
-  public static VisionDistancePID m_visionDistancePID = null;
-  public static VisionRotatePID m_visionRotatePID = null;
 
   public static Telemetry m_telemetry = null;
 
@@ -56,13 +48,9 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
     m_drivetrain = new Drivetrain();
-    m_distanceEncoderPID = new DistanceEncoderPID();
     m_intake = new Intake();
-    m_yawPID = new YawPID();
     m_navigation = new Navigation();
     m_vision = new Vision();
-    m_visionDistancePID = new VisionDistancePID();
-    m_visionRotatePID = new VisionRotatePID();
     m_telemetry = new Telemetry();
     m_oi = new OI();
   }

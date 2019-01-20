@@ -14,15 +14,13 @@ import frcteam3255.robotbase.SN_PID;
 /**
  * Add your docs here.
  */
-public class DistanceEncoderPID extends SN_PID {
+public class DrivetrainDistancePID extends SN_PID {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public DistanceEncoderPID() {
-    super("DrivetrainDistancePID");
-
-    setPIDPreferences(RobotPreferences.DRIVETRAIN_P, RobotPreferences.DRIVETRAIN_I, RobotPreferences.DRIVETRAIN_D);
-    setMinMaxPreferences(RobotPreferences.DRIVETRAIN_MIN, RobotPreferences.DRIVETRAIN_MAX, RobotPreferences.DRIVETRAIN_MAX_CHANGE);
-    setTargetCount(RobotPreferences.DRIVETRAIN_TARGET_COUNT);
+  public DrivetrainDistancePID() {
+    super();
+    
+    setPID(RobotPreferences.DRIVETRAIN_P, RobotPreferences.DRIVETRAIN_I, RobotPreferences.DRIVETRAIN_D);
   }
 
   @Override

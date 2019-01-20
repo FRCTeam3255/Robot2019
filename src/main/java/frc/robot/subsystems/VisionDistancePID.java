@@ -17,11 +17,9 @@ import frcteam3255.robotbase.SN_PID;
 public class VisionDistancePID extends SN_PID{
 
     public VisionDistancePID() {
-        super("VisionDistancePID");
+        super();
 
-        setPIDPreferences(RobotPreferences.VISION_DISTANCE_P, RobotPreferences.VISION_DISTANCE_I, RobotPreferences.VISION_DISTANCE_D);
-        setMinMaxPreferences(RobotPreferences.VISION_MIN, RobotPreferences.VISION_MAX, RobotPreferences.VISION_MAX_CHANGE);
-        setTargetCount(RobotPreferences.VISION_TARGET_COUNT);
+        setPID(RobotPreferences.VISION_DISTANCE_P, RobotPreferences.VISION_DISTANCE_I, RobotPreferences.VISION_DISTANCE_D);
     }
 
     @Override
@@ -29,6 +27,13 @@ public class VisionDistancePID extends SN_PID{
       // Return your input value for the PID loop
       // e.g. a sensor, like a potentiometer:
       // yourPot.getAverageVoltage() / kYourMaxVoltage;
-      return Robot.m_vision.getDistance();
+      double d = Robot.m_vision.getDistance();
+
+      if(d < 0) {
+          this.inputValid = false;
+          return -1;
+      }
+      
+      return d;
     }
 }

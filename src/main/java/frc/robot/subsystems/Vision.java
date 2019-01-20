@@ -29,7 +29,7 @@ public class Vision extends Subsystem {
   }
 
   public double getHorizontalOffset() {
-    return -visionData.getEntry("tx").getDouble(-99.9);
+    return -visionData.getEntry("tx").getDouble(-1000.0);
   }
 
   public double getVerticalOffset() {
@@ -37,7 +37,7 @@ public class Vision extends Subsystem {
   }
 
   public double getWidth() {
-    return visionData.getEntry("thor").getDouble(-99.9);
+    return visionData.getEntry("thor").getDouble(-1.0);
   }
 
   public double getTargetArea() {
@@ -47,8 +47,15 @@ public class Vision extends Subsystem {
   public double getRotation() {
     return visionData.getEntry("ts").getDouble(-99.9);
   }
+
   public double getDistance(){
-    return (8*265)/getWidth();
+    double w = getWidth();
+
+    if(w < 0) {
+      return -1.0;
+    }
+
+    return (8*265) / w;
   }
   public void toggleLEDs(){
     if(visionData.getEntry("ledMode").getDouble(0) == 0){

@@ -27,7 +27,10 @@ public class SN_ManipulatorStick extends Joystick {
     public Button btn_11 = new JoystickButton(this, 11);
 	public Button btn_12 = new JoystickButton(this, 12);
 	
+	private static final int AXIS_X = 0;
 	private static final int AXIS_Y = 1;
+	private static final int AXIS_TWIST = 2; 
+	private static final int AXIS_DIAL = 3;
 	
 	/**
 	 * Logitech Extreme 3D Pro Joystick with 12 buttons
@@ -39,9 +42,30 @@ public class SN_ManipulatorStick extends Joystick {
 	}
 
 	/**
+	 * @return position value of RawAxis({@value #AXIS_X})
+	 */
+	public double getXAxis() {
+		return getRawAxis(AXIS_X);
+	}
+
+	/**
 	 * @return inverted position value of RawAxis({@value #AXIS_Y})
 	 */
-	public double getYAxis(){
+	public double getYAxis() {
 		return -getRawAxis(AXIS_Y);
+	}
+
+	/**
+	 * @return position Value of RawAxis({@value #AXIS_TWIST})
+	 */ 
+	public double getTwistAxis() {
+		return getRawAxis(AXIS_TWIST);
+	}
+
+	/**
+	 * @return inverted position value of RawAxis({@value #AXIS_DIAL})
+	 */
+	public double getDialAxis() {
+		return -getRawAxis(AXIS_DIAL);
 	}
 }

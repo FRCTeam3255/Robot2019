@@ -9,31 +9,42 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.DrivetrainDistancePID;
 import frc.robot.subsystems.NavXRotatePID;
 import frcteam3255.robotbase.SN_DoublePreference;
 
-public class DriveRotate extends Command {
-  private NavXRotatePID pid;
-  private SN_DoublePreference pref_timeout = new SN_DoublePreference("DriveRotate_timeout", 0.0);
- 
-  double expireTime = 0.0;
+public class DriveDistanceRotate extends Command {
 
-  public DriveRotate(double degrees) {
+  private DrivetrainDistancePID distancePID;
+  private NavXRotatePID rotatePID;
+  private SN_DoublePreference pref_timeout = new SN_DoublePreference("DriveStraightDistance_timeout", 0.0);
+
+  private double expireTime = 0.0;
+
+
+  public DriveDistanceRotate(SN_DoublePreference inches, SN_DoublePreference degrees) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_drivetrain);
     requires(Robot.m_navigation);
 
-    pid = new NavXRotatePID();
-    pid.setSetpoint(degrees);
+    distancePID = new DrivetrainDistancePID();
+    rotatePID = new NavXRotatePID();
+
+    distancePID.setSetpoint(inches);
+    rotatePID.setSetpoint(degrees);
   }
 
   public void setTimeout(SN_DoublePreference timeout){
     pref_timeout = timeout;
   }
 
-  public NavXRotatePID getPID() {
-    return pid;
+  public DrivetrainDistancePID getDistancePID() {
+    return distancePID;
+  }
+
+  public NavXRotatePID getRotatePID() {
+    return rotatePID;
   }
 
 // Called just before this Command runs the first time
@@ -41,23 +52,26 @@ public class DriveRotate extends Command {
   protected void initialize() {
     expireTime = timeSinceInitialized() + pref_timeout.get();
 
+    Robot.m_drivetrain.resetEncoderCount();
     Robot.m_navigation.resetYaw();
 
-    pid.enable();
+    distancePID.enable();
+    rotatePID.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double rotateSpeed =  pid.getOutput();
+    double moveSpeed = distancePID.getOutput();
+    double rotateSpeed = rotatePID.getOutput();
 
-    Robot.m_drivetrain.arcadeDrive(0.0, rotateSpeed, false);
+    Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed, false);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    boolean distanceTarget = pid.onRawTarget();
+    boolean distanceTarget = distancePID.onRawTarget();
     double timeNow = timeSinceInitialized();
 
     boolean finished = (distanceTarget || (timeNow >= expireTime));
@@ -68,7 +82,8 @@ public class DriveRotate extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    pid.disable();
+    distancePID.disable();
+    rotatePID.disable();
     Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
   }
 

@@ -14,15 +14,13 @@ import frcteam3255.robotbase.SN_PID;
 /**
  * Add your docs here.
  */
-public class YawPID extends SN_PID {
+public class NavXRotatePID extends SN_PID {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public YawPID() {
-    super("YawPID");
+  public NavXRotatePID() {
+    super();
 
-    setPIDPreferences(RobotPreferences.YAW_P, RobotPreferences.YAW_I, RobotPreferences.YAW_D);
-    setMinMaxPreferences(RobotPreferences.YAW_MIN, RobotPreferences.YAW_MAX, RobotPreferences.YAW_MAX_CHANGE);
-    setTargetCount(RobotPreferences.YAW_TARGET_COUNT);
+    setPID(RobotPreferences.YAW_P, RobotPreferences.YAW_I, RobotPreferences.YAW_D);
   }
 
   @Override

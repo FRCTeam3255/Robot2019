@@ -9,39 +9,37 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.NavXRotatePID;
+import frc.robot.subsystems.VisionDistancePID;
 import frcteam3255.robotbase.SN_DoublePreference;
 
-public class DriveRotate extends Command {
-  private NavXRotatePID pid;
-  private SN_DoublePreference pref_timeout = new SN_DoublePreference("DriveRotate_timeout", 0.0);
- 
-  double expireTime = 0.0;
+public class DriveDistanceVision extends Command {
+  
+  private VisionDistancePID pid;
+  private SN_DoublePreference pref_timeout = new SN_DoublePreference("VisionDistance_timeout", 0.0);
 
-  public DriveRotate(double degrees) {
+  private double expireTime = 0.0;
+
+  public DriveDistanceVision(SN_DoublePreference inches) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_drivetrain);
-    requires(Robot.m_navigation);
 
-    pid = new NavXRotatePID();
-    pid.setSetpoint(degrees);
+    pid = new VisionDistancePID();
+    pid.setSetpoint(inches);
   }
 
   public void setTimeout(SN_DoublePreference timeout){
     pref_timeout = timeout;
   }
 
-  public NavXRotatePID getPID() {
+  public VisionDistancePID getPID() {
     return pid;
   }
 
-// Called just before this Command runs the first time
+  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     expireTime = timeSinceInitialized() + pref_timeout.get();
-
-    Robot.m_navigation.resetYaw();
 
     pid.enable();
   }
@@ -49,9 +47,9 @@ public class DriveRotate extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double rotateSpeed =  pid.getOutput();
+    double moveSpeed = pid.getOutput();
 
-    Robot.m_drivetrain.arcadeDrive(0.0, rotateSpeed, false);
+    Robot.m_drivetrain.arcadeDrive(moveSpeed, 0.0, false);
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -9,44 +9,56 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotPreferences;
+import frc.robot.subsystems.VisionDistancePID;
+import frc.robot.subsystems.VisionRotatePID;
+import frcteam3255.robotbase.SN_DoublePreference;
 
-public class VisionDistance extends Command {
-  private double distance;
-  private double angle;
-  private double expireTime;
-  public VisionDistance(double inches, double degrees) {
+public class DriveDistanceRotateVision extends Command {
+  
+  private VisionDistancePID distancePID;
+  private VisionRotatePID rotatePID;
+  private SN_DoublePreference pref_timeout = new SN_DoublePreference("VisionRotateDistance_timeout", 0.0);
+
+  private double expireTime = 0.0;
+
+  public DriveDistanceRotateVision(SN_DoublePreference inches, SN_DoublePreference degrees) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_visionDistancePID);
-    requires(Robot.m_visionRotatePID);
     requires(Robot.m_drivetrain);
-    distance = inches;
-    angle = degrees;
+
+    distancePID = new VisionDistancePID();
+    rotatePID = new VisionRotatePID();
+
+    distancePID.setSetpoint(inches);
+    rotatePID.setSetpoint(degrees);
+  }
+
+  public void setTimeout(SN_DoublePreference timeout){
+    pref_timeout = timeout;
+  }
+
+  public VisionDistancePID getDistancePID() {
+    return distancePID;
+  }
+
+  public VisionRotatePID getYawPID() {
+    return rotatePID;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    double timeout = RobotPreferences.VISION_TIMEOUT.get();
-    expireTime = timeSinceInitialized() + timeout;
-
-    double tolerance = RobotPreferences.VISION_TOLERANCE.get();
-    double rotateTolerance = RobotPreferences.VISION_ROTATE_TOLERANCE.get();
-
-    Robot.m_visionDistancePID.setRawTolerance(tolerance);
-    Robot.m_visionRotatePID.setRawTolerance(rotateTolerance);
-    Robot.m_visionDistancePID.setSetpoint(distance);
-    Robot.m_visionRotatePID.setSetpoint(angle);
-    Robot.m_visionDistancePID.enable();
-    Robot.m_visionRotatePID.enable();
+    expireTime = timeSinceInitialized() + pref_timeout.get();
+    
+    distancePID.enable();
+    rotatePID.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double moveSpeed = Robot.m_visionDistancePID.getOutput();
-    double rotateSpeed = Robot.m_visionRotatePID.getOutput();
+    double moveSpeed = distancePID.getOutput();
+    double rotateSpeed = rotatePID.getOutput();
 
     Robot.m_drivetrain.arcadeDrive(-moveSpeed, rotateSpeed, false);
   }
@@ -54,8 +66,8 @@ public class VisionDistance extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    boolean distanceTarget = Robot.m_visionDistancePID.onRawTarget();
-    boolean rotateTarget = Robot.m_visionRotatePID.onRawTarget();
+    boolean distanceTarget = distancePID.onRawTarget();
+    boolean rotateTarget = rotatePID.onRawTarget();
     double timeNow = timeSinceInitialized();
 
     boolean finished = (distanceTarget || rotateTarget || (timeNow >= expireTime));
@@ -66,8 +78,8 @@ public class VisionDistance extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_visionDistancePID.disable();
-    Robot.m_visionRotatePID.disable();
+    distancePID.disable();
+    rotatePID.disable();
     Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
   }
 

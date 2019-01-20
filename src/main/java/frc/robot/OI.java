@@ -36,7 +36,7 @@ public class OI {
       manipulatorStick.btn_4.whenPressed(new IntakeRetractHatch());
       manipulatorStick.btn_5.whenPressed(new IntakeEjectHatch());
       manipulatorStick.btn_5.whenReleased(new IntakeReloadHatch());
-      manipulatorStick.btn_11.whenPressed(new VisionDistance(60.0 , 0.0));
+      // manipulatorStick.btn_11.whenPressed(new VisionRotateDistance(60.0 , 0.0));
       // manipulatorStick.btn_4.whenPressed(new DriveDistance(100.0));
       // manipulatorStick.btn_5.whenPressed(new DriveStraightDistance(100.0));
       // manipulatorStick.btn_6.whenPressed(new DriveRotate(90.0));

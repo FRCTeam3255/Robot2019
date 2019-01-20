@@ -17,9 +17,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class SN_DriverStick extends Joystick{
 	/** Joystick Button 1 */
-	public Button btn_A = new JoystickButton(this, 2);
-	/** Joystick Button 2 */
 	public Button btn_X = new JoystickButton(this, 1);
+	/** Joystick Button 2 */
+	public Button btn_A = new JoystickButton(this, 2);
 	/** Joystick Button 3 */
 	public Button btn_B = new JoystickButton(this, 3);
 	/** Joystick Button 4 */
@@ -42,11 +42,12 @@ public class SN_DriverStick extends Joystick{
 	public Button btn_RStick = new JoystickButton(this, 12);
 
 	// Axes
-	private static final int AXIS_TANK_LEFT = 1;
-	private static final int AXIS_TANK_RIGHT = 5;
 	private static final int AXIS_ARCADE_MOVE = 1;
 	private static final int AXIS_ARCADE_ROTATE = 2;
 	private static final int AXIS_ARCADE_STRAFE = 0;
+
+	private static final int AXIS_TANK_LEFT = 1;
+	private static final int AXIS_TANK_RIGHT = 5;
 
 	/**
 	 * Logitech F310 Gamepad with 12 Buttons and custom Axes
@@ -64,17 +65,19 @@ public class SN_DriverStick extends Joystick{
 	public double getArcadeMove(){
 		return -getRawAxis(AXIS_ARCADE_MOVE);
 	}
+
 	/**
 	 * @return position value of RawAxis({@value #AXIS_ARCADE_ROTATE})
 	 */
 	public double getArcadeRotate(){
 		return getRawAxis(AXIS_ARCADE_ROTATE);
 	}
+
 	/**
 	 * @return inverted position value of RawAxis({@value #AXIS_ARCADE_STRAFE})
 	 */
 	public double getArcadeStrafe(){
-		return -getRawAxis(AXIS_ARCADE_STRAFE);
+		return getRawAxis(AXIS_ARCADE_STRAFE);
 	}
 
 	// Tank Drive
@@ -84,6 +87,7 @@ public class SN_DriverStick extends Joystick{
 	public double getTankLeft(){
 		return -getRawAxis(AXIS_TANK_LEFT);
 	}
+	
 	/**
 	 * @return inverted position value of RawAxis({@value #AXIS_TANK_RIGHT})
 	 */

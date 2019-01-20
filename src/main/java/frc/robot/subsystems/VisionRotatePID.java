@@ -17,11 +17,9 @@ import frcteam3255.robotbase.SN_PID;
 public class VisionRotatePID extends SN_PID{
 
     public VisionRotatePID() {
-        super("VisionRotatePID");
+        super();
 
-        setPIDPreferences(RobotPreferences.VISION_ROTATE_P, RobotPreferences.VISION_ROTATE_I, RobotPreferences.VISION_ROTATE_D);
-        setMinMaxPreferences(RobotPreferences.VISION_MIN, RobotPreferences.VISION_MAX, RobotPreferences.VISION_MAX_CHANGE);
-        setTargetCount(RobotPreferences.VISION_TARGET_COUNT);
+        setPID(RobotPreferences.VISION_ROTATE_P, RobotPreferences.VISION_ROTATE_I, RobotPreferences.VISION_ROTATE_D);
     }
 
     @Override
@@ -29,6 +27,13 @@ public class VisionRotatePID extends SN_PID{
       // Return your input value for the PID loop
       // e.g. a sensor, like a potentiometer:
       // yourPot.getAverageVoltage() / kYourMaxVoltage;
-      return Robot.m_vision.getHorizontalOffset();
+      double offset = Robot.m_vision.getHorizontalOffset();
+
+      if(offset < -900) {
+          this.inputValid = false;
+          return -1000;
+      }
+      
+      return offset;
     }
 }
