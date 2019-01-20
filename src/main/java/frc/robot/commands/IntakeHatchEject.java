@@ -13,11 +13,11 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class IntakeEjectHatch extends InstantCommand {
+public class IntakeHatchEject extends InstantCommand {
   /**
    * Add your docs here.
    */
-  public IntakeEjectHatch() {
+  public IntakeHatchEject() {
     super();
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);

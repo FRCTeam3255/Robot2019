@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class IntakeEjectCargo extends Command {
-  public IntakeEjectCargo() {
+public class IntakeCargoCollect extends Command {
+  public IntakeCargoCollect() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_intake);
@@ -25,13 +25,13 @@ public class IntakeEjectCargo extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_intake.ejectCargo();
+    Robot.m_intake.intakeCargo();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return Robot.m_intake.isCargoCollected();
   }
 
   // Called once after isFinished returns true

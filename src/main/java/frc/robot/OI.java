@@ -30,12 +30,12 @@ public class OI {
 	
     public OI() {
       //Manipulator Stick
-      manipulatorStick.btn_1.whileHeld(new IntakeEjectCargo());
-      manipulatorStick.btn_2.whenPressed(new IntakeCollectCargo());
-      manipulatorStick.btn_3.whenPressed(new IntakeDeployHatch());
-      manipulatorStick.btn_4.whenPressed(new IntakeRetractHatch());
-      manipulatorStick.btn_5.whenPressed(new IntakeEjectHatch());
-      manipulatorStick.btn_5.whenReleased(new IntakeReloadHatch());
+      manipulatorStick.btn_1.whileHeld(new IntakeCargoEject());
+      manipulatorStick.btn_2.whenPressed(new IntakeCargoCollect());
+      manipulatorStick.btn_3.whenPressed(new IntakeHatchDeploy());
+      manipulatorStick.btn_4.whenPressed(new IntakeHatchRetract());
+      manipulatorStick.btn_5.whenPressed(new IntakeHatchEject());
+      manipulatorStick.btn_5.whenReleased(new IntakeHatchReload());
       // manipulatorStick.btn_11.whenPressed(new VisionRotateDistance(60.0 , 0.0));
       // manipulatorStick.btn_4.whenPressed(new DriveDistance(100.0));
       // manipulatorStick.btn_5.whenPressed(new DriveStraightDistance(100.0));
