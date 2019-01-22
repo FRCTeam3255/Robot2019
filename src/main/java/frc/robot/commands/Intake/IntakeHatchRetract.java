@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
@@ -13,11 +13,11 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class IntakeHatchReload extends InstantCommand {
+public class IntakeHatchRetract extends InstantCommand {
   /**
    * Add your docs here.
    */
-  public IntakeHatchReload() {
+  public IntakeHatchRetract() {
     super();
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -27,7 +27,6 @@ public class IntakeHatchReload extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.m_intake.reloadHatch();
+    Robot.m_intake.retractHatch();
   }
-
 }

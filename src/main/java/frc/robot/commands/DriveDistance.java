@@ -10,7 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.DrivetrainDistancePID;
-import frcteam3255.robotbase.SN_DoublePreference;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class DriveDistance extends Command {
 
@@ -18,6 +18,7 @@ public class DriveDistance extends Command {
   private SN_DoublePreference pref_timeout = new SN_DoublePreference("DriveDistance_timeout", 10.0);
 
   private double expireTime = 0.0;
+  private double distance;
 
   public DriveDistance(SN_DoublePreference inches) {
     // Use requires() here to declare subsystem dependencies
@@ -26,6 +27,7 @@ public class DriveDistance extends Command {
 
     pid = new DrivetrainDistancePID();
     pid.setSetpoint(inches);
+    distance = inches.get();
   }
 
   public void setTimeout(SN_DoublePreference timeout){
@@ -39,6 +41,7 @@ public class DriveDistance extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_telemetry.setAutonomousStatus("Starting DriveDistance" + ": " + distance);
     expireTime = timeSinceInitialized() + pref_timeout.get();
 
     Robot.m_drivetrain.resetEncoderCount();
@@ -49,6 +52,7 @@ public class DriveDistance extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.m_telemetry.setAutonomousStatus("Executing DriveDistance" + ": " + distance);
     double moveSpeed = pid.getOutput();
 
     Robot.m_drivetrain.arcadeDrive(moveSpeed, 0.0, false);
@@ -68,6 +72,7 @@ public class DriveDistance extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.m_telemetry.setAutonomousStatus("Finishing DriveDistance" + ": " + distance);
     pid.disable();
     Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
   }

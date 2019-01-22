@@ -11,13 +11,15 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.VisionDistancePID;
 import frc.robot.subsystems.VisionRotatePID;
-import frcteam3255.robotbase.SN_DoublePreference;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class DriveDistanceRotateVision extends Command {
   
   private VisionDistancePID distancePID;
   private VisionRotatePID rotatePID;
-  private SN_DoublePreference pref_timeout = new SN_DoublePreference("VisionRotateDistance_timeout", 10.0);
+  private SN_DoublePreference pref_timeout = new SN_DoublePreference("VisionRotateDistance_timeout", 100.0);
+  private double distance;
+  private double angle;
 
   private double expireTime = 0.0;
 
@@ -31,6 +33,8 @@ public class DriveDistanceRotateVision extends Command {
 
     distancePID.setSetpoint(inches);
     rotatePID.setSetpoint(degrees);
+    distance = inches.get();
+    angle = degrees.get();
   }
 
   public void setTimeout(SN_DoublePreference timeout){
@@ -41,13 +45,14 @@ public class DriveDistanceRotateVision extends Command {
     return distancePID;
   }
 
-  public VisionRotatePID getYawPID() {
+  public VisionRotatePID getRotatePID() {
     return rotatePID;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_telemetry.setAutonomousStatus("Starting DriveDistanceRotateVision" + ": " + distance + " " + angle);
     expireTime = timeSinceInitialized() + pref_timeout.get();
     
     distancePID.enable();
@@ -57,6 +62,7 @@ public class DriveDistanceRotateVision extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.m_telemetry.setAutonomousStatus("Executing DriveDistanceRotateVision" + ": " + distance + " " + angle);
     double moveSpeed = distancePID.getOutput();
     double rotateSpeed = rotatePID.getOutput();
 
@@ -78,6 +84,7 @@ public class DriveDistanceRotateVision extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.m_telemetry.setAutonomousStatus("Finishing DriveDistanceRotateVision" + ": " + distance + " " + angle);
     distancePID.disable();
     rotatePID.disable();
     Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);

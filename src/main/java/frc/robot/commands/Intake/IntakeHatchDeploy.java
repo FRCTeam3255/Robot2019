@@ -5,35 +5,28 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Intake;
 
-import edu.wpi.first.wpilibj.command.Command;
-import frcteam3255.robotbase.Preferences.SN_Preferences;
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.Robot;
 
-public class SetDebugMode extends Command {
-  public SetDebugMode() {
+/**
+ * Add your docs here.
+ */
+public class IntakeHatchDeploy extends InstantCommand {
+  /**
+   * Add your docs here.
+   */
+  public IntakeHatchDeploy() {
+    super();
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.m_intake);
   }
 
-  // Called just before this Command runs the first time
+  // Called once when the command executes
   @Override
   protected void initialize() {
-    SN_Preferences.usePreferences();
-  }
-
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
-
-  @Override
-  protected void end() {
-    SN_Preferences.useDefaults();
-  }
-
-  @Override
-  protected void interrupted() {
-    end();
+    Robot.m_intake.deployHatch();
   }
 }

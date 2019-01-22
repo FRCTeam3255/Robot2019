@@ -5,28 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frcteam3255.robotbase.Preferences;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj.Preferences;
 
 /**
  * Add your docs here.
  */
-public class IntakeDeploy extends InstantCommand {
-  /**
-   * Add your docs here.
-   */
-  public IntakeDeploy() {
-    super();
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.m_intake);
-  }
+public class SN_IntPreference extends SN_Preferences {
+	private int m_defaultValue;
 
-  // Called once when the command executes
-  @Override
-  protected void initialize() {
-    Robot.m_intake.deployIntake();
-  }
+	public SN_IntPreference(String name, int defaultValue){
+		m_name = name;
+		m_defaultValue = defaultValue;
+	}
+	public int get(){
+		if(isUsingDefaults()) {
+			return m_defaultValue;
+		}
+		return Preferences.getInstance().getInt(m_name, m_defaultValue);
+	}
+	
 }

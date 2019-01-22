@@ -10,7 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frcteam3255.robotbase.SN_Preferences;
+import frcteam3255.robotbase.Preferences.SN_Preferences;
 
 /**
  * Add your docs here.
@@ -36,4 +36,9 @@ public class Telemetry extends Subsystem {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
+
+  public void setAutonomousStatus(String string) {
+    SmartDashboard.putString("Autonomous Status", string);
+  }
+  
 }

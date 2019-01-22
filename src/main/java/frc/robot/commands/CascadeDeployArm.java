@@ -13,20 +13,21 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class IntakeHatchDeploy extends InstantCommand {
+public class CascadeDeployArm extends InstantCommand {
   /**
    * Add your docs here.
    */
-  public IntakeHatchDeploy() {
+  public CascadeDeployArm() {
     super();
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_intake);
+    requires(Robot.m_cascade);
   }
 
   // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.m_intake.deployHatch();
+    Robot.m_cascade.deployArm();
   }
+
 }

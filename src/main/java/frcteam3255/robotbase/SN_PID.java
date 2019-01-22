@@ -9,7 +9,8 @@ package frcteam3255.robotbase;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import frcteam3255.robotbase.SN_DoublePreference;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
+import frcteam3255.robotbase.Preferences.SN_IntPreference;
 
 /**
  * Add your docs here.
@@ -64,7 +65,7 @@ public abstract class SN_PID extends PIDSubsystem {
   public void setSetpoint(SN_DoublePreference setPoint){
     pref_setPoint = setPoint;
   }
-  public void setTolerence( SN_DoublePreference tolerance) {
+  public void setTolerance( SN_DoublePreference tolerance) {
     pref_tolerance = tolerance;
   }
   public void setTargetCount(SN_IntPreference targetCount) {

@@ -5,28 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frcteam3255.robotbase.Preferences;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj.Preferences;
 
 /**
  * Add your docs here.
  */
-public class IntakeHatchRetract extends InstantCommand {
-  /**
-   * Add your docs here.
-   */
-  public IntakeHatchRetract() {
-    super();
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.m_intake);
-  }
-
-  // Called once when the command executes
-  @Override
-  protected void initialize() {
-    Robot.m_intake.retractHatch();
-  }
+public class SN_DoublePreference extends SN_Preferences {
+	private double m_defaultValue;
+	
+	public SN_DoublePreference(String name, double defaultValue){
+		m_name = name;
+		m_defaultValue = defaultValue;
+	}
+	public double get(){
+		if(isUsingDefaults()) {
+			return m_defaultValue;
+		}
+		return Preferences.getInstance().getDouble(m_name, m_defaultValue);
+	}
+	
 }

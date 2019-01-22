@@ -10,7 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.VisionDistancePID;
-import frcteam3255.robotbase.SN_DoublePreference;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class DriveDistanceVision extends Command {
   

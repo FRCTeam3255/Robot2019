@@ -10,7 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.VisionRotatePID;
-import frcteam3255.robotbase.SN_DoublePreference;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class DriveRotateVision extends Command {
 
@@ -18,6 +18,7 @@ public class DriveRotateVision extends Command {
   private SN_DoublePreference pref_timeout = new SN_DoublePreference("VisionRotate_timeout", 10.0);
 
   private double expireTime = 0.0;
+  private double angle;
 
   public DriveRotateVision(SN_DoublePreference degrees) {
     // Use requires() here to declare subsystem dependencies
@@ -26,11 +27,13 @@ public class DriveRotateVision extends Command {
 
     pid = new VisionRotatePID();
     pid.setSetpoint(degrees);
+    angle = degrees.get();
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_telemetry.setAutonomousStatus("Starting DriveRotateVision" + ": " + angle);
     expireTime = timeSinceInitialized() + pref_timeout.get();
 
    pid.enable();
@@ -47,6 +50,7 @@ public class DriveRotateVision extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.m_telemetry.setAutonomousStatus("Executing DriveRotateVision" + ": " + angle);
     double rotateSpeed = 0.0;
 
     Robot.m_drivetrain.arcadeDrive(0.0, rotateSpeed, false);
@@ -66,6 +70,7 @@ public class DriveRotateVision extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.m_telemetry.setAutonomousStatus("Finishing DriveRotateVision" + ": " + angle);
    pid.disable();
     Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
   }

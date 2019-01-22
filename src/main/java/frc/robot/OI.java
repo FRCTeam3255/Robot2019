@@ -7,11 +7,19 @@
 
 package frc.robot;
 
-import frc.robot.commands.*;
-import frcteam3255.robotbase.SN_DoublePreference;
-import frcteam3255.robotbase.SN_DriverStick;
-import frcteam3255.robotbase.SN_ManipulatorStick;
-import frcteam3255.robotbase.SN_SwitchboardStick;
+import frc.robot.commands.DriveDistance;
+import frc.robot.commands.SetDebugMode;
+import frc.robot.commands.StartMatch;
+import frc.robot.commands.Intake.IntakeCargoCollect;
+import frc.robot.commands.Intake.IntakeCargoEject;
+import frc.robot.commands.Intake.IntakeHatchDeploy;
+import frc.robot.commands.Intake.IntakeHatchEject;
+import frc.robot.commands.Intake.IntakeHatchReload;
+import frc.robot.commands.Intake.IntakeHatchRetract;
+import frcteam3255.robotbase.Joystick.SN_DriverStick;
+import frcteam3255.robotbase.Joystick.SN_ManipulatorStick;
+import frcteam3255.robotbase.Joystick.SN_SwitchboardStick;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -41,6 +49,7 @@ public class OI {
       manipulatorStick.btn_7.whenPressed(new DriveDistance(new SN_DoublePreference("testPID", 100.0)));
       // manipulatorStick.btn_5.whenPressed(new DriveStraightDistance(100.0));
       // manipulatorStick.btn_6.whenPressed(new DriveRotate(90.0));
+      manipulatorStick.btn_9.whenPressed(new StartMatch());
 
       //Switchboard Stick
       switchboardStick.btn_1.whileHeld(new SetDebugMode());

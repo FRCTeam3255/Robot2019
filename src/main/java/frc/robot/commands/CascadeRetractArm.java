@@ -7,33 +7,27 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import frcteam3255.robotbase.Preferences.SN_Preferences;
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.Robot;
 
-public class SetDebugMode extends Command {
-  public SetDebugMode() {
+/**
+ * Add your docs here.
+ */
+public class CascadeRetractArm extends InstantCommand {
+  /**
+   * Add your docs here.
+   */
+  public CascadeRetractArm() {
+    super();
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.m_cascade);
   }
 
-  // Called just before this Command runs the first time
+  // Called once when the command executes
   @Override
   protected void initialize() {
-    SN_Preferences.usePreferences();
+    Robot.m_cascade.retractArm();
   }
 
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
-
-  @Override
-  protected void end() {
-    SN_Preferences.useDefaults();
-  }
-
-  @Override
-  protected void interrupted() {
-    end();
-  }
 }

@@ -1,4 +1,4 @@
-package frcteam3255.robotbase;
+package frcteam3255.robotbase.Preferences;
 
 /**
  * SuperNURDs encapsulation of RobotPreferences
