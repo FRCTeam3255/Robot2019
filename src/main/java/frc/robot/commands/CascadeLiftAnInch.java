@@ -23,7 +23,7 @@ public class CascadeLiftAnInch extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    previousEncoder = Robot.m_cascade.getLiftEncoderCount();
+    previousEncoder = Robot.m_cascade.getLiftEncoderDistance();
     Robot.m_cascade.unlockCascade();
   }
 
@@ -36,7 +36,7 @@ public class CascadeLiftAnInch extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.m_cascade.getLiftEncoderCount() >= previousEncoder + 1;
+    return Robot.m_cascade.getLiftEncoderDistance() >= previousEncoder + 1;
   }
 
   // Called once after isFinished returns true

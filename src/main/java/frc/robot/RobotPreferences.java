@@ -26,6 +26,12 @@ public class RobotPreferences {
 
   // Cascade Preferences
   public static final SN_DoublePreference CASCADE_LIFT_SPEED = new SN_DoublePreference("cascadeLiftSpeed", 1.0);
+  public static final SN_IntPreference CASCADE_PULSES_PER_FOOT = new SN_IntPreference("cascadePulsesPerFoot", 5);
+
+  // Cascade PID
+  public static final SN_DoublePreference CASCADE_P = new SN_DoublePreference("cascadeP", 1.0);
+  public static final SN_DoublePreference CASCADE_I = new SN_DoublePreference("cascadeI", 0.0);
+  public static final SN_DoublePreference CASCADE_D = new SN_DoublePreference("cascadeD", 0.0);
 
   // Drive PID
   public static final SN_DoublePreference DRIVETRAIN_P = new SN_DoublePreference("driveP", 1.0);
@@ -46,4 +52,5 @@ public class RobotPreferences {
   public static final SN_DoublePreference VISION_ROTATE_P = new SN_DoublePreference("visionRotateP", 0.037);
   public static final SN_DoublePreference VISION_ROTATE_I = new SN_DoublePreference("visionRotateI", 0.0);
   public static final SN_DoublePreference VISION_ROTATE_D = new SN_DoublePreference("visionRotateD", 0.0);
+
 }

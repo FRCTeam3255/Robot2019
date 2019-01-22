@@ -41,6 +41,8 @@ public class Cascade extends Subsystem {
     leftBackTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_BACK_TALON);
     rightFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_FRONT_TALON);
     rightBackTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_BACK_TALON);
+    rightFrontTalon.setInverted(true);
+    leftFrontTalon.setInverted(true);
 
     liftEncoder = new Encoder(RobotMap.CASCADE_LIFT_ENCODER_A, RobotMap.CASCADE_LIFT_ENCODER_B);
 
@@ -68,11 +70,11 @@ public class Cascade extends Subsystem {
     armSolenoid.set(Value.kReverse);
   }
 
-  public void shiftUp() {
+  public void shiftCascade() {
     shiftSolenoid.set(Value.kForward);
   }
 
-  public void shiftDown() {
+  public void shiftClimb() {
     shiftSolenoid.set(Value.kReverse);
   }
 
@@ -82,6 +84,10 @@ public class Cascade extends Subsystem {
 
   public void unlockCascade() {
     lockSolenoid.set(Value.kForward);
+  }
+
+  public double getLiftEncoderDistance() {
+    return liftEncoder.get() / RobotPreferences.CASCADE_PULSES_PER_FOOT.get();
   }
 
   public double getLiftEncoderCount() {
@@ -107,8 +113,8 @@ public class Cascade extends Subsystem {
 
     leftFrontTalon.set(speed);
     leftBackTalon.set(speed);
-    rightFrontTalon.set(-speed);
-    rightBackTalon.set(-speed);
+    rightFrontTalon.set(speed);
+    rightBackTalon.set(speed);
   }
 
   @Override

@@ -9,17 +9,18 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class CascadeMove extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public CascadeMove(double setPoint) {
+  public CascadeMove(SN_DoublePreference setPoint) {
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
-    if (setPoint < Robot.m_cascade.getLiftEncoderCount()) {
+    if (setPoint.get() < Robot.m_cascade.getLiftEncoderDistance()) {
       addSequential(new CascadeLiftAnInch());
     }
 
