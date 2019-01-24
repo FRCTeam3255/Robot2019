@@ -21,67 +21,71 @@ import frcteam3255.robotbase.SN_TalonSRX;
 public class Intake extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
- private SN_TalonSRX intakeTalon = null;
+  private SN_TalonSRX intakeTalon = null;
 
- private DoubleSolenoid ejectSolenoid = null;
- private DoubleSolenoid hatchSolenoid = null;
- private DoubleSolenoid deploySolenoid = null;
- private DigitalInput hatchSwitch = null;
- private DigitalInput cargoSwitch = null;
+  private DoubleSolenoid ejectSolenoid = null;
+  private DoubleSolenoid hatchSolenoid = null;
+  private DoubleSolenoid deploySolenoid = null;
+  private DigitalInput hatchSwitch = null;
+  private DigitalInput cargoSwitch = null;
 
-public Intake(){
-  intakeTalon = new SN_TalonSRX(RobotMap.INTAKE_TALON); 
+  public Intake() {
+    intakeTalon = new SN_TalonSRX(RobotMap.INTAKE_TALON);
 
-  ejectSolenoid = new DoubleSolenoid(RobotMap.INTAKE_EJECT_SOLENOID_A, RobotMap.INTAKE_EJECT_SOLENOID_B);
-  hatchSolenoid = new DoubleSolenoid(RobotMap.INTAKE_HATCH_SOLENOID_A, RobotMap.INTAKE_HATCH_SOLENOID_B);
-  deploySolenoid = new DoubleSolenoid(RobotMap.INTAKE_DEPLOY_SOLENOID_A, RobotMap.INTAKE_DEPLOY_SOLENOID_B);
-  hatchSwitch = new DigitalInput(RobotMap.INTAKE_HATCH_SWITCH);
-  cargoSwitch = new DigitalInput(RobotMap.INTAKE_CARGO_SWITCH);
-}
+    ejectSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_EJECT_SOLENOID_A,
+        RobotMap.INTAKE_EJECT_SOLENOID_B);
+    hatchSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_HATCH_SOLENOID_A,
+        RobotMap.INTAKE_HATCH_SOLENOID_B);
+    deploySolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_DEPLOY_SOLENOID_A,
+        RobotMap.INTAKE_DEPLOY_SOLENOID_B);
 
-public void intakeCargo() {
-  intakeTalon.set(RobotPreferences.INTAKE_CARGO_SPEED.get());
-}
+    hatchSwitch = new DigitalInput(RobotMap.INTAKE_HATCH_SWITCH);
+    cargoSwitch = new DigitalInput(RobotMap.INTAKE_CARGO_SWITCH);
+  }
 
-public void ejectCargo() {
-  intakeTalon.set(RobotPreferences.EJECT_CARGO_SPEED.get());
-}
+  public void intakeCargo() {
+    intakeTalon.set(RobotPreferences.INTAKE_CARGO_SPEED.get());
+  }
 
-public void holdCargo() {
-  intakeTalon.set(0.0);
-}
+  public void ejectCargo() {
+    intakeTalon.set(RobotPreferences.EJECT_CARGO_SPEED.get());
+  }
 
-public void deployIntake() {
-  deploySolenoid.set(Value.kForward);
-}
+  public void holdCargo() {
+    intakeTalon.set(0.0);
+  }
 
-public void retractIntake() {
-  deploySolenoid.set(Value.kReverse);
-}
+  public void deployIntake() {
+    deploySolenoid.set(Value.kForward);
+  }
 
-public void deployHatch() {
-  hatchSolenoid.set(Value.kForward);
-}
+  public void retractIntake() {
+    deploySolenoid.set(Value.kReverse);
+  }
 
-public void retractHatch() {
-  hatchSolenoid.set(Value.kReverse);
-}
+  public void deployHatch() {
+    hatchSolenoid.set(Value.kForward);
+  }
 
-public void ejectHatch() {
-  ejectSolenoid.set(Value.kForward);
-}
+  public void retractHatch() {
+    hatchSolenoid.set(Value.kReverse);
+  }
 
-public void reloadHatch() {
-  ejectSolenoid.set(Value.kReverse);
-}
+  public void ejectHatch() {
+    ejectSolenoid.set(Value.kForward);
+  }
 
-public boolean isHatchCollected() {
-  return hatchSwitch.get();
-}
+  public void reloadHatch() {
+    ejectSolenoid.set(Value.kReverse);
+  }
 
-public boolean isCargoCollected() {
-  return cargoSwitch.get();
-}
+  public boolean isHatchCollected() {
+    return hatchSwitch.get();
+  }
+
+  public boolean isCargoCollected() {
+    return cargoSwitch.get();
+  }
 
   @Override
   public void initDefaultCommand() {
