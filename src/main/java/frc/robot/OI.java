@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import frc.robot.commands.Climb;
 import frc.robot.commands.DriveDistance;
 import frc.robot.commands.SetDebugMode;
 import frc.robot.commands.StartMatch;
@@ -33,27 +34,28 @@ public class OI {
   // number it is.
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
-    public SN_DriverStick driverStick = new SN_DriverStick(0);
-    public SN_ManipulatorStick manipulatorStick =  new SN_ManipulatorStick(1);
-    public SN_SwitchboardStick switchboardStick = new SN_SwitchboardStick(2);
-	
-    public OI() {
-      //Manipulator Stick
-      manipulatorStick.btn_1.whileHeld(new IntakeCargoEject());
-      manipulatorStick.btn_2.whenPressed(new IntakeCargoCollect());
-      manipulatorStick.btn_3.whenPressed(new IntakeHatchDeploy());
-      manipulatorStick.btn_4.whenPressed(new IntakeHatchRetract());
-      manipulatorStick.btn_5.whenPressed(new IntakeHatchEject());
-      manipulatorStick.btn_5.whenReleased(new IntakeHatchReload());
-      // manipulatorStick.btn_11.whenPressed(new VisionRotateDistance(60.0 , 0.0));
-      manipulatorStick.btn_7.whenPressed(new DriveDistance(new SN_DoublePreference("testPID", 100.0)));
-      // manipulatorStick.btn_5.whenPressed(new DriveStraightDistance(100.0));
-      // manipulatorStick.btn_6.whenPressed(new DriveRotate(90.0));
-      manipulatorStick.btn_9.whenPressed(new StartMatch());
+  public SN_DriverStick driverStick = new SN_DriverStick(0);
+  public SN_ManipulatorStick manipulatorStick = new SN_ManipulatorStick(1);
+  public SN_SwitchboardStick switchboardStick = new SN_SwitchboardStick(2);
 
-      //Switchboard Stick
-      switchboardStick.btn_1.whileHeld(new SetDebugMode());
-    }
+  public OI() {
+    // Manipulator Stick
+    manipulatorStick.btn_1.whileHeld(new IntakeCargoEject());
+    manipulatorStick.btn_2.whenPressed(new IntakeCargoCollect());
+    manipulatorStick.btn_3.whenPressed(new IntakeHatchDeploy());
+    manipulatorStick.btn_4.whenPressed(new IntakeHatchRetract());
+    manipulatorStick.btn_5.whenPressed(new IntakeHatchEject());
+    manipulatorStick.btn_5.whenReleased(new IntakeHatchReload());
+    // manipulatorStick.btn_11.whenPressed(new VisionRotateDistance(60.0 , 0.0));
+    manipulatorStick.btn_7.whenPressed(new DriveDistance(new SN_DoublePreference("testPID", 100.0)));
+    // manipulatorStick.btn_5.whenPressed(new DriveStraightDistance(100.0));
+    // manipulatorStick.btn_6.whenPressed(new DriveRotate(90.0));
+    manipulatorStick.btn_9.whenPressed(new StartMatch());
+    manipulatorStick.btn_10.whenPressed(new Climb());
+
+    // Switchboard Stick
+    switchboardStick.btn_1.whileHeld(new SetDebugMode());
+  }
 
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to

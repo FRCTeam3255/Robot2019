@@ -19,6 +19,7 @@ import frcteam3255.robotbase.Preferences.SN_IntPreference;
 public class RobotPreferences {
   // Drivetrain preferences
   public static final SN_IntPreference DRIVETRAIN_PULSES_PER_FOOT = new SN_IntPreference("driveTrainPulsesPerFoot", 5);
+  public static final SN_DoublePreference DRIVETRAIN_CLIMB_SETPOINT = new SN_DoublePreference("drivetrainClimb", 25.0);
 
   // Intake Preferences
   public static final SN_DoublePreference INTAKE_CARGO_SPEED = new SN_DoublePreference("intakeCargoSpeed", 1.0);
@@ -27,6 +28,7 @@ public class RobotPreferences {
   // Cascade Preferences
   public static final SN_DoublePreference CASCADE_LIFT_SPEED = new SN_DoublePreference("cascadeLiftSpeed", 1.0);
   public static final SN_IntPreference CASCADE_PULSES_PER_FOOT = new SN_IntPreference("cascadePulsesPerFoot", 5);
+  public static final SN_DoublePreference CASCADE_CLIMB_SETPOINT = new SN_DoublePreference("cascadeClimb", 25.0);
 
   // Cascade PID
   public static final SN_DoublePreference CASCADE_P = new SN_DoublePreference("cascadeP", 1.0);

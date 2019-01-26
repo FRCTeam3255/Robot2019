@@ -30,7 +30,7 @@ public class Cascade extends Subsystem {
   private Encoder liftEncoder = null;
 
   private DoubleSolenoid shiftSolenoid = null;
-  private DoubleSolenoid armSolenoid = null;
+  private DoubleSolenoid climbSolenoid = null;
   private DoubleSolenoid lockSolenoid = null;
 
   private DigitalInput topSwitch = null;
@@ -48,8 +48,8 @@ public class Cascade extends Subsystem {
 
     shiftSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_SHIFT_SOLENOID_A,
         RobotMap.CASCADE_SHIFT_SOLENOID_B);
-    armSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_ARM_SOLENOID_A,
-        RobotMap.CASCADE_ARM_SOLENOID_B);
+    climbSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_CLIMB_SOLENOID_A,
+        RobotMap.CASCADE_CLIMB_SOLENOID_B);
     lockSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_LOCK_SOLENOID_A,
         RobotMap.CASCADE_LOCK_SOLENOID_B);
 
@@ -65,12 +65,12 @@ public class Cascade extends Subsystem {
     return bottomSwitch.get();
   }
 
-  public void deployArm() {
-    armSolenoid.set(Value.kForward);
+  public void deployClimb() {
+    climbSolenoid.set(Value.kForward);
   }
 
-  public void retractArm() {
-    armSolenoid.set(Value.kReverse);
+  public void retractClimb() {
+    climbSolenoid.set(Value.kReverse);
   }
 
   public void shiftCascade() {

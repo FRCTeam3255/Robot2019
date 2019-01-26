@@ -13,11 +13,11 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class CascadeDeployArm extends InstantCommand {
+public class CascadeDeployClimb extends InstantCommand {
   /**
    * Add your docs here.
    */
-  public CascadeDeployArm() {
+  public CascadeDeployClimb() {
     super();
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -27,7 +27,7 @@ public class CascadeDeployArm extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.m_cascade.deployArm();
+    Robot.m_cascade.deployClimb();
   }
 
 }
