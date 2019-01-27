@@ -19,7 +19,7 @@ public class DrivetrainDistancePID extends SN_PID {
   // here. Call these from Commands.
   public DrivetrainDistancePID() {
     super();
-    
+
     setPID(RobotPreferences.DRIVETRAIN_P, RobotPreferences.DRIVETRAIN_I, RobotPreferences.DRIVETRAIN_D);
   }
 
@@ -28,6 +28,7 @@ public class DrivetrainDistancePID extends SN_PID {
     // Return your input value for the PID loop
     // e.g. a sensor, like a potentiometer:
     // yourPot.getAverageVoltage() / kYourMaxVoltage;
+    inputValid = true;
     return Robot.m_drivetrain.getEncoderDistance();
   }
 }

@@ -5,43 +5,44 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.NavXRotatePID;
+import frc.robot.subsystems.VisionRotatePID;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-public class DriveRotate extends Command {
-  private NavXRotatePID pid;
-  private SN_DoublePreference pref_timeout = new SN_DoublePreference("DriveRotate_timeout", 10.0);
- 
-  double expireTime = 0.0;
+public class DriveRotateVision extends Command {
 
-  public DriveRotate(double degrees) {
+  private VisionRotatePID pid;
+  private SN_DoublePreference pref_timeout = new SN_DoublePreference("VisionRotate_timeout", 100.0);
+
+  private double expireTime = 0.0;
+  private String name;
+
+  public DriveRotateVision(SN_DoublePreference degrees, String commandName) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_drivetrain);
-    requires(Robot.m_navigation);
 
-    pid = new NavXRotatePID();
+    pid = new VisionRotatePID();
     pid.setSetpoint(degrees);
+    name = commandName;
   }
 
-  public void setTimeout(SN_DoublePreference timeout){
-    pref_timeout = timeout;
-  }
-
-  public NavXRotatePID getPID() {
+  public VisionRotatePID getPID() {
     return pid;
   }
 
-// Called just before this Command runs the first time
+  public void setTimeout(SN_DoublePreference timeout) {
+    pref_timeout = timeout;
+  }
+
+  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_telemetry.setAutonomousStatus("Starting DriveRotateVision " + name + ": " + pid.getSetpoint());
     expireTime = timeSinceInitialized() + pref_timeout.get();
-
-    Robot.m_navigation.resetYaw();
 
     pid.enable();
   }
@@ -49,7 +50,8 @@ public class DriveRotate extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double rotateSpeed =  pid.getOutput();
+    Robot.m_telemetry.setAutonomousStatus("Executing DriveRotateVision " + name + ": " + pid.getSetpoint());
+    double rotateSpeed = pid.getOutput();
 
     Robot.m_drivetrain.arcadeDrive(0.0, rotateSpeed, false);
   }
@@ -57,10 +59,10 @@ public class DriveRotate extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    boolean distanceTarget = pid.onRawTarget();
+    boolean rotateTarget = pid.onRawTarget();
     double timeNow = timeSinceInitialized();
 
-    boolean finished = (distanceTarget || (timeNow >= expireTime));
+    boolean finished = (rotateTarget || (timeNow >= expireTime));
 
     return finished;
   }
@@ -68,6 +70,7 @@ public class DriveRotate extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.m_telemetry.setAutonomousStatus("Finishing DriveRotateVision " + name + ": " + pid.getSetpoint());
     pid.disable();
     Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
   }

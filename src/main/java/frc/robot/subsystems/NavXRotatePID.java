@@ -28,6 +28,7 @@ public class NavXRotatePID extends SN_PID {
     // Return your input value for the PID loop
     // e.g. a sensor, like a potentiometer:
     // yourPot.getAverageVoltage() / kYourMaxVoltage;
+    inputValid = true;
     return Robot.m_navigation.getYaw();
   }
 }

@@ -14,7 +14,7 @@ import frcteam3255.robotbase.SN_PID;
 /**
  * Add your docs here.
  */
-public class VisionRotatePID extends SN_PID{
+public class VisionRotatePID extends SN_PID {
 
     public VisionRotatePID() {
         super();
@@ -24,16 +24,15 @@ public class VisionRotatePID extends SN_PID{
 
     @Override
     protected double returnPIDInput() {
-      // Return your input value for the PID loop
-      // e.g. a sensor, like a potentiometer:
-      // yourPot.getAverageVoltage() / kYourMaxVoltage;
-      double offset = Robot.m_vision.getHorizontalOffset();
+        double offset = 0;
 
-      if(offset < -900) {
-          this.inputValid = false;
-          return -1000;
-      }
-      
-      return offset;
+        if (Robot.m_vision.targetFound()) {
+            offset = Robot.m_vision.getHorizontalOffset();
+            this.inputValid = true;
+        } else {
+            this.inputValid = false;
+        }
+
+        return offset;
     }
 }

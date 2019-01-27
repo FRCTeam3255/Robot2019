@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.RobotPreferences;
-import frc.robot.commands.DriveArcade;
+import frc.robot.commands.Drive.DriveArcade;
 import frcteam3255.robotbase.SN_TalonSRX;
 
 /**
@@ -22,30 +22,30 @@ import frcteam3255.robotbase.SN_TalonSRX;
 public class Drivetrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private SpeedControllerGroup leftTalons = null; 
+  private SpeedControllerGroup leftTalons = null;
   private SN_TalonSRX leftFrontTalon = null;
-  private SN_TalonSRX leftMidTalon = null;
+  // private SN_TalonSRX leftMidTalon = null;
   private SN_TalonSRX leftBackTalon = null;
 
   private SpeedControllerGroup rightTalons = null;
   private SN_TalonSRX rightFrontTalon = null;
-  private SN_TalonSRX rightMidTalon = null;
+  // private SN_TalonSRX rightMidTalon = null;
   private SN_TalonSRX rightBackTalon = null;
 
   private DifferentialDrive differentialDrive = null;
 
   private Encoder encoder = null;
 
-  public Drivetrain(){
+  public Drivetrain() {
     leftFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT_TALON);
-    leftMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_MID_TALON);
+    // leftMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_MID_TALON);
     leftBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK_TALON);
-    leftTalons = new SpeedControllerGroup(leftFrontTalon, leftMidTalon, leftBackTalon);
+    leftTalons = new SpeedControllerGroup(leftFrontTalon, leftBackTalon);
 
     rightFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT_TALON);
-    rightMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_MID_TALON);
+    // rightMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_MID_TALON);
     rightBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK_TALON);
-    rightTalons = new SpeedControllerGroup(rightFrontTalon, rightMidTalon, rightBackTalon);
+    rightTalons = new SpeedControllerGroup(rightFrontTalon, rightBackTalon);
 
     encoder = new Encoder(RobotMap.DRIVETRAIN_ENCODER_A, RobotMap.DRIVETRAIN_ENCODER_B);
 
@@ -53,15 +53,15 @@ public class Drivetrain extends Subsystem {
     differentialDrive.setSafetyEnabled(false);
   }
 
-  public void arcadeDrive(double moveSpeed, double rotateSpeed, boolean squaredInputs){
+  public void arcadeDrive(double moveSpeed, double rotateSpeed, boolean squaredInputs) {
     differentialDrive.arcadeDrive(moveSpeed, rotateSpeed, true);
   }
 
   public double getEncoderCount() {
-     return -encoder.get();
-  } 
+    return -encoder.get();
+  }
 
-  public void resetEncoderCount(){
+  public void resetEncoderCount() {
     encoder.reset();
   }
 

@@ -5,41 +5,48 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.VisionDistancePID;
+import frc.robot.subsystems.DrivetrainDistancePID;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-public class DriveDistanceVision extends Command {
-  
-  private VisionDistancePID pid;
-  private SN_DoublePreference pref_timeout = new SN_DoublePreference("VisionDistance_timeout", 10.0);
+public class DriveDistance extends Command {
+
+  private DrivetrainDistancePID pid;
+  private SN_DoublePreference pref_timeout = new SN_DoublePreference("DriveDistance_timeout", 10.0);
 
   private double expireTime = 0.0;
+  private double distance;
+  private String name;
 
-  public DriveDistanceVision(SN_DoublePreference inches) {
+  public DriveDistance(SN_DoublePreference inches, String commandName) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_drivetrain);
 
-    pid = new VisionDistancePID();
+    pid = new DrivetrainDistancePID();
     pid.setSetpoint(inches);
+    distance = inches.get();
+    name = commandName;
   }
 
-  public void setTimeout(SN_DoublePreference timeout){
+  public void setTimeout(SN_DoublePreference timeout) {
     pref_timeout = timeout;
   }
 
-  public VisionDistancePID getPID() {
+  public DrivetrainDistancePID getPID() {
     return pid;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_telemetry.setAutonomousStatus("Starting DriveDistance " + name + ": " + pid.getSetpoint() + " ");
     expireTime = timeSinceInitialized() + pref_timeout.get();
+
+    Robot.m_drivetrain.resetEncoderCount();
 
     pid.enable();
   }
@@ -47,6 +54,7 @@ public class DriveDistanceVision extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.m_telemetry.setAutonomousStatus("Executing DriveDistance " + name + ": " + pid.getSetpoint() + " ");
     double moveSpeed = pid.getOutput();
 
     Robot.m_drivetrain.arcadeDrive(moveSpeed, 0.0, false);
@@ -66,6 +74,7 @@ public class DriveDistanceVision extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.m_telemetry.setAutonomousStatus("Finishing DriveDistance " + name + ": " + pid.getSetpoint() + "");
     pid.disable();
     Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
   }

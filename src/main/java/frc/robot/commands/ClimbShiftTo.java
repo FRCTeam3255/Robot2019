@@ -13,11 +13,11 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class ShiftToClimb extends InstantCommand {
+public class ClimbShiftTo extends InstantCommand {
   /**
    * Add your docs here.
    */
-  public ShiftToClimb() {
+  public ClimbShiftTo() {
     super();
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);

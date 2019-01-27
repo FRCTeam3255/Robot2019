@@ -5,41 +5,69 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.VisionDistancePID;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-public class DriveArcade extends Command {
-  public DriveArcade() {
+public class DriveDistanceVision extends Command {
+
+  private VisionDistancePID pid;
+  private SN_DoublePreference pref_timeout = new SN_DoublePreference("VisionDistance_timeout", 10.0);
+
+  private double expireTime = 0.0;
+
+  public DriveDistanceVision(SN_DoublePreference inches) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_drivetrain);
+
+    pid = new VisionDistancePID();
+    pid.setSetpoint(inches);
+  }
+
+  public void setTimeout(SN_DoublePreference timeout) {
+    pref_timeout = timeout;
+  }
+
+  public VisionDistancePID getPID() {
+    return pid;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    expireTime = timeSinceInitialized() + pref_timeout.get();
+
+    pid.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double moveSpeed = Robot.m_oi.driverStick.getArcadeMove();
-    double rotateSpeed = Robot.m_oi.driverStick.getArcadeRotate();
-    Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed, true);
+    double moveSpeed = pid.getOutput();
+
+    Robot.m_drivetrain.arcadeDrive(moveSpeed, 0.0, false);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    boolean distanceTarget = pid.onRawTarget();
+    double timeNow = timeSinceInitialized();
+
+    boolean finished = (distanceTarget || (timeNow >= expireTime));
+
+    return finished;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_drivetrain.arcadeDrive(0.0, 0.0, true);
+    pid.disable();
+    Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
   }
 
   // Called when another command which requires one or more of the same

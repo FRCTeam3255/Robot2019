@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
@@ -14,16 +14,15 @@ import frc.robot.subsystems.VisionRotatePID;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class DriveDistanceRotateVision extends Command {
-  
+
   private VisionDistancePID distancePID;
   private VisionRotatePID rotatePID;
   private SN_DoublePreference pref_timeout = new SN_DoublePreference("VisionRotateDistance_timeout", 100.0);
-  private double distance;
-  private double angle;
+  private String name;
 
   private double expireTime = 0.0;
 
-  public DriveDistanceRotateVision(SN_DoublePreference inches, SN_DoublePreference degrees) {
+  public DriveDistanceRotateVision(SN_DoublePreference inches, SN_DoublePreference degrees, String commandName) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_drivetrain);
@@ -33,11 +32,10 @@ public class DriveDistanceRotateVision extends Command {
 
     distancePID.setSetpoint(inches);
     rotatePID.setSetpoint(degrees);
-    distance = inches.get();
-    angle = degrees.get();
+    name = commandName;
   }
 
-  public void setTimeout(SN_DoublePreference timeout){
+  public void setTimeout(SN_DoublePreference timeout) {
     pref_timeout = timeout;
   }
 
@@ -52,9 +50,10 @@ public class DriveDistanceRotateVision extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_telemetry.setAutonomousStatus("Starting DriveDistanceRotateVision" + ": " + distance + " " + angle);
+    Robot.m_telemetry.setAutonomousStatus("Starting DriveDistanceRotateVision " + name + ": "
+        + distancePID.getSetpoint() + " " + rotatePID.getSetpoint());
     expireTime = timeSinceInitialized() + pref_timeout.get();
-    
+
     distancePID.enable();
     rotatePID.enable();
   }
@@ -62,7 +61,8 @@ public class DriveDistanceRotateVision extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_telemetry.setAutonomousStatus("Executing DriveDistanceRotateVision" + ": " + distance + " " + angle);
+    Robot.m_telemetry.setAutonomousStatus("Executing DriveDistanceRotateVision " + name + ": "
+        + distancePID.getSetpoint() + " " + rotatePID.getSetpoint());
     double moveSpeed = distancePID.getOutput();
     double rotateSpeed = rotatePID.getOutput();
 
@@ -76,7 +76,7 @@ public class DriveDistanceRotateVision extends Command {
     boolean rotateTarget = rotatePID.onRawTarget();
     double timeNow = timeSinceInitialized();
 
-    boolean finished = (distanceTarget || rotateTarget || (timeNow >= expireTime));
+    boolean finished = ((distanceTarget && rotateTarget) || (timeNow >= expireTime));
 
     return finished;
   }
@@ -84,7 +84,8 @@ public class DriveDistanceRotateVision extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_telemetry.setAutonomousStatus("Finishing DriveDistanceRotateVision" + ": " + distance + " " + angle);
+    Robot.m_telemetry.setAutonomousStatus("Finishing DriveDistanceRotateVision " + name + ": "
+        + distancePID.getSetpoint() + " " + rotatePID.getSetpoint());
     distancePID.disable();
     rotatePID.disable();
     Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);

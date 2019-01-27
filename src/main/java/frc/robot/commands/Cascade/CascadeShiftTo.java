@@ -5,29 +5,30 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.commands.Cascade;
 
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
-import frc.robot.RobotPreferences;
-import frcteam3255.robotbase.SN_PID;
 
 /**
  * Add your docs here.
  */
-public class CascadePID extends SN_PID {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-  public CascadePID() {
+public class CascadeShiftTo extends InstantCommand {
+  /**
+   * Add your docs here.
+   */
+  public CascadeShiftTo() {
     super();
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    requires(Robot.m_cascade);
 
-    setPID(RobotPreferences.CASCADE_P, RobotPreferences.CASCADE_I, RobotPreferences.CASCADE_D);
   }
 
+  // Called once when the command executes
   @Override
-  protected double returnPIDInput() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-    inputValid = true;
-    return Robot.m_cascade.getLiftEncoderDistance();
+  protected void initialize() {
+    Robot.m_cascade.shiftCascade();
   }
+
 }

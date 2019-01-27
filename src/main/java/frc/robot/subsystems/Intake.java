@@ -32,12 +32,15 @@ public class Intake extends Subsystem {
   public Intake() {
     intakeTalon = new SN_TalonSRX(RobotMap.INTAKE_TALON);
 
-    ejectSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_EJECT_SOLENOID_A,
-        RobotMap.INTAKE_EJECT_SOLENOID_B);
-    hatchSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_HATCH_SOLENOID_A,
-        RobotMap.INTAKE_HATCH_SOLENOID_B);
-    deploySolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_DEPLOY_SOLENOID_A,
-        RobotMap.INTAKE_DEPLOY_SOLENOID_B);
+    // ejectSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM,
+    // RobotMap.INTAKE_EJECT_SOLENOID_A,
+    // RobotMap.INTAKE_EJECT_SOLENOID_B);
+    // hatchSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM,
+    // RobotMap.INTAKE_HATCH_SOLENOID_A,
+    // RobotMap.INTAKE_HATCH_SOLENOID_B);
+    // deploySolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM,
+    // RobotMap.INTAKE_DEPLOY_SOLENOID_A,
+    // RobotMap.INTAKE_DEPLOY_SOLENOID_B);
 
     hatchSwitch = new DigitalInput(RobotMap.INTAKE_HATCH_SWITCH);
     cargoSwitch = new DigitalInput(RobotMap.INTAKE_CARGO_SWITCH);

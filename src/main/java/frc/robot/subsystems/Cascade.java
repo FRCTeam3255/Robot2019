@@ -46,12 +46,15 @@ public class Cascade extends Subsystem {
 
     liftEncoder = new Encoder(RobotMap.CASCADE_LIFT_ENCODER_A, RobotMap.CASCADE_LIFT_ENCODER_B);
 
-    shiftSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_SHIFT_SOLENOID_A,
-        RobotMap.CASCADE_SHIFT_SOLENOID_B);
-    climbSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_CLIMB_SOLENOID_A,
-        RobotMap.CASCADE_CLIMB_SOLENOID_B);
-    lockSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_LOCK_SOLENOID_A,
-        RobotMap.CASCADE_LOCK_SOLENOID_B);
+    // shiftSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM,
+    // RobotMap.CASCADE_SHIFT_SOLENOID_A,
+    // RobotMap.CASCADE_SHIFT_SOLENOID_B);
+    // climbSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM,
+    // RobotMap.CASCADE_CLIMB_SOLENOID_A,
+    // RobotMap.CASCADE_CLIMB_SOLENOID_B);
+    // lockSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM,
+    // RobotMap.CASCADE_LOCK_SOLENOID_A,
+    // RobotMap.CASCADE_LOCK_SOLENOID_B);
 
     topSwitch = new DigitalInput(RobotMap.CASCADE_TOP_SWITCH);
     bottomSwitch = new DigitalInput(RobotMap.CASCADE_BOTTOM_SWITCH);

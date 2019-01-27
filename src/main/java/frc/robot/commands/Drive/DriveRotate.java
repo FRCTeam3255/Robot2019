@@ -5,57 +5,53 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.DrivetrainDistancePID;
+import frc.robot.subsystems.NavXRotatePID;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-public class DriveDistance extends Command {
+public class DriveRotate extends Command {
+  private NavXRotatePID pid;
+  private SN_DoublePreference pref_timeout = new SN_DoublePreference("DriveRotate_timeout", 10.0);
 
-  private DrivetrainDistancePID pid;
-  private SN_DoublePreference pref_timeout = new SN_DoublePreference("DriveDistance_timeout", 10.0);
+  double expireTime = 0.0;
 
-  private double expireTime = 0.0;
-  private double distance;
-
-  public DriveDistance(SN_DoublePreference inches) {
+  public DriveRotate(double degrees) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_drivetrain);
+    requires(Robot.m_navigation);
 
-    pid = new DrivetrainDistancePID();
-    pid.setSetpoint(inches);
-    distance = inches.get();
+    pid = new NavXRotatePID();
+    pid.setSetpoint(degrees);
   }
 
-  public void setTimeout(SN_DoublePreference timeout){
+  public void setTimeout(SN_DoublePreference timeout) {
     pref_timeout = timeout;
   }
 
-  public DrivetrainDistancePID getPID() {
+  public NavXRotatePID getPID() {
     return pid;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_telemetry.setAutonomousStatus("Starting DriveDistance" + ": " + distance);
     expireTime = timeSinceInitialized() + pref_timeout.get();
 
-    Robot.m_drivetrain.resetEncoderCount();
-    
+    Robot.m_navigation.resetYaw();
+
     pid.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_telemetry.setAutonomousStatus("Executing DriveDistance" + ": " + distance);
-    double moveSpeed = pid.getOutput();
+    double rotateSpeed = pid.getOutput();
 
-    Robot.m_drivetrain.arcadeDrive(moveSpeed, 0.0, false);
+    Robot.m_drivetrain.arcadeDrive(0.0, rotateSpeed, false);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -72,7 +68,6 @@ public class DriveDistance extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_telemetry.setAutonomousStatus("Finishing DriveDistance" + ": " + distance);
     pid.disable();
     Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
   }

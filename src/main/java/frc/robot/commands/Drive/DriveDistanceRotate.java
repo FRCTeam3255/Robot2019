@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
@@ -21,8 +21,11 @@ public class DriveDistanceRotate extends Command {
 
   private double expireTime = 0.0;
 
+  private double distance;
+  private double angle;
+  private String name;
 
-  public DriveDistanceRotate(SN_DoublePreference inches, SN_DoublePreference degrees) {
+  public DriveDistanceRotate(SN_DoublePreference inches, SN_DoublePreference degrees, String commandName) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_drivetrain);
@@ -33,9 +36,12 @@ public class DriveDistanceRotate extends Command {
 
     distancePID.setSetpoint(inches);
     rotatePID.setSetpoint(degrees);
+    distance = inches.get();
+    angle = degrees.get();
+    name = commandName;
   }
 
-  public void setTimeout(SN_DoublePreference timeout){
+  public void setTimeout(SN_DoublePreference timeout) {
     pref_timeout = timeout;
   }
 
@@ -47,9 +53,11 @@ public class DriveDistanceRotate extends Command {
     return rotatePID;
   }
 
-// Called just before this Command runs the first time
+  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_telemetry.setAutonomousStatus(
+        "Starting DriveDistanceRotate" + name + ": " + distancePID.getSetpoint() + " " + rotatePID.getSetpoint());
     expireTime = timeSinceInitialized() + pref_timeout.get();
 
     Robot.m_drivetrain.resetEncoderCount();
@@ -72,9 +80,10 @@ public class DriveDistanceRotate extends Command {
   @Override
   protected boolean isFinished() {
     boolean distanceTarget = distancePID.onRawTarget();
+    boolean rotateTarget = rotatePID.onRawTarget();
     double timeNow = timeSinceInitialized();
 
-    boolean finished = (distanceTarget || (timeNow >= expireTime));
+    boolean finished = ((distanceTarget && rotateTarget) || (timeNow >= expireTime));
 
     return finished;
   }
@@ -82,6 +91,8 @@ public class DriveDistanceRotate extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.m_telemetry.setAutonomousStatus(
+        "Finishing DriveDistanceRotate " + name + ": " + distancePID.getSetpoint() + " " + rotatePID.getSetpoint());
     distancePID.disable();
     rotatePID.disable();
     Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);

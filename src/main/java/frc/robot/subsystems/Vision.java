@@ -25,7 +25,7 @@ public class Vision extends Subsystem {
   }
 
   public boolean targetFound() {
-    return visionData.getEntry("tv").getBoolean(false);
+    return (visionData.getEntry("tv").getDouble(0.0) > 0.5);
   }
 
   public double getHorizontalOffset() {
@@ -48,26 +48,25 @@ public class Vision extends Subsystem {
     return visionData.getEntry("ts").getDouble(-99.9);
   }
 
-  public double getDistance(){
+  public double getDistance() {
     double w = getWidth();
 
-    if(w < 0) {
+    if ((w < 0) || (targetFound() == false)) {
       return -1.0;
     }
 
-    return (8*265) / w;
+    return (8 * 265) / w;
   }
-  public void toggleLEDs(){
-    if(visionData.getEntry("ledMode").getDouble(0) == 0){
-        visionData.getEntry("ledMode").setDouble(1);
-    }
-    else{
+
+  public void toggleLEDs() {
+    if (visionData.getEntry("ledMode").getDouble(0) == 0) {
+      visionData.getEntry("ledMode").setDouble(1);
+    } else {
       visionData.getEntry("ledMode").setDouble(0);
     }
     try {
       Thread.sleep(250);
-    }
-    catch (InterruptedException e) {
+    } catch (InterruptedException e) {
     }
   }
 

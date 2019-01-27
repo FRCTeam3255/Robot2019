@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Cascade;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
@@ -13,11 +13,11 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class DeployClimber extends InstantCommand {
+public class CascadeRetractClimb extends InstantCommand {
   /**
    * Add your docs here.
    */
-  public DeployClimber() {
+  public CascadeRetractClimb() {
     super();
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -27,7 +27,7 @@ public class DeployClimber extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.m_cascade.deployClimb();
+    Robot.m_cascade.retractClimb();
   }
 
 }
