@@ -42,7 +42,7 @@ public class DriveRotateVision extends Command {
   @Override
   protected void initialize() {
     Robot.m_telemetry.setAutonomousStatus("Starting DriveRotateVision " + name + ": " + pid.getSetpoint());
-    expireTime = timeSinceInitialized() + pref_timeout.get();
+    expireTime = timeSinceInitialized() + pref_timeout.getValue();
 
     pid.enable();
   }

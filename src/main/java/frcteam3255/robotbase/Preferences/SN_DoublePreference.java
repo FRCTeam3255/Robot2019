@@ -10,20 +10,31 @@ package frcteam3255.robotbase.Preferences;
 import edu.wpi.first.wpilibj.Preferences;
 
 /**
- * Add your docs here.
+ * SuperNURDs double preference base class
  */
 public class SN_DoublePreference extends SN_Preferences {
 	private double m_defaultValue;
-	
-	public SN_DoublePreference(String name, double defaultValue){
+
+	/**
+	 * Creates a preference with a name and double
+	 * 
+	 * @param name
+	 * @param defaultValue
+	 */
+	public SN_DoublePreference(String name, double defaultValue) {
 		m_name = name;
 		m_defaultValue = defaultValue;
 	}
-	public double get(){
-		if(isUsingDefaults()) {
+
+	/**
+	 * @return if using defaults return code values or get new values from network
+	 *         tables
+	 */
+	public double getValue() {
+		if (isUsingDefaults()) {
 			return m_defaultValue;
 		}
 		return Preferences.getInstance().getDouble(m_name, m_defaultValue);
 	}
-	
+
 }

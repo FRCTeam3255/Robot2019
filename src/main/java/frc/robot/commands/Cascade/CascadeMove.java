@@ -20,7 +20,7 @@ public class CascadeMove extends CommandGroup {
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
-    if (setPoint.get() < Robot.m_cascade.getLiftEncoderDistance()) {
+    if (setPoint.getValue() < Robot.m_cascade.getLiftEncoderDistance()) {
       addSequential(new CascadeLiftAnInch());
     }
 

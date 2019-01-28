@@ -93,7 +93,7 @@ public class Cascade extends Subsystem {
   }
 
   public double getLiftEncoderDistance() {
-    return liftEncoder.get() / RobotPreferences.CASCADE_PULSES_PER_FOOT.get();
+    return liftEncoder.get() / RobotPreferences.CASCADE_PULSES_PER_FOOT.getValue();
   }
 
   public double getLiftEncoderCount() {
@@ -105,7 +105,7 @@ public class Cascade extends Subsystem {
   }
 
   public void setLiftSpeed(double speed) {
-    speed = RobotPreferences.CASCADE_LIFT_SPEED.get();
+    speed = RobotPreferences.CASCADE_LIFT_SPEED.getValue();
 
     if (speed > 0) {
       if (isTopSwitchClosed()) {

@@ -18,7 +18,6 @@ public class DriveDistance extends Command {
   private SN_DoublePreference pref_timeout = new SN_DoublePreference("DriveDistance_timeout", 10.0);
 
   private double expireTime = 0.0;
-  private double distance;
   private String name;
 
   public DriveDistance(SN_DoublePreference inches, String commandName) {
@@ -28,7 +27,6 @@ public class DriveDistance extends Command {
 
     pid = new DrivetrainDistancePID();
     pid.setSetpoint(inches);
-    distance = inches.get();
     name = commandName;
   }
 
@@ -44,7 +42,7 @@ public class DriveDistance extends Command {
   @Override
   protected void initialize() {
     Robot.m_telemetry.setAutonomousStatus("Starting DriveDistance " + name + ": " + pid.getSetpoint() + " ");
-    expireTime = timeSinceInitialized() + pref_timeout.get();
+    expireTime = timeSinceInitialized() + pref_timeout.getValue();
 
     Robot.m_drivetrain.resetEncoderCount();
 

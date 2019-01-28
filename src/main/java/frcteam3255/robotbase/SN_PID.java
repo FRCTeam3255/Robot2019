@@ -13,7 +13,7 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 import frcteam3255.robotbase.Preferences.SN_IntPreference;
 
 /**
- * Add your docs here.
+ * SuperNURDs PID base class
  */
 public abstract class SN_PID extends PIDSubsystem {
   protected SN_DoublePreference pref_p = new SN_DoublePreference("SNPID_P", 1.0);
@@ -31,15 +31,15 @@ public abstract class SN_PID extends PIDSubsystem {
 
   // values used to cache target constraint preferences that will be used while
   // the PID is enabled
-  private double cached_tolerance = pref_tolerance.get();
-  private double cached_targetCount = pref_targetCount.get();
+  private double cached_tolerance = pref_tolerance.getValue();
+  private double cached_targetCount = pref_targetCount.getValue();
 
   // values used to cache output constraint preferences that will be used while
   // the PID is enabled
-  private double cached_minOutput = pref_minOutput.get();
-  private double cached_maxOutput = pref_maxOutput.get();
-  private double cached_maxOutputChange = pref_maxOutputChange.get();
-  private double cached_defaultOutput = pref_defaultOutput.get();
+  private double cached_minOutput = pref_minOutput.getValue();
+  private double cached_maxOutput = pref_maxOutput.getValue();
+  private double cached_maxOutputChange = pref_maxOutputChange.getValue();
+  private double cached_defaultOutput = pref_defaultOutput.getValue();
 
   protected boolean inputValid = false;
   protected boolean outputValid = false;
@@ -58,6 +58,12 @@ public abstract class SN_PID extends PIDSubsystem {
     super(0, 0, 0);
   }
 
+  /**
+   * 
+   * @param p
+   * @param i
+   * @param d
+   */
   public void setPID(SN_DoublePreference p, SN_DoublePreference i, SN_DoublePreference d) {
     pref_p = p;
     pref_i = i;
@@ -70,7 +76,7 @@ public abstract class SN_PID extends PIDSubsystem {
   }
 
   public double getSetpoint() {
-    return pref_setPoint.get();
+    return pref_setPoint.getValue();
   }
 
   public void setTolerance(SN_DoublePreference tolerance) {
@@ -98,22 +104,32 @@ public abstract class SN_PID extends PIDSubsystem {
     pref_defaultOutput = defaultOutput;
   }
 
+  /**
+   * Sets the:
+   * <ul>
+   * <li>PID values</li>
+   * <li>Setpoint constraints</li>
+   * <li>Target constraints</li>
+   * <li>Output constraints</li>
+   * </ul>
+   * before enabling the PID controller
+   */
   @Override
   public void enable() {
     PIDController controller = getPIDController();
 
-    controller.setPID(pref_p.get(), pref_i.get(), pref_d.get());
-    controller.setSetpoint(pref_setPoint.get());
+    controller.setPID(pref_p.getValue(), pref_i.getValue(), pref_d.getValue());
+    controller.setSetpoint(pref_setPoint.getValue());
 
     // cache the target constraint preferences
-    cached_tolerance = pref_tolerance.get();
-    cached_targetCount = pref_targetCount.get();
+    cached_tolerance = pref_tolerance.getValue();
+    cached_targetCount = pref_targetCount.getValue();
 
     // cache the output constraint preferences
-    cached_minOutput = pref_minOutput.get();
-    cached_maxOutput = pref_maxOutput.get();
-    cached_maxOutputChange = pref_maxOutputChange.get();
-    cached_defaultOutput = pref_defaultOutput.get();
+    cached_minOutput = pref_minOutput.getValue();
+    cached_maxOutput = pref_maxOutput.getValue();
+    cached_maxOutputChange = pref_maxOutputChange.getValue();
+    cached_defaultOutput = pref_defaultOutput.getValue();
 
     System.out.println("tol = " + cached_tolerance);
     System.out.println("target count = " + cached_targetCount);
@@ -129,6 +145,10 @@ public abstract class SN_PID extends PIDSubsystem {
     super.enable();
   }
 
+  /**
+   * Use a PID output value that abides by change and and clamp constraints when
+   * the input is ready to produce a valid output
+   */
   @Override
   protected void usePIDOutput(double output) {
     if (inputValid == false) {
@@ -169,6 +189,10 @@ public abstract class SN_PID extends PIDSubsystem {
     outputValid = true;
   }
 
+  /**
+   * Get PID output. If the controller is not enabled or the output is not valid,
+   * use the default
+   */
   public double getOutput() {
     System.out.println("get output prints");
     System.out.println("isEnabled" + this.getPIDController().isEnabled());
@@ -183,6 +207,10 @@ public abstract class SN_PID extends PIDSubsystem {
     return output;
   }
 
+  /**
+   * @return Check if we stayed within the setpoint tolerance for the set amount
+   *         of target counts
+   */
   public boolean onRawTarget() {
     double inputValue = returnPIDInput();
     System.out.println("on raw target data");

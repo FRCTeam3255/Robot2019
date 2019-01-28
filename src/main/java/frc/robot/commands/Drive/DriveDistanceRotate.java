@@ -21,8 +21,6 @@ public class DriveDistanceRotate extends Command {
 
   private double expireTime = 0.0;
 
-  private double distance;
-  private double angle;
   private String name;
 
   public DriveDistanceRotate(SN_DoublePreference inches, SN_DoublePreference degrees, String commandName) {
@@ -36,8 +34,6 @@ public class DriveDistanceRotate extends Command {
 
     distancePID.setSetpoint(inches);
     rotatePID.setSetpoint(degrees);
-    distance = inches.get();
-    angle = degrees.get();
     name = commandName;
   }
 
@@ -58,7 +54,7 @@ public class DriveDistanceRotate extends Command {
   protected void initialize() {
     Robot.m_telemetry.setAutonomousStatus(
         "Starting DriveDistanceRotate" + name + ": " + distancePID.getSetpoint() + " " + rotatePID.getSetpoint());
-    expireTime = timeSinceInitialized() + pref_timeout.get();
+    expireTime = timeSinceInitialized() + pref_timeout.getValue();
 
     Robot.m_drivetrain.resetEncoderCount();
     Robot.m_navigation.resetYaw();

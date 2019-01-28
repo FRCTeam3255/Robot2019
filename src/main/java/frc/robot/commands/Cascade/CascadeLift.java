@@ -26,7 +26,7 @@ public class CascadeLift extends Command {
 
     pid = new CascadePID();
     pid.setSetpoint(inches);
-    distance = inches.get();
+    distance = inches.getValue();
   }
 
   public void setTimeout(SN_DoublePreference timeout) {
@@ -41,7 +41,7 @@ public class CascadeLift extends Command {
   @Override
   protected void initialize() {
     Robot.m_telemetry.setAutonomousStatus("Starting CascadeLift" + ": " + distance);
-    expireTime = timeSinceInitialized() + pref_timeout.get();
+    expireTime = timeSinceInitialized() + pref_timeout.getValue();
 
     Robot.m_cascade.resetLiftEncoder();
 

@@ -25,7 +25,7 @@ public class SN_Debug {
 	 * @param printMessages print yes or no
 	 */
 	public void disableMessages(SN_BooleanPreference disable) {
-		this.disableMessages = disable.get();
+		this.disableMessages = disable.getValue();
 	}
 
 	public void printDebug(String message, Object value) {

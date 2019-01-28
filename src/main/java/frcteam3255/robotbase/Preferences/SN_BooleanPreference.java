@@ -10,17 +10,28 @@ package frcteam3255.robotbase.Preferences;
 import edu.wpi.first.wpilibj.Preferences;
 
 /**
- * Add your docs here.
+ * SuperNURDs boolean preference base class
  */
-public class SN_BooleanPreference extends SN_Preferences{
+public class SN_BooleanPreference extends SN_Preferences {
 	private boolean m_defaultValue;
-	
-	public SN_BooleanPreference(String name, boolean defaultValue){
+
+	/**
+	 * Creates a preference with a name and boolean
+	 * 
+	 * @param name
+	 * @param defaultValue
+	 */
+	public SN_BooleanPreference(String name, boolean defaultValue) {
 		m_name = name;
 		m_defaultValue = defaultValue;
 	}
-	public boolean get(){
-		if(isUsingDefaults()) {
+
+	/**
+	 * @return if using defaults return code values or get new values from network
+	 *         tables
+	 */
+	public boolean getValue() {
+		if (isUsingDefaults()) {
 			return m_defaultValue;
 		}
 		return Preferences.getInstance().getBoolean(m_name, m_defaultValue);

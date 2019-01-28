@@ -8,11 +8,9 @@
 package frc.robot;
 
 import frc.robot.commands.Climb;
-import frc.robot.commands.SetDebugMode;
 import frc.robot.commands.StartMatch;
 import frc.robot.commands.VisionDistanceRotateTest;
 import frc.robot.commands.Drive.DriveDistance;
-import frc.robot.commands.Drive.DriveDistanceRotateVision;
 import frc.robot.commands.Intake.IntakeCargoCollect;
 import frc.robot.commands.Intake.IntakeCargoEject;
 import frc.robot.commands.Intake.IntakeHatchDeploy;
@@ -21,7 +19,6 @@ import frc.robot.commands.Intake.IntakeHatchReload;
 import frc.robot.commands.Intake.IntakeHatchRetract;
 import frcteam3255.robotbase.Joystick.SN_DriverStick;
 import frcteam3255.robotbase.Joystick.SN_ManipulatorStick;
-import frcteam3255.robotbase.Joystick.SN_SwitchboardStick;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 /**

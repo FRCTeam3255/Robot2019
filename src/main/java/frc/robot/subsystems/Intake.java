@@ -47,11 +47,11 @@ public class Intake extends Subsystem {
   }
 
   public void intakeCargo() {
-    intakeTalon.set(RobotPreferences.INTAKE_CARGO_SPEED.get());
+    intakeTalon.set(RobotPreferences.INTAKE_CARGO_SPEED.getValue());
   }
 
   public void ejectCargo() {
-    intakeTalon.set(RobotPreferences.EJECT_CARGO_SPEED.get());
+    intakeTalon.set(RobotPreferences.EJECT_CARGO_SPEED.getValue());
   }
 
   public void holdCargo() {

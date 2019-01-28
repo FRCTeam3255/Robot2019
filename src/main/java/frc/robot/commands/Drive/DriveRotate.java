@@ -39,7 +39,7 @@ public class DriveRotate extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    expireTime = timeSinceInitialized() + pref_timeout.get();
+    expireTime = timeSinceInitialized() + pref_timeout.getValue();
 
     Robot.m_navigation.resetYaw();
 
