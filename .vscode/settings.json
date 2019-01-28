@@ -9,14 +9,12 @@
 		"bin/": true,
 		".classpath": true,
 		".project": true,
-		// SN Settings
 		".settings": true,
 		".gradle": true,
 		"gradle": true,
 		"build": true,
 		"build.gradle": true
 	},
-	// SN Settings
 	"workbench.editor.enablePreview": false,
 	"editor.formatOnPaste": true,
 	"editor.formatOnSave": true,
