@@ -1,14 +1,24 @@
 {
-  "java.configuration.updateBuildConfiguration": "automatic",
-  "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
-    "bin/": true,
-    ".classpath": true,
-    ".project": true
-  },
-  "wpilib.online": true
+	"java.configuration.updateBuildConfiguration": "automatic",
+	"files.exclude": {
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.DS_Store": true,
+		"bin/": true,
+		".classpath": true,
+		".project": true,
+		// SN Settings
+		".settings": true,
+		".gradle": true,
+		"gradle": true,
+		"build": true,
+		"build.gradle": true
+	},
+	// SN Settings
+	"workbench.editor.enablePreview": false,
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
+	"editor.formatOnType": true
 }
