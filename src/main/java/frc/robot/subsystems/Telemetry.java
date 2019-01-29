@@ -15,17 +15,24 @@ import frc.robot.commands.Drive.DriveResetYaw;
 import frcteam3255.robotbase.Preferences.SN_Preferences;
 
 /**
- * Add your docs here.
+ * Subsystem containing board telemetry methoods
  */
 public class Telemetry extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
+  /**
+   * Put command buttons on the board
+   */
   public Telemetry() {
     SmartDashboard.putData("Reset Encoder", new DriveResetEncoder());
     SmartDashboard.putData("Reset Yaw", new DriveResetYaw());
   }
 
+  /**
+   * When this methood is in a periodic methood in Robot.java, these values are
+   * updated
+   */
   public void update() {
     SmartDashboard.putBoolean("Is Debug", !SN_Preferences.isUsingDefaults());
     SmartDashboard.putNumber("Drivetrain Encoder Count", Robot.m_drivetrain.getEncoderCount());
@@ -43,8 +50,13 @@ public class Telemetry extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void setAutonomousStatus(String string) {
-    SmartDashboard.putString("Autonomous Status", string);
+  /**
+   * Updates the status of autonomous commands onto the board
+   * 
+   * @param autonomousState The current autonomous operation happening
+   */
+  public void setAutonomousStatus(String autonomousState) {
+    SmartDashboard.putString("Autonomous Status", autonomousState);
   }
 
 }

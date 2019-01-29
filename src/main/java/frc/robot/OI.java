@@ -37,6 +37,9 @@ public class OI {
   public SN_Extreme3DStick manipulatorStick = new SN_Extreme3DStick(1);
   // public SN_SwitchboardStick switchboardStick = new SN_SwitchboardStick(2);
 
+  /**
+   * Constructor that assigns commands to buttons
+   */
   public OI() {
     // Manipulator Stick
     manipulatorStick.btn_1.whileHeld(new IntakeCargoEject());

@@ -12,10 +12,13 @@ import frc.robot.RobotPreferences;
 import frcteam3255.robotbase.SN_PID;
 
 /**
- * Add your docs here.
+ * PID class based off the distance from vision targets
  */
 public class VisionDistancePID extends SN_PID {
 
+    /**
+     * Creates a VisionDistancePID and sets PID values
+     */
     public VisionDistancePID() {
         super();
 
@@ -23,6 +26,10 @@ public class VisionDistancePID extends SN_PID {
                 RobotPreferences.VISION_DISTANCE_D);
     }
 
+    /**
+     * @return Inputs the distance from the vision target when it is in front of the
+     *         camera
+     */
     @Override
     protected double returnPIDInput() {
         // Return your input value for the PID loop

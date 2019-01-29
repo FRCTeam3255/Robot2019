@@ -12,17 +12,24 @@ import frc.robot.RobotPreferences;
 import frcteam3255.robotbase.SN_PID;
 
 /**
- * Add your docs here.
+ * PID class based off the NavX yaw
  */
 public class NavXRotatePID extends SN_PID {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+
+  /**
+   * Creates a NavXRotatePID and sets PID values
+   */
   public NavXRotatePID() {
     super();
 
     setPID(RobotPreferences.YAW_P, RobotPreferences.YAW_I, RobotPreferences.YAW_D);
   }
 
+  /**
+   * @return Inputs the yaw of the NavX
+   */
   @Override
   protected double returnPIDInput() {
     // Return your input value for the PID loop

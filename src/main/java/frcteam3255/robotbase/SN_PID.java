@@ -190,8 +190,8 @@ public abstract class SN_PID extends PIDSubsystem {
   }
 
   /**
-   * Get PID output. If the controller is not enabled or the output is not valid,
-   * use the default
+   * @return Get PID output. If the controller is not enabled or the output is not
+   *         valid, use the default
    */
   public double getOutput() {
     System.out.println("get output prints");

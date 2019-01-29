@@ -12,16 +12,22 @@ import frc.robot.RobotPreferences;
 import frcteam3255.robotbase.SN_PID;
 
 /**
- * Add your docs here.
+ * PID class based on the horizontal offset of vision targets
  */
 public class VisionRotatePID extends SN_PID {
 
+    /**
+     * Creates a VisionRotatePID and sets PID values
+     */
     public VisionRotatePID() {
         super();
 
         setPID(RobotPreferences.VISION_ROTATE_P, RobotPreferences.VISION_ROTATE_I, RobotPreferences.VISION_ROTATE_D);
     }
 
+    /**
+     * @return Inputs the horizontal offset into PID when there is a target
+     */
     @Override
     protected double returnPIDInput() {
         double offset = 0;

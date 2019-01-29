@@ -14,54 +14,75 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * Add your docs here.
+ * Subsystem containing NavX and field data methoods
  */
 public class Navigation extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
+  // NavX class
   public static AHRS ahrs = null;
 
-
+  /**
+   * Constructs the NavX class
+   */
   public Navigation() {
     // NavX
-      try{
-          ahrs = new AHRS(SPI.Port.kMXP);
-      } catch (RuntimeException ex) {
-          DriverStation.reportError("Error installing navX MXP: " + ex.getMessage(), true);
-      }
+    try {
+      ahrs = new AHRS(SPI.Port.kMXP);
+    } catch (RuntimeException ex) {
+      DriverStation.reportError("Error installing navX MXP: " + ex.getMessage(), true);
+    }
   }
 
-  //NavX
-  public double getYaw(){
+  // NavX
+
+  /**
+   * @return Yaw of NavX
+   */
+  public double getYaw() {
     return ahrs.getYaw();
   }
 
-  public double getPitch(){
+  /**
+   * @return Pitch of NavX
+   */
+  public double getPitch() {
     return ahrs.getPitch();
   }
 
-  public double getRoll(){
+  /**
+   * @return Roll of NavX
+   */
+  public double getRoll() {
     return ahrs.getRoll();
   }
 
-  public void resetYaw(){
+  /**
+   * Reset the NavX yaw and zero it out
+   */
+  public void resetYaw() {
     ahrs.reset();
 
     try {
       Thread.sleep(250);
-    }
-    catch (InterruptedException e) {
+    } catch (InterruptedException e) {
     }
 
     ahrs.zeroYaw();
   }
 
-  public void resetPitch(){
+  /**
+   * Reset the NavX pitch
+   */
+  public void resetPitch() {
     ahrs.reset();
   }
 
-  public boolean isCalibrating(){
+  /**
+   * @return Check if the NavX is automatically calibrating itself
+   */
+  public boolean isCalibrating() {
     return ahrs.isCalibrating();
   }
 
