@@ -10,12 +10,15 @@ package frcteam3255.robotbase.Joystick;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.POVButton;
 
 /**
  * Custom 12 Button Joystick set up for Logitech F310 Gamepad
- * <p> Adds custom axis return methods such as {@link #getArcadeMove()} & {@link #getArcadeRotate()}
+ * <p>
+ * Adds custom axis return methods such as {@link #getArcadeMove()} &
+ * {@link #getArcadeRotate()}
  */
-public class SN_DriverStick extends Joystick{
+public class SN_DuelActionStick extends Joystick {
 	/** Joystick Button 1 */
 	public Button btn_X = new JoystickButton(this, 1);
 	/** Joystick Button 2 */
@@ -41,6 +44,16 @@ public class SN_DriverStick extends Joystick{
 	/** Joystick Button 12 */
 	public Button btn_RStick = new JoystickButton(this, 12);
 
+	// POV Buttons
+	public POVButton POV_North = new POVButton(this, 0);
+	public POVButton POV_NorthEast = new POVButton(this, 45);
+	public POVButton POV_East = new POVButton(this, 90);
+	public POVButton POV_SouthEast = new POVButton(this, 135);
+	public POVButton POV_South = new POVButton(this, 180);
+	public POVButton POV_SouthWest = new POVButton(this, 225);
+	public POVButton POV_West = new POVButton(this, 270);
+	public POVButton POV_NorthWest = new POVButton(this, 315);
+
 	// Axes
 	private static final int AXIS_ARCADE_MOVE = 1;
 	private static final int AXIS_ARCADE_ROTATE = 2;
@@ -54,7 +67,7 @@ public class SN_DriverStick extends Joystick{
 	 *
 	 * @param port The port on the Driver Station that the joystick is plugged into.
 	 */
-	public SN_DriverStick(final int port){
+	public SN_DuelActionStick(final int port) {
 		super(port);
 	}
 
@@ -62,21 +75,21 @@ public class SN_DriverStick extends Joystick{
 	/**
 	 * @return inverted position value of RawAxis({@value #AXIS_ARCADE_MOVE})
 	 */
-	public double getArcadeMove(){
+	public double getArcadeMove() {
 		return -getRawAxis(AXIS_ARCADE_MOVE);
 	}
 
 	/**
 	 * @return position value of RawAxis({@value #AXIS_ARCADE_ROTATE})
 	 */
-	public double getArcadeRotate(){
+	public double getArcadeRotate() {
 		return getRawAxis(AXIS_ARCADE_ROTATE);
 	}
 
 	/**
 	 * @return inverted position value of RawAxis({@value #AXIS_ARCADE_STRAFE})
 	 */
-	public double getArcadeStrafe(){
+	public double getArcadeStrafe() {
 		return getRawAxis(AXIS_ARCADE_STRAFE);
 	}
 
@@ -84,14 +97,14 @@ public class SN_DriverStick extends Joystick{
 	/**
 	 * @return inverted position value of RawAxis({@value #AXIS_TANK_LEFT})
 	 */
-	public double getTankLeft(){
+	public double getTankLeft() {
 		return -getRawAxis(AXIS_TANK_LEFT);
 	}
-	
+
 	/**
 	 * @return inverted position value of RawAxis({@value #AXIS_TANK_RIGHT})
 	 */
-	public double getTankRight(){
+	public double getTankRight() {
 		return -getRawAxis(AXIS_TANK_RIGHT);
 	}
 }

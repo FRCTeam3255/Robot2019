@@ -17,8 +17,8 @@ import frc.robot.commands.Intake.IntakeHatchDeploy;
 import frc.robot.commands.Intake.IntakeHatchEject;
 import frc.robot.commands.Intake.IntakeHatchReload;
 import frc.robot.commands.Intake.IntakeHatchRetract;
-import frcteam3255.robotbase.Joystick.SN_DriverStick;
-import frcteam3255.robotbase.Joystick.SN_ManipulatorStick;
+import frcteam3255.robotbase.Joystick.SN_DuelActionStick;
+import frcteam3255.robotbase.Joystick.SN_Extreme3DStick;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 /**
@@ -33,8 +33,8 @@ public class OI {
   // number it is.
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
-  public SN_DriverStick driverStick = new SN_DriverStick(0);
-  public SN_ManipulatorStick manipulatorStick = new SN_ManipulatorStick(1);
+  public SN_DuelActionStick driverstick = new SN_DuelActionStick(0);
+  public SN_Extreme3DStick manipulatorStick = new SN_Extreme3DStick(1);
   // public SN_SwitchboardStick switchboardStick = new SN_SwitchboardStick(2);
 
   public OI() {

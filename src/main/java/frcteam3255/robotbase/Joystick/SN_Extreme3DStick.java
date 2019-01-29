@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.buttons.*;
 /**
  * Custom 12 Button Joystick set up for Logitech Extreme 3D Joystick
  */
-public class SN_ManipulatorStick extends Joystick {
+public class SN_Extreme3DStick extends Joystick {
 	public Button btn_1 = new JoystickButton(this, 1);
 	public Button btn_2 = new JoystickButton(this, 2);
 	public Button btn_3 = new JoystickButton(this, 3);
@@ -27,7 +27,16 @@ public class SN_ManipulatorStick extends Joystick {
 	public Button btn_11 = new JoystickButton(this, 11);
 	public Button btn_12 = new JoystickButton(this, 12);
 
-	// Axes
+	// POV Buttons
+	public POVButton POV_North = new POVButton(this, 0);
+	public POVButton POV_NorthEast = new POVButton(this, 45);
+	public POVButton POV_East = new POVButton(this, 90);
+	public POVButton POV_SouthEast = new POVButton(this, 135);
+	public POVButton POV_South = new POVButton(this, 180);
+	public POVButton POV_SouthWest = new POVButton(this, 225);
+	public POVButton POV_West = new POVButton(this, 270);
+	public POVButton POV_NorthWest = new POVButton(this, 315);
+
 	private static final int AXIS_X = 0;
 	private static final int AXIS_Y = 1;
 	private static final int AXIS_TWIST = 2;
@@ -38,7 +47,7 @@ public class SN_ManipulatorStick extends Joystick {
 	 *
 	 * @param port The port on the Driver Station that the joystick is plugged into.
 	 */
-	public SN_ManipulatorStick(final int port) {
+	public SN_Extreme3DStick(final int port) {
 		super(port);
 	}
 
@@ -69,4 +78,5 @@ public class SN_ManipulatorStick extends Joystick {
 	public double getDialAxis() {
 		return -getRawAxis(AXIS_DIAL);
 	}
+
 }

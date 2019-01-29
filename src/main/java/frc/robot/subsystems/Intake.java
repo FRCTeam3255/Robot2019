@@ -35,9 +35,8 @@ public class Intake extends Subsystem {
     // ejectSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM,
     // RobotMap.INTAKE_EJECT_SOLENOID_A,
     // RobotMap.INTAKE_EJECT_SOLENOID_B);
-    // hatchSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM,
-    // RobotMap.INTAKE_HATCH_SOLENOID_A,
-    // RobotMap.INTAKE_HATCH_SOLENOID_B);
+    hatchSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_HATCH_SOLENOID_A,
+        RobotMap.INTAKE_HATCH_SOLENOID_B);
     // deploySolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM,
     // RobotMap.INTAKE_DEPLOY_SOLENOID_A,
     // RobotMap.INTAKE_DEPLOY_SOLENOID_B);
