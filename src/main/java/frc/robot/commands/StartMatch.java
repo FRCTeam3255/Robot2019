@@ -15,6 +15,9 @@ import frc.robot.commands.Drive.DriveRotateVision;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 import frcteam3255.robotbase.Preferences.SN_IntPreference;
 
+/**
+ * Autonomous to be used at the start of a match
+ */
 public class StartMatch extends CommandGroup {
   // d1 preferences are used for backing off the ramp
   private static SN_DoublePreference d1SetPoint = new SN_DoublePreference("D1SetPoint", -72.0);
@@ -68,6 +71,9 @@ public class StartMatch extends CommandGroup {
   // private static SN_DoublePreference r6DefaultSpeed = new
   // SN_DoublePreference("R6DefaultSpeed", 0.0);
 
+  /**
+   * Sets the preferences for the PID commands and excutes them in order
+   */
   public StartMatch() {
     // drive in reverse off the platform
     DriveDistance d1 = new DriveDistance(d1SetPoint, "d1");

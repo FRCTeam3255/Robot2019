@@ -19,7 +19,7 @@ public class NavXRotatePID extends SN_PID {
   // here. Call these from Commands.
 
   /**
-   * Creates a NavXRotatePID and sets PID values
+   * Creates a NavXRotatePID loop and sets PID values
    */
   public NavXRotatePID() {
     super();

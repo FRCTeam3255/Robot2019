@@ -8,14 +8,14 @@ public abstract class SN_Preferences {
 	protected String m_name;
 
 	/**
-	 * Set to use preference values in code
+	 * Set to use coded preference values
 	 */
 	public static void useDefaults() {
 		useDefaults = true;
 	}
 
 	/**
-	 * Set not to use preference values in code
+	 * Set not to use coded preference values
 	 */
 	public static void usePreferences() {
 		useDefaults = false;

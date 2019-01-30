@@ -27,7 +27,7 @@ public class SN_BooleanPreference extends SN_Preferences {
 	}
 
 	/**
-	 * @return if using defaults return code values or get new values from network
+	 * @return if using defaults return coded values or get new values from network
 	 *         tables
 	 */
 	public boolean getValue() {

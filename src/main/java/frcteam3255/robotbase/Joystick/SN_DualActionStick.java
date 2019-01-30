@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.buttons.POVButton;
  * Adds custom axis return methods such as {@link #getArcadeMove()} &
  * {@link #getArcadeRotate()}
  */
-public class SN_DuelActionStick extends Joystick {
+public class SN_DualActionStick extends Joystick {
 	/** Joystick Button 1 */
 	public Button btn_X = new JoystickButton(this, 1);
 	/** Joystick Button 2 */
@@ -67,7 +67,7 @@ public class SN_DuelActionStick extends Joystick {
 	 *
 	 * @param port The port on the Driver Station that the joystick is plugged into.
 	 */
-	public SN_DuelActionStick(final int port) {
+	public SN_DualActionStick(final int port) {
 		super(port);
 	}
 

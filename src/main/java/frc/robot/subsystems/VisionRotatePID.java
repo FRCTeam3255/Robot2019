@@ -17,7 +17,7 @@ import frcteam3255.robotbase.SN_PID;
 public class VisionRotatePID extends SN_PID {
 
     /**
-     * Creates a VisionRotatePID and sets PID values
+     * Creates a VisionRotatePID loop and sets PID values
      */
     public VisionRotatePID() {
         super();

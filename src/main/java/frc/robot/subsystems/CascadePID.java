@@ -12,17 +12,24 @@ import frc.robot.RobotPreferences;
 import frcteam3255.robotbase.SN_PID;
 
 /**
- * Add your docs here.
+ * PID class based off the cascade distance
  */
 public class CascadePID extends SN_PID {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+
+  /**
+   * Creates a Cascade PID loop and sets PID values
+   */
   public CascadePID() {
     super();
 
     setPID(RobotPreferences.CASCADE_P, RobotPreferences.CASCADE_I, RobotPreferences.CASCADE_D);
   }
 
+  /**
+   * @return Inputs the cascade distance
+   */
   @Override
   protected double returnPIDInput() {
     // Set the default command for a subsystem here.

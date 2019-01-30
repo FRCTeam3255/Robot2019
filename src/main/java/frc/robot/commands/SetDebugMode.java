@@ -10,6 +10,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frcteam3255.robotbase.Preferences.SN_Preferences;
 
+/**
+ * Sets debug mode for using preferences from network tables
+ */
 public class SetDebugMode extends Command {
   public SetDebugMode() {
     // Use requires() here to declare subsystem dependencies
@@ -19,6 +22,7 @@ public class SetDebugMode extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    // Use network tables values
     SN_Preferences.usePreferences();
   }
 
@@ -29,6 +33,7 @@ public class SetDebugMode extends Command {
 
   @Override
   protected void end() {
+    // Go back to using coded values
     SN_Preferences.useDefaults();
   }
 

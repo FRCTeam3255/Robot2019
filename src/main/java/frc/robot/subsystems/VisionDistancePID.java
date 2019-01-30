@@ -17,7 +17,7 @@ import frcteam3255.robotbase.SN_PID;
 public class VisionDistancePID extends SN_PID {
 
     /**
-     * Creates a VisionDistancePID and sets PID values
+     * Creates a VisionDistancePID loop and sets PID values
      */
     public VisionDistancePID() {
         super();
