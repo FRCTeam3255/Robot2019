@@ -112,6 +112,14 @@ public class Vision extends Subsystem {
     }
   }
 
+  public void setDriverMode() {
+    visionData.getEntry("camMode").setDouble(1);
+  }
+
+  public void setVisionMode() {
+    visionData.getEntry("camMode").setDouble(0);
+  }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.commands.VisionSetDriverMode;
+import frc.robot.commands.VisionSetVisionMode;
 import frc.robot.commands.Drive.DriveResetEncoder;
 import frc.robot.commands.Drive.DriveResetYaw;
 import frcteam3255.robotbase.Preferences.SN_Preferences;
@@ -27,6 +29,8 @@ public class Telemetry extends Subsystem {
   public Telemetry() {
     SmartDashboard.putData("Reset Encoder", new DriveResetEncoder());
     SmartDashboard.putData("Reset Yaw", new DriveResetYaw());
+    SmartDashboard.putData("Set Driver Mode", new VisionSetDriverMode());
+    SmartDashboard.putData("Set Vision Mode", new VisionSetVisionMode());
   }
 
   /**

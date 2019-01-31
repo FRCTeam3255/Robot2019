@@ -50,7 +50,7 @@ public class Intake extends Subsystem {
         RobotMap.INTAKE_HATCH_INTAKE_SOLENOID_B);
     cargoSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_CARGO_SOLENOID_A,
         RobotMap.INTAKE_CARGO_SOLENOID_B);
-    deploySolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_DEPLOY_SOLENOID_A,
+    deploySolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.INTAKE_DEPLOY_SOLENOID_A,
         RobotMap.INTAKE_DEPLOY_SOLENOID_B);
 
     // Switches

@@ -10,6 +10,8 @@ package frc.robot;
 import frc.robot.commands.Climb;
 import frc.robot.commands.StartMatch;
 import frc.robot.commands.VisionDistanceRotateTest;
+import frc.robot.commands.VisionSetDriverMode;
+import frc.robot.commands.VisionSetVisionMode;
 import frc.robot.commands.Drive.DriveDistance;
 import frc.robot.commands.Intake.IntakeCargoCollect;
 import frc.robot.commands.Intake.IntakeCargoEject;
@@ -19,6 +21,7 @@ import frc.robot.commands.Intake.IntakeHatchReload;
 import frc.robot.commands.Intake.IntakeHatchRetract;
 import frcteam3255.robotbase.Joystick.SN_DualActionStick;
 import frcteam3255.robotbase.Joystick.SN_Extreme3DStick;
+import frcteam3255.robotbase.Joystick.SN_SwitchboardStick;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 /**
@@ -35,7 +38,7 @@ public class OI {
   // Button button = new JoystickButton(stick, buttonNumber);
   public SN_DualActionStick driverstick = new SN_DualActionStick(0);
   public SN_Extreme3DStick manipulatorStick = new SN_Extreme3DStick(1);
-  // public SN_SwitchboardStick switchboardStick = new SN_SwitchboardStick(2);
+  public SN_SwitchboardStick switchboardStick = new SN_SwitchboardStick(2);
 
   /**
    * Assigns commands to buttons
@@ -57,6 +60,8 @@ public class OI {
 
     // Switchboard Stick
     // switchboardStick.btn_1.whileHeld(new SetDebugMode());
+    switchboardStick.btn_2.whenPressed(new VisionSetDriverMode());
+    switchboardStick.btn_2.whenReleased(new VisionSetVisionMode());
   }
 
   // There are a few additional built in buttons you can use. Additionally,
