@@ -22,11 +22,13 @@ public class Intake extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private SN_TalonSRX intakeTalon = null;
+  private SN_TalonSRX cargoTalon = null;
 
   // Solenoids
   private DoubleSolenoid ejectSolenoid = null;
-  private DoubleSolenoid hatchSolenoid = null;
+  private DoubleSolenoid hatchDeploySolenoid = null;
+  private DoubleSolenoid hatchIntakeSolenoid = null;
+  private DoubleSolenoid cargoSolenoid = null;
   private DoubleSolenoid deploySolenoid = null;
 
   // Swtiches
@@ -37,17 +39,19 @@ public class Intake extends Subsystem {
    * Creates the devices used in the intake
    */
   public Intake() {
-    intakeTalon = new SN_TalonSRX(RobotMap.INTAKE_TALON);
+    cargoTalon = new SN_TalonSRX(RobotMap.INTAKE_CARGO_TALON);
 
     // Solenoids
-    // ejectSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM,
-    // RobotMap.INTAKE_EJECT_SOLENOID_A,
-    // RobotMap.INTAKE_EJECT_SOLENOID_B);
-    hatchSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_HATCH_SOLENOID_A,
-        RobotMap.INTAKE_HATCH_SOLENOID_B);
-    // deploySolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM,
-    // RobotMap.INTAKE_DEPLOY_SOLENOID_A,
-    // RobotMap.INTAKE_DEPLOY_SOLENOID_B);
+    ejectSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_EJECT_SOLENOID_A,
+        RobotMap.INTAKE_EJECT_SOLENOID_B);
+    hatchDeploySolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_HATCH_DEPLOY_SOLENOID_A,
+        RobotMap.INTAKE_HATCH_DEPLOY_SOLENOID_B);
+    hatchIntakeSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_HATCH_INTAKE_SOLENOID_A,
+        RobotMap.INTAKE_HATCH_INTAKE_SOLENOID_B);
+    cargoSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_CARGO_SOLENOID_A,
+        RobotMap.INTAKE_CARGO_SOLENOID_B);
+    deploySolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_DEPLOY_SOLENOID_A,
+        RobotMap.INTAKE_DEPLOY_SOLENOID_B);
 
     // Switches
     hatchSwitch = new DigitalInput(RobotMap.INTAKE_HATCH_SWITCH);
@@ -58,21 +62,21 @@ public class Intake extends Subsystem {
    * Spin the intake to collect cargo
    */
   public void intakeCargo() {
-    intakeTalon.set(RobotPreferences.INTAKE_CARGO_SPEED.getValue());
+    cargoTalon.set(RobotPreferences.INTAKE_CARGO_SPEED.getValue());
   }
 
   /**
    * Spin the intake to eject cargo
    */
   public void ejectCargo() {
-    intakeTalon.set(RobotPreferences.EJECT_CARGO_SPEED.getValue());
+    cargoTalon.set(RobotPreferences.EJECT_CARGO_SPEED.getValue());
   }
 
   /**
    * Hold the cargo by stopping the motors
    */
   public void holdCargo() {
-    intakeTalon.set(0.0);
+    cargoTalon.set(0.0);
   }
 
   /**
@@ -89,12 +93,46 @@ public class Intake extends Subsystem {
     deploySolenoid.set(Value.kReverse);
   }
 
+  /**
+   * Set the Hatch Intake parallel to the floor
+   */
   public void deployHatch() {
-    hatchSolenoid.set(Value.kForward);
+    hatchDeploySolenoid.set(Value.kForward);
   }
 
+  /**
+   * Lift the Hatch Intake vertically to the robot
+   */
   public void retractHatch() {
-    hatchSolenoid.set(Value.kReverse);
+    hatchDeploySolenoid.set(Value.kReverse);
+  }
+
+  /**
+   * Set the Cargo Intake Parallel to the floor
+   */
+  public void deployCargo() {
+    cargoSolenoid.set(Value.kForward);
+  }
+
+  /**
+   * Lift the Cargo Intake vertically to the robot
+   */
+  public void retractCargo() {
+    cargoSolenoid.set(Value.kReverse);
+  }
+
+  /**
+   * Deploy the piston to grab the hatch from the floor
+   */
+  public void reachHatch() {
+    hatchIntakeSolenoid.set(Value.kForward);
+  }
+
+  /**
+   * Retracts the piston to grab the hatch from the floor
+   */
+  public void grabHatch() {
+    hatchIntakeSolenoid.set(Value.kReverse);
   }
 
   /**
