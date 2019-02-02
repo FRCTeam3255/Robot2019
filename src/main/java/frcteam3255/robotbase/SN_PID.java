@@ -16,18 +16,31 @@ import frcteam3255.robotbase.Preferences.SN_IntPreference;
  * SuperNURDs PID base class
  */
 public abstract class SN_PID extends PIDSubsystem {
-  protected SN_DoublePreference pref_p = new SN_DoublePreference("SNPID_P", 1.0);
-  protected SN_DoublePreference pref_i = new SN_DoublePreference("SNPID_I", 0.0);
-  protected SN_DoublePreference pref_d = new SN_DoublePreference("SNPID_D", 0.0);
+  protected static SN_DoublePreference default_p = new SN_DoublePreference("SNPID_P", 1.0);
+  protected static SN_DoublePreference default_i = new SN_DoublePreference("SNPID_I", 0.0);
+  protected static SN_DoublePreference default_d = new SN_DoublePreference("SNPID_D", 0.0);
 
-  protected SN_DoublePreference pref_setPoint = new SN_DoublePreference("SNPID_setPoint", 0.0);
-  protected SN_DoublePreference pref_tolerance = new SN_DoublePreference("SNPID_tol", 0.0);
-  protected SN_IntPreference pref_targetCount = new SN_IntPreference("SNPID_targetCount", 1);
+  protected static SN_DoublePreference default_setPoint = new SN_DoublePreference("SNPID_setPoint", 0.0);
+  protected static SN_DoublePreference default_tolerance = new SN_DoublePreference("SNPID_tol", 1.0);
+  protected static SN_IntPreference default_targetCount = new SN_IntPreference("SNPID_targetCount", 1);
 
-  protected SN_DoublePreference pref_minOutput = new SN_DoublePreference("SNPID_minOutput", 0.0);
-  protected SN_DoublePreference pref_maxOutput = new SN_DoublePreference("SNPID_maxOutput", 1.0);
-  protected SN_DoublePreference pref_maxOutputChange = new SN_DoublePreference("SNPID_maxOutputChange", 1.0);
-  protected SN_DoublePreference pref_defaultOutput = new SN_DoublePreference("SNPID_defaultOuput", 0.0);
+  protected static SN_DoublePreference default_minOutput = new SN_DoublePreference("SNPID_minOutput", 0.0);
+  protected static SN_DoublePreference default_maxOutput = new SN_DoublePreference("SNPID_maxOutput", 1.0);
+  protected static SN_DoublePreference default_maxOutputChange = new SN_DoublePreference("SNPID_maxOutputChange", 1.0);
+  protected static SN_DoublePreference default_defaultOutput = new SN_DoublePreference("SNPID_defaultOuput", 0.0);
+
+  protected SN_DoublePreference pref_p = default_p;
+  protected SN_DoublePreference pref_i = default_i;
+  protected SN_DoublePreference pref_d = default_d;
+
+  protected SN_DoublePreference pref_setPoint = default_setPoint;
+  protected SN_DoublePreference pref_tolerance = default_tolerance;
+  protected SN_IntPreference pref_targetCount = default_targetCount;
+
+  protected SN_DoublePreference pref_minOutput = default_minOutput;
+  protected SN_DoublePreference pref_maxOutput = default_maxOutput;
+  protected SN_DoublePreference pref_maxOutputChange = default_maxOutputChange;
+  protected SN_DoublePreference pref_defaultOutput = default_defaultOutput;
 
   // values used to cache target constraint preferences that will be used while
   // the PID is enabled
@@ -131,13 +144,6 @@ public abstract class SN_PID extends PIDSubsystem {
     cached_maxOutputChange = pref_maxOutputChange.getValue();
     cached_defaultOutput = pref_defaultOutput.getValue();
 
-    System.out.println("tol = " + cached_tolerance);
-    System.out.println("target count = " + cached_targetCount);
-    System.out.println("min output = " + cached_minOutput);
-    System.out.println("max out = " + cached_maxOutput);
-    System.out.println("max out change = " + cached_maxOutputChange);
-    System.out.println("default = " + cached_defaultOutput);
-
     previousOutput = 0.0;
     inputValid = false;
     outputValid = false;
@@ -187,6 +193,22 @@ public abstract class SN_PID extends PIDSubsystem {
 
     this.output = output;
     outputValid = true;
+
+    System.err.println("get output prints");
+    System.err.println("isEnabled" + this.getPIDController().isEnabled());
+    System.err.println("outputval" + outputValid);
+    System.err.println("cashed" + cached_defaultOutput);
+    System.err.println("output" + this.output);
+    System.err.println("tol = " + cached_tolerance);
+    System.err.println("target count = " + cached_targetCount);
+    System.err.println("min output = " + cached_minOutput);
+    System.err.println("max out = " + cached_maxOutput);
+    System.err.println("max out change = " + cached_maxOutputChange);
+    System.err.println("default = " + cached_defaultOutput);
+    System.err.println("p" + getPIDController().getP());
+    System.err.println("i" + getPIDController().getI());
+    System.err.println("d" + getPIDController().getD());
+    System.err.println();
   }
 
   /**
@@ -194,13 +216,6 @@ public abstract class SN_PID extends PIDSubsystem {
    *         valid, use the default
    */
   public double getOutput() {
-    System.out.println("get output prints");
-    System.out.println("isEnabled" + this.getPIDController().isEnabled());
-    System.out.println("outputval" + outputValid);
-    System.out.println("cashed" + cached_defaultOutput);
-    System.out.println("output" + output);
-    System.out.println();
-
     if ((this.getPIDController().isEnabled() == false) || (outputValid == false)) {
       return cached_defaultOutput;
     }
@@ -213,14 +228,6 @@ public abstract class SN_PID extends PIDSubsystem {
    */
   public boolean onRawTarget() {
     double inputValue = returnPIDInput();
-    System.out.println("on raw target data");
-    System.out.println("input value" + inputValue);
-    System.out.println("input valid" + inputValid);
-    System.out.println("setpoint" + getPIDController().getSetpoint());
-    System.out.println("targetCounter" + targetCounter);
-    System.out.println("cached targetCount" + cached_targetCount);
-    System.out.println("cached tol" + cached_tolerance);
-    System.out.println("\n");
 
     if (inputValid == false) {
       targetCounter = 0;
@@ -232,6 +239,15 @@ public abstract class SN_PID extends PIDSubsystem {
     } else {
       targetCounter = 0;
     }
+
+    System.err.println("on raw target data");
+    System.err.println("input value" + inputValue);
+    System.err.println("input valid" + inputValid);
+    System.err.println("setpoint" + getPIDController().getSetpoint());
+    System.err.println("targetCounter" + targetCounter);
+    System.err.println("cached targetCount" + cached_targetCount);
+    System.err.println("cached tol" + cached_tolerance);
+    System.err.println("\n");
 
     return (targetCounter >= cached_targetCount);
   }

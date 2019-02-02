@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.commands.VisionSetDriverMode;
 import frc.robot.commands.VisionSetVisionMode;
+import frc.robot.commands.Cascade.CascadeLockDogtooth;
+import frc.robot.commands.Cascade.CascadeResetEncoder;
+import frc.robot.commands.Cascade.CascadeUnlockDogtooth;
 import frc.robot.commands.Drive.DriveResetEncoder;
 import frc.robot.commands.Drive.DriveResetYaw;
 import frcteam3255.robotbase.Preferences.SN_Preferences;
@@ -31,6 +34,9 @@ public class Telemetry extends Subsystem {
     SmartDashboard.putData("Reset Yaw", new DriveResetYaw());
     SmartDashboard.putData("Set Driver Mode", new VisionSetDriverMode());
     SmartDashboard.putData("Set Vision Mode", new VisionSetVisionMode());
+    SmartDashboard.putData("Cascade Lock Dogtooth", new CascadeLockDogtooth());
+    SmartDashboard.putData("Cascade Unlock Dogtooth", new CascadeUnlockDogtooth());
+    SmartDashboard.putData("Reset Cascade", new CascadeResetEncoder());
   }
 
   /**
@@ -46,6 +52,10 @@ public class Telemetry extends Subsystem {
     SmartDashboard.putNumber("Vision Horizontal Offset", Robot.m_vision.getHorizontalOffset());
     SmartDashboard.putNumber("Yaw", Robot.m_navigation.getYaw());
     SmartDashboard.putBoolean("Target Found", Robot.m_vision.targetFound());
+    SmartDashboard.putNumber("Cascade Lift Count", Robot.m_cascade.getLiftEncoderCount());
+    SmartDashboard.putNumber("Cascade Lift Distance", Robot.m_cascade.getLiftEncoderDistance());
+    SmartDashboard.putBoolean("Cascade Top Switch", Robot.m_cascade.isTopSwitchClosed());
+    SmartDashboard.putBoolean("Cascade Bottom Switch", Robot.m_cascade.isBottomSwitchClosed());
   }
 
   @Override

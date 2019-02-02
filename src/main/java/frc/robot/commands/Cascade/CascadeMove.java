@@ -16,10 +16,8 @@ public class CascadeMove extends CommandGroup {
    * Add your docs here.
    */
   public CascadeMove(SN_DoublePreference setPoint) {
-    // Add Commands here:
-    // e.g. addSequential(new Command1());
-    // addSequential(new Command2());
-    // these will run in order.
+    // TODO: Need to have the command always execute and determine whether it needs
+    // to move. Currently only checking during constructor
     if (setPoint.getValue() < Robot.m_cascade.getLiftEncoderDistance()) {
       addSequential(new CascadeLiftAnInch());
     }

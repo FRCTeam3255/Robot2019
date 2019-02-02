@@ -26,15 +26,15 @@ public class Cascade extends Subsystem {
   // Talons
   private SN_TalonSRX leftFrontTalon = null;
   private SN_TalonSRX leftBackTalon = null;
-  private SN_TalonSRX rightFrontTalon = null;
-  private SN_TalonSRX rightBackTalon = null;
+  // private SN_TalonSRX rightFrontTalon = null;
+  // private SN_TalonSRX rightBackTalon = null;
 
   // Encoders
   private Encoder liftEncoder = null;
 
   // Solenoids
-  private DoubleSolenoid shiftSolenoid = null;
-  private DoubleSolenoid climbSolenoid = null;
+  // private DoubleSolenoid shiftSolenoid = null;
+  // private DoubleSolenoid climbSolenoid = null;
   private DoubleSolenoid lockSolenoid = null;
 
   // Switches
@@ -48,10 +48,12 @@ public class Cascade extends Subsystem {
     // Talons
     leftFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_FRONT_TALON);
     leftBackTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_BACK_TALON);
-    rightFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_FRONT_TALON);
-    rightBackTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_BACK_TALON);
-    rightFrontTalon.setInverted(true);
-    leftFrontTalon.setInverted(true);
+    // rightFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_FRONT_TALON);
+    // rightBackTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_BACK_TALON);
+    // rightFrontTalon.setInverted(false);
+    leftFrontTalon.setInverted(false);
+    // rightBackTalon.setInverted(true);
+    leftBackTalon.setInverted(true);
 
     // Encoders
     liftEncoder = new Encoder(RobotMap.CASCADE_LIFT_ENCODER_A, RobotMap.CASCADE_LIFT_ENCODER_B);
@@ -63,9 +65,8 @@ public class Cascade extends Subsystem {
     // climbSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM,
     // RobotMap.CASCADE_CLIMB_SOLENOID_A,
     // RobotMap.CASCADE_CLIMB_SOLENOID_B);
-    // lockSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM,
-    // RobotMap.CASCADE_LOCK_SOLENOID_A,
-    // RobotMap.CASCADE_LOCK_SOLENOID_B);
+    lockSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_LOCK_SOLENOID_A,
+        RobotMap.CASCADE_LOCK_SOLENOID_B);
 
     // Switches
     topSwitch = new DigitalInput(RobotMap.CASCADE_TOP_SWITCH);
@@ -73,45 +74,45 @@ public class Cascade extends Subsystem {
   }
 
   /**
-   * @return Check if the top switch is activated
+   * @return Check if the top switch is activated. Inverted to default as false
    */
   public boolean isTopSwitchClosed() {
-    return topSwitch.get();
+    return !topSwitch.get();
   }
 
   /**
-   * @return Check if the bottom switch is activated
+   * @return Check if the bottom switch is activated. Inverted to default as false
    */
   public boolean isBottomSwitchClosed() {
-    return bottomSwitch.get();
+    return !bottomSwitch.get();
   }
 
   /**
    * Deploy the climber pistons
    */
   public void deployClimb() {
-    climbSolenoid.set(Value.kForward);
+    // climbSolenoid.set(Value.kForward);
   }
 
   /**
    * Retract the climber pistons
    */
   public void retractClimb() {
-    climbSolenoid.set(Value.kReverse);
+    // climbSolenoid.set(Value.kReverse);
   }
 
   /**
    * Shift the gearbox to cascade
    */
   public void shiftCascade() {
-    shiftSolenoid.set(Value.kForward);
+    // shiftSolenoid.set(Value.kForward);
   }
 
   /**
-   * Shift the gearbox to climb
+   * Shift the gearbox to climb //
    */
   public void shiftClimb() {
-    shiftSolenoid.set(Value.kReverse);
+    // shiftSolenoid.set(Value.kReverse);
   }
 
   /**
@@ -125,7 +126,7 @@ public class Cascade extends Subsystem {
    * Unlock the cascade dogtooth
    */
   public void unlockCascade() {
-    lockSolenoid.set(Value.kForward);
+    lockSolenoid.set(Value.kReverse);
   }
 
   /**
@@ -154,7 +155,7 @@ public class Cascade extends Subsystem {
    * bottom switches
    */
   public void setLiftSpeed(double speed) {
-    speed = RobotPreferences.CASCADE_LIFT_SPEED.getValue();
+    // speed = RobotPreferences.CASCADE_LIFT_SPEED.getValue();
 
     if (speed > 0) {
       if (isTopSwitchClosed()) {
@@ -168,8 +169,8 @@ public class Cascade extends Subsystem {
 
     leftFrontTalon.set(speed);
     leftBackTalon.set(speed);
-    rightFrontTalon.set(speed);
-    rightBackTalon.set(speed);
+    // rightFrontTalon.set(speed);
+    // rightBackTalon.set(speed);
   }
 
   @Override

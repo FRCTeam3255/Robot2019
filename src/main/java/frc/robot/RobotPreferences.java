@@ -32,7 +32,7 @@ public class RobotPreferences {
   public static final SN_DoublePreference CASCADE_CLIMB_SETPOINT = new SN_DoublePreference("cascadeClimb", 25.0);
 
   // Cascade PID
-  public static final SN_DoublePreference CASCADE_P = new SN_DoublePreference("cascadeP", 1.0);
+  public static final SN_DoublePreference CASCADE_P = new SN_DoublePreference("cascadeP", 5.0);
   public static final SN_DoublePreference CASCADE_I = new SN_DoublePreference("cascadeI", 0.0);
   public static final SN_DoublePreference CASCADE_D = new SN_DoublePreference("cascadeD", 0.0);
 

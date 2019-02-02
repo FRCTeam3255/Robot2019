@@ -23,6 +23,7 @@ public class CascadeLiftAnInch extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_telemetry.setAutonomousStatus("Starting CascadeLiftAnInch");
     previousEncoder = Robot.m_cascade.getLiftEncoderDistance();
     Robot.m_cascade.unlockCascade();
   }
@@ -30,6 +31,7 @@ public class CascadeLiftAnInch extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.m_telemetry.setAutonomousStatus("Executing CascadeLiftAnInch");
     Robot.m_cascade.setLiftSpeed(0.5);
   }
 
@@ -42,6 +44,7 @@ public class CascadeLiftAnInch extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.m_telemetry.setAutonomousStatus("Finishing CascadeLiftAnInch");
     Robot.m_cascade.setLiftSpeed(0.0);
   }
 

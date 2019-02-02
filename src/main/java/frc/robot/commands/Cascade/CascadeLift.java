@@ -15,9 +15,8 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 public class CascadeLift extends Command {
 
   private CascadePID pid;
-  private SN_DoublePreference pref_timeout = new SN_DoublePreference("Lift Timeout", 10.0);
+  private SN_DoublePreference pref_timeout = new SN_DoublePreference("Lift Timeout", 100.0);
   private double expireTime = 0.0;
-  private double distance;
 
   public CascadeLift(SN_DoublePreference inches) {
     // Use requires() here to declare subsystem dependencies
@@ -26,7 +25,6 @@ public class CascadeLift extends Command {
 
     pid = new CascadePID();
     pid.setSetpoint(inches);
-    distance = inches.getValue();
   }
 
   public void setTimeout(SN_DoublePreference timeout) {
@@ -40,10 +38,10 @@ public class CascadeLift extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_telemetry.setAutonomousStatus("Starting CascadeLift" + ": " + distance);
+    Robot.m_telemetry.setAutonomousStatus("Starting CascadeLift" + ": " + pid.getSetpoint());
     expireTime = timeSinceInitialized() + pref_timeout.getValue();
 
-    Robot.m_cascade.resetLiftEncoder();
+    // Robot.m_cascade.resetLiftEncoder();
 
     pid.enable();
   }
@@ -51,8 +49,21 @@ public class CascadeLift extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_telemetry.setAutonomousStatus("Executing CascadeLift" + ": " + distance);
+    Robot.m_telemetry.setAutonomousStatus("Executing CascadeLift");
     double moveSpeed = pid.getOutput();
+
+    // if (moveSpeed < 0 & Robot.m_cascade.getLiftEncoderDistance() <= 50) {
+    // moveSpeed = pid.getOutput();
+
+    // }
+
+    // else if (pid.getOutput() > 0) {
+    // moveSpeed = -RobotPreferences.CASCADE_LIFT_SPEED.getValue();
+    // }
+
+    // else {
+    // moveSpeed = RobotPreferences.CASCADE_LIFT_SPEED.getValue();
+    // }
 
     Robot.m_cascade.setLiftSpeed(moveSpeed);
   }
@@ -70,7 +81,7 @@ public class CascadeLift extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_telemetry.setAutonomousStatus("Finishing CascadeLift" + ": " + distance);
+    Robot.m_telemetry.setAutonomousStatus("Finishing CascadeLift" + ": " + pid.getSetpoint());
     pid.disable();
     Robot.m_cascade.setLiftSpeed(0.0);
   }
