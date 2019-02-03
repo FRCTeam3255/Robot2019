@@ -15,27 +15,27 @@ import frcteam3255.robotbase.SN_PID;
  * PID class based off the NavX yaw
  */
 public class NavXRotatePID extends SN_PID {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+	// Put methods for controlling this subsystem
+	// here. Call these from Commands.
 
-  /**
-   * Creates a NavXRotatePID loop and sets PID values
-   */
-  public NavXRotatePID() {
-    super();
+	/**
+	 * Creates a NavXRotatePID loop and sets PID values
+	 */
+	public NavXRotatePID() {
+		super();
 
-    setPID(RobotPreferences.YAW_P, RobotPreferences.YAW_I, RobotPreferences.YAW_D);
-  }
+		setPID(RobotPreferences.YAW_P, RobotPreferences.YAW_I, RobotPreferences.YAW_D);
+	}
 
-  /**
-   * @return Inputs the yaw of the NavX
-   */
-  @Override
-  protected double returnPIDInput() {
-    // Return your input value for the PID loop
-    // e.g. a sensor, like a potentiometer:
-    // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    inputValid = true;
-    return Robot.m_navigation.getYaw();
-  }
+	/**
+	 * @return Inputs the yaw of the NavX
+	 */
+	@Override
+	protected double returnPIDInput() {
+		// Return your input value for the PID loop
+		// e.g. a sensor, like a potentiometer:
+		// yourPot.getAverageVoltage() / kYourMaxVoltage;
+		inputValid = true;
+		return Robot.m_navigation.getYaw();
+	}
 }

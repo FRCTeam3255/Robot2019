@@ -16,29 +16,29 @@ import frcteam3255.robotbase.SN_PID;
  */
 public class VisionRotatePID extends SN_PID {
 
-    /**
-     * Creates a VisionRotatePID loop and sets PID values
-     */
-    public VisionRotatePID() {
-        super();
+	/**
+	 * Creates a VisionRotatePID loop and sets PID values
+	 */
+	public VisionRotatePID() {
+		super();
 
-        setPID(RobotPreferences.VISION_ROTATE_P, RobotPreferences.VISION_ROTATE_I, RobotPreferences.VISION_ROTATE_D);
-    }
+		setPID(RobotPreferences.VISION_ROTATE_P, RobotPreferences.VISION_ROTATE_I, RobotPreferences.VISION_ROTATE_D);
+	}
 
-    /**
-     * @return Inputs the horizontal offset into PID when there is a target
-     */
-    @Override
-    protected double returnPIDInput() {
-        double offset = 0;
+	/**
+	 * @return Inputs the horizontal offset into PID when there is a target
+	 */
+	@Override
+	protected double returnPIDInput() {
+		double offset = 0;
 
-        if (Robot.m_vision.targetFound()) {
-            offset = Robot.m_vision.getHorizontalOffset();
-            this.inputValid = true;
-        } else {
-            this.inputValid = false;
-        }
+		if (Robot.m_vision.targetFound()) {
+			offset = Robot.m_vision.getHorizontalOffset();
+			this.inputValid = true;
+		} else {
+			this.inputValid = false;
+		}
 
-        return offset;
-    }
+		return offset;
+	}
 }

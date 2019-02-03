@@ -13,29 +13,29 @@ import frc.robot.commands.Cascade.CascadeMove;
 import frc.robot.commands.Drive.DriveDistance;
 
 public class Climb extends CommandGroup {
-  /**
-   * Add your docs here.
-   */
-  public Climb() {
-    // Add Commands here:
-    // e.g. addSequential(new Command1());
-    // addSequential(new Command2());
-    // these will run in order.
+	/**
+	 * Add your docs here.
+	 */
+	public Climb() {
+		// Add Commands here:
+		// e.g. addSequential(new Command1());
+		// addSequential(new Command2());
+		// these will run in order.
 
-    // To run multiple commands at the same time,
-    // use addParallel()
-    // e.g. addParallel(new Command1());
-    // addSequential(new Command2());
-    // Command1 and Command2 will run in parallel.
+		// To run multiple commands at the same time,
+		// use addParallel()
+		// e.g. addParallel(new Command1());
+		// addSequential(new Command2());
+		// Command1 and Command2 will run in parallel.
 
-    // A command group will require all of the subsystems that each member
-    // would require.
-    // e.g. if Command1 requires chassis, and Command2 requires arm,
-    // a CommandGroup containing them would require both the chassis and the
-    // arm.
-    addSequential(new ClimbShiftTo());
-    addSequential(new ClimberDeploy());
-    addParallel(new CascadeMove(RobotPreferences.CASCADE_CLIMB_SETPOINT));
-    addParallel(new DriveDistance(RobotPreferences.DRIVETRAIN_CLIMB_SETPOINT, "Climb"), 60);
-  }
+		// A command group will require all of the subsystems that each member
+		// would require.
+		// e.g. if Command1 requires chassis, and Command2 requires arm,
+		// a CommandGroup containing them would require both the chassis and the
+		// arm.
+		addSequential(new ClimbShiftTo());
+		addSequential(new ClimberDeploy());
+		addParallel(new CascadeMove(RobotPreferences.CASCADE_CLIMB_SETPOINT));
+		addParallel(new DriveDistance(RobotPreferences.DRIVETRAIN_CLIMB_SETPOINT, "Climb"), 60);
+	}
 }

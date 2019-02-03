@@ -14,20 +14,20 @@ import frc.robot.Robot;
  * Add your docs here.
  */
 public class CascadeResetEncoder extends InstantCommand {
-  /**
-   * Add your docs here.
-   */
-  public CascadeResetEncoder() {
-    super();
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.m_cascade);
-  }
+	/**
+	 * Add your docs here.
+	 */
+	public CascadeResetEncoder() {
+		super();
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+		requires(Robot.m_cascade);
+	}
 
-  // Called once when the command executes
-  @Override
-  protected void initialize() {
-    Robot.m_cascade.resetLiftEncoder();
-  }
+	// Called once when the command executes
+	@Override
+	protected void initialize() {
+		Robot.m_cascade.resetLiftEncoder();
+	}
 
 }

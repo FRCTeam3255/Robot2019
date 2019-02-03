@@ -3,7 +3,7 @@
 ## Updated with Pheonix Tuner
 
 [TalonSRX - CTRE](http://www.ctr-electronics.com/control-system/motor-control/talon-srx.html#product_tabs_technical_resources)  
-(v 4.11) (released - 2019)
+(v 4.15) (released - 2019)
 
 [PDP - CTRE](http://www.ctr-electronics.com/control-system/pdp.html#product_tabs_technical_resources)  
 (v 1.40) (released - 2015)
@@ -20,7 +20,7 @@
 [navX-MXP - Kauai Labs](https://www.kauailabs.com/support/navx-mxp/kb/faq.php?id=48)  
 ***NOTE: Only included in the Kauai Labs tools installer***  
 *Updated with Kauai Labs tools*  
-(v ???) (downloaded - 1/27/2019)
+(v 3.1.366) (downloaded - 2/2/2019)
 
 [SPARK MAX - REVRobotics](http://www.revrobotics.com/sparkmax-software/#spark-max-firmware-updates)  
 *Updated with SPARK MAX Client*  
@@ -38,7 +38,7 @@ http://devsite.ctr-electronics.com/maven/release/com/ctre/phoenix/Phoenix-latest
 [Kauai Labs - (for navX-MXP)](https://pdocs.kauailabs.com/navx-mxp/software/roborio-libraries/java/)  
 VSCode Online install URL:  
 https://www.kauailabs.com/dist/frc/2019/navx_frc.json   
-(v 3.1.344) (released - 1/4/2019)
+(v 3.1.366) (released - 2/2/2019)
 
 [SPARK MAX roboRIO SDK](http://www.revrobotics.com/sparkmax-software/#java-api)  
 VSCode Online install URL:  
@@ -52,7 +52,7 @@ https://www.revrobotics.com/content/sw/max/sdk/REVRobotics.json
 [CTRE Pheonix Framework](http://www.ctr-electronics.com/hro.html#product_tabs_technical_resources)  
 ***NOTE: Install Pheonix Library from Tuner after any roboRIO imaging***  
 *Includes Pheonix Tuner, vendor libraries, and firmware*  
-(v 5.12.1.0) (released - 2019)
+(v 5.13.0.0) (released - 2019)
 
 [Kauai Labs Tools](https://www.kauailabs.com/support/navx-mxp/kb/faq.php?id=48)  
 *Includes NavX firmware updater tool, vendor libraries, and firmware*  

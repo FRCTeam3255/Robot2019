@@ -14,20 +14,20 @@ import frc.robot.Robot;
  * Add your docs here.
  */
 public class DriveResetYaw extends InstantCommand {
-  /**
-   * Add your docs here.
-   */
-  public DriveResetYaw() {
-    super();
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.m_navigation);
-  }
+	/**
+	 * Add your docs here.
+	 */
+	public DriveResetYaw() {
+		super();
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+		requires(Robot.m_navigation);
+	}
 
-  // Called once when the command executes
-  @Override
-  protected void initialize() {
-    Robot.m_navigation.resetYaw();
-  }
+	// Called once when the command executes
+	@Override
+	protected void initialize() {
+		Robot.m_navigation.resetYaw();
+	}
 
 }

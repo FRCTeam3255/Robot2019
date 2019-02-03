@@ -14,20 +14,20 @@ import frc.robot.Robot;
  * Add your docs here.
  */
 public class IntakeHatchReload extends InstantCommand {
-  /**
-   * Add your docs here.
-   */
-  public IntakeHatchReload() {
-    super();
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.m_intake);
-  }
+	/**
+	 * Add your docs here.
+	 */
+	public IntakeHatchReload() {
+		super();
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+		requires(Robot.m_intake);
+	}
 
-  // Called once when the command executes
-  @Override
-  protected void initialize() {
-    Robot.m_intake.reloadHatch();
-  }
+	// Called once when the command executes
+	@Override
+	protected void initialize() {
+		Robot.m_intake.reloadHatch();
+	}
 
 }

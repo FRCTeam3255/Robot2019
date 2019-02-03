@@ -20,42 +20,42 @@ import frcteam3255.robotbase.Preferences.*;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  //// CREATING BUTTONS
-  // One type of button is a joystick button which is any button on a
-  //// joystick.
-  // You create one by telling it which joystick it's on and which button
-  // number it is.
-  // Joystick stick = new Joystick(port);
-  // Button button = new JoystickButton(stick, buttonNumber);
-  public SN_DualActionStick driverStick = new SN_DualActionStick(0);
-  public SN_Extreme3DStick manipulatorStick = new SN_Extreme3DStick(1);
-  public SN_SwitchboardStick switchboardStick = new SN_SwitchboardStick(2);
+	//// CREATING BUTTONS
+	// One type of button is a joystick button which is any button on a
+	//// joystick.
+	// You create one by telling it which joystick it's on and which button
+	// number it is.
+	// Joystick stick = new Joystick(port);
+	// Button button = new JoystickButton(stick, buttonNumber);
+	public SN_DualActionStick driverStick = new SN_DualActionStick(0);
+	public SN_Extreme3DStick manipulatorStick = new SN_Extreme3DStick(1);
+	public SN_SwitchboardStick switchboardStick = new SN_SwitchboardStick(2);
 
-  /**
-   * Assigns commands to buttons
-   */
-  public OI() {
-    // Manipulator Stick
-    manipulatorStick.btn_1.whileHeld(new IntakeCargoEject());
-    manipulatorStick.btn_2.whenPressed(new IntakeCargoCollect());
-    manipulatorStick.btn_3.whenPressed(new IntakeHatchDeploy());
-    manipulatorStick.btn_4.whenPressed(new IntakeHatchRetract());
-    manipulatorStick.btn_5.whenPressed(new IntakeHatchReach());
-    manipulatorStick.btn_5.whenReleased(new IntakeHatchGrab());
-    manipulatorStick.btn_6.whenPressed(new CascadeResetEncoder());
-    manipulatorStick.btn_11.whenPressed(new VisionDistanceRotateTest());
-    manipulatorStick.btn_7.whenPressed(new DriveDistance(new SN_DoublePreference("testPID", 100.0), "testPID"));
-    // manipulatorStick.btn_5.whenPressed(new DriveStraightDistance(100.0));
-    // manipulatorStick.btn_6.whenPressed(new DriveRotate(90.0));
-    manipulatorStick.btn_9.whenPressed(new StartMatch());
-    manipulatorStick.btn_10.whenPressed(new Climb());
+	/**
+	 * Assigns commands to buttons
+	 */
+	public OI() {
+		// Manipulator Stick
+		manipulatorStick.btn_1.whileHeld(new IntakeCargoEject());
+		manipulatorStick.btn_2.whenPressed(new IntakeCargoCollect());
+		manipulatorStick.btn_3.whenPressed(new IntakeHatchDeploy());
+		manipulatorStick.btn_4.whenPressed(new IntakeHatchRetract());
+		manipulatorStick.btn_5.whenPressed(new IntakeHatchReach());
+		manipulatorStick.btn_5.whenReleased(new IntakeHatchGrab());
+		manipulatorStick.btn_6.whenPressed(new CascadeResetEncoder());
+		manipulatorStick.btn_11.whenPressed(new VisionDistanceRotateTest());
+		manipulatorStick.btn_7.whenPressed(new DriveDistance(new SN_DoublePreference("testPID", 100.0), "testPID"));
+		// manipulatorStick.btn_5.whenPressed(new DriveStraightDistance(100.0));
+		// manipulatorStick.btn_6.whenPressed(new DriveRotate(90.0));
+		manipulatorStick.btn_9.whenPressed(new StartMatch());
+		manipulatorStick.btn_10.whenPressed(new Climb());
 
-    // Driver Stick
-    driverStick.btn_A.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeMoveSetpoint", 100.0)));
+		// Driver Stick
+		driverStick.btn_A.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeMoveSetpoint", 100.0)));
 
-    // Switchboard Stick
-    // switchboardStick.btn_1.whileHeld(new SetDebugMode());
-    switchboardStick.btn_2.whenPressed(new VisionSetDriverMode());
-    switchboardStick.btn_2.whenReleased(new VisionSetVisionMode());
-  }
+		// Switchboard Stick
+		// switchboardStick.btn_1.whileHeld(new SetDebugMode());
+		switchboardStick.btn_2.whenPressed(new VisionSetDriverMode());
+		switchboardStick.btn_2.whenReleased(new VisionSetVisionMode());
+	}
 }

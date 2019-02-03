@@ -14,19 +14,19 @@ import frc.robot.Robot;
  * Add your docs here.
  */
 public class DriveResetEncoder extends InstantCommand {
-  /**
-   * Add your docs here.
-   */
-  public DriveResetEncoder() {
-    super();
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-  }
+	/**
+	 * Add your docs here.
+	 */
+	public DriveResetEncoder() {
+		super();
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+	}
 
-  // Called once when the command executes
-  @Override
-  protected void initialize() {
-    Robot.m_drivetrain.resetEncoderCount();
-  }
+	// Called once when the command executes
+	@Override
+	protected void initialize() {
+		Robot.m_drivetrain.resetEncoderCount();
+	}
 
 }

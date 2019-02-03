@@ -20,158 +20,158 @@ import frcteam3255.robotbase.SN_TalonSRX;
  * Subsytem containing the cascade devices and methoods
  */
 public class Cascade extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+	// Put methods for controlling this subsystem
+	// here. Call these from Commands.
 
-  // Talons
-  private SN_TalonSRX leftFrontTalon = null;
-  private SN_TalonSRX leftBackTalon = null;
-  // private SN_TalonSRX rightFrontTalon = null;
-  // private SN_TalonSRX rightBackTalon = null;
+	// Talons
+	private SN_TalonSRX leftFrontTalon = null;
+	private SN_TalonSRX leftBackTalon = null;
+	// private SN_TalonSRX rightFrontTalon = null;
+	// private SN_TalonSRX rightBackTalon = null;
 
-  // Encoders
-  private Encoder liftEncoder = null;
+	// Encoders
+	private Encoder liftEncoder = null;
 
-  // Solenoids
-  // private DoubleSolenoid shiftSolenoid = null;
-  // private DoubleSolenoid climbSolenoid = null;
-  private DoubleSolenoid lockSolenoid = null;
+	// Solenoids
+	// private DoubleSolenoid shiftSolenoid = null;
+	// private DoubleSolenoid climbSolenoid = null;
+	private DoubleSolenoid lockSolenoid = null;
 
-  // Switches
-  private DigitalInput topSwitch = null;
-  private DigitalInput bottomSwitch = null;
+	// Switches
+	private DigitalInput topSwitch = null;
+	private DigitalInput bottomSwitch = null;
 
-  /**
-   * Creates the devices used in the cascade
-   */
-  public Cascade() {
-    // Talons
-    leftFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_FRONT_TALON);
-    leftBackTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_BACK_TALON);
-    // rightFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_FRONT_TALON);
-    // rightBackTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_BACK_TALON);
-    leftFrontTalon.setInverted(false);
-    leftBackTalon.setInverted(false);
-    // rightFrontTalon.setInverted(true);
-    // rightBackTalon.setInverted(true);
+	/**
+	 * Creates the devices used in the cascade
+	 */
+	public Cascade() {
+		// Talons
+		leftFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_FRONT_TALON);
+		leftBackTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_BACK_TALON);
+		// rightFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_FRONT_TALON);
+		// rightBackTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_BACK_TALON);
+		leftFrontTalon.setInverted(false);
+		leftBackTalon.setInverted(false);
+		// rightFrontTalon.setInverted(true);
+		// rightBackTalon.setInverted(true);
 
-    // Encoders
-    liftEncoder = new Encoder(RobotMap.CASCADE_LIFT_ENCODER_A, RobotMap.CASCADE_LIFT_ENCODER_B);
+		// Encoders
+		liftEncoder = new Encoder(RobotMap.CASCADE_LIFT_ENCODER_A, RobotMap.CASCADE_LIFT_ENCODER_B);
 
-    // Solenoids
-    // shiftSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM,
-    // RobotMap.CASCADE_SHIFT_SOLENOID_A,
-    // RobotMap.CASCADE_SHIFT_SOLENOID_B);
-    // climbSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM,
-    // RobotMap.CASCADE_CLIMB_SOLENOID_A,
-    // RobotMap.CASCADE_CLIMB_SOLENOID_B);
-    lockSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_LOCK_SOLENOID_A,
-        RobotMap.CASCADE_LOCK_SOLENOID_B);
+		// Solenoids
+		// shiftSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM,
+		// RobotMap.CASCADE_SHIFT_SOLENOID_A,
+		// RobotMap.CASCADE_SHIFT_SOLENOID_B);
+		// climbSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM,
+		// RobotMap.CASCADE_CLIMB_SOLENOID_A,
+		// RobotMap.CASCADE_CLIMB_SOLENOID_B);
+		lockSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_LOCK_SOLENOID_A,
+				RobotMap.CASCADE_LOCK_SOLENOID_B);
 
-    // Switches
-    topSwitch = new DigitalInput(RobotMap.CASCADE_TOP_SWITCH);
-    bottomSwitch = new DigitalInput(RobotMap.CASCADE_BOTTOM_SWITCH);
-  }
+		// Switches
+		topSwitch = new DigitalInput(RobotMap.CASCADE_TOP_SWITCH);
+		bottomSwitch = new DigitalInput(RobotMap.CASCADE_BOTTOM_SWITCH);
+	}
 
-  /**
-   * @return Check if the top switch is activated. Inverted to default as false
-   */
-  public boolean isTopSwitchClosed() {
-    return !topSwitch.get();
-  }
+	/**
+	 * @return Check if the top switch is activated. Inverted to default as false
+	 */
+	public boolean isTopSwitchClosed() {
+		return !topSwitch.get();
+	}
 
-  /**
-   * @return Check if the bottom switch is activated. Inverted to default as false
-   */
-  public boolean isBottomSwitchClosed() {
-    return !bottomSwitch.get();
-  }
+	/**
+	 * @return Check if the bottom switch is activated. Inverted to default as false
+	 */
+	public boolean isBottomSwitchClosed() {
+		return !bottomSwitch.get();
+	}
 
-  /**
-   * Deploy the climber pistons
-   */
-  public void deployClimb() {
-    // climbSolenoid.set(Value.kForward);
-  }
+	/**
+	 * Deploy the climber pistons
+	 */
+	public void deployClimb() {
+		// climbSolenoid.set(Value.kForward);
+	}
 
-  /**
-   * Retract the climber pistons
-   */
-  public void retractClimb() {
-    // climbSolenoid.set(Value.kReverse);
-  }
+	/**
+	 * Retract the climber pistons
+	 */
+	public void retractClimb() {
+		// climbSolenoid.set(Value.kReverse);
+	}
 
-  /**
-   * Shift the gearbox to cascade
-   */
-  public void shiftCascade() {
-    // shiftSolenoid.set(Value.kForward);
-  }
+	/**
+	 * Shift the gearbox to cascade
+	 */
+	public void shiftCascade() {
+		// shiftSolenoid.set(Value.kForward);
+	}
 
-  /**
-   * Shift the gearbox to climb //
-   */
-  public void shiftClimb() {
-    // shiftSolenoid.set(Value.kReverse);
-  }
+	/**
+	 * Shift the gearbox to climb //
+	 */
+	public void shiftClimb() {
+		// shiftSolenoid.set(Value.kReverse);
+	}
 
-  /**
-   * Lock the cascade dogtooth
-   */
-  public void lockCascade() {
-    lockSolenoid.set(Value.kForward);
-  }
+	/**
+	 * Lock the cascade dogtooth
+	 */
+	public void lockCascade() {
+		lockSolenoid.set(Value.kForward);
+	}
 
-  public boolean isCascadeLocked() {
-    return lockSolenoid.get() == Value.kForward;
-  }
+	public boolean isCascadeLocked() {
+		return lockSolenoid.get() == Value.kForward;
+	}
 
-  /**
-   * Unlock the cascade dogtooth
-   */
-  public void unlockCascade() {
-    lockSolenoid.set(Value.kReverse);
-  }
+	/**
+	 * Unlock the cascade dogtooth
+	 */
+	public void unlockCascade() {
+		lockSolenoid.set(Value.kReverse);
+	}
 
-  /**
-   * @return Lift encoder distance in inches
-   */
-  public double getLiftEncoderDistance() {
-    return (liftEncoder.get() / RobotPreferences.CASCADE_PULSES_PER_FOOT.getValue()) * 12.0;
-  }
+	/**
+	 * @return Lift encoder distance in inches
+	 */
+	public double getLiftEncoderDistance() {
+		return (liftEncoder.get() / RobotPreferences.CASCADE_PULSES_PER_FOOT.getValue()) * 12.0;
+	}
 
-  /**
-   * @return Default scaled lift encoder count
-   */
-  public double getLiftEncoderCount() {
-    return liftEncoder.get();
-  }
+	/**
+	 * @return Default scaled lift encoder count
+	 */
+	public double getLiftEncoderCount() {
+		return liftEncoder.get();
+	}
 
-  /**
-   * Set the lift encoder to zero
-   */
-  public void resetLiftEncoder() {
-    liftEncoder.reset();
-  }
+	/**
+	 * Set the lift encoder to zero
+	 */
+	public void resetLiftEncoder() {
+		liftEncoder.reset();
+	}
 
-  /**
-   * Set the speed for the lift motors. Can not move the lift past the top or
-   * bottom switches
-   */
-  public void setLiftSpeed(double speed) {
-    if ((speed > 0 && isTopSwitchClosed()) || (speed < 0 && isBottomSwitchClosed()) || isCascadeLocked()) {
-      speed = 0.0;
-    }
+	/**
+	 * Set the speed for the lift motors. Can not move the lift past the top or
+	 * bottom switches
+	 */
+	public void setLiftSpeed(double speed) {
+		if ((speed > 0 && isTopSwitchClosed()) || (speed < 0 && isBottomSwitchClosed()) || isCascadeLocked()) {
+			speed = 0.0;
+		}
 
-    leftFrontTalon.set(speed);
-    leftBackTalon.set(speed);
-    // rightFrontTalon.set(speed);
-    // rightBackTalon.set(speed);
-  }
+		leftFrontTalon.set(speed);
+		leftBackTalon.set(speed);
+		// rightFrontTalon.set(speed);
+		// rightBackTalon.set(speed);
+	}
 
-  @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-  }
+	@Override
+	public void initDefaultCommand() {
+		// Set the default command for a subsystem here.
+		// setDefaultCommand(new MySpecialCommand());
+	}
 }

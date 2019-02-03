@@ -16,32 +16,32 @@ import frcteam3255.robotbase.SN_PID;
  */
 public class VisionDistancePID extends SN_PID {
 
-    /**
-     * Creates a VisionDistancePID loop and sets PID values
-     */
-    public VisionDistancePID() {
-        super();
+	/**
+	 * Creates a VisionDistancePID loop and sets PID values
+	 */
+	public VisionDistancePID() {
+		super();
 
-        setPID(RobotPreferences.VISION_DISTANCE_P, RobotPreferences.VISION_DISTANCE_I,
-                RobotPreferences.VISION_DISTANCE_D);
-    }
+		setPID(RobotPreferences.VISION_DISTANCE_P, RobotPreferences.VISION_DISTANCE_I,
+				RobotPreferences.VISION_DISTANCE_D);
+	}
 
-    /**
-     * @return Inputs the distance from the vision target when it is in front of the
-     *         camera
-     */
-    @Override
-    protected double returnPIDInput() {
-        // Return your input value for the PID loop
-        // e.g. a sensor, like a potentiometer:
-        // yourPot.getAverageVoltage() / kYourMaxVoltage;
-        double d = Robot.m_vision.getDistance();
+	/**
+	 * @return Inputs the distance from the vision target when it is in front of the
+	 *         camera
+	 */
+	@Override
+	protected double returnPIDInput() {
+		// Return your input value for the PID loop
+		// e.g. a sensor, like a potentiometer:
+		// yourPot.getAverageVoltage() / kYourMaxVoltage;
+		double d = Robot.m_vision.getDistance();
 
-        if (d < 0) {
-            inputValid = false;
-            return -1;
-        }
-        inputValid = true;
-        return d;
-    }
+		if (d < 0) {
+			inputValid = false;
+			return -1;
+		}
+		inputValid = true;
+		return d;
+	}
 }

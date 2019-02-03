@@ -13,10 +13,15 @@
 		".gradle": true,
 		"gradle": true,
 		"build": true,
-		"build.gradle": true
+		"build.gradle": true,
+		"**/.classpath": true,
+		"**/.project": true,
+		"**/.settings": true,
+		"**/.factorypath": true
 	},
 	"workbench.editor.enablePreview": false,
 	"editor.formatOnPaste": true,
 	"editor.formatOnSave": true,
-	"editor.formatOnType": true
+	"editor.formatOnType": true,
+	"editor.minimap.enabled": false
 }
