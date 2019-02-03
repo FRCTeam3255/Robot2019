@@ -53,7 +53,7 @@ public class Cascade extends Subsystem {
     // rightFrontTalon.setInverted(false);
     leftFrontTalon.setInverted(false);
     // rightBackTalon.setInverted(true);
-    leftBackTalon.setInverted(true);
+    leftBackTalon.setInverted(false);
 
     // Encoders
     liftEncoder = new Encoder(RobotMap.CASCADE_LIFT_ENCODER_A, RobotMap.CASCADE_LIFT_ENCODER_B);
@@ -133,7 +133,7 @@ public class Cascade extends Subsystem {
    * @return Lift encoder distance in inches
    */
   public double getLiftEncoderDistance() {
-    return liftEncoder.get() / RobotPreferences.CASCADE_PULSES_PER_FOOT.getValue();
+    return (liftEncoder.get() / RobotPreferences.CASCADE_PULSES_PER_FOOT.getValue()) * 12.0;
   }
 
   /**

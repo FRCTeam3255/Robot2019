@@ -71,7 +71,7 @@ public class OI {
 
     // Testing
     manipulatorStick.btn_6.whenPressed(new CascadeResetEncoder());
-    manipulatorStick.btn_8.whileHeld(new CascadeLift(new SN_DoublePreference("liftSP", 150.0)));
+    manipulatorStick.btn_8.whileHeld(new CascadeLift(new SN_DoublePreference("liftSP", 18.0)));
     manipulatorStick.btn_12.whenPressed(new CascadeMove(new SN_DoublePreference("yee", 200.0)));
     DriveDistance test = new DriveDistance(new SN_DoublePreference("yee2", 200.0), "Test");
     test.getPID().setTolerance(new SN_DoublePreference("tol1", 0.0));
