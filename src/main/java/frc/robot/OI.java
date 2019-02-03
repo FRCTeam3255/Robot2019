@@ -7,28 +7,11 @@
 
 package frc.robot;
 
-import frc.robot.commands.Climb;
-import frc.robot.commands.StartMatch;
-import frc.robot.commands.VisionDistanceRotateTest;
-import frc.robot.commands.VisionSetDriverMode;
-import frc.robot.commands.VisionSetVisionMode;
-import frc.robot.commands.Cascade.CascadeLift;
-import frc.robot.commands.Cascade.CascadeMove;
-import frc.robot.commands.Cascade.CascadeResetEncoder;
-import frc.robot.commands.Drive.DriveDistance;
-import frc.robot.commands.Intake.IntakeCargoCollect;
-import frc.robot.commands.Intake.IntakeCargoEject;
-import frc.robot.commands.Intake.IntakeHatchDeploy;
-import frc.robot.commands.Intake.IntakeHatchEject;
-import frc.robot.commands.Intake.IntakeHatchGrab;
-import frc.robot.commands.Intake.IntakeHatchReach;
-import frc.robot.commands.Intake.IntakeHatchReload;
-import frc.robot.commands.Intake.IntakeHatchRetract;
-import frcteam3255.robotbase.Joystick.SN_DualActionStick;
-import frcteam3255.robotbase.Joystick.SN_Extreme3DStick;
-import frcteam3255.robotbase.Joystick.SN_SwitchboardStick;
-import frcteam3255.robotbase.Preferences.SN_DoublePreference;
-import frcteam3255.robotbase.Preferences.SN_IntPreference;
+import frc.robot.commands.*;
+import frc.robot.commands.Drive.*;
+import frc.robot.commands.Intake.*;
+import frcteam3255.robotbase.Joystick.*;
+import frcteam3255.robotbase.Preferences.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -68,40 +51,5 @@ public class OI {
     // switchboardStick.btn_1.whileHeld(new SetDebugMode());
     switchboardStick.btn_2.whenPressed(new VisionSetDriverMode());
     switchboardStick.btn_2.whenReleased(new VisionSetVisionMode());
-
-    // Testing
-    manipulatorStick.btn_6.whenPressed(new CascadeResetEncoder());
-    manipulatorStick.btn_8.whileHeld(new CascadeLift(new SN_DoublePreference("liftSP", 18.0)));
-    manipulatorStick.btn_12.whenPressed(new CascadeMove(new SN_DoublePreference("yee", 200.0)));
-    DriveDistance test = new DriveDistance(new SN_DoublePreference("yee2", 200.0), "Test");
-    test.getPID().setTolerance(new SN_DoublePreference("tol1", 0.0));
-    test.getPID().setTargetCount(new SN_IntPreference("tc", 100));
-    test.setTimeout(new SN_DoublePreference("time", 100.0));
-    test.getPID().setSetpoint(new SN_DoublePreference("testset", 100));
-    // TODO: THIS BREAKS IT
-    // test.getPID().setPID(new SN_DoublePreference("testp", 0.7), new
-    // SN_DoublePreference("testi", 0.0),
-    // new SN_DoublePreference("testd", 0.0));
-    // manipulatorStick.btn_6.whenPressed(test);
   }
-
-  // There are a few additional built in buttons you can use. Additionally,
-  // by subclassing Button you can create custom triggers and bind those to
-  // commands the same as any other Button.
-
-  //// TRIGGERING COMMANDS WITH BUTTONS
-  // Once you have a button, it's trivial to bind it to a button in one of
-  // three ways:
-
-  // Start the command when the button is pressed and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenPressed(new ExampleCommand());
-
-  // Run the command while the button is being held down and interrupt it once
-  // the button is released.
-  // button.whileHeld(new ExampleCommand());
-
-  // Start the command when the button is released and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenReleased(new ExampleCommand());
 }

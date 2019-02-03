@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 import frc.robot.Robot;
-import frc.robot.RobotPreferences;
 import frcteam3255.robotbase.SN_PID;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 import frcteam3255.robotbase.Preferences.SN_IntPreference;
@@ -48,11 +47,7 @@ public class CascadePID extends SN_PID {
    */
   @Override
   protected double returnPIDInput() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
     inputValid = true;
-    double d = Robot.m_cascade.getLiftEncoderDistance();
-    System.err.println("CascadePID.returnPIDInput: d = " + d);
-    return d;
+    return Robot.m_cascade.getLiftEncoderDistance();
   }
 }

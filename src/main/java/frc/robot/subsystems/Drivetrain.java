@@ -48,11 +48,17 @@ public class Drivetrain extends Subsystem {
     // leftMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_MID_TALON);
     leftBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK_TALON);
     leftTalons = new SpeedControllerGroup(leftFrontTalon, leftBackTalon);
+    // leftTalons = new SpeedControllerGroup(leftFrontTalon, leftMidTalon,
+    // leftBackTalon);
 
     rightFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT_TALON);
     // rightMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_MID_TALON);
     rightBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK_TALON);
     rightTalons = new SpeedControllerGroup(rightFrontTalon, rightBackTalon);
+    // rightTalons = new SpeedControllerGroup(rightFrontTalon, rightMidTalon,
+    // rightBackTalon);
+    // rightTalons = new SpeedControllerGroup(rightFrontTalon, rightMidTalon,
+    // rightBackTalon);
 
     // Encoders
     encoder = new Encoder(RobotMap.DRIVETRAIN_ENCODER_A, RobotMap.DRIVETRAIN_ENCODER_B);
@@ -87,7 +93,7 @@ public class Drivetrain extends Subsystem {
    * @return Encoder distance in inches
    */
   public double getEncoderDistance() {
-    return getEncoderCount() / RobotPreferences.DRIVETRAIN_PULSES_PER_FOOT.getValue();
+    return (getEncoderCount() / RobotPreferences.DRIVETRAIN_PULSES_PER_FOOT.getValue()) * 12;
   }
 
   @Override

@@ -50,10 +50,10 @@ public class Cascade extends Subsystem {
     leftBackTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_BACK_TALON);
     // rightFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_FRONT_TALON);
     // rightBackTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_BACK_TALON);
-    // rightFrontTalon.setInverted(false);
     leftFrontTalon.setInverted(false);
-    // rightBackTalon.setInverted(true);
     leftBackTalon.setInverted(false);
+    // rightFrontTalon.setInverted(true);
+    // rightBackTalon.setInverted(true);
 
     // Encoders
     liftEncoder = new Encoder(RobotMap.CASCADE_LIFT_ENCODER_A, RobotMap.CASCADE_LIFT_ENCODER_B);
@@ -155,8 +155,6 @@ public class Cascade extends Subsystem {
    * bottom switches
    */
   public void setLiftSpeed(double speed) {
-    // speed = RobotPreferences.CASCADE_LIFT_SPEED.getValue();
-
     if (speed > 0) {
       if (isTopSwitchClosed()) {
         speed = 0.0;
