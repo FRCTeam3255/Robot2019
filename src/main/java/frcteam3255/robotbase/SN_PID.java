@@ -57,7 +57,6 @@ public abstract class SN_PID extends PIDSubsystem {
   protected boolean inputValid = false;
   protected boolean outputValid = false;
   protected double output = 0.0;
-  protected double previousOutput = 0.0;
 
   protected int targetCounter = 0;
 
@@ -144,10 +143,11 @@ public abstract class SN_PID extends PIDSubsystem {
     cached_maxOutputChange = pref_maxOutputChange.getValue();
     cached_defaultOutput = pref_defaultOutput.getValue();
 
-    previousOutput = 0.0;
+    output = 0.0;
     inputValid = false;
     outputValid = false;
 
+    controller.reset();
     super.enable();
   }
 
@@ -157,6 +157,9 @@ public abstract class SN_PID extends PIDSubsystem {
    */
   @Override
   protected void usePIDOutput(double output) {
+    double previousOutput = this.output;
+    double requestedOutput = output;
+
     if (inputValid == false) {
       this.output = cached_defaultOutput;
       outputValid = false;
@@ -166,49 +169,52 @@ public abstract class SN_PID extends PIDSubsystem {
     // Use output to drive your system, like a motor
     // e.g. yourMotor.set(output);
     // Change by Maximum Change
-    if (Math.abs(output - previousOutput) > cached_maxOutputChange) {
-      if (output - previousOutput > 0) {
-        output = previousOutput + cached_maxOutputChange;
-      } else {
-        output = previousOutput - cached_maxOutputChange;
-      }
-    } else {
-      previousOutput = output;
-    }
+    // if (Math.abs(output - previousOutput) > cached_maxOutputChange) {
+    // if (output - previousOutput > 0) {
+    // output = previousOutput + cached_maxOutputChange;
+    // } else {
+    // output = previousOutput - cached_maxOutputChange;
+    // }
+    // }
 
     // Clamping
-    if (output > 0) {
-      if (output < cached_minOutput) {
-        output = cached_minOutput;
-      } else if (output > cached_maxOutput) {
-        output = cached_maxOutput;
-      }
-    } else if (output < 0) {
-      if (output > -cached_minOutput) {
-        output = -cached_minOutput;
-      } else if (output < -cached_maxOutput) {
-        output = -cached_maxOutput;
-      }
-    }
+    // if (output > 0) {
+    // if (output < cached_minOutput) {
+    // output = cached_minOutput;
+    // } else if (output > cached_maxOutput) {
+    // output = cached_maxOutput;
+    // }
+    // } else if (output < 0) {
+    // if (output > -cached_minOutput) {
+    // output = -cached_minOutput;
+    // } else if (output < -cached_maxOutput) {
+    // output = -cached_maxOutput;
+    // }
+    // }
 
     this.output = output;
     outputValid = true;
 
-    System.err.println("get output prints");
-    System.err.println("isEnabled" + this.getPIDController().isEnabled());
-    System.err.println("outputval" + outputValid);
-    System.err.println("cashed" + cached_defaultOutput);
-    System.err.println("output" + this.output);
-    System.err.println("tol = " + cached_tolerance);
-    System.err.println("target count = " + cached_targetCount);
-    System.err.println("min output = " + cached_minOutput);
-    System.err.println("max out = " + cached_maxOutput);
-    System.err.println("max out change = " + cached_maxOutputChange);
-    System.err.println("default = " + cached_defaultOutput);
-    System.err.println("p" + getPIDController().getP());
-    System.err.println("i" + getPIDController().getI());
-    System.err.println("d" + getPIDController().getD());
-    System.err.println();
+    if (Math.abs(this.output - requestedOutput) > 0.1) {
+      System.err.println("SN_PID.usePIDOutput (prior, requested, out): (" + previousOutput + ", " + requestedOutput
+          + ", " + this.output + ")");
+    }
+
+    // System.err.println("SN_PID.usePIDOutput");
+    // System.err.println("isEnabled" + this.getPIDController().isEnabled());
+    // System.err.println("outputval" + outputValid);
+    // System.err.println("cashed" + cached_defaultOutput);
+    // System.err.println("SN_PID.usePIDOutput endOutput = " + this.output);
+    // System.err.println("tol = " + cached_tolerance);
+    // System.err.println("target count = " + cached_targetCount);
+    // System.err.println("min output = " + cached_minOutput);
+    // System.err.println("max out = " + cached_maxOutput);
+    // System.err.println("max out change = " + cached_maxOutputChange);
+    // System.err.println("default = " + cached_defaultOutput);
+    // System.err.println("p" + getPIDController().getP());
+    // System.err.println("i" + getPIDController().getI());
+    // System.err.println("d" + getPIDController().getD());
+    // System.err.println();
   }
 
   /**
@@ -240,14 +246,14 @@ public abstract class SN_PID extends PIDSubsystem {
       targetCounter = 0;
     }
 
-    System.err.println("on raw target data");
-    System.err.println("input value" + inputValue);
-    System.err.println("input valid" + inputValid);
-    System.err.println("setpoint" + getPIDController().getSetpoint());
-    System.err.println("targetCounter" + targetCounter);
-    System.err.println("cached targetCount" + cached_targetCount);
-    System.err.println("cached tol" + cached_tolerance);
-    System.err.println("\n");
+    // System.err.println("SN_PID.onRawTarget");
+    // System.err.println("input value" + inputValue);
+    // System.err.println("input valid" + inputValid);
+    // System.err.println("setpoint" + getPIDController().getSetpoint());
+    // System.err.println("targetCounter" + targetCounter);
+    // System.err.println("cached targetCount" + cached_targetCount);
+    // System.err.println("cached tol" + cached_tolerance);
+    // System.err.println("\n");
 
     return (targetCounter >= cached_targetCount);
   }

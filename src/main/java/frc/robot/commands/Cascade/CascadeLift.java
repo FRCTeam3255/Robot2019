@@ -41,8 +41,6 @@ public class CascadeLift extends Command {
     Robot.m_telemetry.setAutonomousStatus("Starting CascadeLift" + ": " + pid.getSetpoint());
     expireTime = timeSinceInitialized() + pref_timeout.getValue();
 
-    // Robot.m_cascade.resetLiftEncoder();
-
     pid.enable();
   }
 

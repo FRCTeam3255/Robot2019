@@ -35,6 +35,8 @@ public class CascadePID extends SN_PID {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
     inputValid = true;
-    return Robot.m_cascade.getLiftEncoderDistance();
+    double d = Robot.m_cascade.getLiftEncoderDistance();
+    System.err.println("CascadePID.returnPIDInput: d = " + d);
+    return d;
   }
 }

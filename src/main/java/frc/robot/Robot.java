@@ -69,10 +69,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    if (RobotController.getUserButton() == true) {
-      Robot.m_vision.toggleLEDs();
-    }
-    m_telemetry.update();
+    // if (RobotController.getUserButton() == true) {
+    // Robot.m_vision.toggleLEDs();
+    // }
+    // m_telemetry.update();
   }
 
   /**

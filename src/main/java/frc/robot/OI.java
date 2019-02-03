@@ -14,11 +14,14 @@ import frc.robot.commands.VisionSetDriverMode;
 import frc.robot.commands.VisionSetVisionMode;
 import frc.robot.commands.Cascade.CascadeLift;
 import frc.robot.commands.Cascade.CascadeMove;
+import frc.robot.commands.Cascade.CascadeResetEncoder;
 import frc.robot.commands.Drive.DriveDistance;
 import frc.robot.commands.Intake.IntakeCargoCollect;
 import frc.robot.commands.Intake.IntakeCargoEject;
 import frc.robot.commands.Intake.IntakeHatchDeploy;
 import frc.robot.commands.Intake.IntakeHatchEject;
+import frc.robot.commands.Intake.IntakeHatchGrab;
+import frc.robot.commands.Intake.IntakeHatchReach;
 import frc.robot.commands.Intake.IntakeHatchReload;
 import frc.robot.commands.Intake.IntakeHatchRetract;
 import frcteam3255.robotbase.Joystick.SN_DualActionStick;
@@ -52,8 +55,8 @@ public class OI {
     manipulatorStick.btn_2.whenPressed(new IntakeCargoCollect());
     manipulatorStick.btn_3.whenPressed(new IntakeHatchDeploy());
     manipulatorStick.btn_4.whenPressed(new IntakeHatchRetract());
-    manipulatorStick.btn_5.whenPressed(new IntakeHatchEject());
-    manipulatorStick.btn_5.whenReleased(new IntakeHatchReload());
+    manipulatorStick.btn_5.whenPressed(new IntakeHatchReach());
+    manipulatorStick.btn_5.whenReleased(new IntakeHatchGrab());
     manipulatorStick.btn_11.whenPressed(new VisionDistanceRotateTest());
     manipulatorStick.btn_7.whenPressed(new DriveDistance(new SN_DoublePreference("testPID", 100.0), "testPID"));
     // manipulatorStick.btn_5.whenPressed(new DriveStraightDistance(100.0));
@@ -67,6 +70,8 @@ public class OI {
     switchboardStick.btn_2.whenReleased(new VisionSetVisionMode());
 
     // Testing
+    manipulatorStick.btn_6.whenPressed(new CascadeResetEncoder());
+    manipulatorStick.btn_8.whileHeld(new CascadeLift(new SN_DoublePreference("liftSP", 150.0)));
     manipulatorStick.btn_12.whenPressed(new CascadeMove(new SN_DoublePreference("yee", 200.0)));
     DriveDistance test = new DriveDistance(new SN_DoublePreference("yee2", 200.0), "Test");
     test.getPID().setTolerance(new SN_DoublePreference("tol1", 0.0));
@@ -74,9 +79,10 @@ public class OI {
     test.setTimeout(new SN_DoublePreference("time", 100.0));
     test.getPID().setSetpoint(new SN_DoublePreference("testset", 100));
     // TODO: THIS BREAKS IT
-    test.getPID().setPID(new SN_DoublePreference("testp", 0.7), new SN_DoublePreference("testi", 0.0),
-        new SN_DoublePreference("testd", 0.0));
-    manipulatorStick.btn_6.whenPressed(test);
+    // test.getPID().setPID(new SN_DoublePreference("testp", 0.7), new
+    // SN_DoublePreference("testi", 0.0),
+    // new SN_DoublePreference("testd", 0.0));
+    // manipulatorStick.btn_6.whenPressed(test);
   }
 
   // There are a few additional built in buttons you can use. Additionally,
