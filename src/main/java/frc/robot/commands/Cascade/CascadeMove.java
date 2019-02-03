@@ -8,7 +8,6 @@
 package frc.robot.commands.Cascade;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.Robot;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class CascadeMove extends CommandGroup {
@@ -16,13 +15,9 @@ public class CascadeMove extends CommandGroup {
    * Add your docs here.
    */
   public CascadeMove(SN_DoublePreference setPoint) {
-    // TODO: Need to have the command always execute and determine whether it needs
-    // to move. Currently only checking during constructor
-    if (setPoint.getValue() < Robot.m_cascade.getLiftEncoderDistance()) {
-      addSequential(new CascadeLiftAnInch());
-    }
-
+    addSequential(new CascadeUnweight());
     addSequential(new CascadeLift(setPoint));
+    addSequential(new CascadeLockDogtooth());
 
     // To run multiple commands at the same time,
     // use addParallel()

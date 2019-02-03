@@ -9,12 +9,14 @@ package frc.robot.commands.Cascade;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-public class CascadeLiftAnInch extends Command {
+public class CascadeUnweight extends Command {
 
   private double previousEncoder;
+  private static SN_DoublePreference cascadeUnweightSpeed = new SN_DoublePreference("cascadeUnweightSpeed", 0.5);
 
-  public CascadeLiftAnInch() {
+  public CascadeUnweight() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_cascade);
@@ -23,7 +25,7 @@ public class CascadeLiftAnInch extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_telemetry.setAutonomousStatus("Starting CascadeLiftAnInch");
+    Robot.m_telemetry.setAutonomousStatus("Starting CascadeUnweight");
     previousEncoder = Robot.m_cascade.getLiftEncoderDistance();
     Robot.m_cascade.unlockCascade();
   }
@@ -31,8 +33,8 @@ public class CascadeLiftAnInch extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_telemetry.setAutonomousStatus("Executing CascadeLiftAnInch");
-    Robot.m_cascade.setLiftSpeed(0.5);
+    Robot.m_telemetry.setAutonomousStatus("Executing CascadeUnweight");
+    Robot.m_cascade.setLiftSpeed(cascadeUnweightSpeed.getValue());
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -44,7 +46,7 @@ public class CascadeLiftAnInch extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_telemetry.setAutonomousStatus("Finishing CascadeLiftAnInch");
+    Robot.m_telemetry.setAutonomousStatus("Finishing CascadeUnweight");
     Robot.m_cascade.setLiftSpeed(0.0);
   }
 

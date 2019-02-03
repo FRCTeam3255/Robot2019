@@ -122,6 +122,10 @@ public class Cascade extends Subsystem {
     lockSolenoid.set(Value.kForward);
   }
 
+  public boolean isCascadeLocked() {
+    return lockSolenoid.get() == Value.kForward;
+  }
+
   /**
    * Unlock the cascade dogtooth
    */
@@ -155,14 +159,8 @@ public class Cascade extends Subsystem {
    * bottom switches
    */
   public void setLiftSpeed(double speed) {
-    if (speed > 0) {
-      if (isTopSwitchClosed()) {
-        speed = 0.0;
-      }
-    } else if (speed < 0) {
-      if (isBottomSwitchClosed()) {
-        speed = 0.0;
-      }
+    if ((speed > 0 && isTopSwitchClosed()) || (speed < 0 && isBottomSwitchClosed()) || isCascadeLocked()) {
+      speed = 0.0;
     }
 
     leftFrontTalon.set(speed);

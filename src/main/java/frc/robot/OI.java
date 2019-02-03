@@ -8,8 +8,10 @@
 package frc.robot;
 
 import frc.robot.commands.*;
+import frc.robot.commands.Cascade.*;
 import frc.robot.commands.Drive.*;
 import frc.robot.commands.Intake.*;
+import frc.robot.commands.Climber.*;
 import frcteam3255.robotbase.Joystick.*;
 import frcteam3255.robotbase.Preferences.*;
 
@@ -40,12 +42,16 @@ public class OI {
     manipulatorStick.btn_4.whenPressed(new IntakeHatchRetract());
     manipulatorStick.btn_5.whenPressed(new IntakeHatchReach());
     manipulatorStick.btn_5.whenReleased(new IntakeHatchGrab());
+    manipulatorStick.btn_6.whenPressed(new CascadeResetEncoder());
     manipulatorStick.btn_11.whenPressed(new VisionDistanceRotateTest());
     manipulatorStick.btn_7.whenPressed(new DriveDistance(new SN_DoublePreference("testPID", 100.0), "testPID"));
     // manipulatorStick.btn_5.whenPressed(new DriveStraightDistance(100.0));
     // manipulatorStick.btn_6.whenPressed(new DriveRotate(90.0));
     manipulatorStick.btn_9.whenPressed(new StartMatch());
     manipulatorStick.btn_10.whenPressed(new Climb());
+
+    // Driver Stick
+    driverStick.btn_A.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeMoveSetpoint", 100.0)));
 
     // Switchboard Stick
     // switchboardStick.btn_1.whileHeld(new SetDebugMode());
