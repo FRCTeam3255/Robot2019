@@ -25,10 +25,9 @@ public class Intake extends Subsystem {
 	private SN_TalonSRX cargoTalon = null;
 
 	// Solenoids
-	private DoubleSolenoid ejectSolenoid = null;
+	// private DoubleSolenoid ejectSolenoid = null;
 	private DoubleSolenoid hatchDeploySolenoid = null;
 	private DoubleSolenoid hatchIntakeSolenoid = null;
-	private DoubleSolenoid cargoSolenoid = null;
 	private DoubleSolenoid deploySolenoid = null;
 
 	// Swtiches
@@ -42,15 +41,14 @@ public class Intake extends Subsystem {
 		cargoTalon = new SN_TalonSRX(RobotMap.INTAKE_CARGO_TALON);
 
 		// Solenoids
-		ejectSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_EJECT_SOLENOID_A,
-				RobotMap.INTAKE_EJECT_SOLENOID_B);
+		// ejectSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM,
+		// RobotMap.INTAKE_EJECT_SOLENOID_A,
+		// RobotMap.INTAKE_EJECT_SOLENOID_B);
 		hatchDeploySolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_HATCH_DEPLOY_SOLENOID_A,
 				RobotMap.INTAKE_HATCH_DEPLOY_SOLENOID_B);
 		hatchIntakeSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_HATCH_INTAKE_SOLENOID_A,
 				RobotMap.INTAKE_HATCH_INTAKE_SOLENOID_B);
-		cargoSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_CARGO_SOLENOID_A,
-				RobotMap.INTAKE_CARGO_SOLENOID_B);
-		deploySolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.INTAKE_DEPLOY_SOLENOID_A,
+		deploySolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_DEPLOY_SOLENOID_A,
 				RobotMap.INTAKE_DEPLOY_SOLENOID_B);
 
 		// Switches
@@ -108,20 +106,6 @@ public class Intake extends Subsystem {
 	}
 
 	/**
-	 * Set the Cargo Intake Parallel to the floor
-	 */
-	public void deployCargo() {
-		cargoSolenoid.set(Value.kForward);
-	}
-
-	/**
-	 * Lift the Cargo Intake vertically to the robot
-	 */
-	public void retractCargo() {
-		cargoSolenoid.set(Value.kReverse);
-	}
-
-	/**
 	 * Deploy the piston to grab the hatch from the floor
 	 */
 	public void reachHatch() {
@@ -135,19 +119,19 @@ public class Intake extends Subsystem {
 		hatchIntakeSolenoid.set(Value.kReverse);
 	}
 
-	/**
-	 * Eject the hatch by firing the pistons
-	 */
-	public void ejectHatch() {
-		ejectSolenoid.set(Value.kForward);
-	}
+	// /**
+	// * Eject the hatch by firing the pistons
+	// */
+	// public void ejectHatch() {
+	// ejectSolenoid.set(Value.kForward);
+	// }
 
-	/**
-	 * Retract the hatch ejecting pistons
-	 */
-	public void reloadHatch() {
-		ejectSolenoid.set(Value.kReverse);
-	}
+	// /**
+	// * Retract the hatch ejecting pistons
+	// */
+	// public void reloadHatch() {
+	// ejectSolenoid.set(Value.kReverse);
+	// }
 
 	/**
 	 * @return Check if the hatch triggered the hatch switch

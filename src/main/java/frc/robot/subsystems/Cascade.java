@@ -26,15 +26,15 @@ public class Cascade extends Subsystem {
 	// Talons
 	private SN_TalonSRX leftFrontTalon = null;
 	private SN_TalonSRX leftBackTalon = null;
-	// private SN_TalonSRX rightFrontTalon = null;
-	// private SN_TalonSRX rightBackTalon = null;
+	private SN_TalonSRX rightFrontTalon = null;
+	private SN_TalonSRX rightBackTalon = null;
 
 	// Encoders
 	private Encoder liftEncoder = null;
 
 	// Solenoids
-	// private DoubleSolenoid shiftSolenoid = null;
-	// private DoubleSolenoid climbSolenoid = null;
+	private DoubleSolenoid shiftSolenoid = null;
+	private DoubleSolenoid climbSolenoid = null;
 	private DoubleSolenoid lockSolenoid = null;
 
 	// Switches
@@ -48,23 +48,21 @@ public class Cascade extends Subsystem {
 		// Talons
 		leftFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_FRONT_TALON);
 		leftBackTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_BACK_TALON);
-		// rightFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_FRONT_TALON);
-		// rightBackTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_BACK_TALON);
+		rightFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_FRONT_TALON);
+		rightBackTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_BACK_TALON);
 		leftFrontTalon.setInverted(false);
 		leftBackTalon.setInverted(false);
-		// rightFrontTalon.setInverted(true);
-		// rightBackTalon.setInverted(true);
+		rightFrontTalon.setInverted(true);
+		rightBackTalon.setInverted(true);
 
 		// Encoders
 		liftEncoder = new Encoder(RobotMap.CASCADE_LIFT_ENCODER_A, RobotMap.CASCADE_LIFT_ENCODER_B);
 
 		// Solenoids
-		// shiftSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM,
-		// RobotMap.CASCADE_SHIFT_SOLENOID_A,
-		// RobotMap.CASCADE_SHIFT_SOLENOID_B);
-		// climbSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM,
-		// RobotMap.CASCADE_CLIMB_SOLENOID_A,
-		// RobotMap.CASCADE_CLIMB_SOLENOID_B);
+		shiftSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_SHIFT_SOLENOID_A,
+				RobotMap.CASCADE_SHIFT_SOLENOID_B);
+		climbSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_CLIMB_SOLENOID_A,
+				RobotMap.CASCADE_CLIMB_SOLENOID_B);
 		lockSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_LOCK_SOLENOID_A,
 				RobotMap.CASCADE_LOCK_SOLENOID_B);
 
@@ -91,28 +89,28 @@ public class Cascade extends Subsystem {
 	 * Deploy the climber pistons
 	 */
 	public void deployClimb() {
-		// climbSolenoid.set(Value.kForward);
+		climbSolenoid.set(Value.kForward);
 	}
 
 	/**
 	 * Retract the climber pistons
 	 */
 	public void retractClimb() {
-		// climbSolenoid.set(Value.kReverse);
+		climbSolenoid.set(Value.kReverse);
 	}
 
 	/**
 	 * Shift the gearbox to cascade
 	 */
 	public void shiftCascade() {
-		// shiftSolenoid.set(Value.kForward);
+		shiftSolenoid.set(Value.kForward);
 	}
 
 	/**
 	 * Shift the gearbox to climb //
 	 */
 	public void shiftClimb() {
-		// shiftSolenoid.set(Value.kReverse);
+		shiftSolenoid.set(Value.kReverse);
 	}
 
 	/**
@@ -165,8 +163,8 @@ public class Cascade extends Subsystem {
 
 		leftFrontTalon.set(speed);
 		leftBackTalon.set(speed);
-		// rightFrontTalon.set(speed);
-		// rightBackTalon.set(speed);
+		rightFrontTalon.set(speed);
+		rightBackTalon.set(speed);
 	}
 
 	@Override

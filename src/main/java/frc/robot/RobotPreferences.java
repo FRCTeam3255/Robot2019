@@ -21,6 +21,7 @@ public class RobotPreferences {
 			"drivetrainPulsesPerFoot", 13.3);
 	public static final SN_DoublePreference DRIVETRAIN_CLIMB_SETPOINT = new SN_DoublePreference("drivetrainClimb",
 			25.0);
+	public static final SN_DoublePreference DECELERATION_SPEED = new SN_DoublePreference("decelerationSpeed", 0.5);
 
 	// Intake Preferences
 	public static final SN_DoublePreference INTAKE_CARGO_SPEED = new SN_DoublePreference("intakeCargoSpeed", 1.0);
@@ -29,7 +30,11 @@ public class RobotPreferences {
 	// Cascade Preferences
 	public static final SN_DoublePreference CASCADE_PULSES_PER_FOOT = new SN_DoublePreference("cascadePulsesPerFoot",
 			510.0);
-	public static final SN_DoublePreference CASCADE_CLIMB_SETPOINT = new SN_DoublePreference("cascadeClimb", 25.0);
+
+	// Climber
+	public static final SN_DoublePreference CLIMB_SETPOINT = new SN_DoublePreference("cascadeClimb", 25.0);
+	public static final SN_DoublePreference CLIMBER_LIFT_SPEED = new SN_DoublePreference("climbLiftSpeed", 0.5);
+	public static final SN_DoublePreference CLIMB_LIFT_DELAY = new SN_DoublePreference("climbLiftDelay", 10.0);
 
 	// Drive PID
 	public static final SN_DoublePreference DRIVETRAIN_P = new SN_DoublePreference("driveP", 0.04);

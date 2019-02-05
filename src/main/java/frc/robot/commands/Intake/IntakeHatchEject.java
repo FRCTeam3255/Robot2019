@@ -27,6 +27,6 @@ public class IntakeHatchEject extends InstantCommand {
 	// Called once when the command executes
 	@Override
 	protected void initialize() {
-		Robot.m_intake.ejectHatch();
+		// Robot.m_intake.ejectHatch();
 	}
 }

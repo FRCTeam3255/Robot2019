@@ -53,21 +53,21 @@ public class RobotMap {
 	public static final int CASCADE_PCM = 1;
 
 	// Solenoids
+	// Intake PCM
 	public static final int INTAKE_EJECT_SOLENOID_A = 0;
 	public static final int INTAKE_EJECT_SOLENOID_B = 1;
 	public static final int INTAKE_HATCH_DEPLOY_SOLENOID_A = 2;
 	public static final int INTAKE_HATCH_DEPLOY_SOLENOID_B = 3;
 	public static final int INTAKE_HATCH_INTAKE_SOLENOID_A = 4;
 	public static final int INTAKE_HATCH_INTAKE_SOLENOID_B = 5;
-	public static final int INTAKE_CARGO_SOLENOID_A = 6;
-	public static final int INTAKE_CARGO_SOLENOID_B = 7;
+	public static final int INTAKE_DEPLOY_SOLENOID_A = 6;
+	public static final int INTAKE_DEPLOY_SOLENOID_B = 7;
 
+	// Cascade PCM
 	public static final int CASCADE_CLIMB_SOLENOID_A = 0;
 	public static final int CASCADE_CLIMB_SOLENOID_B = 1;
 	public static final int CASCADE_SHIFT_SOLENOID_A = 2;
 	public static final int CASCADE_SHIFT_SOLENOID_B = 3;
 	public static final int CASCADE_LOCK_SOLENOID_A = 4;
 	public static final int CASCADE_LOCK_SOLENOID_B = 5;
-	public static final int INTAKE_DEPLOY_SOLENOID_A = 6;
-	public static final int INTAKE_DEPLOY_SOLENOID_B = 7;
 }

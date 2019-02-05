@@ -26,12 +26,12 @@ public class Drivetrain extends Subsystem {
 	// Talons
 	private SpeedControllerGroup leftTalons = null;
 	private SN_TalonSRX leftFrontTalon = null;
-	// private SN_TalonSRX leftMidTalon = null;
+	private SN_TalonSRX leftMidTalon = null;
 	private SN_TalonSRX leftBackTalon = null;
 
 	private SpeedControllerGroup rightTalons = null;
 	private SN_TalonSRX rightFrontTalon = null;
-	// private SN_TalonSRX rightMidTalon = null;
+	private SN_TalonSRX rightMidTalon = null;
 	private SN_TalonSRX rightBackTalon = null;
 
 	private DifferentialDrive differentialDrive = null;
@@ -45,20 +45,17 @@ public class Drivetrain extends Subsystem {
 	public Drivetrain() {
 		// Talons
 		leftFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT_TALON);
-		// leftMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_MID_TALON);
+		leftMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_MID_TALON);
 		leftBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK_TALON);
 		leftTalons = new SpeedControllerGroup(leftFrontTalon, leftBackTalon);
-		// leftTalons = new SpeedControllerGroup(leftFrontTalon, leftMidTalon,
-		// leftBackTalon);
+		leftTalons = new SpeedControllerGroup(leftFrontTalon, leftMidTalon, leftBackTalon);
 
 		rightFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT_TALON);
-		// rightMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_MID_TALON);
+		rightMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_MID_TALON);
 		rightBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK_TALON);
 		rightTalons = new SpeedControllerGroup(rightFrontTalon, rightBackTalon);
-		// rightTalons = new SpeedControllerGroup(rightFrontTalon, rightMidTalon,
-		// rightBackTalon);
-		// rightTalons = new SpeedControllerGroup(rightFrontTalon, rightMidTalon,
-		// rightBackTalon);
+		rightTalons = new SpeedControllerGroup(rightFrontTalon, rightMidTalon, rightBackTalon);
+		rightTalons = new SpeedControllerGroup(rightFrontTalon, rightMidTalon, rightBackTalon);
 
 		// Encoders
 		encoder = new Encoder(RobotMap.DRIVETRAIN_ENCODER_A, RobotMap.DRIVETRAIN_ENCODER_B);
