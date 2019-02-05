@@ -56,6 +56,9 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putNumber("Cascade Lift Distance", Robot.m_cascade.getLiftEncoderDistance());
 		SmartDashboard.putBoolean("Cascade Top Switch", Robot.m_cascade.isTopSwitchClosed());
 		SmartDashboard.putBoolean("Cascade Bottom Switch", Robot.m_cascade.isBottomSwitchClosed());
+		SmartDashboard.putNumber("Acceleration X", Robot.m_navigation.getAccelerationX());
+		SmartDashboard.putNumber("Acceleration Y", Robot.m_navigation.getAccelerationY());
+		SmartDashboard.putNumber("Acceleration Z", Robot.m_navigation.getAccelerationZ());
 	}
 
 	@Override

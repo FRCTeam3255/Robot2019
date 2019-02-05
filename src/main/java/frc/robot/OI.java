@@ -41,8 +41,8 @@ public class OI {
 		manipulatorStick.btn_3.whenPressed(new IntakeHatchDeploy());
 		manipulatorStick.btn_4.whenPressed(new IntakeHatchRetract());
 		manipulatorStick.btn_5.whenPressed(new IntakeHatchReach());
-		manipulatorStick.btn_5.whenReleased(new IntakeHatchGrab());
-		manipulatorStick.btn_6.whenPressed(new CascadeResetEncoder());
+		manipulatorStick.btn_6.whenPressed(new IntakeHatchGrab());
+		// manipulatorStick.btn_6.whenPressed(new CascadeResetEncoder());
 		manipulatorStick.btn_11.whenPressed(new VisionDistanceRotateTest());
 		manipulatorStick.btn_7.whenPressed(new DriveDistance(new SN_DoublePreference("testPID", 100.0), "testPID"));
 		// manipulatorStick.btn_5.whenPressed(new DriveStraightDistance(100.0));

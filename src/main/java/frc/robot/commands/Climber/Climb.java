@@ -9,8 +9,6 @@ package frc.robot.commands.Climber;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.RobotPreferences;
-import frc.robot.commands.DoDelay;
-import frc.robot.commands.Drive.DriveUntilDeceleration;
 
 public class Climb extends CommandGroup {
 	/**
@@ -36,7 +34,5 @@ public class Climb extends CommandGroup {
 		addSequential(new ClimbShiftTo());
 		addSequential(new ClimberDeploy());
 		addSequential(new ClimberLift(RobotPreferences.CLIMB_SETPOINT));
-		addParallel(new DoDelay(RobotPreferences.CLIMB_LIFT_DELAY));
-		addParallel(new DriveUntilDeceleration());
 	}
 }

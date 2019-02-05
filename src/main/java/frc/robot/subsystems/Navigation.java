@@ -58,12 +58,16 @@ public class Navigation extends Subsystem {
 		return ahrs.getRoll();
 	}
 
+	public double getAccelerationX() {
+		return ahrs.getRawAccelX();
+	}
+
 	public double getAccelerationY() {
 		return ahrs.getRawAccelY();
 	}
 
-	public boolean isDecelerated() {
-		return ahrs.getRawAccelY() == 0.0;
+	public double getAccelerationZ() {
+		return ahrs.getRawAccelZ();
 	}
 
 	/**
