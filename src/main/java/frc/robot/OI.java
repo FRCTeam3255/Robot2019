@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.commands.*;
 import frc.robot.commands.Cascade.*;
 import frc.robot.commands.Drive.*;
@@ -38,17 +39,19 @@ public class OI {
 		// Manipulator Stick
 		manipulatorStick.btn_1.whileHeld(new IntakeCargoEject());
 		manipulatorStick.btn_2.whenPressed(new IntakeCargoCollect());
-		manipulatorStick.btn_3.whenPressed(new IntakeHatchDeploy());
-		manipulatorStick.btn_4.whenPressed(new IntakeHatchRetract());
-		manipulatorStick.btn_5.whenPressed(new IntakeHatchReach());
-		manipulatorStick.btn_6.whenPressed(new IntakeHatchGrab());
-		// manipulatorStick.btn_6.whenPressed(new CascadeResetEncoder());
-		manipulatorStick.btn_11.whenPressed(new VisionDistanceRotateTest());
-		manipulatorStick.btn_7.whenPressed(new DriveDistance(new SN_DoublePreference("testPID", 100.0), "testPID"));
-		// manipulatorStick.btn_5.whenPressed(new DriveStraightDistance(100.0));
-		// manipulatorStick.btn_6.whenPressed(new DriveRotate(90.0));
-		manipulatorStick.btn_9.whenPressed(new StartMatch());
-		manipulatorStick.btn_10.whenPressed(new Climb());
+		manipulatorStick.btn_3.whenPressed(new IntakeHatchReach());
+		// manipulatorStick.btn_3.whenReleased(new IntakeHatchGrab());
+		manipulatorStick.btn_4.whenPressed(new IntakeHatchGrab());
+		// manipulatorStick.btn_4.whenPressed(new ToggleIntakeHatch());
+		// manipulatorStick.btn_5.whenPressed(new DeployHatch());
+		manipulatorStick.btn_5.whenPressed(new IntakeHatchDeploy());
+		manipulatorStick.btn_6.whenPressed(new IntakeHatchRetract());
+		manipulatorStick.btn_7.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeTop", 75)));
+		manipulatorStick.btn_8.whenPressed(new Climb());
+		manipulatorStick.btn_9.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeMid", 50)));
+		// manipulatorStick.btn_10.
+		manipulatorStick.btn_11.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeLow", 25)));
+		manipulatorStick.btn_12.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeBottom", 0.0)));
 
 		// Driver Stick
 		driverStick.btn_A.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeMoveSetpoint", 100.0)));

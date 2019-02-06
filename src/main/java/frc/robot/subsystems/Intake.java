@@ -91,6 +91,18 @@ public class Intake extends Subsystem {
 		deploySolenoid.set(Value.kReverse);
 	}
 
+	public boolean isIntakeDeployed() {
+		return deploySolenoid.get() == Value.kForward;
+	}
+
+	public void toggleIntake() {
+		if (isIntakeDeployed()) {
+			retractIntake();
+		} else {
+			deployIntake();
+		}
+	}
+
 	/**
 	 * Set the Hatch Intake parallel to the floor
 	 */
