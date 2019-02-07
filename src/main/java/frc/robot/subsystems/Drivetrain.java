@@ -47,14 +47,13 @@ public class Drivetrain extends Subsystem {
 		leftFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT_TALON);
 		leftMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_MID_TALON);
 		leftBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK_TALON);
-		leftTalons = new SpeedControllerGroup(leftFrontTalon, leftBackTalon);
+		// leftTalons = new SpeedControllerGroup(leftFrontTalon, leftBackTalon);
 		leftTalons = new SpeedControllerGroup(leftFrontTalon, leftMidTalon, leftBackTalon);
 
 		rightFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT_TALON);
 		rightMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_MID_TALON);
 		rightBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK_TALON);
-		rightTalons = new SpeedControllerGroup(rightFrontTalon, rightBackTalon);
-		rightTalons = new SpeedControllerGroup(rightFrontTalon, rightMidTalon, rightBackTalon);
+		// rightTalons = new SpeedControllerGroup(rightFrontTalon, rightBackTalon);
 		rightTalons = new SpeedControllerGroup(rightFrontTalon, rightMidTalon, rightBackTalon);
 
 		// Encoders

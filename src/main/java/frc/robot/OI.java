@@ -7,14 +7,22 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.commands.*;
-import frc.robot.commands.Cascade.*;
-import frc.robot.commands.Drive.*;
-import frc.robot.commands.Intake.*;
-import frc.robot.commands.Climber.*;
-import frcteam3255.robotbase.Joystick.*;
-import frcteam3255.robotbase.Preferences.*;
+import frc.robot.commands.VisionSetDriverMode;
+import frc.robot.commands.VisionSetVisionMode;
+import frc.robot.commands.Cascade.CascadeLift;
+import frc.robot.commands.Cascade.CascadeMove;
+import frc.robot.commands.Cascade.CascadeResetEncoder;
+import frc.robot.commands.Intake.IntakeCargoCollect;
+import frc.robot.commands.Intake.IntakeCargoEject;
+import frc.robot.commands.Intake.IntakeHatchDeploy;
+import frc.robot.commands.Intake.IntakeHatchGrab;
+import frc.robot.commands.Intake.IntakeHatchReach;
+import frc.robot.commands.Intake.IntakeHatchRetract;
+import frc.robot.commands.Intake.IntakePickUpHatch;
+import frcteam3255.robotbase.Joystick.SN_DualActionStick;
+import frcteam3255.robotbase.Joystick.SN_Extreme3DStick;
+import frcteam3255.robotbase.Joystick.SN_SwitchboardStick;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -39,8 +47,7 @@ public class OI {
 		// Manipulator Stick
 		manipulatorStick.btn_1.whileHeld(new IntakeCargoEject());
 		manipulatorStick.btn_2.whenPressed(new IntakeCargoCollect());
-		manipulatorStick.btn_3.whenPressed(new IntakeHatchReach());
-		// manipulatorStick.btn_3.whenReleased(new IntakeHatchGrab());
+		manipulatorStick.btn_3.whenPressed(new IntakePickUpHatch());
 		manipulatorStick.btn_4.whenPressed(new IntakeHatchGrab());
 		// manipulatorStick.btn_4.whenPressed(new ToggleIntakeHatch());
 		// manipulatorStick.btn_5.whenPressed(new DeployHatch());
@@ -48,13 +55,17 @@ public class OI {
 		manipulatorStick.btn_6.whenPressed(new IntakeHatchRetract());
 		manipulatorStick.btn_7.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeTop", 75)));
 		manipulatorStick.btn_8.whenPressed(new Climb());
+		// manipulatorStick.btn_8.whenPressed(new CascadeResetEncoder());
 		manipulatorStick.btn_9.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeMid", 50)));
-		// manipulatorStick.btn_10.
 		manipulatorStick.btn_11.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeLow", 25)));
 		manipulatorStick.btn_12.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeBottom", 0.0)));
 
 		// Driver Stick
 		driverStick.btn_A.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeMoveSetpoint", 100.0)));
+
+		// Testing
+		manipulatorStick.btn_10.whenPressed(
+				new CascadeLift(new SN_DoublePreference("testing", RobotPreferences.TESTING_SETPOINT.getValue())));
 
 		// Switchboard Stick
 		// switchboardStick.btn_1.whileHeld(new SetDebugMode());

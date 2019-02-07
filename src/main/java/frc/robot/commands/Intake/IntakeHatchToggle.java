@@ -5,13 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class ToggleIntakeHatch extends InstantCommand {
-  public ToggleIntakeHatch() {
+public class IntakeHatchToggle extends InstantCommand {
+  public IntakeHatchToggle() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_intake);

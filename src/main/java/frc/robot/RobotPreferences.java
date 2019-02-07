@@ -54,4 +54,7 @@ public class RobotPreferences {
 	public static final SN_DoublePreference VISION_ROTATE_P = new SN_DoublePreference("visionRotateP", 0.04);
 	public static final SN_DoublePreference VISION_ROTATE_I = new SN_DoublePreference("visionRotateI", 0.0);
 	public static final SN_DoublePreference VISION_ROTATE_D = new SN_DoublePreference("visionRotateD", 0.0);
+
+	// testing
+	public static final SN_DoublePreference TESTING_SETPOINT = new SN_DoublePreference("testing", 100.0);
 }
