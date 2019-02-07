@@ -12,6 +12,7 @@ import frc.robot.commands.VisionSetVisionMode;
 import frc.robot.commands.Cascade.CascadeLift;
 import frc.robot.commands.Cascade.CascadeMove;
 import frc.robot.commands.Cascade.CascadeResetEncoder;
+import frc.robot.commands.Climber.Climb;
 import frc.robot.commands.Intake.IntakeCargoCollect;
 import frc.robot.commands.Intake.IntakeCargoEject;
 import frc.robot.commands.Intake.IntakeHatchDeploy;
