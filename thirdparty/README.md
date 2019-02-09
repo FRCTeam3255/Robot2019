@@ -33,7 +33,7 @@
 [Pheonix Libraries - (for TalonSRX)](https://phoenix-documentation.readthedocs.io/en/latest/ch05a_CppJava.html#frc-c-java-add-phoenix)  
 VSCode Online install URL:  
 http://devsite.ctr-electronics.com/maven/release/com/ctre/phoenix/Phoenix-latest.json  
-(v 5.12.1) (released - 2019)
+(v 5.13.0) (released - 2019)
 
 [Kauai Labs - (for navX-MXP)](https://pdocs.kauailabs.com/navx-mxp/software/roborio-libraries/java/)  
 VSCode Online install URL:  
