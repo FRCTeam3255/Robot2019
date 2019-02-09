@@ -59,6 +59,9 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putNumber("Acceleration X", Robot.m_navigation.getAccelerationX());
 		SmartDashboard.putNumber("Acceleration Y", Robot.m_navigation.getAccelerationY());
 		SmartDashboard.putNumber("Acceleration Z", Robot.m_navigation.getAccelerationZ());
+
+		SmartDashboard.putBoolean("Cargo Collected", Robot.m_intake.isCargoCollected());
+		SmartDashboard.putBoolean("Hatch Collected", Robot.m_intake.isHatchCollected());
 	}
 
 	@Override

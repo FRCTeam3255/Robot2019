@@ -9,6 +9,7 @@ package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.Lighting;
 import frc.robot.subsystems.VisionRotatePID;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
@@ -54,6 +55,14 @@ public class DriveRotateVision extends Command {
 		double rotateSpeed = pid.getOutput();
 
 		Robot.m_drivetrain.arcadeDrive(0.0, rotateSpeed, false);
+
+		if (pid.onRawTarget()) {
+			Robot.m_lighting.setLighting(Lighting.GREEN);
+		} else if (Robot.m_vision.targetFound()) {
+			Robot.m_lighting.setLighting(Lighting.YELLOW);
+		} else {
+			Robot.m_lighting.setLighting(Lighting.RED);
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

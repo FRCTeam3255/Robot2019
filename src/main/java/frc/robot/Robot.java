@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Cascade;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Lighting;
 import frc.robot.subsystems.Navigation;
 import frc.robot.subsystems.Telemetry;
 import frc.robot.subsystems.Vision;
@@ -33,6 +34,7 @@ public class Robot extends TimedRobot {
 	public static Navigation m_navigation = null;
 	public static Vision m_vision = null;
 
+	public static Lighting m_lighting = null;
 	public static Telemetry m_telemetry = null;
 
 	public static OI m_oi;
@@ -53,6 +55,7 @@ public class Robot extends TimedRobot {
 		m_cascade = new Cascade();
 		m_navigation = new Navigation();
 		m_vision = new Vision();
+		m_lighting = new Lighting();
 		m_telemetry = new Telemetry();
 		m_oi = new OI();
 	}
@@ -87,6 +90,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		m_lighting.update();
 		m_telemetry.update();
 	}
 

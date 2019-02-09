@@ -9,6 +9,7 @@ package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.Lighting;
 import frc.robot.subsystems.VisionDistancePID;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
@@ -23,6 +24,7 @@ public class DriveDistanceVision extends Command {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.m_drivetrain);
+		requires(Robot.m_lighting);
 
 		pid = new VisionDistancePID();
 		pid.setSetpoint(inches);
@@ -50,6 +52,14 @@ public class DriveDistanceVision extends Command {
 		double moveSpeed = pid.getOutput();
 
 		Robot.m_drivetrain.arcadeDrive(moveSpeed, 0.0, false);
+
+		if (pid.onRawTarget()) {
+			Robot.m_lighting.setLighting(Lighting.GREEN);
+		} else if (Robot.m_vision.targetFound()) {
+			Robot.m_lighting.setLighting(Lighting.YELLOW);
+		} else {
+			Robot.m_lighting.setLighting(Lighting.RED);
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
