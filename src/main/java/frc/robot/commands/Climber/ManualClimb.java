@@ -24,7 +24,8 @@ public class ManualClimb extends Command {
   @Override
   protected void initialize() {
     speed = 0.0;
-    Robot.m_cascade.shiftCascade();
+    Robot.m_cascade.shiftClimb();
+    Robot.m_cascade.unlockCascade();
     // Robot.m_cascade.deployClimb();
   }
 

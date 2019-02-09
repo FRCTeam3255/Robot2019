@@ -103,32 +103,32 @@ public class Cascade extends Subsystem {
 	 * Shift the gearbox to cascade
 	 */
 	public void shiftCascade() {
-		shiftSolenoid.set(Value.kForward);
+		shiftSolenoid.set(Value.kReverse);
 	}
 
 	/**
 	 * Shift the gearbox to climb //
 	 */
 	public void shiftClimb() {
-		shiftSolenoid.set(Value.kReverse);
+		shiftSolenoid.set(Value.kForward);
 	}
 
 	/**
 	 * Lock the cascade dogtooth
 	 */
 	public void lockCascade() {
-		lockSolenoid.set(Value.kForward);
+		lockSolenoid.set(Value.kReverse);
 	}
 
 	public boolean isCascadeLocked() {
-		return lockSolenoid.get() == Value.kForward;
+		return lockSolenoid.get() == Value.kReverse;
 	}
 
 	/**
 	 * Unlock the cascade dogtooth
 	 */
 	public void unlockCascade() {
-		lockSolenoid.set(Value.kReverse);
+		lockSolenoid.set(Value.kForward);
 	}
 
 	/**
