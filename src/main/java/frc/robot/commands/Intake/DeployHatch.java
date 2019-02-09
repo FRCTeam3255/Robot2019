@@ -15,7 +15,6 @@ public class DeployHatch extends CommandGroup {
    * Add your docs here.
    */
   public DeployHatch() {
-    addSequential(new IntakeDeploy());
     addSequential(new IntakeHatchDeploy());
   }
 }

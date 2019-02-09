@@ -61,7 +61,7 @@ public class Cascade extends Subsystem {
 		// Solenoids
 		shiftSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_SHIFT_SOLENOID_A,
 				RobotMap.CASCADE_SHIFT_SOLENOID_B);
-		climbSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_CLIMB_SOLENOID_A,
+		climbSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.CASCADE_CLIMB_SOLENOID_A,
 				RobotMap.CASCADE_CLIMB_SOLENOID_B);
 		lockSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_LOCK_SOLENOID_A,
 				RobotMap.CASCADE_LOCK_SOLENOID_B);
@@ -89,14 +89,14 @@ public class Cascade extends Subsystem {
 	 * Deploy the climber pistons
 	 */
 	public void deployClimb() {
-		climbSolenoid.set(Value.kForward);
+		climbSolenoid.set(Value.kReverse);
 	}
 
 	/**
 	 * Retract the climber pistons
 	 */
 	public void retractClimb() {
-		climbSolenoid.set(Value.kReverse);
+		climbSolenoid.set(Value.kForward);
 	}
 
 	/**

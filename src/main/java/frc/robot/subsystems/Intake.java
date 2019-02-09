@@ -28,7 +28,6 @@ public class Intake extends Subsystem {
 	// private DoubleSolenoid ejectSolenoid = null;
 	private DoubleSolenoid hatchDeploySolenoid = null;
 	private DoubleSolenoid hatchIntakeSolenoid = null;
-	private DoubleSolenoid deploySolenoid = null;
 
 	// Swtiches
 	private DigitalInput hatchSwitch = null;
@@ -48,8 +47,6 @@ public class Intake extends Subsystem {
 				RobotMap.INTAKE_HATCH_DEPLOY_SOLENOID_B);
 		hatchIntakeSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_HATCH_INTAKE_SOLENOID_A,
 				RobotMap.INTAKE_HATCH_INTAKE_SOLENOID_B);
-		deploySolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_DEPLOY_SOLENOID_A,
-				RobotMap.INTAKE_DEPLOY_SOLENOID_B);
 
 		// Switches
 		hatchSwitch = new DigitalInput(RobotMap.INTAKE_HATCH_SWITCH);
@@ -75,32 +72,6 @@ public class Intake extends Subsystem {
 	 */
 	public void holdCargo() {
 		cargoTalon.set(0.0);
-	}
-
-	/**
-	 * Set the intake on the floor
-	 */
-	public void deployIntake() {
-		deploySolenoid.set(Value.kForward);
-	}
-
-	/**
-	 * Lift the intake vertically into the robot
-	 */
-	public void retractIntake() {
-		deploySolenoid.set(Value.kReverse);
-	}
-
-	public boolean isIntakeDeployed() {
-		return deploySolenoid.get() == Value.kForward;
-	}
-
-	public void toggleIntake() {
-		if (isIntakeDeployed()) {
-			retractIntake();
-		} else {
-			deployIntake();
-		}
 	}
 
 	/**

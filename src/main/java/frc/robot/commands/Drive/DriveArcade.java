@@ -27,7 +27,7 @@ public class DriveArcade extends Command {
 	protected void execute() {
 		double moveSpeed = Robot.m_oi.driverStick.getArcadeMove();
 		double rotateSpeed = Robot.m_oi.driverStick.getArcadeRotate();
-		Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed, true);
+		Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed, false);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -39,7 +39,7 @@ public class DriveArcade extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.m_drivetrain.arcadeDrive(0.0, 0.0, true);
+		Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
 	}
 
 	// Called when another command which requires one or more of the same
