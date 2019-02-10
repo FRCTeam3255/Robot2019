@@ -9,8 +9,12 @@ package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class DriveArcade extends Command {
+
+	private static SN_DoublePreference slowSpeedFactor = new SN_DoublePreference("slowSpeedFactor", 0.5);
+
 	public DriveArcade() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -27,6 +31,11 @@ public class DriveArcade extends Command {
 	protected void execute() {
 		double moveSpeed = Robot.m_oi.driverStick.getArcadeMove();
 		double rotateSpeed = Robot.m_oi.driverStick.getArcadeRotate();
+
+		if (Robot.m_oi.driverStick.btn_RBump.get()) {
+			moveSpeed = moveSpeed * slowSpeedFactor.getValue();
+			rotateSpeed = rotateSpeed * slowSpeedFactor.getValue();
+		}
 		Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed, false);
 	}
 

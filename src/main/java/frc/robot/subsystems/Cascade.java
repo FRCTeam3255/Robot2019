@@ -106,11 +106,19 @@ public class Cascade extends Subsystem {
 		shiftSolenoid.set(Value.kReverse);
 	}
 
+	public boolean isShiftedCascade() {
+		return shiftSolenoid.get() == Value.kReverse;
+	}
+
 	/**
 	 * Shift the gearbox to climb //
 	 */
 	public void shiftClimb() {
 		shiftSolenoid.set(Value.kForward);
+	}
+
+	public boolean isShiftedClimb() {
+		return shiftSolenoid.get() == Value.kForward;
 	}
 
 	/**

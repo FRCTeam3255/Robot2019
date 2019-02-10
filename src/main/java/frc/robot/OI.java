@@ -14,6 +14,7 @@ import frc.robot.commands.Cascade.CascadeMove;
 import frc.robot.commands.Cascade.CascadeMoveManual;
 import frc.robot.commands.Climber.Climb;
 import frc.robot.commands.Climber.ManualClimb;
+import frc.robot.commands.Drive.DriveDistanceRotateVision;
 import frc.robot.commands.Drive.DriveDistanceVision;
 import frc.robot.commands.Drive.DriveRotateVision;
 import frc.robot.commands.Intake.IntakeCargoCollect;
@@ -51,8 +52,8 @@ public class OI {
 		// Manipulator Stick
 		manipulatorStick.btn_1.whileHeld(new IntakeCargoEject());
 		manipulatorStick.btn_2.whenPressed(new IntakeCargoCollect());
-		// manipulatorStick.btn_3.whenPressed(new IntakePickUpHatch());
-		manipulatorStick.btn_3.whenPressed(new IntakeHatchReach());
+		manipulatorStick.btn_3.whenPressed(new IntakePickUpHatch());
+		// manipulatorStick.btn_3.whenPressed(new IntakeHatchReach());
 		manipulatorStick.btn_4.whenPressed(new IntakeHatchGrab());
 		// manipulatorStick.btn_4.whenPressed(new ToggleIntakeHatch());
 		// manipulatorStick.btn_5.whenPressed(new DeployHatch());
@@ -68,14 +69,11 @@ public class OI {
 		manipulatorStick.btn_12.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeBottom", 0.0)));
 
 		// Driver Stick
-		driverStick.btn_A.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeMoveSetpoint", 100.0)));
 		driverStick.btn_Y
 				.whenPressed(new DriveDistanceVision(new SN_DoublePreference("DriveDistanceVisionsetPoint", 100.00)));
 
-		// // Testing
-		// manipulatorStick.btn_10.whenPressed(
-		// new CascadeLift(new SN_DoublePreference("testing",
-		// RobotPreferences.TESTING_SETPOINT.getValue())));
+		driverStick.btn_RTrig.whileHeld(new DriveDistanceRotateVision((new SN_DoublePreference("VisDisSetpoint", 24.0)),
+				(new SN_DoublePreference("VisRotSetpoint", 0.0)), "DistanceRotateVision"));
 
 		// Switchboard Stick
 		// switchboardStick.btn_1.whileHeld(new SetDebugMode());

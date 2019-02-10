@@ -25,6 +25,7 @@ public class DriveRotateVision extends Command {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.m_drivetrain);
+		requires(Robot.m_lighting);
 
 		pid = new VisionRotatePID();
 		pid.setSetpoint(degrees);

@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Robot;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -14,14 +15,24 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.RobotPreferences;
 import frc.robot.commands.Drive.DriveArcade;
+import frcteam3255.SN_Math;
 import frcteam3255.robotbase.SN_TalonSRX;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 /**
  * Subsytem containing the drivetrain devices and methoods
  */
+
 public class Drivetrain extends Subsystem {
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
+	private static SN_DoublePreference minCascadeHeight = new SN_DoublePreference("minCascadeHeight", 0.0);
+	private static SN_DoublePreference maxCascadeHeight = new SN_DoublePreference("maxCascadeHeight", 100.0);
+	private static SN_DoublePreference factorAtMinCascade = new SN_DoublePreference("factorAtMinCascade", 1.0);
+	private static SN_DoublePreference factorAtMaxCascade = new SN_DoublePreference("factorAtMaxCascade", 0.2);
+
+	private static SN_DoublePreference minStingerHeight = new SN_DoublePreference("minStingerHeight", 0.0);
+	private static SN_DoublePreference maxStingerHeight = new SN_DoublePreference("maxStingerHeight", 30.0);
+	private static SN_DoublePreference factorAtMinStinger = new SN_DoublePreference("factorAtMinStinger", 0.5);
+	private static SN_DoublePreference factorAtMaxStinger = new SN_DoublePreference("factorAtMaxStinger", 0.2);
 
 	// Talons
 	private SpeedControllerGroup leftTalons = null;
@@ -68,6 +79,23 @@ public class Drivetrain extends Subsystem {
 	 * (rotate) speed
 	 */
 	public void arcadeDrive(double moveSpeed, double rotateSpeed, boolean squaredInputs) {
+		double cascadeSpeedFactor = 1.0;
+
+		double cascadeHeight = Math.abs(Robot.m_cascade.getLiftEncoderDistance());
+		if (Robot.m_cascade.isShiftedCascade()) {
+			cascadeSpeedFactor = SN_Math.interpolate(cascadeHeight, minCascadeHeight.getValue(),
+					maxCascadeHeight.getValue(), factorAtMinCascade.getValue(), factorAtMaxCascade.getValue());
+		} else {
+			cascadeSpeedFactor = SN_Math.interpolate(cascadeHeight, minStingerHeight.getValue(),
+					maxStingerHeight.getValue(), factorAtMinStinger.getValue(), factorAtMaxStinger.getValue());
+		}
+
+		// double cascadeSpeedFactor = ((-0.01 *
+		// Math.abs(Robot.m_cascade.getLiftEncoderDistance())) + 1);
+
+		moveSpeed = moveSpeed * cascadeSpeedFactor;
+		rotateSpeed = rotateSpeed * cascadeSpeedFactor;
+
 		differentialDrive.arcadeDrive(moveSpeed, rotateSpeed, true);
 	}
 

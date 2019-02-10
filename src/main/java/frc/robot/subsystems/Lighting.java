@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
@@ -33,6 +35,8 @@ public class Lighting extends Subsystem {
   public static SN_DoublePreference lightsHatch = new SN_DoublePreference("lightsHatch", BLUE); // solid blue
   public static SN_DoublePreference lightsOff = new SN_DoublePreference("lightsOff", RED_LARSON); // larson scanner red
   public static SN_DoublePreference lightsCargo = new SN_DoublePreference("lightsCargo", ORANGE); // solid orange
+  public static SN_DoublePreference lightsTargetFound = new SN_DoublePreference("lightsTargetFound", YELLOW);
+  public static SN_DoublePreference lightsTargetNotFound = new SN_DoublePreference("lightsTargetNotFound", RED);
 
   public Lighting() {
     lighting = new Spark(RobotMap.LIGHTING_SPARK);
@@ -43,7 +47,15 @@ public class Lighting extends Subsystem {
   }
 
   public void update() {
-    if (Robot.m_intake.isHatchCollected()) {
+    if (RobotController.isBrownedOut() || !(DriverStation.getInstance().isDSAttached())) {
+      setLighting(OFF);
+    } else if (Robot.m_oi.driverStick.btn_LTrig.get()) {
+      if (Robot.m_vision.targetFound()) {
+        setLighting(lightsTargetFound.getValue());
+      } else {
+        setLighting(lightsTargetNotFound.getValue());
+      }
+    } else if (Robot.m_intake.isHatchCollected()) {
       setLighting(lightsHatch.getValue());
     } else if (Robot.m_intake.isCargoCollected()) {
       setLighting(lightsCargo.getValue());

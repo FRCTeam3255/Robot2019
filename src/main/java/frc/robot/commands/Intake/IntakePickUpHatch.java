@@ -8,6 +8,8 @@
 package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.DoDelay;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class IntakePickUpHatch extends CommandGroup {
   /**
@@ -17,7 +19,9 @@ public class IntakePickUpHatch extends CommandGroup {
     addSequential(new IntakeHatchDeploy());
     addSequential(new IntakeWaitForHatch());
     addSequential(new IntakeHatchReach());
+    addSequential(new DoDelay(new SN_DoublePreference("IntakeDelay1", 0.5)));
     addSequential(new IntakeHatchGrab());
+    addSequential(new DoDelay(new SN_DoublePreference("IntakeDelay2", 0.5)));
     addSequential(new IntakeHatchRetract());
 
     // Add Commands here:

@@ -75,13 +75,6 @@ public class Navigation extends Subsystem {
 	 */
 	public void resetYaw() {
 		ahrs.reset();
-
-		try {
-			Thread.sleep(250);
-		} catch (InterruptedException e) {
-		}
-
-		ahrs.zeroYaw();
 	}
 
 	/**
