@@ -51,7 +51,7 @@ public class DriveDistanceVision extends Command {
 	protected void execute() {
 		double moveSpeed = pid.getOutput();
 
-		Robot.m_drivetrain.arcadeDrive(moveSpeed, 0.0, false);
+		Robot.m_drivetrain.arcadeDrive(moveSpeed, 0.0);
 
 		if (pid.onRawTarget()) {
 			Robot.m_lighting.setLighting(Lighting.GREEN);
@@ -77,7 +77,7 @@ public class DriveDistanceVision extends Command {
 	@Override
 	protected void end() {
 		pid.disable();
-		Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
+		Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
 	}
 
 	// Called when another command which requires one or more of the same

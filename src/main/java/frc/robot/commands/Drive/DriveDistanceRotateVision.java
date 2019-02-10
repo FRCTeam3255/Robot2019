@@ -68,7 +68,7 @@ public class DriveDistanceRotateVision extends Command {
 		double moveSpeed = distancePID.getOutput();
 		double rotateSpeed = rotatePID.getOutput();
 
-		Robot.m_drivetrain.arcadeDrive(-moveSpeed, rotateSpeed, false);
+		Robot.m_drivetrain.arcadeDrive(-moveSpeed, rotateSpeed);
 
 		if (distancePID.onRawTarget() && rotatePID.onRawTarget()) {
 			Robot.m_lighting.setLighting(Lighting.GREEN);
@@ -98,7 +98,7 @@ public class DriveDistanceRotateVision extends Command {
 				+ distancePID.getSetpoint() + " " + rotatePID.getSetpoint());
 		distancePID.disable();
 		rotatePID.disable();
-		Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
+		Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
 	}
 
 	// Called when another command which requires one or more of the same

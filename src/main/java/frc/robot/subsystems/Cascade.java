@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.RobotPreferences;
+import frc.robot.commands.Cascade.CascadeResetEncoder;
 import frcteam3255.robotbase.SN_TalonSRX;
 
 /**
@@ -90,6 +91,10 @@ public class Cascade extends Subsystem {
 	 */
 	public void deployClimb() {
 		climbSolenoid.set(Value.kReverse);
+	}
+
+	public boolean isClimberDeployed() {
+		return climbSolenoid.get() == Value.kReverse;
 	}
 
 	/**
@@ -179,5 +184,6 @@ public class Cascade extends Subsystem {
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new CascadeResetEncoder());
 	}
 }

@@ -32,7 +32,6 @@ public class RobotPreferences {
 			510.0);
 
 	// Climber
-	public static final SN_DoublePreference CLIMB_SETPOINT = new SN_DoublePreference("cascadeClimb", 25.0);
 	public static final SN_DoublePreference CLIMBER_LIFT_SPEED = new SN_DoublePreference("climbLiftSpeed", 0.5);
 	public static final SN_DoublePreference CLIMB_LIFT_DELAY = new SN_DoublePreference("climbLiftDelay", 10.0);
 

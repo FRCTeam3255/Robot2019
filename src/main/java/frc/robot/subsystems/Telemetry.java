@@ -12,11 +12,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.commands.VisionSetDriverMode;
 import frc.robot.commands.VisionSetVisionMode;
-import frc.robot.commands.Cascade.CascadeLockDogtooth;
-import frc.robot.commands.Cascade.CascadeResetEncoder;
-import frc.robot.commands.Cascade.CascadeUnlockDogtooth;
-import frc.robot.commands.Drive.DriveResetEncoder;
-import frc.robot.commands.Drive.DriveResetYaw;
+import frc.robot.commands.Cascade.*;
+import frc.robot.commands.Climber.*;
+import frc.robot.commands.Drive.*;
+import frc.robot.commands.Intake.*;
 import frcteam3255.robotbase.Preferences.SN_Preferences;
 
 /**
@@ -30,13 +29,18 @@ public class Telemetry extends Subsystem {
 	 * Put command buttons on the board
 	 */
 	public Telemetry() {
-		SmartDashboard.putData("Reset Encoder", new DriveResetEncoder());
+		SmartDashboard.putData("Reset Drive Encoder", new DriveResetEncoder());
 		SmartDashboard.putData("Reset Yaw", new DriveResetYaw());
 		SmartDashboard.putData("Set Driver Mode", new VisionSetDriverMode());
 		SmartDashboard.putData("Set Vision Mode", new VisionSetVisionMode());
 		SmartDashboard.putData("Cascade Lock Dogtooth", new CascadeLockDogtooth());
 		SmartDashboard.putData("Cascade Unlock Dogtooth", new CascadeUnlockDogtooth());
 		SmartDashboard.putData("Reset Cascade", new CascadeResetEncoder());
+		SmartDashboard.putData("Shift Cascade", new CascadeShiftTo());
+		SmartDashboard.putData("Shift Climb", new ClimbShiftTo());
+		SmartDashboard.putData("Drive To Wall", new DriveToWall());
+		SmartDashboard.putData("Deploy Fangs", new CascadeDeployClimb());
+		SmartDashboard.putData("Retract Fangs", new CascadeRetractClimb());
 	}
 
 	/**
@@ -59,9 +63,11 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putNumber("Acceleration X", Robot.m_navigation.getAccelerationX());
 		SmartDashboard.putNumber("Acceleration Y", Robot.m_navigation.getAccelerationY());
 		SmartDashboard.putNumber("Acceleration Z", Robot.m_navigation.getAccelerationZ());
+		SmartDashboard.putBoolean("Is Calibrating", Robot.m_navigation.isCalibrating());
 
 		SmartDashboard.putBoolean("Cargo Collected", Robot.m_intake.isCargoCollected());
 		SmartDashboard.putBoolean("Hatch Collected", Robot.m_intake.isHatchCollected());
+		SmartDashboard.putBoolean("Is Shifted To Cascade", Robot.m_cascade.isShiftedCascade());
 	}
 
 	@Override

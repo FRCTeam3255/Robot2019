@@ -7,13 +7,13 @@
 
 package frc.robot.commands.Cascade;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
  * Add your docs here.
  */
-public class CascadeResetEncoder extends InstantCommand {
+public class CascadeResetEncoder extends Command {
 	/**
 	 * Add your docs here.
 	 */
@@ -27,7 +27,20 @@ public class CascadeResetEncoder extends InstantCommand {
 	// Called once when the command executes
 	@Override
 	protected void initialize() {
-		Robot.m_cascade.resetLiftEncoder();
+
+	}
+
+	@Override
+	protected void execute() {
+		if (Robot.m_cascade.isBottomSwitchClosed() && (Robot.m_cascade.isShiftedCascade())) {
+			Robot.m_cascade.resetLiftEncoder();
+		}
+
+	}
+
+	@Override
+	protected boolean isFinished() {
+		return false;
 	}
 
 }

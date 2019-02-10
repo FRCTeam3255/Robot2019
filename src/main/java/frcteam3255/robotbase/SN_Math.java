@@ -5,18 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frcteam3255;
+package frcteam3255.robotbase;
 
-/**
- * 
- * @param input       - the input value used to determine the output value
- * @param minInput    - the input value that should map to the outputAtMin value
- * @param maxInput    - the input value that should map to the outputAtMax value
- * @param outputAtMin - the output value when input = minInput
- * @param outputAtMax - the output value when input = maxInput
- * @return
- */
 public class SN_Math {
+    /**
+     * 
+     * @param input       - the input value used to determine the output value
+     * @param minInput    - the input value that should map to the outputAtMin value
+     * @param maxInput    - the input value that should map to the outputAtMax value
+     * @param outputAtMin - the output value when input = minInput
+     * @param outputAtMax - the output value when input = maxInput
+     * @return
+     */
     public static double interpolate(double input, double minInput, double maxInput, double outputAtMin,
             double outputAtMax) {
 

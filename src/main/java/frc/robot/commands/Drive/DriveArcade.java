@@ -12,7 +12,7 @@ import frc.robot.Robot;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class DriveArcade extends Command {
-
+	private static SN_DoublePreference frontSpeed = new SN_DoublePreference("frontSpeed", 1.0);
 	private static SN_DoublePreference slowSpeedFactor = new SN_DoublePreference("slowSpeedFactor", 0.5);
 
 	public DriveArcade() {
@@ -37,6 +37,12 @@ public class DriveArcade extends Command {
 			rotateSpeed = rotateSpeed * slowSpeedFactor.getValue();
 		}
 		Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed, false);
+
+		if (Robot.m_cascade.isClimberDeployed() && (moveSpeed < 0)) {
+			Robot.m_drivetrain.setBackSpeed(frontSpeed.getValue());
+		} else {
+			Robot.m_drivetrain.setBackSpeed(0.0);
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -48,7 +54,7 @@ public class DriveArcade extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
+		Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
 	}
 
 	// Called when another command which requires one or more of the same

@@ -51,7 +51,7 @@ public class DriveRotate extends Command {
 	protected void execute() {
 		double rotateSpeed = pid.getOutput();
 
-		Robot.m_drivetrain.arcadeDrive(0.0, rotateSpeed, false);
+		Robot.m_drivetrain.arcadeDrive(0.0, rotateSpeed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -69,7 +69,7 @@ public class DriveRotate extends Command {
 	@Override
 	protected void end() {
 		pid.disable();
-		Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
+		Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
 	}
 
 	// Called when another command which requires one or more of the same

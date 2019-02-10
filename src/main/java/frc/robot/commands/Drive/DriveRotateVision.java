@@ -55,7 +55,7 @@ public class DriveRotateVision extends Command {
 		Robot.m_telemetry.setAutonomousStatus("Executing DriveRotateVision " + name + ": " + pid.getSetpoint());
 		double rotateSpeed = pid.getOutput();
 
-		Robot.m_drivetrain.arcadeDrive(0.0, rotateSpeed, false);
+		Robot.m_drivetrain.arcadeDrive(0.0, rotateSpeed);
 
 		if (pid.onRawTarget()) {
 			Robot.m_lighting.setLighting(Lighting.GREEN);
@@ -82,7 +82,7 @@ public class DriveRotateVision extends Command {
 	protected void end() {
 		Robot.m_telemetry.setAutonomousStatus("Finishing DriveRotateVision " + name + ": " + pid.getSetpoint());
 		pid.disable();
-		Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
+		Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
 	}
 
 	// Called when another command which requires one or more of the same

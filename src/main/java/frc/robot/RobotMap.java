@@ -34,6 +34,8 @@ public class RobotMap {
 	public static final int CASCADE_RIGHT_FRONT_TALON = 10;
 	public static final int CASCADE_RIGHT_BACK_TALON = 11;
 
+	public static final int DRIVETRAIN_CENTER_BACK_TALON = 12;
+
 	// Spark
 	public static final int LIGHTING_SPARK = 0;
 

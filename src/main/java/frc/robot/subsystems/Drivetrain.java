@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.RobotPreferences;
 import frc.robot.commands.Drive.DriveArcade;
-import frcteam3255.SN_Math;
+import frcteam3255.robotbase.SN_Math;
 import frcteam3255.robotbase.SN_TalonSRX;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
@@ -45,6 +45,8 @@ public class Drivetrain extends Subsystem {
 	private SN_TalonSRX rightMidTalon = null;
 	private SN_TalonSRX rightBackTalon = null;
 
+	private SN_TalonSRX centerBackTalon = null;
+
 	private DifferentialDrive differentialDrive = null;
 
 	// Encoders
@@ -67,11 +69,23 @@ public class Drivetrain extends Subsystem {
 		// rightTalons = new SpeedControllerGroup(rightFrontTalon, rightBackTalon);
 		rightTalons = new SpeedControllerGroup(rightFrontTalon, rightMidTalon, rightBackTalon);
 
+		centerBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_CENTER_BACK_TALON);
+
 		// Encoders
 		encoder = new Encoder(RobotMap.DRIVETRAIN_ENCODER_A, RobotMap.DRIVETRAIN_ENCODER_B);
 
 		differentialDrive = new DifferentialDrive(leftTalons, rightTalons);
 		differentialDrive.setSafetyEnabled(false);
+	}
+
+	/**
+	 * acradeDrive but squared inputs defaults to false
+	 * 
+	 * @param moveSpeed
+	 * @param rotateSpeed
+	 */
+	public void arcadeDrive(double moveSpeed, double rotateSpeed) {
+		arcadeDrive(moveSpeed, rotateSpeed, false);
 	}
 
 	/**
@@ -96,7 +110,7 @@ public class Drivetrain extends Subsystem {
 		moveSpeed = moveSpeed * cascadeSpeedFactor;
 		rotateSpeed = rotateSpeed * cascadeSpeedFactor;
 
-		differentialDrive.arcadeDrive(moveSpeed, rotateSpeed, true);
+		differentialDrive.arcadeDrive(moveSpeed, rotateSpeed, squaredInputs);
 	}
 
 	/**
@@ -118,6 +132,15 @@ public class Drivetrain extends Subsystem {
 	 */
 	public double getEncoderDistance() {
 		return (getEncoderCount() / RobotPreferences.DRIVETRAIN_PULSES_PER_FOOT.getValue()) * 12;
+	}
+
+	/**
+	 * Set the speed for the center back wheel
+	 * 
+	 * @param speed
+	 */
+	public void setBackSpeed(double speed) {
+		centerBackTalon.set(speed);
 	}
 
 	@Override

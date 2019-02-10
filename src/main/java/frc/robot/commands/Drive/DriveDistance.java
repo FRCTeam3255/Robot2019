@@ -55,7 +55,11 @@ public class DriveDistance extends Command {
 		Robot.m_telemetry.setAutonomousStatus("Executing DriveDistance " + name + ": " + pid.getSetpoint() + " ");
 		double moveSpeed = pid.getOutput();
 
-		Robot.m_drivetrain.arcadeDrive(moveSpeed, 0.0, false);
+		Robot.m_drivetrain.arcadeDrive(moveSpeed, 0.0);
+
+		if (Robot.m_cascade.isClimberDeployed() && (moveSpeed < 0.0)) {
+			Robot.m_drivetrain.setBackSpeed(1.0);
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -74,7 +78,7 @@ public class DriveDistance extends Command {
 	protected void end() {
 		Robot.m_telemetry.setAutonomousStatus("Finishing DriveDistance " + name + ": " + pid.getSetpoint() + "");
 		pid.disable();
-		Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
+		Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
 	}
 
 	// Called when another command which requires one or more of the same
