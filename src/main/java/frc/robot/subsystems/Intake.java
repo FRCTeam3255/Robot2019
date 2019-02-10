@@ -120,14 +120,14 @@ public class Intake extends Subsystem {
 	 * @return Check if the hatch triggered the hatch switch
 	 */
 	public boolean isHatchCollected() {
-		return !hatchSwitch.get();
+		return hatchSwitch.get();
 	}
 
 	/**
 	 * @return Check if the cargo triggered the cargo swtich
 	 */
 	public boolean isCargoCollected() {
-		return !cargoSwitch.get();
+		return cargoSwitch.get();
 	}
 
 	@Override

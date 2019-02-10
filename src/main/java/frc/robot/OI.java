@@ -51,9 +51,9 @@ public class OI {
 	public OI() {
 		// Manipulator Stick
 		manipulatorStick.btn_1.whileHeld(new IntakeCargoEject());
-		manipulatorStick.btn_2.whenPressed(new IntakeCargoCollect());
-		manipulatorStick.btn_3.whenPressed(new IntakePickUpHatch());
-		// manipulatorStick.btn_3.whenPressed(new IntakeHatchReach());
+		manipulatorStick.btn_2.whileHeld(new IntakeCargoCollect());
+		// manipulatorStick.btn_3.whenPressed(new IntakePickUpHatch());
+		manipulatorStick.btn_3.whenPressed(new IntakeHatchReach());
 		manipulatorStick.btn_4.whenPressed(new IntakeHatchGrab());
 		// manipulatorStick.btn_4.whenPressed(new ToggleIntakeHatch());
 		// manipulatorStick.btn_5.whenPressed(new DeployHatch());
