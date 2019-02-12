@@ -15,6 +15,7 @@ public class CascadeUnweight extends Command {
 
 	private double previousEncoder;
 	private static SN_DoublePreference cascadeUnweightSpeed = new SN_DoublePreference("cascadeUnweightSpeed", 0.5);
+	private static SN_DoublePreference cascadeUnweightHeight = new SN_DoublePreference("cascadeUnweightHeight", 0.3);
 
 	public CascadeUnweight() {
 		// Use requires() here to declare subsystem dependencies
@@ -40,7 +41,7 @@ public class CascadeUnweight extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return Robot.m_cascade.getLiftEncoderDistance() >= previousEncoder + 1;
+		return Robot.m_cascade.getLiftEncoderDistance() >= previousEncoder + cascadeUnweightHeight.getValue();
 	}
 
 	// Called once after isFinished returns true

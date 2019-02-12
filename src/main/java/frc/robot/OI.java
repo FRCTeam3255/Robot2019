@@ -23,7 +23,8 @@ import frc.robot.commands.Intake.IntakeHatchDeploy;
 import frc.robot.commands.Intake.IntakeHatchGrab;
 import frc.robot.commands.Intake.IntakeHatchReach;
 import frc.robot.commands.Intake.IntakeHatchRetract;
-import frc.robot.commands.Intake.IntakePickUpHatch;
+import frc.robot.commands.Intake.IntakeUp;
+import frc.robot.commands.Intake.IntakeDown;
 import frcteam3255.robotbase.Joystick.SN_DualActionStick;
 import frcteam3255.robotbase.Joystick.SN_Extreme3DStick;
 import frcteam3255.robotbase.Joystick.SN_SwitchboardStick;
@@ -51,22 +52,18 @@ public class OI {
 	public OI() {
 		// Manipulator Stick
 		manipulatorStick.btn_1.whileHeld(new IntakeCargoEject());
-		manipulatorStick.btn_2.whileHeld(new IntakeCargoCollect());
-		// manipulatorStick.btn_3.whenPressed(new IntakePickUpHatch());
-		manipulatorStick.btn_3.whenPressed(new IntakeHatchReach());
-		manipulatorStick.btn_4.whenPressed(new IntakeHatchGrab());
+		manipulatorStick.btn_2.whenPressed(new IntakeCargoCollect());
+		manipulatorStick.btn_3.whenPressed(new IntakeHatchGrab());
 		// manipulatorStick.btn_4.whenPressed(new ToggleIntakeHatch());
-		// manipulatorStick.btn_5.whenPressed(new DeployHatch());
-		manipulatorStick.btn_5.whenPressed(new IntakeHatchDeploy());
-		manipulatorStick.btn_6.whenPressed(new IntakeHatchRetract());
-		manipulatorStick.btn_7.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeTop", 75)));
-		// manipulatorStick.btn_8.whenPressed(new Climb());
-		manipulatorStick.btn_8.whileHeld(new ManualClimb());
-		// manipulatorStick.btn_8.whenPressed(new CascadeResetEncoder());
-		manipulatorStick.btn_9.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeMid", 50)));
-		manipulatorStick.btn_10.whileHeld(new CascadeMoveManual());
-		manipulatorStick.btn_11.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeLow", 25)));
-		manipulatorStick.btn_12.whenPressed(new CascadeMove(new SN_DoublePreference("cascadeBottom", 0.0)));
+		manipulatorStick.btn_5.whenPressed(new IntakeUp());
+		manipulatorStick.btn_6.whenPressed(new IntakeDown());
+		manipulatorStick.btn_7.whenPressed(new CascadeMove(new SN_DoublePreference("hatchPos3", 75)));
+		manipulatorStick.btn_8.whenPressed(new CascadeMove(new SN_DoublePreference("cargopos3", 50)));
+		manipulatorStick.btn_9.whenPressed(new CascadeMove(new SN_DoublePreference("hatchPos2", 50)));
+		manipulatorStick.btn_10.whileHeld(new CascadeMove(new SN_DoublePreference("cargoPos2", 25)));
+		// manipulatorStick.btn_11.whenPressed(new CascadeMove(new
+		// SN_DoublePreference("cascadeLow", 25)));
+		manipulatorStick.btn_12.whenPressed(new CascadeMove(new SN_DoublePreference("cargopos1", 0.0)));
 
 		// Driver Stick
 		driverStick.btn_Y

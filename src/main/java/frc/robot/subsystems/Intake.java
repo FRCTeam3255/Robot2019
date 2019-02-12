@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.RobotPreferences;
+import frc.robot.commands.Intake.IntakeWaitForHatch;
 import frcteam3255.robotbase.SN_TalonSRX;
 
 /**
@@ -25,7 +26,7 @@ public class Intake extends Subsystem {
 	private SN_TalonSRX cargoTalon = null;
 
 	// Solenoids
-	// private DoubleSolenoid ejectSolenoid = null;
+	private DoubleSolenoid ejectSolenoid = null;
 	private DoubleSolenoid hatchDeploySolenoid = null;
 	private DoubleSolenoid hatchIntakeSolenoid = null;
 
@@ -40,9 +41,8 @@ public class Intake extends Subsystem {
 		cargoTalon = new SN_TalonSRX(RobotMap.INTAKE_CARGO_TALON);
 
 		// Solenoids
-		// ejectSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM,
-		// RobotMap.INTAKE_EJECT_SOLENOID_A,
-		// RobotMap.INTAKE_EJECT_SOLENOID_B);
+		ejectSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_EJECT_SOLENOID_A,
+				RobotMap.INTAKE_EJECT_SOLENOID_B);
 		hatchDeploySolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_HATCH_DEPLOY_SOLENOID_A,
 				RobotMap.INTAKE_HATCH_DEPLOY_SOLENOID_B);
 		hatchIntakeSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_HATCH_INTAKE_SOLENOID_A,
@@ -63,7 +63,7 @@ public class Intake extends Subsystem {
 	/**
 	 * Spin the intake to eject cargo
 	 */
-	public void ejectCargo() {
+	public void shootCargo() {
 		cargoTalon.set(RobotPreferences.EJECT_CARGO_SPEED.getValue());
 	}
 
@@ -88,6 +88,11 @@ public class Intake extends Subsystem {
 		hatchDeploySolenoid.set(Value.kReverse);
 	}
 
+	public boolean isHatchRetracted() {
+		return hatchDeploySolenoid.get() == Value.kReverse;
+
+	}
+
 	/**
 	 * Deploy the piston to grab the hatch from the floor
 	 */
@@ -105,16 +110,16 @@ public class Intake extends Subsystem {
 	// /**
 	// * Eject the hatch by firing the pistons
 	// */
-	// public void ejectHatch() {
-	// ejectSolenoid.set(Value.kForward);
-	// }
+	public void ejectCargo() {
+		ejectSolenoid.set(Value.kForward);
+	}
 
 	// /**
 	// * Retract the hatch ejecting pistons
 	// */
-	// public void reloadHatch() {
-	// ejectSolenoid.set(Value.kReverse);
-	// }
+	public void reloadHatch() {
+		ejectSolenoid.set(Value.kReverse);
+	}
 
 	/**
 	 * @return Check if the hatch triggered the hatch switch
@@ -134,5 +139,7 @@ public class Intake extends Subsystem {
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new IntakeWaitForHatch());
 	}
+
 }

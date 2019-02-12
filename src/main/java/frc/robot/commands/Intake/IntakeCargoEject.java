@@ -25,7 +25,12 @@ public class IntakeCargoEject extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.m_intake.ejectCargo();
+		Robot.m_intake.shootCargo();
+		if (Robot.m_intake.isHatchRetracted()) {
+			Robot.m_intake.shootCargo();
+		} else {
+			Robot.m_intake.ejectCargo();
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

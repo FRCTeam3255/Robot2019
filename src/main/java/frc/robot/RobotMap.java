@@ -71,4 +71,6 @@ public class RobotMap {
 	public static final int CASCADE_LOCK_SOLENOID_B = 1;
 	public static final int CASCADE_SHIFT_SOLENOID_A = 2;
 	public static final int CASCADE_SHIFT_SOLENOID_B = 3;
+	public static final int INTAKE_EJECT_SOLENOID_A = 4;
+	public static final int INTAKE_EJECT_SOLENOID_B = 5;
 }

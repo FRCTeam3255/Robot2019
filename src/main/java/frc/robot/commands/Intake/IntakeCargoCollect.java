@@ -20,6 +20,7 @@ public class IntakeCargoCollect extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
+		Robot.m_intake.grabHatch();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -38,6 +39,7 @@ public class IntakeCargoCollect extends Command {
 	@Override
 	protected void end() {
 		Robot.m_intake.holdCargo();
+
 	}
 
 	// Called when another command which requires one or more of the same

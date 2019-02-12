@@ -9,20 +9,23 @@ package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.DoDelay;
+import frc.robot.commands.Cascade.CascadeMove;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-public class IntakePickUpHatch extends CommandGroup {
+public class IntakeDown extends CommandGroup {
+  private static SN_DoublePreference cascadeBottom = new SN_DoublePreference("cascadeBottom", 0.0);
+
   /**
    * Add your docs here.
    */
-  public IntakePickUpHatch() {
+  public IntakeDown() {
+    addSequential(new CascadeMove(cascadeBottom));
     addSequential(new IntakeHatchDeploy());
     addSequential(new IntakeWaitForHatch());
     addSequential(new IntakeHatchReach());
     addSequential(new DoDelay(new SN_DoublePreference("IntakeDelay1", 0.5)));
     addSequential(new IntakeHatchGrab());
     addSequential(new DoDelay(new SN_DoublePreference("IntakeDelay2", 0.5)));
-    addSequential(new IntakeHatchRetract());
 
     // Add Commands here:
     // e.g. addSequential(new Command1());
