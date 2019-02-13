@@ -8,6 +8,7 @@
 package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.DoDelay;
 import frc.robot.commands.Cascade.CascadeMove;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
@@ -20,7 +21,9 @@ public class IntakeUp extends CommandGroup {
    */
   public IntakeUp() {
     addSequential(new IntakeHatchGrab());
+    addSequential(new DoDelay(new SN_DoublePreference("IntakeUpDelay1", 0.5)));
     addSequential(new IntakeHatchRetract());
+    addSequential(new DoDelay(new SN_DoublePreference("IntakeUpDelay2", 0.5)));
     addParallel(new CascadeMove(hatchPos1));
   }
 }

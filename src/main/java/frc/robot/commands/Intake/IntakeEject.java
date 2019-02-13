@@ -10,8 +10,8 @@ package frc.robot.commands.Intake;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class IntakeCargoEject extends Command {
-	public IntakeCargoEject() {
+public class IntakeEject extends Command {
+	public IntakeEject() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.m_intake);
@@ -29,7 +29,7 @@ public class IntakeCargoEject extends Command {
 		if (Robot.m_intake.isHatchRetracted()) {
 			Robot.m_intake.shootCargo();
 		} else {
-			Robot.m_intake.ejectCargo();
+			Robot.m_intake.ejectHatch();
 		}
 	}
 

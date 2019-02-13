@@ -41,7 +41,7 @@ public class Intake extends Subsystem {
 		cargoTalon = new SN_TalonSRX(RobotMap.INTAKE_CARGO_TALON);
 
 		// Solenoids
-		ejectSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_EJECT_SOLENOID_A,
+		ejectSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.INTAKE_EJECT_SOLENOID_A,
 				RobotMap.INTAKE_EJECT_SOLENOID_B);
 		hatchDeploySolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_HATCH_DEPLOY_SOLENOID_A,
 				RobotMap.INTAKE_HATCH_DEPLOY_SOLENOID_B);
@@ -110,7 +110,7 @@ public class Intake extends Subsystem {
 	// /**
 	// * Eject the hatch by firing the pistons
 	// */
-	public void ejectCargo() {
+	public void ejectHatch() {
 		ejectSolenoid.set(Value.kForward);
 	}
 

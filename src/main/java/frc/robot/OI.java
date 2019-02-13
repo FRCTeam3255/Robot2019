@@ -9,22 +9,15 @@ package frc.robot;
 
 import frc.robot.commands.VisionSetDriverMode;
 import frc.robot.commands.VisionSetVisionMode;
-import frc.robot.commands.Cascade.CascadeLift;
 import frc.robot.commands.Cascade.CascadeMove;
 import frc.robot.commands.Cascade.CascadeMoveManual;
-import frc.robot.commands.Climber.Climb;
-import frc.robot.commands.Climber.ManualClimb;
 import frc.robot.commands.Drive.DriveDistanceRotateVision;
 import frc.robot.commands.Drive.DriveDistanceVision;
-import frc.robot.commands.Drive.DriveRotateVision;
 import frc.robot.commands.Intake.IntakeCargoCollect;
-import frc.robot.commands.Intake.IntakeCargoEject;
-import frc.robot.commands.Intake.IntakeHatchDeploy;
-import frc.robot.commands.Intake.IntakeHatchGrab;
-import frc.robot.commands.Intake.IntakeHatchReach;
-import frc.robot.commands.Intake.IntakeHatchRetract;
-import frc.robot.commands.Intake.IntakeUp;
 import frc.robot.commands.Intake.IntakeDown;
+import frc.robot.commands.Intake.IntakeEject;
+import frc.robot.commands.Intake.IntakeHatchGrab;
+import frc.robot.commands.Intake.IntakeUp;
 import frcteam3255.robotbase.Joystick.SN_DualActionStick;
 import frcteam3255.robotbase.Joystick.SN_Extreme3DStick;
 import frcteam3255.robotbase.Joystick.SN_SwitchboardStick;
@@ -51,19 +44,19 @@ public class OI {
 	 */
 	public OI() {
 		// Manipulator Stick
-		manipulatorStick.btn_1.whileHeld(new IntakeCargoEject());
+		manipulatorStick.btn_1.whileHeld(new IntakeEject());
 		manipulatorStick.btn_2.whenPressed(new IntakeCargoCollect());
 		manipulatorStick.btn_3.whenPressed(new IntakeHatchGrab());
+		manipulatorStick.btn_4.whileHeld(new CascadeMoveManual());
 		// manipulatorStick.btn_4.whenPressed(new ToggleIntakeHatch());
 		manipulatorStick.btn_5.whenPressed(new IntakeUp());
 		manipulatorStick.btn_6.whenPressed(new IntakeDown());
-		manipulatorStick.btn_7.whenPressed(new CascadeMove(new SN_DoublePreference("hatchPos3", 75)));
-		manipulatorStick.btn_8.whenPressed(new CascadeMove(new SN_DoublePreference("cargopos3", 50)));
-		manipulatorStick.btn_9.whenPressed(new CascadeMove(new SN_DoublePreference("hatchPos2", 50)));
-		manipulatorStick.btn_10.whileHeld(new CascadeMove(new SN_DoublePreference("cargoPos2", 25)));
-		// manipulatorStick.btn_11.whenPressed(new CascadeMove(new
-		// SN_DoublePreference("cascadeLow", 25)));
-		manipulatorStick.btn_12.whenPressed(new CascadeMove(new SN_DoublePreference("cargopos1", 0.0)));
+		manipulatorStick.btn_7.whenPressed(new CascadeMove(new SN_DoublePreference("hatchPos3", 51)));
+		manipulatorStick.btn_8.whenPressed(new CascadeMove(new SN_DoublePreference("cargoPos3", 61)));
+		manipulatorStick.btn_9.whenPressed(new CascadeMove(new SN_DoublePreference("hatchPos2", 28)));
+		manipulatorStick.btn_10.whileHeld(new CascadeMove(new SN_DoublePreference("cargoPos2", 43)));
+		manipulatorStick.btn_11.whenPressed(new CascadeMove(new SN_DoublePreference("hatchPos1", 5)));
+		manipulatorStick.btn_12.whenPressed(new CascadeMove(new SN_DoublePreference("cargoPos1", 20.0)));
 
 		// Driver Stick
 		driverStick.btn_Y

@@ -25,7 +25,6 @@ public class IntakeDown extends CommandGroup {
     addSequential(new IntakeHatchReach());
     addSequential(new DoDelay(new SN_DoublePreference("IntakeDelay1", 0.5)));
     addSequential(new IntakeHatchGrab());
-    addSequential(new DoDelay(new SN_DoublePreference("IntakeDelay2", 0.5)));
 
     // Add Commands here:
     // e.g. addSequential(new Command1());
