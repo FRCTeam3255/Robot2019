@@ -5,27 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.Robot;
 import frc.robot.RobotPreferences;
+import frc.robot.commands.DoDelay;
+import frc.robot.commands.Cascade.CascadeBottom;
 import frc.robot.commands.Cascade.CascadeMove;
-import frc.robot.commands.Intake.*;
+import frc.robot.commands.Cascade.CascadeUnweight;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-public class WaitForHatchAndPickUp extends CommandGroup {
+public class IntakeCargoCollectAndLift extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public WaitForHatchAndPickUp() {
-    requires(Robot.m_cascade);
-    requires(Robot.m_intake);
-
-    addSequential(new IntakeWaitForHatch());
-    addSequential(new IntakeRetractHook());
-    addSequential(new DoDelay(new SN_DoublePreference("hatchPickUpDelay", 0.5)));
-    addSequential(new IntakeVertical());
-    addSequential(new CascadeMove(RobotPreferences.HATCH_POSITION_1));
+  public IntakeCargoCollectAndLift() {
+    addSequential(new CascadeUnweight());
+    addSequential(new CascadeBottom());
+    addSequential(new IntakeHorizontal());
+    addSequential(new IntakeCargoCollect());
+    addSequential(new DoDelay(new SN_DoublePreference("cargoCollectAndLift", 0.5)));
+    addSequential(new CascadeMove(RobotPreferences.CARGO_POSITION_1));
   }
 }

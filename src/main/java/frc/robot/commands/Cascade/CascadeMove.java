@@ -8,6 +8,7 @@
 package frc.robot.commands.Cascade;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.Robot;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class CascadeMove extends CommandGroup {
@@ -15,6 +16,8 @@ public class CascadeMove extends CommandGroup {
 	 * Add your docs here.
 	 */
 	public CascadeMove(SN_DoublePreference setPoint) {
+		requires(Robot.m_cascade);
+
 		addSequential(new CascadeUnweight());
 		addSequential(new CascadeLift(setPoint));
 		addSequential(new CascadeLockDogtooth());

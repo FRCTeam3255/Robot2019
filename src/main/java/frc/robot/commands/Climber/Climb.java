@@ -8,13 +8,13 @@
 package frc.robot.commands.Climber;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.RobotPreferences;
 import frc.robot.commands.Cascade.CascadeMove;
 import frc.robot.commands.Cascade.CascadeResetEncoder;
 import frc.robot.commands.Drive.DriveDistance;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class Climb extends CommandGroup {
-	private static final SN_DoublePreference bottomSetpoint = new SN_DoublePreference("bottomSetpoint", 0.0);
 	private static final SN_DoublePreference climbLiftD1 = new SN_DoublePreference("climbLiftD1", -25.0);
 	private static final SN_DoublePreference climbDriveD1 = new SN_DoublePreference("climbDriveD1", -20.0);
 	private static final SN_DoublePreference climbLiftD2 = new SN_DoublePreference("climbLiftD2", 0.0);
@@ -24,7 +24,7 @@ public class Climb extends CommandGroup {
 	 * Add your docs here.
 	 */
 	public Climb() {
-		addSequential(new CascadeMove(bottomSetpoint));
+		addSequential(new CascadeMove(RobotPreferences.CASCADE_BOTTOM));
 		addSequential(new CascadeResetEncoder());
 		addSequential(new ClimbShiftTo());
 		addSequential(new ClimberDeploy());

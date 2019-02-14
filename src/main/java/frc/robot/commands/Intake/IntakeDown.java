@@ -8,39 +8,20 @@
 package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.DoDelay;
-import frc.robot.commands.Cascade.CascadeMove;
-import frcteam3255.robotbase.Preferences.SN_DoublePreference;
+import frc.robot.commands.Cascade.CascadeBottom;
+import frc.robot.commands.Cascade.CascadeLockDogtooth;
+import frc.robot.commands.Cascade.CascadeUnweight;
 
 public class IntakeDown extends CommandGroup {
-  private static SN_DoublePreference cascadeBottom = new SN_DoublePreference("cascadeBottom", 0.0);
 
   /**
    * Add your docs here.
    */
   public IntakeDown() {
-    addSequential(new CascadeMove(cascadeBottom));
+    addSequential(new CascadeUnweight());
+    addSequential(new CascadeBottom());
+    addSequential(new CascadeLockDogtooth());
     addSequential(new IntakeHorizontal());
-    addSequential(new IntakeWaitForHatch());
-    addSequential(new IntakeHookDeploy());
-    addSequential(new DoDelay(new SN_DoublePreference("IntakeDelay1", 0.5)));
-    addSequential(new IntakeRetractHook());
-
-    // Add Commands here:
-    // e.g. addSequential(new Command1());
-    // addSequential(new Command2());
-    // these will run in order.
-
-    // To run multiple commands at the same time,
-    // use addParallel()
-    // e.g. addParallel(new Command1());
-    // addSequential(new Command2());
-    // Command1 and Command2 will run in parallel.
-
-    // A command group will require all of the subsystems that each member
-    // would require.
-    // e.g. if Command1 requires chassis, and Command2 requires arm,
-    // a CommandGroup containing them would require both the chassis and the
-    // arm.
+    addSequential(new IntakeDeployHook());
   }
 }

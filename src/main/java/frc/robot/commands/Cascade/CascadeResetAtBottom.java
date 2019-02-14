@@ -25,18 +25,21 @@ public class CascadeResetAtBottom extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if (Robot.m_cascade.isBottomSwitchClosed()) {
+      Robot.m_cascade.resetLiftEncoder();
+    }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.m_cascade.isBottomSwitchClosed();
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_cascade.resetLiftEncoder();
   }
 
   // Called when another command which requires one or more of the same

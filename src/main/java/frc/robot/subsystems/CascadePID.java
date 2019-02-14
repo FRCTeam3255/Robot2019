@@ -19,13 +19,14 @@ public class CascadePID extends SN_PID {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	// Cascade PID
-	public static final SN_DoublePreference CASCADE_P = new SN_DoublePreference("cascadeP", 0.12);
+	public static final SN_DoublePreference CASCADE_P = new SN_DoublePreference("cascadeP", 0.1);
 	public static final SN_DoublePreference CASCADE_I = new SN_DoublePreference("cascadeI", 0.0);
 	public static final SN_DoublePreference CASCADE_D = new SN_DoublePreference("cascadeD", 0.0);
 	public static final SN_DoublePreference CASCADE_TOL = new SN_DoublePreference("cascadeTol", 1.0);
 	public static final SN_IntPreference CASCADE_TARGET_COUNT = new SN_IntPreference("cascadeTargetCount", 1);
 	public static final SN_DoublePreference CASCADE_MINOUT = new SN_DoublePreference("cascadeMinSpeed", 0);
-	public static final SN_DoublePreference CASCADE_MAXOUT = new SN_DoublePreference("cascadeMaxSpeed", 1);
+	public static final SN_DoublePreference CASCADE_MAXOUTDOWN = new SN_DoublePreference("cascadeMaxSpeedDown", 0.1);
+	public static final SN_DoublePreference CASCADE_MAXOUTUP = new SN_DoublePreference("cascadeMaxSpeedUp", 0.5);
 	public static final SN_DoublePreference CASCADE_MAXCHANGE = new SN_DoublePreference("cascadeMaxChange", 1.0);
 
 	/**
@@ -38,7 +39,8 @@ public class CascadePID extends SN_PID {
 		setTolerance(CASCADE_TOL);
 		setTargetCount(CASCADE_TARGET_COUNT);
 		setMinOutput(CASCADE_MINOUT);
-		setMaxOutput(CASCADE_MAXOUT);
+		setMaxOutputNegative(CASCADE_MAXOUTDOWN);
+		setMaxOutputPositive(CASCADE_MAXOUTUP);
 		setMaxOutputChange(CASCADE_MAXCHANGE);
 	}
 

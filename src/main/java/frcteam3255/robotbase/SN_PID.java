@@ -25,7 +25,10 @@ public abstract class SN_PID extends PIDSubsystem {
   protected static SN_IntPreference default_targetCount = new SN_IntPreference("SNPID_targetCount", 1);
 
   protected static SN_DoublePreference default_minOutput = new SN_DoublePreference("SNPID_minOutput", 0.0);
-  protected static SN_DoublePreference default_maxOutput = new SN_DoublePreference("SNPID_maxOutput", 1.0);
+  protected static SN_DoublePreference default_maxOutputNegative = new SN_DoublePreference("SNPID_maxOutputNegative",
+      1.0);
+  protected static SN_DoublePreference default_maxOutputPositive = new SN_DoublePreference("SNPID_maxOutputPositive",
+      1.0);
   protected static SN_DoublePreference default_maxOutputChange = new SN_DoublePreference("SNPID_maxOutputChange", 1.0);
   protected static SN_DoublePreference default_defaultOutput = new SN_DoublePreference("SNPID_defaultOuput", 0.0);
 
@@ -38,7 +41,8 @@ public abstract class SN_PID extends PIDSubsystem {
   protected SN_IntPreference pref_targetCount = default_targetCount;
 
   protected SN_DoublePreference pref_minOutput = default_minOutput;
-  protected SN_DoublePreference pref_maxOutput = default_maxOutput;
+  protected SN_DoublePreference pref_maxOutputNegative = default_maxOutputNegative;
+  protected SN_DoublePreference pref_maxOutputPositive = default_maxOutputPositive;
   protected SN_DoublePreference pref_maxOutputChange = default_maxOutputChange;
   protected SN_DoublePreference pref_defaultOutput = default_defaultOutput;
 
@@ -50,7 +54,8 @@ public abstract class SN_PID extends PIDSubsystem {
   // values used to cache output constraint preferences that will be used while
   // the PID is enabled
   private double cached_minOutput = pref_minOutput.getValue();
-  private double cached_maxOutput = pref_maxOutput.getValue();
+  private double cached_maxOutputNegative = pref_maxOutputNegative.getValue();
+  private double cached_maxOutputPositive = pref_maxOutputPositive.getValue();
   private double cached_maxOutputChange = pref_maxOutputChange.getValue();
   private double cached_defaultOutput = pref_defaultOutput.getValue();
 
@@ -104,8 +109,17 @@ public abstract class SN_PID extends PIDSubsystem {
     pref_minOutput = minOutput;
   }
 
+  public void setMaxOutputPositive(SN_DoublePreference maxOutputPositive) {
+    pref_maxOutputPositive = maxOutputPositive;
+  }
+
+  public void setMaxOutputNegative(SN_DoublePreference maxOutputNegative) {
+    pref_maxOutputNegative = maxOutputNegative;
+  }
+
   public void setMaxOutput(SN_DoublePreference maxOutput) {
-    pref_maxOutput = maxOutput;
+    setMaxOutputPositive(maxOutput);
+    setMaxOutputNegative(maxOutput);
   }
 
   public void setMaxOutputChange(SN_DoublePreference maxOutputChange) {
@@ -139,7 +153,8 @@ public abstract class SN_PID extends PIDSubsystem {
 
     // cache the output constraint preferences
     cached_minOutput = pref_minOutput.getValue();
-    cached_maxOutput = pref_maxOutput.getValue();
+    cached_maxOutputNegative = pref_maxOutputNegative.getValue();
+    cached_maxOutputPositive = pref_maxOutputPositive.getValue();
     cached_maxOutputChange = pref_maxOutputChange.getValue();
     cached_defaultOutput = pref_defaultOutput.getValue();
 
@@ -182,14 +197,14 @@ public abstract class SN_PID extends PIDSubsystem {
     if (newOutput > 0) {
       if (newOutput < cached_minOutput) {
         newOutput = cached_minOutput;
-      } else if (newOutput > cached_maxOutput) {
-        newOutput = cached_maxOutput;
+      } else if (newOutput > cached_maxOutputPositive) {
+        newOutput = cached_maxOutputPositive;
       }
     } else if (newOutput < 0) {
       if (newOutput > -cached_minOutput) {
         newOutput = -cached_minOutput;
-      } else if (newOutput < -cached_maxOutput) {
-        newOutput = -cached_maxOutput;
+      } else if (newOutput < -cached_maxOutputNegative) {
+        newOutput = -cached_maxOutputNegative;
       }
     }
 

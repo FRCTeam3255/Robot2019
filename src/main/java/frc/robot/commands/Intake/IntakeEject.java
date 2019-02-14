@@ -26,6 +26,7 @@ public class IntakeEject extends Command {
 	@Override
 	protected void execute() {
 		if (Robot.m_intake.isIntakeRetract()) {
+			Robot.m_intake.deployHook();
 			Robot.m_intake.ejectHatch();
 		} else {
 			Robot.m_intake.shootCargo();

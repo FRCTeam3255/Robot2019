@@ -13,11 +13,11 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class IntakeHookDeploy extends InstantCommand {
+public class IntakeDeployHook extends InstantCommand {
 	/**
 	 * Add your docs here.
 	 */
-	public IntakeHookDeploy() {
+	public IntakeDeployHook() {
 		super();
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);

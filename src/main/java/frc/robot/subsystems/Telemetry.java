@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -20,6 +21,8 @@ import frc.robot.commands.Climber.ClimbShiftTo;
 import frc.robot.commands.Drive.DriveResetEncoder;
 import frc.robot.commands.Drive.DriveResetYaw;
 import frc.robot.commands.Drive.DriveToWall;
+import frc.robot.commands.Intake.IntakeDeployHook;
+import frc.robot.commands.Intake.IntakeRetractHook;
 import frc.robot.commands.Vision.VisionSetDriverMode;
 import frc.robot.commands.Vision.VisionSetVisionMode;
 import frcteam3255.robotbase.Preferences.SN_Preferences;
@@ -47,6 +50,9 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putData("Drive To Wall", new DriveToWall());
 		SmartDashboard.putData("Deploy Fangs", new CascadeDeployClimb());
 		SmartDashboard.putData("Retract Fangs", new CascadeRetractClimb());
+		SmartDashboard.putData("Deploy Hook", new IntakeDeployHook());
+		SmartDashboard.putData("Retract Hook", new IntakeRetractHook());
+
 	}
 
 	/**
@@ -74,6 +80,8 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putBoolean("Cargo Collected", Robot.m_intake.isCargoCollected());
 		SmartDashboard.putBoolean("Hatch Collected", Robot.m_intake.isHatchCollected());
 		SmartDashboard.putBoolean("Is Shifted To Cascade", Robot.m_cascade.isShiftedCascade());
+
+		SmartDashboard.putData("Running Commands", Scheduler.getInstance());
 	}
 
 	@Override

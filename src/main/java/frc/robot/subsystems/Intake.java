@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.RobotPreferences;
-import frc.robot.commands.Intake.IntakeWaitForHatch;
+import frc.robot.commands.WaitForHatchAndPickUp;
 import frcteam3255.robotbase.SN_TalonSRX;
 
 /**
@@ -27,8 +27,8 @@ public class Intake extends Subsystem {
 
 	// Solenoids
 	private DoubleSolenoid ejectSolenoid = null;
-	private DoubleSolenoid hatchDeploySolenoid = null;
-	private DoubleSolenoid hatchIntakeSolenoid = null;
+	private DoubleSolenoid intakeArmSolenoid = null;
+	private DoubleSolenoid hatchHookSolenoid = null;
 
 	// Swtiches
 	private DigitalInput hatchSwitch = null;
@@ -43,10 +43,10 @@ public class Intake extends Subsystem {
 		// Solenoids
 		ejectSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.INTAKE_EJECT_SOLENOID_A,
 				RobotMap.INTAKE_EJECT_SOLENOID_B);
-		hatchDeploySolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_HATCH_DEPLOY_SOLENOID_A,
-				RobotMap.INTAKE_HATCH_DEPLOY_SOLENOID_B);
-		hatchIntakeSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_HATCH_INTAKE_SOLENOID_A,
-				RobotMap.INTAKE_HATCH_INTAKE_SOLENOID_B);
+		intakeArmSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_ARM_SOLENOID_A,
+				RobotMap.INTAKE_ARM_SOLENOID_B);
+		hatchHookSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_HOOK_SOLENOID_A,
+				RobotMap.INTAKE_HOOK_SOLENOID_B);
 
 		// Switches
 		hatchSwitch = new DigitalInput(RobotMap.INTAKE_HATCH_SWITCH);
@@ -75,30 +75,33 @@ public class Intake extends Subsystem {
 	}
 
 	public void intakeDeploy() {
-		hatchDeploySolenoid.set(Value.kForward);
+		intakeArmSolenoid.set(Value.kReverse);
 	}
 
 	public void intakeRetract() {
-		hatchDeploySolenoid.set(Value.kReverse);
+		intakeArmSolenoid.set(Value.kForward);
 	}
 
 	public boolean isIntakeRetract() {
-		return hatchDeploySolenoid.get() == Value.kReverse;
-
+		return intakeArmSolenoid.get() == Value.kForward;
 	}
 
 	/**
 	 * Deploy the piston to grab the hatch from the floor
 	 */
 	public void deployHook() {
-		hatchIntakeSolenoid.set(Value.kForward);
+		hatchHookSolenoid.set(Value.kReverse);
 	}
 
 	/**
 	 * Retracts the piston to grab the hatch from the floor
 	 */
 	public void retractHook() {
-		hatchIntakeSolenoid.set(Value.kReverse);
+		hatchHookSolenoid.set(Value.kForward);
+	}
+
+	public boolean isHookDeployed() {
+		return hatchHookSolenoid.get() == Value.kReverse;
 	}
 
 	// /**
@@ -133,7 +136,6 @@ public class Intake extends Subsystem {
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
-		setDefaultCommand(new IntakeWaitForHatch());
+		setDefaultCommand(new WaitForHatchAndPickUp());
 	}
-
 }
