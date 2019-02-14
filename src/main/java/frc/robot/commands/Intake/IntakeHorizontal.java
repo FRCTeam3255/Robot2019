@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
@@ -13,21 +13,20 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class VisionSetDriverMode extends InstantCommand {
+public class IntakeHorizontal extends InstantCommand {
 	/**
 	 * Add your docs here.
 	 */
-	public VisionSetDriverMode() {
+	public IntakeHorizontal() {
 		super();
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		requires(Robot.m_vision);
+		requires(Robot.m_intake);
 	}
 
 	// Called once when the command executes
 	@Override
 	protected void initialize() {
-		Robot.m_vision.setDriverMode();
+		Robot.m_intake.intakeDeploy();
 	}
-
 }

@@ -20,9 +20,9 @@ public class IntakeUp extends CommandGroup {
    * Add your docs here.
    */
   public IntakeUp() {
-    addSequential(new IntakeHatchGrab());
+    addSequential(new IntakeRetractHook());
     addSequential(new DoDelay(new SN_DoublePreference("IntakeUpDelay1", 0.5)));
-    addSequential(new IntakeHatchRetract());
+    addSequential(new IntakeVertical());
     addSequential(new DoDelay(new SN_DoublePreference("IntakeUpDelay2", 0.5)));
     addParallel(new CascadeMove(hatchPos1));
   }

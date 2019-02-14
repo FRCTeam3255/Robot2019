@@ -13,11 +13,11 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class IntakeHatchDeploy extends InstantCommand {
+public class IntakeRetractHook extends InstantCommand {
 	/**
 	 * Add your docs here.
 	 */
-	public IntakeHatchDeploy() {
+	public IntakeRetractHook() {
 		super();
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -27,6 +27,7 @@ public class IntakeHatchDeploy extends InstantCommand {
 	// Called once when the command executes
 	@Override
 	protected void initialize() {
-		Robot.m_intake.deployHatch();
+		Robot.m_intake.retractHook();
 	}
+
 }

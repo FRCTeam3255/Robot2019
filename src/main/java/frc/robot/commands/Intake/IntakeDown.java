@@ -20,11 +20,11 @@ public class IntakeDown extends CommandGroup {
    */
   public IntakeDown() {
     addSequential(new CascadeMove(cascadeBottom));
-    addSequential(new IntakeHatchDeploy());
+    addSequential(new IntakeHorizontal());
     addSequential(new IntakeWaitForHatch());
-    addSequential(new IntakeHatchReach());
+    addSequential(new IntakeHookDeploy());
     addSequential(new DoDelay(new SN_DoublePreference("IntakeDelay1", 0.5)));
-    addSequential(new IntakeHatchGrab());
+    addSequential(new IntakeRetractHook());
 
     // Add Commands here:
     // e.g. addSequential(new Command1());

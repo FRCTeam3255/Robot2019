@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Vision;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.Drive.DriveDistanceRotateVision;

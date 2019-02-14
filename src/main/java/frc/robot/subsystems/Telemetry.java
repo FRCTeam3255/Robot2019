@@ -10,12 +10,18 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.commands.VisionSetDriverMode;
-import frc.robot.commands.VisionSetVisionMode;
-import frc.robot.commands.Cascade.*;
-import frc.robot.commands.Climber.*;
-import frc.robot.commands.Drive.*;
-import frc.robot.commands.Intake.*;
+import frc.robot.commands.Cascade.CascadeDeployClimb;
+import frc.robot.commands.Cascade.CascadeLockDogtooth;
+import frc.robot.commands.Cascade.CascadeResetEncoder;
+import frc.robot.commands.Cascade.CascadeRetractClimb;
+import frc.robot.commands.Cascade.CascadeShiftTo;
+import frc.robot.commands.Cascade.CascadeUnlockDogtooth;
+import frc.robot.commands.Climber.ClimbShiftTo;
+import frc.robot.commands.Drive.DriveResetEncoder;
+import frc.robot.commands.Drive.DriveResetYaw;
+import frc.robot.commands.Drive.DriveToWall;
+import frc.robot.commands.Vision.VisionSetDriverMode;
+import frc.robot.commands.Vision.VisionSetVisionMode;
 import frcteam3255.robotbase.Preferences.SN_Preferences;
 
 /**
@@ -81,8 +87,8 @@ public class Telemetry extends Subsystem {
 	 * 
 	 * @param autonomousState The current autonomous operation happening
 	 */
-	public void setAutonomousStatus(String autonomousState) {
-		SmartDashboard.putString("Autonomous Status", autonomousState);
+	public void setCommandStatus(String commandState) {
+		SmartDashboard.putString("Command Status", commandState);
 	}
 
 }

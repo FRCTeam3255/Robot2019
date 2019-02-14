@@ -41,7 +41,7 @@ public class DriveDistance extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		Robot.m_telemetry.setAutonomousStatus("Starting DriveDistance " + name + ": " + pid.getSetpoint() + " ");
+		Robot.m_telemetry.setCommandStatus("Starting DriveDistance " + name + ": " + pid.getSetpoint() + " ");
 		expireTime = timeSinceInitialized() + pref_timeout.getValue();
 
 		Robot.m_drivetrain.resetEncoderCount();
@@ -52,7 +52,7 @@ public class DriveDistance extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.m_telemetry.setAutonomousStatus("Executing DriveDistance " + name + ": " + pid.getSetpoint() + " ");
+		Robot.m_telemetry.setCommandStatus("Executing DriveDistance " + name + ": " + pid.getSetpoint() + " ");
 		double moveSpeed = pid.getOutput();
 
 		Robot.m_drivetrain.arcadeDrive(moveSpeed, 0.0);
@@ -76,7 +76,7 @@ public class DriveDistance extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.m_telemetry.setAutonomousStatus("Finishing DriveDistance " + name + ": " + pid.getSetpoint() + "");
+		Robot.m_telemetry.setCommandStatus("Finishing DriveDistance " + name + ": " + pid.getSetpoint() + "");
 		pid.disable();
 		Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
 	}

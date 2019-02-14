@@ -26,7 +26,7 @@ public class CascadeUnweight extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		Robot.m_telemetry.setAutonomousStatus("Starting CascadeUnweight");
+		Robot.m_telemetry.setCommandStatus("Starting CascadeUnweight");
 		previousEncoder = Robot.m_cascade.getLiftEncoderDistance();
 		Robot.m_cascade.unlockCascade();
 	}
@@ -34,7 +34,7 @@ public class CascadeUnweight extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.m_telemetry.setAutonomousStatus("Executing CascadeUnweight");
+		Robot.m_telemetry.setCommandStatus("Executing CascadeUnweight");
 		Robot.m_cascade.setLiftSpeed(cascadeUnweightSpeed.getValue());
 	}
 
@@ -47,7 +47,7 @@ public class CascadeUnweight extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.m_telemetry.setAutonomousStatus("Finishing CascadeUnweight");
+		Robot.m_telemetry.setCommandStatus("Finishing CascadeUnweight");
 		Robot.m_cascade.setLiftSpeed(0.0);
 	}
 

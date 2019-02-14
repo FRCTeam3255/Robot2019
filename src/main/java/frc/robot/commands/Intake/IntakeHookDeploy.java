@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Cascade;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
@@ -13,20 +13,21 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class CascadeResetEncoder extends InstantCommand {
+public class IntakeHookDeploy extends InstantCommand {
 	/**
 	 * Add your docs here.
 	 */
-	public CascadeResetEncoder() {
+	public IntakeHookDeploy() {
 		super();
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		requires(Robot.m_cascade);
+		requires(Robot.m_intake);
 	}
 
 	// Called once when the command executes
 	@Override
 	protected void initialize() {
-		Robot.m_cascade.resetLiftEncoder();
+		Robot.m_intake.deployHook();
 	}
+
 }

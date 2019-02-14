@@ -74,21 +74,15 @@ public class Intake extends Subsystem {
 		cargoTalon.set(0.0);
 	}
 
-	/**
-	 * Set the Hatch Intake parallel to the floor
-	 */
-	public void deployHatch() {
+	public void intakeDeploy() {
 		hatchDeploySolenoid.set(Value.kForward);
 	}
 
-	/**
-	 * Lift the Hatch Intake vertically to the robot
-	 */
-	public void retractHatch() {
+	public void intakeRetract() {
 		hatchDeploySolenoid.set(Value.kReverse);
 	}
 
-	public boolean isHatchRetracted() {
+	public boolean isIntakeRetract() {
 		return hatchDeploySolenoid.get() == Value.kReverse;
 
 	}
@@ -96,14 +90,14 @@ public class Intake extends Subsystem {
 	/**
 	 * Deploy the piston to grab the hatch from the floor
 	 */
-	public void reachHatch() {
+	public void deployHook() {
 		hatchIntakeSolenoid.set(Value.kForward);
 	}
 
 	/**
 	 * Retracts the piston to grab the hatch from the floor
 	 */
-	public void grabHatch() {
+	public void retractHook() {
 		hatchIntakeSolenoid.set(Value.kReverse);
 	}
 

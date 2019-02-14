@@ -25,11 +25,10 @@ public class IntakeEject extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.m_intake.shootCargo();
-		if (Robot.m_intake.isHatchRetracted()) {
-			Robot.m_intake.shootCargo();
-		} else {
+		if (Robot.m_intake.isIntakeRetract()) {
 			Robot.m_intake.ejectHatch();
+		} else {
+			Robot.m_intake.shootCargo();
 		}
 	}
 
@@ -42,7 +41,11 @@ public class IntakeEject extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.m_intake.holdCargo();
+		if (Robot.m_intake.isIntakeRetract()) {
+			Robot.m_intake.reloadHatch();
+		} else {
+			Robot.m_intake.holdCargo();
+		}
 	}
 
 	// Called when another command which requires one or more of the same

@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.RobotPreferences;
-import frc.robot.commands.Cascade.CascadeResetEncoder;
 import frcteam3255.robotbase.SN_TalonSRX;
 
 /**
@@ -116,7 +115,7 @@ public class Cascade extends Subsystem {
 	}
 
 	/**
-	 * Shift the gearbox to climb //
+	 * Shift the gearbox to climb
 	 */
 	public void shiftClimb() {
 		shiftSolenoid.set(Value.kForward);
@@ -174,6 +173,8 @@ public class Cascade extends Subsystem {
 			speed = 0.0;
 		}
 
+		unlockCascade();
+
 		leftFrontTalon.set(speed);
 		leftBackTalon.set(speed);
 		rightFrontTalon.set(speed);
@@ -184,6 +185,5 @@ public class Cascade extends Subsystem {
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
-		setDefaultCommand(new CascadeResetEncoder());
 	}
 }

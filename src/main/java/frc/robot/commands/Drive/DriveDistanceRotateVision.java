@@ -52,7 +52,7 @@ public class DriveDistanceRotateVision extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		Robot.m_telemetry.setAutonomousStatus("Starting DriveDistanceRotateVision " + name + ": "
+		Robot.m_telemetry.setCommandStatus("Starting DriveDistanceRotateVision " + name + ": "
 				+ distancePID.getSetpoint() + " " + rotatePID.getSetpoint());
 		expireTime = timeSinceInitialized() + pref_timeout.getValue();
 
@@ -63,7 +63,7 @@ public class DriveDistanceRotateVision extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.m_telemetry.setAutonomousStatus("Executing DriveDistanceRotateVision " + name + ": "
+		Robot.m_telemetry.setCommandStatus("Executing DriveDistanceRotateVision " + name + ": "
 				+ distancePID.getSetpoint() + " " + rotatePID.getSetpoint());
 		double moveSpeed = distancePID.getOutput();
 		double rotateSpeed = rotatePID.getOutput();
@@ -94,7 +94,7 @@ public class DriveDistanceRotateVision extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.m_telemetry.setAutonomousStatus("Finishing DriveDistanceRotateVision " + name + ": "
+		Robot.m_telemetry.setCommandStatus("Finishing DriveDistanceRotateVision " + name + ": "
 				+ distancePID.getSetpoint() + " " + rotatePID.getSetpoint());
 		distancePID.disable();
 		rotatePID.disable();
