@@ -18,7 +18,7 @@ public class IntakeUp extends CommandGroup {
    */
   public IntakeUp() {
     addSequential(new IntakeHatchReload());
-    addSequential(new IntakeVertical());
+    addSequential(new IntakeRetract());
     addParallel(new CascadeMove(RobotPreferences.HATCH_POSITION_1));
   }
 }

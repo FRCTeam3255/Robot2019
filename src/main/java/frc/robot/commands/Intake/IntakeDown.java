@@ -22,7 +22,7 @@ public class IntakeDown extends CommandGroup {
     addSequential(new CascadeUnweight());
     addSequential(new CascadeBottom());
     addSequential(new CascadeLockDogtooth());
-    addSequential(new IntakeHorizontal());
+    addSequential(new IntakeDeploy());
     addSequential(new IntakeDeployHook());
   }
 }

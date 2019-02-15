@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.RobotPreferences;
-import frc.robot.commands.WaitForHatchAndPickUp;
+import frc.robot.commands.Intake.WaitForHatchAndPickUp;
 import frcteam3255.robotbase.SN_TalonSRX;
 
 /**

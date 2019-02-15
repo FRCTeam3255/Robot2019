@@ -5,13 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
 import frc.robot.RobotPreferences;
+import frc.robot.commands.DoDelay;
 import frc.robot.commands.Cascade.CascadeMove;
-import frc.robot.commands.Intake.*;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class WaitForHatchAndPickUp extends CommandGroup {
@@ -25,7 +25,7 @@ public class WaitForHatchAndPickUp extends CommandGroup {
     addSequential(new IntakeWaitForHatch());
     addSequential(new IntakeRetractHook());
     addSequential(new DoDelay(new SN_DoublePreference("hatchPickUpDelay", 0.5)));
-    addSequential(new IntakeVertical());
+    addSequential(new IntakeRetract());
     addSequential(new CascadeMove(RobotPreferences.HATCH_POSITION_1));
   }
 }

@@ -33,8 +33,8 @@ public class RobotPreferences {
 	public static final SN_DoublePreference HATCH_POSITION_1 = new SN_DoublePreference("hatchPos1", 5.0);
 	public static final SN_DoublePreference HATCH_POSITION_2 = new SN_DoublePreference("hatchPos2", 28.0);
 	public static final SN_DoublePreference HATCH_POSITION_3 = new SN_DoublePreference("hatchPos3", 51.0);
-	public static final SN_DoublePreference CARGO_POSITION_1 = new SN_DoublePreference("cargoPos1", 20.0);
-	public static final SN_DoublePreference CARGO_POSITION_2 = new SN_DoublePreference("cargoPos2", 43.0);
+	public static final SN_DoublePreference CARGO_POSITION_1 = new SN_DoublePreference("cargoPos1", 21.5);
+	public static final SN_DoublePreference CARGO_POSITION_2 = new SN_DoublePreference("cargoPos2", 47.0);
 	public static final SN_DoublePreference CARGO_POSITION_3 = new SN_DoublePreference("cargoPos3", 61.0);
 	public static final SN_DoublePreference CASCADE_BOTTOM = new SN_DoublePreference("cascadeBottom", 0.0);
 	public static final SN_DoublePreference CASCADE_BOTTOM_SPEED = new SN_DoublePreference("cascadeBottomSpeed", -0.2);
