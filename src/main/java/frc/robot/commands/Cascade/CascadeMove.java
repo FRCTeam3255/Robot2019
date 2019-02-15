@@ -18,6 +18,7 @@ public class CascadeMove extends CommandGroup {
 	public CascadeMove(SN_DoublePreference setPoint) {
 		requires(Robot.m_cascade);
 
+		addSequential(new CascadeShiftTo());
 		addSequential(new CascadeUnweight());
 		addSequential(new CascadeLift(setPoint));
 		addSequential(new CascadeLockDogtooth());

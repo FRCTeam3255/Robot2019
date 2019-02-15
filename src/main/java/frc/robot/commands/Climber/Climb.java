@@ -9,6 +9,7 @@ package frc.robot.commands.Climber;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.RobotPreferences;
+import frc.robot.commands.Cascade.CascadeDeployClimb;
 import frc.robot.commands.Cascade.CascadeMove;
 import frc.robot.commands.Cascade.CascadeResetEncoder;
 import frc.robot.commands.Drive.DriveDistance;
@@ -27,7 +28,7 @@ public class Climb extends CommandGroup {
 		addSequential(new CascadeMove(RobotPreferences.CASCADE_BOTTOM));
 		addSequential(new CascadeResetEncoder());
 		addSequential(new ClimbShiftTo());
-		addSequential(new ClimberDeploy());
+		addSequential(new CascadeDeployClimb());
 		addSequential(new ClimberLift(climbLiftD1));
 		addSequential(new DriveDistance(climbDriveD1, "Climb Drive #1"));
 		addSequential(new ClimberLift(climbLiftD2));

@@ -38,6 +38,10 @@ public class RobotPreferences {
 	public static final SN_DoublePreference CARGO_POSITION_3 = new SN_DoublePreference("cargoPos3", 61.0);
 	public static final SN_DoublePreference CASCADE_BOTTOM = new SN_DoublePreference("cascadeBottom", 0.0);
 	public static final SN_DoublePreference CASCADE_BOTTOM_SPEED = new SN_DoublePreference("cascadeBottomSpeed", -0.2);
+	public static final SN_DoublePreference CASCADE_UNWEIGHT_SPEED = new SN_DoublePreference("cascadeUnweightSpeed",
+			0.5);
+	public static final SN_DoublePreference CASCADE_UNWEIGHT_HEIGHT = new SN_DoublePreference("cascadeUnweightHeight",
+			0.3);
 
 	// Climber
 	public static final SN_DoublePreference CLIMBER_LIFT_SPEED = new SN_DoublePreference("climbLiftSpeed", 0.5);

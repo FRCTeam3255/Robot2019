@@ -10,18 +10,16 @@ package frc.robot;
 import frc.robot.commands.Cascade.CascadeMove;
 import frc.robot.commands.Cascade.CascadeMoveManual;
 import frc.robot.commands.Cascade.CascadeResetEncoder;
+import frc.robot.commands.Climber.Climb;
+import frc.robot.commands.Climber.ManualClimb;
 import frc.robot.commands.Drive.DriveDistanceRotateVision;
-import frc.robot.commands.Intake.IntakeCargoCollect;
 import frc.robot.commands.Intake.IntakeCargoCollectAndLift;
 import frc.robot.commands.Intake.IntakeDown;
 import frc.robot.commands.Intake.IntakeEject;
 import frc.robot.commands.Intake.IntakeRetractHook;
 import frc.robot.commands.Intake.IntakeUp;
-import frc.robot.commands.Vision.VisionSetDriverMode;
-import frc.robot.commands.Vision.VisionSetVisionMode;
 import frcteam3255.robotbase.Joystick.SN_DualActionStick;
 import frcteam3255.robotbase.Joystick.SN_Extreme3DStick;
-import frcteam3255.robotbase.Joystick.SN_SwitchboardStick;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 /**
@@ -52,7 +50,8 @@ public class OI {
 		manipulatorStick.btn_2.whenPressed(new IntakeCargoCollectAndLift());
 		manipulatorStick.btn_3.whenPressed(new IntakeRetractHook());
 		manipulatorStick.btn_4.whileHeld(new CascadeMoveManual());
-		// manipulatorStick.btn_4.whenPressed(new ToggleIntakeHatch());
+
+		// manipulatorStick.btn_4.whileHeld(new ManualClimb());
 		manipulatorStick.btn_5.whenPressed(new IntakeUp());
 		manipulatorStick.btn_6.whenPressed(new IntakeDown());
 		manipulatorStick.btn_7.whenPressed(new CascadeMove(RobotPreferences.HATCH_POSITION_3));

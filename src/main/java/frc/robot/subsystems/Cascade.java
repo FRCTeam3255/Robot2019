@@ -170,8 +170,10 @@ public class Cascade extends Subsystem {
 	 * bottom switches
 	 */
 	public void setLiftSpeed(double speed) {
-		if ((speed > 0 && isTopSwitchClosed()) || (speed < 0 && isBottomSwitchClosed()) || isCascadeLocked()) {
-			speed = 0.0;
+		if (isShiftedCascade()) {
+			if ((speed > 0 && isTopSwitchClosed()) || (speed < 0 && isBottomSwitchClosed()) || isCascadeLocked()) {
+				speed = 0.0;
+			}
 		}
 
 		unlockCascade();

@@ -99,9 +99,6 @@ public class Drivetrain extends Subsystem {
 		if (Robot.m_cascade.isShiftedCascade()) {
 			cascadeSpeedFactor = SN_Math.interpolate(cascadeHeight, minCascadeHeight.getValue(),
 					maxCascadeHeight.getValue(), factorAtMinCascade.getValue(), factorAtMaxCascade.getValue());
-		} else {
-			cascadeSpeedFactor = SN_Math.interpolate(cascadeHeight, minStingerHeight.getValue(),
-					maxStingerHeight.getValue(), factorAtMinStinger.getValue(), factorAtMaxStinger.getValue());
 		}
 
 		// double cascadeSpeedFactor = ((-0.01 *
