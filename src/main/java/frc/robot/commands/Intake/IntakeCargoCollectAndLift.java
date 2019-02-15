@@ -25,6 +25,6 @@ public class IntakeCargoCollectAndLift extends CommandGroup {
     addSequential(new IntakeDeploy());
     addSequential(new IntakeCargoCollect());
     addSequential(new DoDelay(new SN_DoublePreference("cargoCollectAndLift", 0.5)));
-    addSequential(new CascadeMove(RobotPreferences.CARGO_POSITION_1));
+    addSequential(new CascadeMove(1));
   }
 }

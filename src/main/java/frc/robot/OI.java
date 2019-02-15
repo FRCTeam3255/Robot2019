@@ -9,6 +9,7 @@ package frc.robot;
 
 import frc.robot.commands.Cascade.CascadeMove;
 import frc.robot.commands.Cascade.CascadeMoveManual;
+import frc.robot.commands.Cascade.CascadePosition;
 import frc.robot.commands.Cascade.CascadeResetEncoder;
 import frc.robot.commands.Drive.DriveDistanceRotateVision;
 import frc.robot.commands.Intake.IntakeCargoCollectAndLift;
@@ -36,7 +37,7 @@ public class OI {
 	public SN_Extreme3DStick manipulatorStick = new SN_Extreme3DStick(1);
 	public SN_Extreme3DStick switchboardStick = new SN_Extreme3DStick(2);
 
-	public static SN_DoublePreference VisDisSetpoint = new SN_DoublePreference("VisDisSetpoint", 24.0);
+	public static SN_DoublePreference VisDisSetpoint = new SN_DoublePreference("VisDisSetpoint", 10.0);
 	public static SN_DoublePreference VisRotSetpoint = new SN_DoublePreference("VisRotSetpoint", 0.0);
 
 	/**
@@ -51,12 +52,9 @@ public class OI {
 		// manipulatorStick.btn_4.whileHeld(new ManualClimb());
 		manipulatorStick.btn_5.whenPressed(new IntakeUp());
 		manipulatorStick.btn_6.whenPressed(new IntakeDown());
-		manipulatorStick.btn_7.whenPressed(new CascadeMove(RobotPreferences.HATCH_POSITION_3));
-		manipulatorStick.btn_8.whenPressed(new CascadeMove(RobotPreferences.CARGO_POSITION_3));
-		manipulatorStick.btn_9.whenPressed(new CascadeMove(RobotPreferences.HATCH_POSITION_2));
-		manipulatorStick.btn_10.whenPressed(new CascadeMove(RobotPreferences.CARGO_POSITION_2));
-		manipulatorStick.btn_11.whenPressed(new CascadeMove(RobotPreferences.HATCH_POSITION_1));
-		manipulatorStick.btn_12.whenPressed(new CascadeMove(RobotPreferences.CARGO_POSITION_1));
+		manipulatorStick.btn_8.whenPressed(new CascadeMove(3));
+		manipulatorStick.btn_10.whenPressed(new CascadeMove(2));
+		manipulatorStick.btn_12.whenPressed(new CascadeMove(1));
 
 		// Driver Stick
 		// driverStick.btn_RBump slow speed

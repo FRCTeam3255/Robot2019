@@ -26,6 +26,6 @@ public class WaitForHatchAndPickUp extends CommandGroup {
     addSequential(new IntakeRetractHook());
     addSequential(new DoDelay(new SN_DoublePreference("hatchPickUpDelay", 0.5)));
     addSequential(new IntakeRetract());
-    addSequential(new CascadeMove(RobotPreferences.HATCH_POSITION_1));
+    addSequential(new CascadeMove(1));
   }
 }

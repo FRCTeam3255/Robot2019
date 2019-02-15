@@ -25,7 +25,7 @@ public class Climb extends CommandGroup {
 	 * Add your docs here.
 	 */
 	public Climb() {
-		addSequential(new CascadeMove(RobotPreferences.CASCADE_BOTTOM));
+		addSequential(new CascadeMove(0));
 		addSequential(new CascadeResetEncoder());
 		addSequential(new ClimbShiftTo());
 		addSequential(new CascadeDeployClimb());

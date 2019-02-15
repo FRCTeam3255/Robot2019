@@ -94,7 +94,7 @@ public class Vision extends Subsystem {
 			return -1.0;
 		}
 
-		return (8 * 265) / w;
+		return (3.5 * 117.85) / w;
 	}
 
 	/**

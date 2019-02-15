@@ -15,13 +15,13 @@ public class CascadeMove extends CommandGroup {
 	/**
 	 * Add your docs here.
 	 */
-	public CascadeMove(SN_DoublePreference setPoint) {
+	public CascadeMove(int position) {
 		requires(Robot.m_cascade);
 		requires(Robot.m_intake);
 
 		addSequential(new CascadeShiftTo());
 		addSequential(new CascadeUnweight());
-		addSequential(new CascadeLift(setPoint));
+		addSequential(new CascadePosition(position));
 		addSequential(new CascadeLockDogtooth());
 
 		// To run multiple commands at the same time,

@@ -21,7 +21,9 @@ import frc.robot.commands.Climber.ClimbShiftTo;
 import frc.robot.commands.Drive.DriveResetEncoder;
 import frc.robot.commands.Drive.DriveResetYaw;
 import frc.robot.commands.Drive.DriveToWall;
+import frc.robot.commands.Intake.IntakeDeploy;
 import frc.robot.commands.Intake.IntakeDeployHook;
+import frc.robot.commands.Intake.IntakeRetract;
 import frc.robot.commands.Intake.IntakeRetractHook;
 import frc.robot.commands.Vision.VisionSetDriverMode;
 import frc.robot.commands.Vision.VisionSetVisionMode;
@@ -52,6 +54,8 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putData("Retract Fangs", new CascadeRetractClimb());
 		SmartDashboard.putData("Deploy Hook", new IntakeDeployHook());
 		SmartDashboard.putData("Retract Hook", new IntakeRetractHook());
+		SmartDashboard.putData("Intake Deploy", new IntakeDeploy());
+		SmartDashboard.putData("Intake Retract", new IntakeRetract());
 
 	}
 
@@ -66,6 +70,7 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putNumber("Vision Distance From Target", Robot.m_vision.getDistance());
 		SmartDashboard.putNumber("Vision Rotation", Robot.m_vision.getRotation());
 		SmartDashboard.putNumber("Vision Horizontal Offset", Robot.m_vision.getHorizontalOffset());
+		SmartDashboard.putNumber("Vision Width", Robot.m_vision.getWidth());
 		SmartDashboard.putNumber("Yaw", Robot.m_navigation.getYaw());
 		SmartDashboard.putBoolean("Target Found", Robot.m_vision.targetFound());
 		SmartDashboard.putNumber("Cascade Lift Count", Robot.m_cascade.getLiftEncoderCount());

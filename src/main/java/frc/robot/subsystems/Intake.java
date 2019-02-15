@@ -15,6 +15,7 @@ import frc.robot.RobotMap;
 import frc.robot.RobotPreferences;
 import frc.robot.commands.Intake.WaitForHatchAndPickUp;
 import frcteam3255.robotbase.SN_TalonSRX;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 /**
  * Subsytem consisting of the intake devices and methoods
@@ -116,6 +117,30 @@ public class Intake extends Subsystem {
 	// */
 	public void reloadHatch() {
 		ejectSolenoid.set(Value.kForward);
+	}
+
+	public SN_DoublePreference getP1Setpoint() {
+		if (isIntakeRetract()) {
+			return RobotPreferences.HATCH_POSITION_1;
+		} else {
+			return RobotPreferences.CARGO_POSITION_1;
+		}
+	}
+
+	public SN_DoublePreference getP2Setpoint() {
+		if (isIntakeRetract()) {
+			return RobotPreferences.HATCH_POSITION_2;
+		} else {
+			return RobotPreferences.CARGO_POSITION_2;
+		}
+	}
+
+	public SN_DoublePreference getP3Setpoint() {
+		if (isIntakeRetract()) {
+			return RobotPreferences.HATCH_POSITION_3;
+		} else {
+			return RobotPreferences.CARGO_POSITION_3;
+		}
 	}
 
 	/**
