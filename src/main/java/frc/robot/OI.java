@@ -10,8 +10,6 @@ package frc.robot;
 import frc.robot.commands.Cascade.CascadeMove;
 import frc.robot.commands.Cascade.CascadeMoveManual;
 import frc.robot.commands.Cascade.CascadeResetEncoder;
-import frc.robot.commands.Climber.Climb;
-import frc.robot.commands.Climber.ManualClimb;
 import frc.robot.commands.Drive.DriveDistanceRotateVision;
 import frc.robot.commands.Intake.IntakeCargoCollectAndLift;
 import frc.robot.commands.Intake.IntakeDown;
@@ -50,7 +48,6 @@ public class OI {
 		manipulatorStick.btn_2.whenPressed(new IntakeCargoCollectAndLift());
 		manipulatorStick.btn_3.whenPressed(new IntakeRetractHook());
 		manipulatorStick.btn_4.whileHeld(new CascadeMoveManual());
-
 		// manipulatorStick.btn_4.whileHeld(new ManualClimb());
 		manipulatorStick.btn_5.whenPressed(new IntakeUp());
 		manipulatorStick.btn_6.whenPressed(new IntakeDown());
@@ -62,6 +59,7 @@ public class OI {
 		manipulatorStick.btn_12.whenPressed(new CascadeMove(RobotPreferences.CARGO_POSITION_1));
 
 		// Driver Stick
+		// driverStick.btn_RBump slow speed
 		driverStick.btn_RTrig
 				.whileHeld(new DriveDistanceRotateVision(VisDisSetpoint, VisRotSetpoint, "DistanceRotateVision"));
 
