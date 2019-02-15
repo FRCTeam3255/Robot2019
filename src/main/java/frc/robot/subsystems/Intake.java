@@ -108,14 +108,14 @@ public class Intake extends Subsystem {
 	// * Eject the hatch by firing the pistons
 	// */
 	public void ejectHatch() {
-		ejectSolenoid.set(Value.kForward);
+		ejectSolenoid.set(Value.kReverse);
 	}
 
 	// /**
 	// * Retract the hatch ejecting pistons
 	// */
 	public void reloadHatch() {
-		ejectSolenoid.set(Value.kReverse);
+		ejectSolenoid.set(Value.kForward);
 	}
 
 	/**

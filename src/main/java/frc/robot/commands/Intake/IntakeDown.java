@@ -18,6 +18,7 @@ public class IntakeDown extends CommandGroup {
    * Add your docs here.
    */
   public IntakeDown() {
+    addSequential(new IntakeHatchReload());
     addSequential(new CascadeUnweight());
     addSequential(new CascadeBottom());
     addSequential(new CascadeLockDogtooth());

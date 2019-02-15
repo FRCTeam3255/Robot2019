@@ -22,6 +22,7 @@ public class CascadeLift extends Command {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.m_cascade);
+		requires(Robot.m_intake);
 
 		pid = new CascadePID();
 		pid.setSetpoint(inches);

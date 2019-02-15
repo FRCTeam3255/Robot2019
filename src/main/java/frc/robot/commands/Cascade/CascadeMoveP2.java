@@ -19,10 +19,8 @@ public class CascadeMoveP2 extends CommandGroup {
 
   public SN_DoublePreference getSetpoint() {
     if (Robot.m_intake.isIntakeRetract()) {
-      System.err.println("hatch position 2");
       return RobotPreferences.HATCH_POSITION_2;
     } else {
-      System.err.println("cargo position 2");
       return RobotPreferences.CARGO_POSITION_2;
     }
   }
