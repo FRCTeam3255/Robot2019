@@ -38,7 +38,7 @@ public class OI {
 	public SN_Extreme3DStick switchboardStick = new SN_Extreme3DStick(2);
 
 	public static SN_DoublePreference VisDisSetpoint = new SN_DoublePreference("VisDisSetpoint", 10.0);
-	public static SN_DoublePreference VisRotSetpoint = new SN_DoublePreference("VisRotSetpoint", 0.0);
+	public static SN_DoublePreference VisRotSetpoint = new SN_DoublePreference("VisRotSetpoint", 0.2);
 
 	/**
 	 * Assigns commands to buttons
