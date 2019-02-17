@@ -52,6 +52,9 @@ public class Intake extends Subsystem {
 		// Switches
 		hatchSwitch = new DigitalInput(RobotMap.INTAKE_HATCH_SWITCH);
 		cargoSwitch = new DigitalInput(RobotMap.INTAKE_CARGO_SWITCH);
+
+		intakeDeploy();
+		deployHook();
 	}
 
 	/**
@@ -83,7 +86,7 @@ public class Intake extends Subsystem {
 		intakeArmSolenoid.set(Value.kForward);
 	}
 
-	public boolean isIntakeRetract() {
+	public boolean isIntakeRetracted() {
 		return intakeArmSolenoid.get() == Value.kForward;
 	}
 
@@ -99,6 +102,14 @@ public class Intake extends Subsystem {
 	 */
 	public void retractHook() {
 		hatchHookSolenoid.set(Value.kForward);
+	}
+
+	public void toggleHook() {
+		if (isIntakeRetracted() == true) {
+			deployHook();
+		} else {
+			retractHook();
+		}
 	}
 
 	public boolean isHookDeployed() {
@@ -120,7 +131,7 @@ public class Intake extends Subsystem {
 	}
 
 	public SN_DoublePreference getP1Setpoint() {
-		if (isIntakeRetract()) {
+		if (isIntakeRetracted()) {
 			return RobotPreferences.HATCH_POSITION_1;
 		} else {
 			return RobotPreferences.CARGO_POSITION_1;
@@ -128,7 +139,7 @@ public class Intake extends Subsystem {
 	}
 
 	public SN_DoublePreference getP2Setpoint() {
-		if (isIntakeRetract()) {
+		if (isIntakeRetracted()) {
 			return RobotPreferences.HATCH_POSITION_2;
 		} else {
 			return RobotPreferences.CARGO_POSITION_2;
@@ -136,7 +147,7 @@ public class Intake extends Subsystem {
 	}
 
 	public SN_DoublePreference getP3Setpoint() {
-		if (isIntakeRetract()) {
+		if (isIntakeRetracted()) {
 			return RobotPreferences.HATCH_POSITION_3;
 		} else {
 			return RobotPreferences.CARGO_POSITION_3;
@@ -154,7 +165,7 @@ public class Intake extends Subsystem {
 	 * @return Check if the cargo triggered the cargo swtich
 	 */
 	public boolean isCargoCollected() {
-		return cargoSwitch.get();
+		return !cargoSwitch.get();
 	}
 
 	@Override
