@@ -10,8 +10,8 @@ package frc.robot.commands.Intake;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class AutoEject extends InstantCommand {
-  public AutoEject() {
+public class IntakeHatchEject extends InstantCommand {
+  public IntakeHatchEject() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_intake);
@@ -22,6 +22,6 @@ public class AutoEject extends InstantCommand {
   @Override
   protected void initialize() {
     Robot.m_intake.deployHook();
-    Robot.m_intake.ejectHatch();
+    Robot.m_intake.deployEjector();
   }
 }

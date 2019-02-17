@@ -5,40 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Intake;
 
-import edu.wpi.first.wpilibj.command.Command;
-import frcteam3255.robotbase.Preferences.SN_Preferences;
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.Robot;
 
 /**
- * Sets debug mode for using preferences from network tables
+ * Add your docs here.
  */
-public class SetDebugMode extends Command {
-	public SetDebugMode() {
+public class IntakeHookRetract extends InstantCommand {
+	/**
+	 * Add your docs here.
+	 */
+	public IntakeHookRetract() {
+		super();
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
+		requires(Robot.m_intake);
 	}
 
-	// Called just before this Command runs the first time
+	// Called once when the command executes
 	@Override
 	protected void initialize() {
-		// Use network tables values
-		SN_Preferences.usePreferences();
+		Robot.m_intake.retractHook();
 	}
 
-	@Override
-	protected boolean isFinished() {
-		return false;
-	}
-
-	@Override
-	protected void end() {
-		// Go back to using coded values
-		SN_Preferences.useDefaults();
-	}
-
-	@Override
-	protected void interrupted() {
-		end();
-	}
 }

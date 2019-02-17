@@ -30,8 +30,8 @@ public class RobotPreferences {
 			1.0);
 
 	// Intake Preferences
-	public static final SN_DoublePreference INTAKE_CARGO_SPEED = new SN_DoublePreference("intakeCargoSpeed", 1.0);
-	public static final SN_DoublePreference EJECT_CARGO_SPEED = new SN_DoublePreference("ejectCargoSpeed", -1.0);
+	public static final SN_DoublePreference CARGO_COLLECT_SPEED = new SN_DoublePreference("cargoCollectSpeed", 1.0);
+	public static final SN_DoublePreference CARGO_SHOOT_SPEED = new SN_DoublePreference("cargoShootSpeed", -1.0);
 
 	// Cascade Preferences
 	public static final SN_DoublePreference CASCADE_PULSES_PER_FOOT = new SN_DoublePreference("cascadePulsesPerFoot",

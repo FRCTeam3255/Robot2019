@@ -30,13 +30,13 @@ public class VisionRotatePID extends SN_PID {
 	 */
 	@Override
 	protected double returnPIDInput() {
-		double offset = 0;
+		double offset = Robot.m_vision.getHorizontalOffset();
 
-		if (Robot.m_vision.targetFound()) {
-			offset = Robot.m_vision.getHorizontalOffset();
-			this.inputValid = true;
+		if ((Robot.m_vision.targetFound() == false) || (offset > 900)) {
+			inputValid = false;
+			offset = 0;
 		} else {
-			this.inputValid = false;
+			inputValid = true;
 		}
 
 		return offset;

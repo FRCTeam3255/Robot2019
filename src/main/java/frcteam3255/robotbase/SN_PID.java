@@ -223,6 +223,14 @@ public abstract class SN_PID extends PIDSubsystem {
     return output;
   }
 
+  public boolean isInputValid() {
+    return inputValid;
+  }
+
+  public boolean isOutputValid() {
+    return outputValid;
+  }
+
   /**
    * @return Check if we stayed within the setpoint tolerance for the set amount
    *         of target counts

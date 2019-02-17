@@ -76,18 +76,18 @@ public class DriveDistanceRotateVision extends Command {
 			rotateSpeed = Robot.m_oi.driverStick.getArcadeRotate();
 
 			if (Robot.m_oi.driverStick.btn_RBump.get()) {
-				moveSpeed = moveSpeed * -RobotPreferences.slowSpeedMoveFactor.getValue();
+				moveSpeed = moveSpeed * RobotPreferences.slowSpeedMoveFactor.getValue();
 				rotateSpeed = rotateSpeed * RobotPreferences.slowSpeedRotateFactor.getValue();
 			} else {
-				moveSpeed = moveSpeed * -RobotPreferences.highSpeedMoveFactor.getValue();
+				moveSpeed = moveSpeed * RobotPreferences.highSpeedMoveFactor.getValue();
 				rotateSpeed = rotateSpeed * RobotPreferences.highSpeedRotateFactor.getValue();
 			}
 		} else {
-			moveSpeed = distancePID.getOutput();
+			moveSpeed = -distancePID.getOutput();
 			rotateSpeed = rotatePID.getOutput();
 		}
 
-		Robot.m_drivetrain.arcadeDrive(-moveSpeed, rotateSpeed);
+		Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed);
 
 		if (distancePID.onRawTarget() && rotatePID.onRawTarget()) {
 			Robot.m_lighting.setLighting(Lighting.GREEN);

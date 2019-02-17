@@ -10,21 +10,21 @@ package frc.robot.commands.Intake;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
 import frc.robot.commands.DoDelay;
-import frc.robot.commands.Cascade.CascadeMove;
+import frc.robot.commands.Cascade.CascadePositionGroup;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-public class WaitForHatchAndPickUp extends CommandGroup {
+public class IntakeWaitForHatchGroup extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public WaitForHatchAndPickUp() {
+  public IntakeWaitForHatchGroup() {
     requires(Robot.m_cascade);
     requires(Robot.m_intake);
 
     addSequential(new IntakeWaitForHatch());
-    addSequential(new IntakeRetractHook());
+    addSequential(new IntakeHookRetract());
     addSequential(new DoDelay(new SN_DoublePreference("hatchPickUpDelay", 0.5)));
     addSequential(new IntakeRetract());
-    addSequential(new CascadeMove(1));
+    addSequential(new CascadePositionGroup(1));
   }
 }

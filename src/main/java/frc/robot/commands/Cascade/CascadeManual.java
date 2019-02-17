@@ -5,29 +5,24 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Climber;
+package frc.robot.commands.Cascade;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ManualClimb extends Command {
-
+public class CascadeManual extends Command {
   double speed = 0.0;
 
-  public ManualClimb() {
+  public CascadeManual() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);\
+    // eg. requires(chassis);
     requires(Robot.m_cascade);
-    requires(Robot.m_intake);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     speed = 0.0;
-    Robot.m_cascade.shiftClimb();
-    Robot.m_cascade.unlockCascade();
-    // Robot.m_cascade.deployClimb();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -47,6 +42,7 @@ public class ManualClimb extends Command {
   @Override
   protected void end() {
     Robot.m_cascade.setLiftSpeed(0.0);
+    Robot.m_cascade.lockCascade();
   }
 
   // Called when another command which requires one or more of the same

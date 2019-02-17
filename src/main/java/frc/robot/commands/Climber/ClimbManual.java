@@ -9,25 +9,30 @@ package frc.robot.commands.Climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotPreferences;
-import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-public class ClimberLift extends Command {
-  public ClimberLift(SN_DoublePreference setPoint) {
+public class ClimbManual extends Command {
+
+  double speed = 0.0;
+
+  public ClimbManual() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    // eg. requires(chassis);\
     requires(Robot.m_cascade);
+    requires(Robot.m_intake);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    speed = 0.0;
+    Robot.m_cascade.shiftClimb();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_cascade.setLiftSpeed(RobotPreferences.CLIMBER_LIFT_SPEED.getValue());
+    speed = Robot.m_oi.manipulatorStick.getYAxis();
+    Robot.m_cascade.setLiftSpeed(speed);
   }
 
   // Make this return true when this Command no longer needs to run execute()

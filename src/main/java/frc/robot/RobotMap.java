@@ -34,7 +34,7 @@ public class RobotMap {
 	public static final int CASCADE_RIGHT_FRONT_TALON = 10;
 	public static final int CASCADE_RIGHT_BACK_TALON = 11;
 
-	public static final int DRIVETRAIN_CENTER_BACK_TALON = 12;
+	public static final int DRIVETRAIN_CLIMB_TALON = 12;
 
 	// Spark
 	public static final int LIGHTING_SPARK = 0;
@@ -59,18 +59,16 @@ public class RobotMap {
 
 	// Solenoids
 	// Intake PCM
-	public static final int INTAKE_ARM_SOLENOID_A = 4;
-	public static final int INTAKE_ARM_SOLENOID_B = 5;
-	public static final int CASCADE_CLIMB_SOLENOID_A = 2;
-	public static final int CASCADE_CLIMB_SOLENOID_B = 3;
 	public static final int INTAKE_HOOK_SOLENOID_A = 0;
 	public static final int INTAKE_HOOK_SOLENOID_B = 1;
+	public static final int INTAKE_ARM_SOLENOID_A = 2;
+	public static final int INTAKE_ARM_SOLENOID_B = 3;
+	public static final int INTAKE_EJECTOR_SOLENOID_A = 4;
+	public static final int INTAKE_EJECTOR_SOLENOID_B = 5;
 
 	// Cascade PCM
 	public static final int CASCADE_LOCK_SOLENOID_A = 0;
 	public static final int CASCADE_LOCK_SOLENOID_B = 1;
 	public static final int CASCADE_SHIFT_SOLENOID_A = 2;
 	public static final int CASCADE_SHIFT_SOLENOID_B = 3;
-	public static final int INTAKE_EJECT_SOLENOID_A = 4;
-	public static final int INTAKE_EJECT_SOLENOID_B = 5;
 }

@@ -32,10 +32,7 @@ public class DrivetrainDistancePID extends SN_PID {
 	 */
 	@Override
 	protected double returnPIDInput() {
-		// Return your input value for the PID loop
-		// e.g. a sensor, like a potentiometer:
-		// yourPot.getAverageVoltage() / kYourMaxVoltage;
 		inputValid = true;
-		return -Robot.m_drivetrain.getEncoderDistance();
+		return Robot.m_drivetrain.getEncoderDistance();
 	}
 }

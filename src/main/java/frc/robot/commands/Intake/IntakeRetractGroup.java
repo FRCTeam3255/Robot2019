@@ -7,27 +7,15 @@
 
 package frc.robot.commands.Intake;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**
- * Add your docs here.
- */
-public class IntakeHatchReload extends InstantCommand {
-	/**
-	 * Add your docs here.
-	 */
-	public IntakeHatchReload() {
-		super();
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
-		requires(Robot.m_intake);
-	}
+public class IntakeRetractGroup extends CommandGroup {
 
-	// Called once when the command executes
-	@Override
-	protected void initialize() {
-		Robot.m_intake.reloadHatch();
-	}
-
+  /**
+   * Add your docs here.
+   */
+  public IntakeRetractGroup() {
+    addSequential(new IntakeEjectorRetract());
+    addSequential(new IntakeRetract());
+  }
 }

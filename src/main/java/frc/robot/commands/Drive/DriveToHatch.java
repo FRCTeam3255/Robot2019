@@ -13,13 +13,12 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class DriveToHatch extends Command {
 
-  private static SN_DoublePreference hatchSpeed = new SN_DoublePreference("wallSpeed", 0.5);
+  private static SN_DoublePreference hatchSpeed = new SN_DoublePreference("hatchSpeed", 0.5);
 
   public DriveToHatch() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_drivetrain);
-    requires(Robot.m_navigation);
   }
 
   // Called just before this Command runs the first time
@@ -44,9 +43,6 @@ public class DriveToHatch extends Command {
   protected void end() {
     Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
     Robot.m_intake.retractHook();
-    if (Robot.m_intake.isHatchCollected()) {
-      Robot.m_lighting.setLighting(Robot.m_lighting.lightsHatch.getValue());
-    }
   }
 
   // Called when another command which requires one or more of the same

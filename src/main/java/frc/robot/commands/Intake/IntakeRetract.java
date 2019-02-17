@@ -27,6 +27,6 @@ public class IntakeRetract extends InstantCommand {
 	// Called once when the command executes
 	@Override
 	protected void initialize() {
-		Robot.m_intake.intakeRetract();
+		Robot.m_intake.retractIntake();
 	}
 }

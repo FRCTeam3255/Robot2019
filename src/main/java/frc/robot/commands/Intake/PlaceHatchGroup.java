@@ -9,21 +9,19 @@ package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.DoDelay;
-import frc.robot.commands.Cascade.CascadeBottom;
-import frc.robot.commands.Cascade.CascadeMove;
-import frc.robot.commands.Cascade.CascadeUnweight;
+import frc.robot.commands.Drive.DriveDistance;
+import frc.robot.commands.Drive.DriveToWall;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-public class IntakeCargoCollectAndLift extends CommandGroup {
-  /**
-   * Add your docs here.
-   */
-  public IntakeCargoCollectAndLift() {
-    addSequential(new CascadeUnweight());
-    addSequential(new CascadeBottom());
-    addSequential(new IntakeDeploy());
-    addSequential(new IntakeCargoCollect());
-    addSequential(new DoDelay(new SN_DoublePreference("cargoCollectAndLift", 0.5)));
-    addSequential(new CascadeMove(1));
+public class PlaceHatchGroup extends CommandGroup {
+
+  private SN_DoublePreference AutoPlaceBackup = new SN_DoublePreference("AutoPlaceBackup", -5.0);
+
+  public PlaceHatchGroup() {
+    addSequential(new DriveToWall());
+    addSequential(new IntakeHatchEject());
+    addSequential(new DoDelay(new SN_DoublePreference("AutoPlaceTimeout", 0.5)));
+    addSequential(new DriveDistance(AutoPlaceBackup, "AutoPlaceBackup"));
+    addSequential(new IntakeEjectorRetract());
   }
 }

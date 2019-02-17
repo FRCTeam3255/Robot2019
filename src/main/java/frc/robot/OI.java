@@ -7,19 +7,18 @@
 
 package frc.robot;
 
-import frc.robot.commands.Cascade.CascadeMove;
-import frc.robot.commands.Cascade.CascadeMoveManual;
+import frc.robot.commands.Cascade.CascadePositionGroup;
+import frc.robot.commands.Cascade.CascadeManualGroup;
 import frc.robot.commands.Cascade.CascadeResetEncoder;
-import frc.robot.commands.Climber.ManualClimb;
+import frc.robot.commands.Climber.ClimbManual;
 import frc.robot.commands.Drive.DriveDistanceRotateVision;
-import frc.robot.commands.Intake.AutoFeederIntake;
-import frc.robot.commands.Intake.AutoPlace;
-import frc.robot.commands.Intake.IntakeCargoCollectAndLift;
-import frc.robot.commands.Intake.IntakeDown;
-import frc.robot.commands.Intake.IntakeEject;
-import frc.robot.commands.Intake.IntakeRetractHook;
-import frc.robot.commands.Intake.IntakeToggleHook;
-import frc.robot.commands.Intake.IntakeUp;
+import frc.robot.commands.Intake.IntakeFeederGroup;
+import frc.robot.commands.Intake.PlaceHatchGroup;
+import frc.robot.commands.Intake.IntakeCargoCollectGroup;
+import frc.robot.commands.Intake.IntakeDeployGroup;
+import frc.robot.commands.Intake.HatchCargoEject;
+import frc.robot.commands.Intake.IntakeHookToggle;
+import frc.robot.commands.Intake.IntakeRetractGroup;
 import frcteam3255.robotbase.Joystick.SN_DualActionStick;
 import frcteam3255.robotbase.Joystick.SN_Extreme3DStick;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
@@ -48,23 +47,23 @@ public class OI {
 	 */
 	public OI() {
 		// Manipulator Stick
-		manipulatorStick.btn_1.whileHeld(new IntakeEject());
-		manipulatorStick.btn_2.whenPressed(new IntakeCargoCollectAndLift());
-		manipulatorStick.btn_3.whenPressed(new IntakeToggleHook());
-		manipulatorStick.btn_4.whileHeld(new CascadeMoveManual());
-		manipulatorStick.btn_5.whenPressed(new IntakeUp());
-		manipulatorStick.btn_6.whenPressed(new IntakeDown());
-		manipulatorStick.btn_8.whenPressed(new CascadeMove(3));
-		manipulatorStick.btn_9.whileHeld(new ManualClimb());
-		manipulatorStick.btn_10.whenPressed(new CascadeMove(2));
-		manipulatorStick.btn_12.whenPressed(new CascadeMove(1));
+		manipulatorStick.btn_1.whileHeld(new HatchCargoEject());
+		manipulatorStick.btn_2.whenPressed(new IntakeCargoCollectGroup());
+		manipulatorStick.btn_3.whenPressed(new IntakeHookToggle());
+		manipulatorStick.btn_4.whileHeld(new CascadeManualGroup());
+		manipulatorStick.btn_5.whenPressed(new IntakeRetractGroup());
+		manipulatorStick.btn_6.whenPressed(new IntakeDeployGroup());
+		manipulatorStick.btn_8.whenPressed(new CascadePositionGroup(3));
+		manipulatorStick.btn_9.whileHeld(new ClimbManual());
+		manipulatorStick.btn_10.whenPressed(new CascadePositionGroup(2));
+		manipulatorStick.btn_12.whenPressed(new CascadePositionGroup(1));
 
 		// Driver Stick
 		// driverStick.btn_RBump slow speed
 		driverStick.btn_RTrig
 				.whileHeld(new DriveDistanceRotateVision(VisDisSetpoint, VisRotSetpoint, "DistanceRotateVision"));
-		driverStick.btn_A.whenPressed(new AutoFeederIntake());
-		driverStick.btn_B.whenPressed(new AutoPlace());
+		driverStick.btn_A.whenPressed(new IntakeFeederGroup());
+		driverStick.btn_B.whenPressed(new PlaceHatchGroup());
 
 		// Switchboard Stick
 		switchboardStick.btn_2.whenPressed(new CascadeResetEncoder());

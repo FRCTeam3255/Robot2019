@@ -8,21 +8,20 @@
 package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.Cascade.CascadeBottom;
-import frc.robot.commands.Cascade.CascadeLockDogtooth;
-import frc.robot.commands.Cascade.CascadeUnweight;
+import frc.robot.commands.DoDelay;
+import frc.robot.commands.Cascade.CascadeBottomGroup;
+import frc.robot.commands.Cascade.CascadePositionGroup;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-public class IntakeDown extends CommandGroup {
-
+public class IntakeCargoCollectGroup extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public IntakeDown() {
-    addSequential(new IntakeHatchReload());
-    addSequential(new CascadeUnweight());
-    addSequential(new CascadeBottom());
-    addSequential(new CascadeLockDogtooth());
+  public IntakeCargoCollectGroup() {
+    addSequential(new CascadeBottomGroup());
     addSequential(new IntakeDeploy());
-    addSequential(new IntakeDeployHook());
+    addSequential(new IntakeCargoCollect());
+    addSequential(new DoDelay(new SN_DoublePreference("cargoCollectDelay", 0.5)));
+    addSequential(new CascadePositionGroup(1));
   }
 }

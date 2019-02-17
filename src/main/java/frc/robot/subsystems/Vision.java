@@ -106,10 +106,6 @@ public class Vision extends Subsystem {
 		} else {
 			visionData.getEntry("ledMode").setDouble(0);
 		}
-		try {
-			Thread.sleep(250);
-		} catch (InterruptedException e) {
-		}
 	}
 
 	public void setDriverMode() {

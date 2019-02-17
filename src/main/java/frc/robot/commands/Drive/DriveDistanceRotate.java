@@ -17,7 +17,7 @@ public class DriveDistanceRotate extends Command {
 
 	private DrivetrainDistancePID distancePID;
 	private NavXRotatePID rotatePID;
-	private SN_DoublePreference pref_timeout = new SN_DoublePreference("DriveStraightDistance_timeout", 10.0);
+	private SN_DoublePreference pref_timeout = new SN_DoublePreference("DriveDistanceRotate_timeout", 10.0);
 
 	private double expireTime = 0.0;
 

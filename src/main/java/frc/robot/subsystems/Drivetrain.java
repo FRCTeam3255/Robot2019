@@ -22,12 +22,13 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 /**
  * Subsytem containing the drivetrain devices and methoods
  */
-
 public class Drivetrain extends Subsystem {
 	private static SN_DoublePreference minCascadeHeight = new SN_DoublePreference("minCascadeHeight", 0.0);
 	private static SN_DoublePreference maxCascadeHeight = new SN_DoublePreference("maxCascadeHeight", 100.0);
 	private static SN_DoublePreference factorAtMinCascade = new SN_DoublePreference("factorAtMinCascade", 1.0);
 	private static SN_DoublePreference factorAtMaxCascade = new SN_DoublePreference("factorAtMaxCascade", 0.2);
+
+	private static SN_DoublePreference climbDriveSpeed = new SN_DoublePreference("climbDriveSpeed", 1.0);
 
 	// Talons
 	private SpeedControllerGroup leftTalons = null;
@@ -40,7 +41,7 @@ public class Drivetrain extends Subsystem {
 	private SN_TalonSRX rightMidTalon = null;
 	private SN_TalonSRX rightBackTalon = null;
 
-	private SN_TalonSRX centerBackTalon = null;
+	private SN_TalonSRX climbDriveTalon = null;
 
 	private DifferentialDrive differentialDrive = null;
 
@@ -55,61 +56,50 @@ public class Drivetrain extends Subsystem {
 		leftFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT_TALON);
 		leftMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_MID_TALON);
 		leftBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK_TALON);
+		// For BenchBot
 		// leftTalons = new SpeedControllerGroup(leftFrontTalon, leftBackTalon);
 		leftTalons = new SpeedControllerGroup(leftFrontTalon, leftMidTalon, leftBackTalon);
 
 		rightFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT_TALON);
 		rightMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_MID_TALON);
 		rightBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK_TALON);
-		// rightTalons = new SpeedControllerGroup(rightFrontTalon, rightBackTalon);
+		// For BenchBot
+		// rightTalons = new SpeedControllerGroup(rightFrontTalon, rightBackTalon); //
 		rightTalons = new SpeedControllerGroup(rightFrontTalon, rightMidTalon, rightBackTalon);
 
-		centerBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_CENTER_BACK_TALON);
+		climbDriveTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_CLIMB_TALON);
 
 		// Encoders
 		encoder = new Encoder(RobotMap.DRIVETRAIN_ENCODER_A, RobotMap.DRIVETRAIN_ENCODER_B);
 
 		differentialDrive = new DifferentialDrive(leftTalons, rightTalons);
-		differentialDrive.setSafetyEnabled(false);
-	}
-
-	/**
-	 * acradeDrive but squared inputs defaults to false
-	 * 
-	 * @param moveSpeed
-	 * @param rotateSpeed
-	 */
-	public void arcadeDrive(double moveSpeed, double rotateSpeed) {
-		arcadeDrive(moveSpeed, rotateSpeed, false);
+		differentialDrive.setSafetyEnabled(true);
 	}
 
 	/**
 	 * Drives the robot using a foward/backward (move) speed and a left right
 	 * (rotate) speed
 	 */
-	public void arcadeDrive(double moveSpeed, double rotateSpeed, boolean squaredInputs) {
+	public void arcadeDrive(double moveSpeed, double rotateSpeed) {
 		double cascadeSpeedFactor = 1.0;
 
-		double cascadeHeight = Math.abs(Robot.m_cascade.getLiftEncoderDistance());
 		if (Robot.m_cascade.isShiftedCascade()) {
+			double cascadeHeight = Math.abs(Robot.m_cascade.getLiftEncoderDistance());
 			cascadeSpeedFactor = SN_Math.interpolate(cascadeHeight, minCascadeHeight.getValue(),
 					maxCascadeHeight.getValue(), factorAtMinCascade.getValue(), factorAtMaxCascade.getValue());
 		}
 
-		// double cascadeSpeedFactor = ((-0.01 *
-		// Math.abs(Robot.m_cascade.getLiftEncoderDistance())) + 1);
-
 		moveSpeed = moveSpeed * cascadeSpeedFactor;
 		rotateSpeed = rotateSpeed * cascadeSpeedFactor;
 
-		differentialDrive.arcadeDrive(moveSpeed, rotateSpeed, squaredInputs);
+		differentialDrive.arcadeDrive(moveSpeed, rotateSpeed, false);
 	}
 
 	/**
 	 * @return Default scaled encoder count
 	 */
 	public double getEncoderCount() {
-		return -encoder.get();
+		return encoder.get();
 	}
 
 	/**
@@ -127,12 +117,17 @@ public class Drivetrain extends Subsystem {
 	}
 
 	/**
-	 * Set the speed for the center back wheel
-	 * 
-	 * @param speed
+	 * turn on the climb drive wheel
 	 */
-	public void setBackSpeed(double speed) {
-		centerBackTalon.set(speed);
+	public void enableClimbDrive() {
+		climbDriveTalon.set(climbDriveSpeed.getValue());
+	}
+
+	/**
+	 * turn off the climb drive wheel
+	 */
+	public void disableClimbDrive() {
+		climbDriveTalon.set(0.0);
 	}
 
 	@Override

@@ -7,28 +7,16 @@
 
 package frc.robot.commands.Cascade;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**
- * Add your docs here.
- */
-public class CascadeRetractClimb extends InstantCommand {
+public class CascadeBottomGroup extends CommandGroup {
 	/**
 	 * Add your docs here.
 	 */
-	public CascadeRetractClimb() {
-		super();
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
-		requires(Robot.m_cascade);
-		requires(Robot.m_intake);
+	public CascadeBottomGroup() {
+		addSequential(new CascadeShiftTo());
+		addSequential(new CascadeUnweight());
+		addSequential(new CascadeBottom());
+		addSequential(new CascadeLockDogtooth());
 	}
-
-	// Called once when the command executes
-	@Override
-	protected void initialize() {
-		Robot.m_cascade.retractClimb();
-	}
-
 }

@@ -57,8 +57,10 @@ public class DriveDistance extends Command {
 
 		Robot.m_drivetrain.arcadeDrive(moveSpeed, 0.0);
 
-		if (Robot.m_cascade.isClimberDeployed() && (moveSpeed < 0.0)) {
-			Robot.m_drivetrain.setBackSpeed(1.0);
+		if (Robot.m_cascade.isShiftedClimb() && (moveSpeed < 0.0)) {
+			Robot.m_drivetrain.enableClimbDrive();
+		} else {
+			Robot.m_drivetrain.disableClimbDrive();
 		}
 	}
 

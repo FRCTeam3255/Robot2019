@@ -10,11 +10,8 @@ package frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotPreferences;
-import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class DriveArcade extends Command {
-	private static SN_DoublePreference frontSpeed = new SN_DoublePreference("frontSpeed", 1.0);
-
 	public DriveArcade() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -39,12 +36,12 @@ public class DriveArcade extends Command {
 			moveSpeed = moveSpeed * RobotPreferences.highSpeedMoveFactor.getValue();
 			rotateSpeed = rotateSpeed * RobotPreferences.highSpeedRotateFactor.getValue();
 		}
-		Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed, false);
+		Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed);
 
-		if (Robot.m_cascade.isClimberDeployed() && (moveSpeed < 0)) {
-			Robot.m_drivetrain.setBackSpeed(frontSpeed.getValue());
+		if (Robot.m_cascade.isShiftedClimb() && (moveSpeed < 0)) {
+			Robot.m_drivetrain.enableClimbDrive();
 		} else {
-			Robot.m_drivetrain.setBackSpeed(0.0);
+			Robot.m_drivetrain.disableClimbDrive();
 		}
 	}
 

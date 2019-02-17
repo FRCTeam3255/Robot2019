@@ -32,20 +32,15 @@ public class VisionDistancePID extends SN_PID {
 	 */
 	@Override
 	protected double returnPIDInput() {
-		// Return your input value for the PID loop
-		// e.g. a sensor, like a potentiometer:
-		// yourPot.getAverageVoltage() / kYourMaxVoltage;
 		double d = Robot.m_vision.getDistance();
 
-		if (d < 0) {
+		if ((Robot.m_vision.targetFound() == false) || (d < 0)) {
 			inputValid = false;
-			return -1;
+			d = 0;
+		} else {
+			inputValid = true;
 		}
-		inputValid = true;
-		return d;
-	}
 
-	public boolean isOutputValid() {
-		return inputValid;
+		return d;
 	}
 }

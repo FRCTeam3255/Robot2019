@@ -9,38 +9,22 @@ package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.DoDelay;
-import frc.robot.commands.Cascade.CascadeMove;
+import frc.robot.commands.Cascade.CascadePositionGroup;
 import frc.robot.commands.Drive.DriveDistance;
 import frc.robot.commands.Drive.DriveToHatch;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-public class AutoFeederIntake extends CommandGroup {
+public class IntakeFeederGroup extends CommandGroup {
   /**
    * Add your docs here.
    */
   private SN_DoublePreference AutoIntakeBackup = new SN_DoublePreference("AutoIntakeBackup", -5.0);
 
-  public AutoFeederIntake() {
-    // Add Commands here:
-    // e.g. addSequential(new Command1());
-    // addSequential(new Command2());
-    // these will run in order.
-
-    // To run multiple commands at the same time,
-    // use addParallel()
-    // e.g. addParallel(new Command1());
-    // addSequential(new Command2());
-    // Command1 and Command2 will run in parallel.
-
-    // A command group will require all of the subsystems that each member
-    // would require.
-    // e.g. if Command1 requires chassis, and Command2 requires arm,
-    // a CommandGroup containing them would require both the chassis and the
-    // arm.
-    addSequential(new IntakeDeployHook());
+  public IntakeFeederGroup() {
+    addSequential(new IntakeHookDeploy());
     addSequential(new DriveToHatch());
     addSequential(new DoDelay(new SN_DoublePreference("AutoIntakeTimeout", 0.5)));
-    addSequential(new CascadeMove(1));
+    addSequential(new CascadePositionGroup(1));
     addSequential(new DriveDistance(AutoIntakeBackup, "AutoIntakeBackup"));
   }
 }

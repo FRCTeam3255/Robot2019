@@ -41,7 +41,6 @@ public class CascadePosition extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		Robot.m_telemetry.setCommandStatus("Starting CascadeLift" + ": " + pid.getSetpoint());
 		expireTime = timeSinceInitialized() + pref_timeout.getValue();
 		if (m_position == 1) {
 			setpoint = Robot.m_intake.getP1Setpoint();
@@ -50,29 +49,18 @@ public class CascadePosition extends Command {
 		} else if (m_position == 3) {
 			setpoint = Robot.m_intake.getP3Setpoint();
 		} else {
-			setpoint = RobotPreferences.CASCADE_BOTTOM;
+			setpoint = Robot.m_intake.getP1Setpoint();
 		}
 		pid.setSetpoint(setpoint);
 		pid.enable();
+
+		Robot.m_telemetry.setCommandStatus("Starting CascadeLift" + ": " + pid.getSetpoint());
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		Robot.m_telemetry.setCommandStatus("Executing CascadeLift");
-
-		// if (moveSpeed < 0 & Robot.m_cascade.getLiftEncoderDistance() <= 50) {
-		// moveSpeed = pid.getOutput();
-
-		// }
-
-		// else if (pid.getOutput() > 0) {
-		// moveSpeed = -RobotPreferences.CASCADE_LIFT_SPEED.getValue();
-		// }
-
-		// else {
-		// moveSpeed = RobotPreferences.CASCADE_LIFT_SPEED.getValue();
-		// }
 
 		Robot.m_cascade.setLiftSpeed(pid.getOutput());
 	}

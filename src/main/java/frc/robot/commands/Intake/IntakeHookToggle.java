@@ -5,30 +5,22 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Cascade;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
-public class CascadeDeployClimb extends InstantCommand {
-	/**
-	 * Add your docs here.
-	 */
-	public CascadeDeployClimb() {
-		super();
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
-		requires(Robot.m_cascade);
-		requires(Robot.m_intake);
-	}
+public class IntakeHookToggle extends InstantCommand {
+  public IntakeHookToggle() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    super();
+    requires(Robot.m_intake);
+  }
 
-	// Called once when the command executes
-	@Override
-	protected void initialize() {
-		Robot.m_cascade.deployClimb();
-	}
-
+  // Called just before this Command runs the first time
+  @Override
+  protected void initialize() {
+    Robot.m_intake.toggleHook();
+  }
 }
