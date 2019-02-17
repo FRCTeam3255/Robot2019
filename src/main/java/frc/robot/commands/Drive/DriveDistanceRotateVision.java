@@ -9,6 +9,7 @@ package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotPreferences;
 import frc.robot.subsystems.Lighting;
 import frc.robot.subsystems.VisionDistancePID;
 import frc.robot.subsystems.VisionRotatePID;
@@ -22,6 +23,8 @@ public class DriveDistanceRotateVision extends Command {
 	private String name;
 
 	private double expireTime = 0.0;
+	private double moveSpeed = 0.0;
+	private double rotateSpeed = 0.0;
 
 	public DriveDistanceRotateVision(SN_DoublePreference inches, SN_DoublePreference degrees, String commandName) {
 		// Use requires() here to declare subsystem dependencies
@@ -65,8 +68,24 @@ public class DriveDistanceRotateVision extends Command {
 	protected void execute() {
 		Robot.m_telemetry.setCommandStatus("Executing DriveDistanceRotateVision " + name + ": "
 				+ distancePID.getSetpoint() + " " + rotatePID.getSetpoint());
-		double moveSpeed = distancePID.getOutput();
-		double rotateSpeed = rotatePID.getOutput();
+
+		if (distancePID.isOutputValid() == false || rotatePID.isOutputValid() == false) {
+			// get the moveSpeed from a joystick method that contains all the logic
+			// from arcade drive that computes moveSpeed from joystick input
+			moveSpeed = Robot.m_oi.driverStick.getArcadeMove();
+			rotateSpeed = Robot.m_oi.driverStick.getArcadeRotate();
+
+			if (Robot.m_oi.driverStick.btn_RBump.get()) {
+				moveSpeed = moveSpeed * -RobotPreferences.slowSpeedMoveFactor.getValue();
+				rotateSpeed = rotateSpeed * RobotPreferences.slowSpeedRotateFactor.getValue();
+			} else {
+				moveSpeed = moveSpeed * -RobotPreferences.highSpeedMoveFactor.getValue();
+				rotateSpeed = rotateSpeed * RobotPreferences.highSpeedRotateFactor.getValue();
+			}
+		} else {
+			moveSpeed = distancePID.getOutput();
+			rotateSpeed = rotatePID.getOutput();
+		}
 
 		Robot.m_drivetrain.arcadeDrive(-moveSpeed, rotateSpeed);
 

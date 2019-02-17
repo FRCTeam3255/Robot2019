@@ -41,4 +41,8 @@ public class VisionRotatePID extends SN_PID {
 
 		return offset;
 	}
+
+	public boolean isOutputValid() {
+		return inputValid;
+	}
 }

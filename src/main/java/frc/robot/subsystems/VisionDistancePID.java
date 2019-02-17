@@ -44,4 +44,8 @@ public class VisionDistancePID extends SN_PID {
 		inputValid = true;
 		return d;
 	}
+
+	public boolean isOutputValid() {
+		return inputValid;
+	}
 }

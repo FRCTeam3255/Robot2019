@@ -7,17 +7,21 @@
 
 package frc.robot.commands.Intake;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.Cascade.CascadeMove;
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.Robot;
 
-public class IntakeUp extends CommandGroup {
+public class AutoEject extends InstantCommand {
+  public AutoEject() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    requires(Robot.m_intake);
+    requires(Robot.m_cascade);
+  }
 
-  /**
-   * Add your docs here.
-   */
-  public IntakeUp() {
-    addSequential(new IntakeHatchReload());
-    addSequential(new IntakeRetract());
-    // addParallel(new CascadeMove(1));
+  // Called just before this Command runs the first time
+  @Override
+  protected void initialize() {
+    Robot.m_intake.deployHook();
+    Robot.m_intake.ejectHatch();
   }
 }

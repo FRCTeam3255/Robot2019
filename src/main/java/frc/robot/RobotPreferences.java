@@ -22,6 +22,12 @@ public class RobotPreferences {
 	public static final SN_DoublePreference DRIVETRAIN_CLIMB_SETPOINT = new SN_DoublePreference("drivetrainClimb",
 			25.0);
 	public static final SN_DoublePreference DECELERATION_SPEED = new SN_DoublePreference("decelerationSpeed", 0.5);
+	public static final SN_DoublePreference slowSpeedMoveFactor = new SN_DoublePreference("slowSpeedMoveFactor", 0.5);
+	public static final SN_DoublePreference slowSpeedRotateFactor = new SN_DoublePreference("slowSpeedRotateFactor",
+			0.3);
+	public static final SN_DoublePreference highSpeedMoveFactor = new SN_DoublePreference("highSpeedMoveFactor", 1.0);
+	public static final SN_DoublePreference highSpeedRotateFactor = new SN_DoublePreference("highSpeedRotateFactor",
+			1.0);
 
 	// Intake Preferences
 	public static final SN_DoublePreference INTAKE_CARGO_SPEED = new SN_DoublePreference("intakeCargoSpeed", 1.0);

@@ -9,7 +9,6 @@ package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
-import frc.robot.RobotPreferences;
 import frc.robot.commands.DoDelay;
 import frc.robot.commands.Cascade.CascadeMove;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;

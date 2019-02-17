@@ -85,7 +85,7 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putBoolean("Cargo Collected", Robot.m_intake.isCargoCollected());
 		SmartDashboard.putBoolean("Hatch Collected", Robot.m_intake.isHatchCollected());
 		SmartDashboard.putBoolean("Is Shifted To Cascade", Robot.m_cascade.isShiftedCascade());
-		SmartDashboard.putBoolean("Intake Retracted", Robot.m_intake.isIntakeRetract());
+		SmartDashboard.putBoolean("Intake Retracted", Robot.m_intake.isIntakeRetracted());
 
 		SmartDashboard.putData("Running Commands", Scheduler.getInstance());
 	}

@@ -9,14 +9,11 @@ package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotPreferences;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class DriveArcade extends Command {
 	private static SN_DoublePreference frontSpeed = new SN_DoublePreference("frontSpeed", 1.0);
-	private static SN_DoublePreference slowSpeedMoveFactor = new SN_DoublePreference("slowSpeedMoveFactor", 0.5);
-	private static SN_DoublePreference slowSpeedRotateFactor = new SN_DoublePreference("slowSpeedRotateFactor", 0.3);
-	private static SN_DoublePreference highSpeedMoveFactor = new SN_DoublePreference("highSpeedMoveFactor", 1.0);
-	private static SN_DoublePreference highSpeedRotateFactor = new SN_DoublePreference("highSpeedRotateFactor", 1.0);
 
 	public DriveArcade() {
 		// Use requires() here to declare subsystem dependencies
@@ -36,11 +33,11 @@ public class DriveArcade extends Command {
 		double rotateSpeed = Robot.m_oi.driverStick.getArcadeRotate();
 
 		if (Robot.m_oi.driverStick.btn_RBump.get()) {
-			moveSpeed = moveSpeed * slowSpeedMoveFactor.getValue();
-			rotateSpeed = rotateSpeed * slowSpeedRotateFactor.getValue();
+			moveSpeed = moveSpeed * RobotPreferences.slowSpeedMoveFactor.getValue();
+			rotateSpeed = rotateSpeed * RobotPreferences.slowSpeedRotateFactor.getValue();
 		} else {
-			moveSpeed = moveSpeed * highSpeedMoveFactor.getValue();
-			rotateSpeed = rotateSpeed * highSpeedRotateFactor.getValue();
+			moveSpeed = moveSpeed * RobotPreferences.highSpeedMoveFactor.getValue();
+			rotateSpeed = rotateSpeed * RobotPreferences.highSpeedRotateFactor.getValue();
 		}
 		Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed, false);
 

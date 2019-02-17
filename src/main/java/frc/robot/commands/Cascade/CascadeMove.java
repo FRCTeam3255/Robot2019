@@ -9,7 +9,6 @@ package frc.robot.commands.Cascade;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
-import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class CascadeMove extends CommandGroup {
 	/**

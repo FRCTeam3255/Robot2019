@@ -14,6 +14,7 @@ public class CascadeMoveManual extends CommandGroup {
 	 * Add your docs here.
 	 */
 	public CascadeMoveManual() {
+		addSequential(new CascadeShiftTo());
 		addSequential(new CascadeUnweight());
 		addSequential(new CascadeLiftManual());
 		addSequential(new CascadeLockDogtooth());

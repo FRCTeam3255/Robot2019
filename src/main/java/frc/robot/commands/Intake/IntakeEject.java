@@ -20,15 +20,17 @@ public class IntakeEject extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
+		if (Robot.m_intake.isIntakeRetracted()) {
+			Robot.m_intake.deployHook();
+			Robot.m_intake.ejectHatch();
+		}
+
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		if (Robot.m_intake.isIntakeRetract()) {
-			Robot.m_intake.deployHook();
-			Robot.m_intake.ejectHatch();
-		} else {
+		if (!Robot.m_intake.isIntakeRetracted()) {
 			Robot.m_intake.shootCargo();
 		}
 	}
@@ -42,7 +44,7 @@ public class IntakeEject extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		if (Robot.m_intake.isIntakeRetract()) {
+		if (Robot.m_intake.isIntakeRetracted()) {
 			Robot.m_intake.reloadHatch();
 		} else {
 			Robot.m_intake.holdCargo();

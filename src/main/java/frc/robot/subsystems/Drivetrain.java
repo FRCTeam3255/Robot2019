@@ -29,11 +29,6 @@ public class Drivetrain extends Subsystem {
 	private static SN_DoublePreference factorAtMinCascade = new SN_DoublePreference("factorAtMinCascade", 1.0);
 	private static SN_DoublePreference factorAtMaxCascade = new SN_DoublePreference("factorAtMaxCascade", 0.2);
 
-	private static SN_DoublePreference minStingerHeight = new SN_DoublePreference("minStingerHeight", 0.0);
-	private static SN_DoublePreference maxStingerHeight = new SN_DoublePreference("maxStingerHeight", 30.0);
-	private static SN_DoublePreference factorAtMinStinger = new SN_DoublePreference("factorAtMinStinger", 0.5);
-	private static SN_DoublePreference factorAtMaxStinger = new SN_DoublePreference("factorAtMaxStinger", 0.2);
-
 	// Talons
 	private SpeedControllerGroup leftTalons = null;
 	private SN_TalonSRX leftFrontTalon = null;

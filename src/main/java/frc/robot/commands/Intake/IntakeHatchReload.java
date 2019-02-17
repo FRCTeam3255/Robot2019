@@ -27,7 +27,7 @@ public class IntakeHatchReload extends InstantCommand {
 	// Called once when the command executes
 	@Override
 	protected void initialize() {
-		// Robot.m_intake.reloadHatch();
+		Robot.m_intake.reloadHatch();
 	}
 
 }

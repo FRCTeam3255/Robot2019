@@ -9,13 +9,16 @@ package frc.robot;
 
 import frc.robot.commands.Cascade.CascadeMove;
 import frc.robot.commands.Cascade.CascadeMoveManual;
-import frc.robot.commands.Cascade.CascadePosition;
 import frc.robot.commands.Cascade.CascadeResetEncoder;
+import frc.robot.commands.Climber.ManualClimb;
 import frc.robot.commands.Drive.DriveDistanceRotateVision;
+import frc.robot.commands.Intake.AutoFeederIntake;
+import frc.robot.commands.Intake.AutoPlace;
 import frc.robot.commands.Intake.IntakeCargoCollectAndLift;
 import frc.robot.commands.Intake.IntakeDown;
 import frc.robot.commands.Intake.IntakeEject;
 import frc.robot.commands.Intake.IntakeRetractHook;
+import frc.robot.commands.Intake.IntakeToggleHook;
 import frc.robot.commands.Intake.IntakeUp;
 import frcteam3255.robotbase.Joystick.SN_DualActionStick;
 import frcteam3255.robotbase.Joystick.SN_Extreme3DStick;
@@ -47,12 +50,12 @@ public class OI {
 		// Manipulator Stick
 		manipulatorStick.btn_1.whileHeld(new IntakeEject());
 		manipulatorStick.btn_2.whenPressed(new IntakeCargoCollectAndLift());
-		manipulatorStick.btn_3.whenPressed(new IntakeRetractHook());
+		manipulatorStick.btn_3.whenPressed(new IntakeToggleHook());
 		manipulatorStick.btn_4.whileHeld(new CascadeMoveManual());
-		// manipulatorStick.btn_4.whileHeld(new ManualClimb());
 		manipulatorStick.btn_5.whenPressed(new IntakeUp());
 		manipulatorStick.btn_6.whenPressed(new IntakeDown());
 		manipulatorStick.btn_8.whenPressed(new CascadeMove(3));
+		manipulatorStick.btn_9.whileHeld(new ManualClimb());
 		manipulatorStick.btn_10.whenPressed(new CascadeMove(2));
 		manipulatorStick.btn_12.whenPressed(new CascadeMove(1));
 
@@ -60,6 +63,8 @@ public class OI {
 		// driverStick.btn_RBump slow speed
 		driverStick.btn_RTrig
 				.whileHeld(new DriveDistanceRotateVision(VisDisSetpoint, VisRotSetpoint, "DistanceRotateVision"));
+		driverStick.btn_A.whenPressed(new AutoFeederIntake());
+		driverStick.btn_B.whenPressed(new AutoPlace());
 
 		// Switchboard Stick
 		switchboardStick.btn_2.whenPressed(new CascadeResetEncoder());
