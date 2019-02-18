@@ -30,11 +30,11 @@ public class DriveArcade extends Command {
 		double rotateSpeed = Robot.m_oi.driverStick.getArcadeRotate();
 
 		if (Robot.m_oi.driverStick.btn_RBump.get()) {
-			moveSpeed = moveSpeed * RobotPreferences.slowSpeedMoveFactor.getValue();
-			rotateSpeed = rotateSpeed * RobotPreferences.slowSpeedRotateFactor.getValue();
+			moveSpeed = moveSpeed * RobotPreferences.SLOW_SPEED_MOVE_FACTOR.getValue();
+			rotateSpeed = rotateSpeed * RobotPreferences.SLOW_SPEED_ROTATE_FACTOR.getValue();
 		} else {
-			moveSpeed = moveSpeed * RobotPreferences.highSpeedMoveFactor.getValue();
-			rotateSpeed = rotateSpeed * RobotPreferences.highSpeedRotateFactor.getValue();
+			moveSpeed = moveSpeed * RobotPreferences.HIGH_SPEED_MOVE_FACTOR.getValue();
+			rotateSpeed = rotateSpeed * RobotPreferences.HIGH_SPEED_ROTATE_FACTOR.getValue();
 		}
 		Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed);
 

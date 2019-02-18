@@ -10,12 +10,9 @@ package frc.robot.commands.Cascade;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
 public class CascadeShiftTo extends InstantCommand {
 	/**
-	 * Add your docs here.
+	 * Shifts to cascade mode
 	 */
 	public CascadeShiftTo() {
 		super();

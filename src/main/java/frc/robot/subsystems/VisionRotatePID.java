@@ -15,7 +15,6 @@ import frcteam3255.robotbase.SN_PID;
  * PID class based on the horizontal offset of vision targets
  */
 public class VisionRotatePID extends SN_PID {
-
 	/**
 	 * Creates a VisionRotatePID loop and sets PID values
 	 */

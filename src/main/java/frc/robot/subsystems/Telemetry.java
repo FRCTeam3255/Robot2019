@@ -11,29 +11,17 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.commands.Cascade.CascadeLockDogtooth;
-import frc.robot.commands.Cascade.CascadeResetEncoder;
-import frc.robot.commands.Cascade.CascadeShiftTo;
-import frc.robot.commands.Cascade.CascadeUnlockDogtooth;
-import frc.robot.commands.Climber.ClimbShiftTo;
-import frc.robot.commands.Drive.DriveResetEncoder;
-import frc.robot.commands.Drive.DriveResetYaw;
-import frc.robot.commands.Drive.DriveToWall;
-import frc.robot.commands.Intake.IntakeDeploy;
-import frc.robot.commands.Intake.IntakeHookDeploy;
-import frc.robot.commands.Intake.IntakeRetract;
-import frc.robot.commands.Intake.IntakeHookRetract;
-import frc.robot.commands.Vision.VisionSetDriverMode;
-import frc.robot.commands.Vision.VisionSetVisionMode;
+import frc.robot.commands.Cascade.*;
+import frc.robot.commands.Climber.*;
+import frc.robot.commands.Drive.*;
+import frc.robot.commands.Intake.*;
+import frc.robot.commands.Vision.*;
 import frcteam3255.robotbase.Preferences.SN_Preferences;
 
 /**
  * Subsystem containing board telemetry methoods
  */
 public class Telemetry extends Subsystem {
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
-
 	/**
 	 * Put command buttons on the board
 	 */
@@ -109,8 +97,6 @@ public class Telemetry extends Subsystem {
 
 	@Override
 	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
 	}
 
 	/**

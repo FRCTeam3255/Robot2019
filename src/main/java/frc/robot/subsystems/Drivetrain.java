@@ -23,12 +23,12 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
  * Subsytem containing the drivetrain devices and methoods
  */
 public class Drivetrain extends Subsystem {
-	private static SN_DoublePreference minCascadeHeight = new SN_DoublePreference("minCascadeHeight", 0.0);
-	private static SN_DoublePreference maxCascadeHeight = new SN_DoublePreference("maxCascadeHeight", 100.0);
-	private static SN_DoublePreference factorAtMinCascade = new SN_DoublePreference("factorAtMinCascade", 1.0);
-	private static SN_DoublePreference factorAtMaxCascade = new SN_DoublePreference("factorAtMaxCascade", 0.2);
+	private static SN_DoublePreference MIN_CASCADE_HEIGHT = new SN_DoublePreference("minCascadeHeight", 0.0);
+	private static SN_DoublePreference MAX_CASCADE_HEIGHT = new SN_DoublePreference("maxCascadeHeight", 100.0);
+	private static SN_DoublePreference FACTOR_AT_MIN_CASCADE = new SN_DoublePreference("factorAtMinCascade", 1.0);
+	private static SN_DoublePreference FACTOR_AT_MAX_CASCADE = new SN_DoublePreference("factorAtMaxCascade", 0.2);
 
-	private static SN_DoublePreference climbDriveSpeed = new SN_DoublePreference("climbDriveSpeed", 1.0);
+	private static SN_DoublePreference CLIMB_DRIVE_SPEED = new SN_DoublePreference("climbDriveSpeed", 1.0);
 
 	// Talons
 	private SpeedControllerGroup leftTalons = null;
@@ -78,15 +78,15 @@ public class Drivetrain extends Subsystem {
 
 	/**
 	 * Drives the robot using a foward/backward (move) speed and a left right
-	 * (rotate) speed
+	 * (rotate) speed. Ramp the speed in cascade mode.
 	 */
 	public void arcadeDrive(double moveSpeed, double rotateSpeed) {
 		double cascadeSpeedFactor = 1.0;
 
 		if (Robot.m_cascade.isShiftedCascade()) {
 			double cascadeHeight = Math.abs(Robot.m_cascade.getLiftEncoderDistance());
-			cascadeSpeedFactor = SN_Math.interpolate(cascadeHeight, minCascadeHeight.getValue(),
-					maxCascadeHeight.getValue(), factorAtMinCascade.getValue(), factorAtMaxCascade.getValue());
+			cascadeSpeedFactor = SN_Math.interpolate(cascadeHeight, MIN_CASCADE_HEIGHT.getValue(),
+					MAX_CASCADE_HEIGHT.getValue(), FACTOR_AT_MIN_CASCADE.getValue(), FACTOR_AT_MAX_CASCADE.getValue());
 		}
 
 		moveSpeed = moveSpeed * cascadeSpeedFactor;
@@ -117,14 +117,14 @@ public class Drivetrain extends Subsystem {
 	}
 
 	/**
-	 * turn on the climb drive wheel
+	 * Turn on the climb drive wheel
 	 */
 	public void enableClimbDrive() {
-		climbDriveTalon.set(climbDriveSpeed.getValue());
+		climbDriveTalon.set(CLIMB_DRIVE_SPEED.getValue());
 	}
 
 	/**
-	 * turn off the climb drive wheel
+	 * urn off the climb drive wheel
 	 */
 	public void disableClimbDrive() {
 		climbDriveTalon.set(0.0);
@@ -132,8 +132,6 @@ public class Drivetrain extends Subsystem {
 
 	@Override
 	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
 		setDefaultCommand(new DriveArcade());
 	}
 }

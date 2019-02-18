@@ -10,12 +10,9 @@ package frc.robot.commands.Climber;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
 public class ClimbShiftTo extends InstantCommand {
 	/**
-	 * Add your docs here.
+	 * Shifts to climber mode
 	 */
 	public ClimbShiftTo() {
 		super();

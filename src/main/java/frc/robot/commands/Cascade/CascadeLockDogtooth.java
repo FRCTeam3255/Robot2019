@@ -10,12 +10,9 @@ package frc.robot.commands.Cascade;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
 public class CascadeLockDogtooth extends InstantCommand {
 	/**
-	 * Add your docs here.
+	 * Moves cascade to the bottom switch and resets the encoder
 	 */
 	public CascadeLockDogtooth() {
 		super();

@@ -26,7 +26,22 @@ public class DriveDistanceRotateVision extends Command {
 	private double moveSpeed = 0.0;
 	private double rotateSpeed = 0.0;
 
-	public DriveDistanceRotateVision(SN_DoublePreference inches, SN_DoublePreference degrees, String commandName) {
+	/**
+	 * <li>Assists the driver with vision. If output is invalid lets driver
+	 * control.</li>
+	 * <li>Driver RBump uses slow speed.</li>
+	 * <li>Sets lighting for targeting:</li>
+	 * <ul>
+	 * <li>Green: Maintained distance/offset setpoints.</li>
+	 * <li>Yellow: Sees target.</li>
+	 * <li>Red: No target.</li>
+	 * </ul>
+	 * 
+	 * @param inches
+	 * @param offset
+	 * @param commandName
+	 */
+	public DriveDistanceRotateVision(SN_DoublePreference inches, SN_DoublePreference offset, String commandName) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.m_drivetrain);
@@ -36,7 +51,7 @@ public class DriveDistanceRotateVision extends Command {
 		rotatePID = new VisionRotatePID();
 
 		distancePID.setSetpoint(inches);
-		rotatePID.setSetpoint(degrees);
+		rotatePID.setSetpoint(offset);
 		name = commandName;
 	}
 
@@ -76,11 +91,11 @@ public class DriveDistanceRotateVision extends Command {
 			rotateSpeed = Robot.m_oi.driverStick.getArcadeRotate();
 
 			if (Robot.m_oi.driverStick.btn_RBump.get()) {
-				moveSpeed = moveSpeed * RobotPreferences.slowSpeedMoveFactor.getValue();
-				rotateSpeed = rotateSpeed * RobotPreferences.slowSpeedRotateFactor.getValue();
+				moveSpeed = moveSpeed * RobotPreferences.SLOW_SPEED_MOVE_FACTOR.getValue();
+				rotateSpeed = rotateSpeed * RobotPreferences.SLOW_SPEED_ROTATE_FACTOR.getValue();
 			} else {
-				moveSpeed = moveSpeed * RobotPreferences.highSpeedMoveFactor.getValue();
-				rotateSpeed = rotateSpeed * RobotPreferences.highSpeedRotateFactor.getValue();
+				moveSpeed = moveSpeed * RobotPreferences.HIGH_SPEED_MOVE_FACTOR.getValue();
+				rotateSpeed = rotateSpeed * RobotPreferences.HIGH_SPEED_ROTATE_FACTOR.getValue();
 			}
 		} else {
 			moveSpeed = -distancePID.getOutput();

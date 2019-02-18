@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
 public class IntakeHatchEject extends InstantCommand {
+  /**
+   * Deploys hatch hook and ejector pistions
+   */
   public IntakeHatchEject() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -24,4 +27,5 @@ public class IntakeHatchEject extends InstantCommand {
     Robot.m_intake.deployHook();
     Robot.m_intake.deployEjector();
   }
+
 }

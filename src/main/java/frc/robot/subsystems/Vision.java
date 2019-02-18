@@ -15,8 +15,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Subsytem containing vision networktables and methoods
  */
 public class Vision extends Subsystem {
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
 
 	public static NetworkTable visionData = null;
 
@@ -118,7 +116,5 @@ public class Vision extends Subsystem {
 
 	@Override
 	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
 	}
 }

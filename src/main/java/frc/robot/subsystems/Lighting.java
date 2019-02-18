@@ -17,13 +17,12 @@ import frc.robot.commands.UpdateLighting;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 /**
- * Add your docs here.
+ * Subystem conrolling the REV BLinkin module
  */
 public class Lighting extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
   private Spark lighting = null;
 
+  // Color frequencies
   public static final double RED = 0.60;
   public static final double BLUE = 0.87;
   public static final double YELLOW = 0.66;
@@ -32,12 +31,15 @@ public class Lighting extends Subsystem {
   public static final double OFF = 0.98;
   public static final double RED_LARSON = 0.0;
 
-  public static SN_DoublePreference lightsHatch = new SN_DoublePreference("lightsHatch", BLUE); // solid blue
-  public static SN_DoublePreference lightsOff = new SN_DoublePreference("lightsOff", RED_LARSON); // larson scanner red
-  public static SN_DoublePreference lightsCargo = new SN_DoublePreference("lightsCargo", ORANGE); // solid orange
-  public static SN_DoublePreference lightsTargetFound = new SN_DoublePreference("lightsTargetFound", YELLOW);
-  public static SN_DoublePreference lightsTargetNotFound = new SN_DoublePreference("lightsTargetNotFound", RED);
+  public static SN_DoublePreference LIGHTS_HATCH = new SN_DoublePreference("lightsHatch", BLUE); // solid blue
+  public static SN_DoublePreference LIGHTS_OFF = new SN_DoublePreference("lightsOff", RED_LARSON); // larson scanner red
+  public static SN_DoublePreference LIGHTS_CARGO = new SN_DoublePreference("lightsCargo", ORANGE); // solid orange
+  public static SN_DoublePreference LIGHTS_TARGET_FOUND = new SN_DoublePreference("lightsTargetFound", YELLOW);
+  public static SN_DoublePreference LIGHTS_TARGET_NOT_FOUND = new SN_DoublePreference("lightsTargetNotFound", RED);
 
+  /**
+   * Create the spark light controller
+   */
   public Lighting() {
     lighting = new Spark(RobotMap.LIGHTING_SPARK);
   }
@@ -46,28 +48,29 @@ public class Lighting extends Subsystem {
     lighting.set(frequency);
   }
 
+  /**
+   * Update the lighting for various scenarios
+   */
   public void update() {
     if (RobotController.isBrownedOut() || !(DriverStation.getInstance().isDSAttached())) {
       setLighting(OFF);
     } else if (Robot.m_oi.driverStick.btn_LTrig.get()) {
       if (Robot.m_vision.targetFound()) {
-        setLighting(lightsTargetFound.getValue());
+        setLighting(LIGHTS_TARGET_FOUND.getValue());
       } else {
-        setLighting(lightsTargetNotFound.getValue());
+        setLighting(LIGHTS_TARGET_NOT_FOUND.getValue());
       }
     } else if (Robot.m_intake.isHatchCollected()) {
-      setLighting(lightsHatch.getValue());
+      setLighting(LIGHTS_HATCH.getValue());
     } else if (Robot.m_intake.isCargoCollected()) {
-      setLighting(lightsCargo.getValue());
+      setLighting(LIGHTS_CARGO.getValue());
     } else {
-      setLighting(lightsOff.getValue());
+      setLighting(LIGHTS_OFF.getValue());
     }
   }
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new UpdateLighting());
   }
 }

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class CascadeBottomGroup extends CommandGroup {
 	/**
-	 * Add your docs here.
+	 * Unweights and Locks the casacade to the botom
 	 */
 	public CascadeBottomGroup() {
 		addSequential(new CascadeShiftTo());

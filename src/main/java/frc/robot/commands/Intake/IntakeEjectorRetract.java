@@ -10,12 +10,9 @@ package frc.robot.commands.Intake;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
 public class IntakeEjectorRetract extends InstantCommand {
 	/**
-	 * Add your docs here.
+	 * Retracts hatch ejector pistions
 	 */
 	public IntakeEjectorRetract() {
 		super();

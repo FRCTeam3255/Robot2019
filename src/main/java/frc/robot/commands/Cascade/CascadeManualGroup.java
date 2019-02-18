@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class CascadeManualGroup extends CommandGroup {
 	/**
-	 * Add your docs here.
+	 * Unweights the cascade and locks when manual finishes
 	 */
 	public CascadeManualGroup() {
 		addSequential(new CascadeShiftTo());

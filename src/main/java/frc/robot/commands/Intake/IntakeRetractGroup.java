@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class IntakeRetractGroup extends CommandGroup {
 
   /**
-   * Add your docs here.
+   * Retracts hatch ejectors and intake
    */
   public IntakeRetractGroup() {
     addSequential(new IntakeEjectorRetract());

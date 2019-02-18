@@ -13,9 +13,12 @@ import frc.robot.commands.Cascade.CascadeLockDogtooth;
 import frc.robot.commands.Cascade.CascadeUnweight;
 
 public class IntakeDeployGroup extends CommandGroup {
-
   /**
-   * Add your docs here.
+   * <ul>
+   * <li>Retracts hatch ejector pistons</li>
+   * <li>Unweights and locks cascade at bottom</li>
+   * <li>Deploys the intake and hatch hook</li>
+   * </ul>
    */
   public IntakeDeployGroup() {
     addSequential(new IntakeEjectorRetract());

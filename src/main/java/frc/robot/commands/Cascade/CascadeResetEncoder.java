@@ -15,7 +15,7 @@ import frc.robot.Robot;
  */
 public class CascadeResetEncoder extends InstantCommand {
 	/**
-	 * Add your docs here.
+	 * Resets cascade encoder
 	 */
 	public CascadeResetEncoder() {
 		super();
@@ -30,4 +30,5 @@ public class CascadeResetEncoder extends InstantCommand {
 	protected void initialize() {
 		Robot.m_cascade.resetLiftEncoder();
 	}
+
 }

@@ -10,12 +10,9 @@ package frc.robot.commands.Cascade;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
 public class CascadeUnlockDogtooth extends InstantCommand {
 	/**
-	 * Add your docs here.
+	 * Unlocks cascade dogtooth
 	 */
 	public CascadeUnlockDogtooth() {
 		super();

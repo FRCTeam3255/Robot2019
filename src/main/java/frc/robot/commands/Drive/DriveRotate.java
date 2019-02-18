@@ -13,6 +13,7 @@ import frc.robot.subsystems.NavXRotatePID;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class DriveRotate extends Command {
+
 	private NavXRotatePID pid;
 	private SN_DoublePreference pref_timeout = new SN_DoublePreference("DriveRotate_timeout", 10.0);
 

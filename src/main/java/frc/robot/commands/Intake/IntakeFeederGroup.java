@@ -15,11 +15,18 @@ import frc.robot.commands.Drive.DriveToHatch;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class IntakeFeederGroup extends CommandGroup {
-  /**
-   * Add your docs here.
-   */
+
   private SN_DoublePreference AutoIntakeBackup = new SN_DoublePreference("AutoIntakeBackup", -5.0);
 
+  /**
+   * <ul>
+   * <li>Deploys the hatch hook</li>
+   * <li>Drives until hatch is collected; retracts hatch hook automatically</li>
+   * <li>Half-second delay</li>
+   * <li>Moves cascade to position 1</li>
+   * <li>Backs up the robot 5"</li>
+   * </ul>
+   */
   public IntakeFeederGroup() {
     addSequential(new IntakeHookDeploy());
     addSequential(new DriveToHatch());

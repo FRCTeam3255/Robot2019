@@ -17,9 +17,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Subsystem containing NavX and field data methoods
  */
 public class Navigation extends Subsystem {
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
-
 	// NavX class
 	public static AHRS ahrs = null;
 

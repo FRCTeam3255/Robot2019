@@ -10,12 +10,9 @@ package frc.robot.commands.Intake;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
 public class IntakeRetract extends InstantCommand {
 	/**
-	 * Add your docs here.
+	 * Retracts intake
 	 */
 	public IntakeRetract() {
 		super();
@@ -29,4 +26,5 @@ public class IntakeRetract extends InstantCommand {
 	protected void initialize() {
 		Robot.m_intake.retractIntake();
 	}
+
 }

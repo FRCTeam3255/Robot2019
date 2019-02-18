@@ -15,7 +15,13 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class IntakeCargoCollectGroup extends CommandGroup {
   /**
-   * Add your docs here.
+   * <ul>
+   * <li>Moves cascade to bottom</li>
+   * <li>Deploys the intake</li>
+   * <li>Retracts hatch hook and collects cargo</li>
+   * <li>Half-second delay</li>
+   * <li>Moves cascade to position 1</li>
+   * </ul>
    */
   public IntakeCargoCollectGroup() {
     addSequential(new CascadeBottomGroup());

@@ -17,6 +17,15 @@ public class PlaceHatchGroup extends CommandGroup {
 
   private SN_DoublePreference AutoPlaceBackup = new SN_DoublePreference("AutoPlaceBackup", -5.0);
 
+  /**
+   * <ul>
+   * <li>Drives robot forward until it hits a wall</li>
+   * <li>Deploys hatch hook and ejects a hatch</li>
+   * <li>Half-second delay</li>
+   * <li>Backs up robot 5"</li>
+   * <li>Retracts ejector pistions</li>
+   * </ul>
+   */
   public PlaceHatchGroup() {
     addSequential(new DriveToWall());
     addSequential(new IntakeHatchEject());

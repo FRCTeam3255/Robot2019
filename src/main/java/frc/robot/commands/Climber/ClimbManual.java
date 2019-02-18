@@ -14,6 +14,9 @@ public class ClimbManual extends Command {
 
   double speed = 0.0;
 
+  /**
+   * Shifts to climber mode and manually moves climber with manipulator Y-axis
+   */
   public ClimbManual() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);\

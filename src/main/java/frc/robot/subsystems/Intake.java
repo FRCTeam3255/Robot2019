@@ -20,9 +20,7 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
  * Subsytem consisting of the intake devices and methoods
  */
 public class Intake extends Subsystem {
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
-
+	// Talons
 	private SN_TalonSRX cargoTalon = null;
 
 	// Solenoids
@@ -50,6 +48,7 @@ public class Intake extends Subsystem {
 	 * Creates the devices used in the intake
 	 */
 	public Intake() {
+		// Talons
 		cargoTalon = new SN_TalonSRX(RobotMap.INTAKE_CARGO_TALON);
 
 		// Solenoids
@@ -89,6 +88,9 @@ public class Intake extends Subsystem {
 		cargoTalon.set(0.0);
 	}
 
+	/**
+	 * Set the intake down
+	 */
 	public void deployIntake() {
 		intakeArmSolenoid.set(intakeDeployedValue);
 	}
@@ -97,6 +99,9 @@ public class Intake extends Subsystem {
 		return intakeArmSolenoid.get() == intakeDeployedValue;
 	}
 
+	/**
+	 * Set the intake up
+	 */
 	public void retractIntake() {
 		intakeArmSolenoid.set(intakeRetractedValue);
 	}
@@ -157,6 +162,9 @@ public class Intake extends Subsystem {
 		return ejectorSolenoid.get() == ejectorRetractedValue;
 	}
 
+	/**
+	 * @return Low hatch/cargo position
+	 */
 	public SN_DoublePreference getP1Setpoint() {
 		if (isIntakeRetracted()) {
 			return RobotPreferences.HATCH_POSITION_1;
@@ -165,6 +173,9 @@ public class Intake extends Subsystem {
 		}
 	}
 
+	/**
+	 * @return Med hatch/cargo position
+	 */
 	public SN_DoublePreference getP2Setpoint() {
 		if (isIntakeRetracted()) {
 			return RobotPreferences.HATCH_POSITION_2;
@@ -173,6 +184,9 @@ public class Intake extends Subsystem {
 		}
 	}
 
+	/**
+	 * @return High hatch/cargo position
+	 */
 	public SN_DoublePreference getP3Setpoint() {
 		if (isIntakeRetracted()) {
 			return RobotPreferences.HATCH_POSITION_3;

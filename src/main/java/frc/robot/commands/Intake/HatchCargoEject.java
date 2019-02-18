@@ -11,6 +11,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class HatchCargoEject extends Command {
+	/**
+	 * <ul>
+	 * <li>Ejects hatches/cargo depending on if intake is retracted</li>
+	 * <li>Retracts hatch hook/stops spinning intake in end</li>
+	 * </ul>
+	 */
 	public HatchCargoEject() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);

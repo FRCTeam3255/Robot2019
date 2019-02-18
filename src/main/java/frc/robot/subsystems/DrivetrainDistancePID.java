@@ -28,7 +28,7 @@ public class DrivetrainDistancePID extends SN_PID {
 	}
 
 	/**
-	 * @return Inputs the encoder distance
+	 * @return Inputs the drivetrain encoder distance
 	 */
 	@Override
 	protected double returnPIDInput() {

@@ -10,12 +10,9 @@ package frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
 public class DriveResetYaw extends InstantCommand {
 	/**
-	 * Add your docs here.
+	 * Resets navX yaw
 	 */
 	public DriveResetYaw() {
 		super();

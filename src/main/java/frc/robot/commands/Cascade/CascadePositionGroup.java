@@ -11,7 +11,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class CascadePositionGroup extends CommandGroup {
 	/**
-	 * Add your docs here.
+	 * Unweights and locks the cascade after moving to a postion
+	 * 
+	 * @param position One of the 3 positions to place/retrieve a hatch/cargo
 	 */
 	public CascadePositionGroup(int position) {
 		addSequential(new CascadeShiftTo());

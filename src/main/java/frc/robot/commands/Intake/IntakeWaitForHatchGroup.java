@@ -15,7 +15,13 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class IntakeWaitForHatchGroup extends CommandGroup {
   /**
-   * Add your docs here.
+   * <ul>
+   * <li>Waits until the hatch hook and intake is deployed</li>
+   * <li>Retracts hatch hook</li>
+   * <li>Half-second delay</li>
+   * <li>Retracts intake</li>
+   * <li>Moves cascade to position 1</li>
+   * </ul>
    */
   public IntakeWaitForHatchGroup() {
     requires(Robot.m_cascade);

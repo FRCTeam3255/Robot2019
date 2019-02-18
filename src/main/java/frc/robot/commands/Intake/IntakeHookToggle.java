@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
 public class IntakeHookToggle extends InstantCommand {
+  /**
+   * Toggles hatch hook
+   */
   public IntakeHookToggle() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -23,4 +26,5 @@ public class IntakeHookToggle extends InstantCommand {
   protected void initialize() {
     Robot.m_intake.toggleHook();
   }
+
 }
