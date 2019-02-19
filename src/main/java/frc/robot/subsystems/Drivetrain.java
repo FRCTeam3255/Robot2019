@@ -64,7 +64,7 @@ public class Drivetrain extends Subsystem {
 		rightMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_MID_TALON);
 		rightBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK_TALON);
 		// For BenchBot
-		// rightTalons = new SpeedControllerGroup(rightFrontTalon, rightBackTalon); //
+		// rightTalons = new SpeedControllerGroup(rightFrontTalon, rightBackTalon);
 		rightTalons = new SpeedControllerGroup(rightFrontTalon, rightMidTalon, rightBackTalon);
 
 		climbDriveTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_CLIMB_TALON);

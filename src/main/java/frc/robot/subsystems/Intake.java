@@ -20,6 +20,11 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
  * Subsytem consisting of the intake devices and methoods
  */
 public class Intake extends Subsystem {
+
+	public static enum fieldHeights {
+		LOW, MED, HIGH, CSHIP
+	};
+
 	// Talons
 	private SN_TalonSRX cargoTalon = null;
 
@@ -52,7 +57,7 @@ public class Intake extends Subsystem {
 		cargoTalon = new SN_TalonSRX(RobotMap.INTAKE_CARGO_TALON);
 
 		// Solenoids
-		ejectorSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.INTAKE_EJECTOR_SOLENOID_A,
+		ejectorSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_EJECTOR_SOLENOID_A,
 				RobotMap.INTAKE_EJECTOR_SOLENOID_B);
 		intakeArmSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_ARM_SOLENOID_A,
 				RobotMap.INTAKE_ARM_SOLENOID_B);
@@ -63,8 +68,9 @@ public class Intake extends Subsystem {
 		hatchSwitch = new DigitalInput(RobotMap.INTAKE_HATCH_SWITCH);
 		cargoSwitch = new DigitalInput(RobotMap.INTAKE_CARGO_SWITCH);
 
+		retractEjector();
+		retractHook();
 		deployIntake();
-		deployHook();
 	}
 
 	/**
@@ -162,36 +168,31 @@ public class Intake extends Subsystem {
 		return ejectorSolenoid.get() == ejectorRetractedValue;
 	}
 
-	/**
-	 * @return Low hatch/cargo position
-	 */
-	public SN_DoublePreference getP1Setpoint() {
-		if (isIntakeRetracted()) {
-			return RobotPreferences.HATCH_POSITION_1;
-		} else {
+	public SN_DoublePreference getSetpoint(fieldHeights position) {
+
+		switch (position) {
+		case LOW:
+			if (isIntakeRetracted()) {
+				return RobotPreferences.HATCH_POSITION_1;
+			}
 			return RobotPreferences.CARGO_POSITION_1;
-		}
-	}
-
-	/**
-	 * @return Med hatch/cargo position
-	 */
-	public SN_DoublePreference getP2Setpoint() {
-		if (isIntakeRetracted()) {
-			return RobotPreferences.HATCH_POSITION_2;
-		} else {
+		case MED:
+			if (isIntakeRetracted()) {
+				return RobotPreferences.HATCH_POSITION_2;
+			}
 			return RobotPreferences.CARGO_POSITION_2;
-		}
-	}
-
-	/**
-	 * @return High hatch/cargo position
-	 */
-	public SN_DoublePreference getP3Setpoint() {
-		if (isIntakeRetracted()) {
-			return RobotPreferences.HATCH_POSITION_3;
-		} else {
+		case HIGH:
+			if (isIntakeRetracted()) {
+				return RobotPreferences.HATCH_POSITION_3;
+			}
 			return RobotPreferences.CARGO_POSITION_3;
+		case CSHIP:
+			if (isIntakeRetracted()) {
+				return RobotPreferences.HATCH_POSITION_1;
+			}
+			return RobotPreferences.CARGO_POSITION_SHIP;
+		default:
+			return RobotPreferences.CASCADE_BOTTOM;
 		}
 	}
 

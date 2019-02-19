@@ -18,7 +18,7 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 public class RobotPreferences {
 	// Drivetrain preferences
 	public static final SN_DoublePreference DRIVETRAIN_PULSES_PER_FOOT = new SN_DoublePreference(
-			"drivetrainPulsesPerFoot", 13.3);
+			"drivetrainPulsesPerFoot", 29.0);
 	public static final SN_DoublePreference DRIVETRAIN_CLIMB_SETPOINT = new SN_DoublePreference("drivetrainClimb",
 			25.0);
 	public static final SN_DoublePreference DECELERATION_SPEED = new SN_DoublePreference("decelerationSpeed", 0.5);
@@ -39,11 +39,12 @@ public class RobotPreferences {
 	public static final SN_DoublePreference CASCADE_PULSES_PER_FOOT = new SN_DoublePreference("cascadePulsesPerFoot",
 			510.0);
 	public static final SN_DoublePreference HATCH_POSITION_1 = new SN_DoublePreference("hatchPos1", 5.0);
-	public static final SN_DoublePreference HATCH_POSITION_2 = new SN_DoublePreference("hatchPos2", 28.0);
-	public static final SN_DoublePreference HATCH_POSITION_3 = new SN_DoublePreference("hatchPos3", 51.0);
-	public static final SN_DoublePreference CARGO_POSITION_1 = new SN_DoublePreference("cargoPos1", 21.5);
-	public static final SN_DoublePreference CARGO_POSITION_2 = new SN_DoublePreference("cargoPos2", 47.0);
-	public static final SN_DoublePreference CARGO_POSITION_3 = new SN_DoublePreference("cargoPos3", 61.0);
+	public static final SN_DoublePreference HATCH_POSITION_2 = new SN_DoublePreference("hatchPos2", 31.0);
+	public static final SN_DoublePreference HATCH_POSITION_3 = new SN_DoublePreference("hatchPos3", 61.0);
+	public static final SN_DoublePreference CARGO_POSITION_1 = new SN_DoublePreference("cargoPos1", 24.0);
+	public static final SN_DoublePreference CARGO_POSITION_2 = new SN_DoublePreference("cargoPos2", 53.0);
+	public static final SN_DoublePreference CARGO_POSITION_3 = new SN_DoublePreference("cargoPos3", 72.0);
+	public static final SN_DoublePreference CARGO_POSITION_SHIP = new SN_DoublePreference("cargoPosShip", 34.0);
 	public static final SN_DoublePreference CASCADE_BOTTOM = new SN_DoublePreference("cascadeBottom", 0.0);
 	public static final SN_DoublePreference CASCADE_BOTTOM_SPEED = new SN_DoublePreference("cascadeBottomSpeed", -0.2);
 	public static final SN_DoublePreference CASCADE_UNWEIGHT_SPEED = new SN_DoublePreference("cascadeUnweightSpeed",
@@ -53,7 +54,7 @@ public class RobotPreferences {
 
 	// Climber
 	public static final SN_DoublePreference CLIMBER_LIFT_SPEED = new SN_DoublePreference("climbLiftSpeed", 0.5);
-	public static final SN_DoublePreference CLIMB_LIFT_DELAY = new SN_DoublePreference("climbLiftDelay", 10.0);
+	public static final SN_DoublePreference CLIMB_LIFT_DELAY = new SN_DoublePreference("climbLiftDelay", 0.5);
 
 	// Drive PID
 	public static final SN_DoublePreference DRIVETRAIN_P = new SN_DoublePreference("driveP", 0.04);
@@ -73,7 +74,4 @@ public class RobotPreferences {
 	public static final SN_DoublePreference VISION_ROTATE_P = new SN_DoublePreference("visionRotateP", 0.04);
 	public static final SN_DoublePreference VISION_ROTATE_I = new SN_DoublePreference("visionRotateI", 0.0);
 	public static final SN_DoublePreference VISION_ROTATE_D = new SN_DoublePreference("visionRotateD", 0.0);
-
-	// testing
-	public static final SN_DoublePreference TESTING_SETPOINT = new SN_DoublePreference("testing", 100.0);
 }

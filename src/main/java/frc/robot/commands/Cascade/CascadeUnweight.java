@@ -27,7 +27,6 @@ public class CascadeUnweight extends Command {
 	protected void initialize() {
 		Robot.m_telemetry.setCommandStatus("Starting CascadeUnweight");
 		previousEncoder = Robot.m_cascade.getLiftEncoderDistance();
-		Robot.m_cascade.unlockCascade();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

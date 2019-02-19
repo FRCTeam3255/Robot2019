@@ -8,6 +8,7 @@
 package frc.robot.commands.Cascade;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.subsystems.Intake.fieldHeights;
 
 public class CascadePositionGroup extends CommandGroup {
 	/**
@@ -15,9 +16,9 @@ public class CascadePositionGroup extends CommandGroup {
 	 * 
 	 * @param position One of the 3 positions to place/retrieve a hatch/cargo
 	 */
-	public CascadePositionGroup(int position) {
+	public CascadePositionGroup(fieldHeights position) {
 		addSequential(new CascadeShiftTo());
-		addSequential(new CascadeUnweight());
+		addSequential(new CascadeUnweightGroup());
 		addSequential(new CascadePosition(position));
 		addSequential(new CascadeLockDogtooth());
 	}

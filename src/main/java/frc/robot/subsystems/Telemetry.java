@@ -42,6 +42,8 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putData("Retract Intake", new IntakeRetract());
 		SmartDashboard.putData("Deploy Hook", new IntakeHookDeploy());
 		SmartDashboard.putData("Retract Hook", new IntakeHookRetract());
+		SmartDashboard.putData("Eject", new IntakeHatchEject());
+		SmartDashboard.putData("Ejector Retract", new IntakeEjectorRetract());
 
 		// Lighting Commands
 

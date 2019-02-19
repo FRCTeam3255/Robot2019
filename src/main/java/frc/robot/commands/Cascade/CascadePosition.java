@@ -9,8 +9,8 @@ package frc.robot.commands.Cascade;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotPreferences;
 import frc.robot.subsystems.CascadePID;
+import frc.robot.subsystems.Intake.fieldHeights;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class CascadePosition extends Command {
@@ -18,15 +18,14 @@ public class CascadePosition extends Command {
 	private CascadePID pid;
 	private SN_DoublePreference pref_timeout = new SN_DoublePreference("Lift Timeout", 100.0);
 	private double expireTime = 0.0;
-	private SN_DoublePreference setpoint = RobotPreferences.CASCADE_BOTTOM;
-	private int m_position = 0;
+	private fieldHeights setpoint;
 
-	public CascadePosition(int position) {
+	public CascadePosition(fieldHeights position) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.m_cascade);
 		requires(Robot.m_intake);
-		m_position = position;
+		setpoint = position;
 		pid = new CascadePID();
 	}
 
@@ -42,16 +41,7 @@ public class CascadePosition extends Command {
 	@Override
 	protected void initialize() {
 		expireTime = timeSinceInitialized() + pref_timeout.getValue();
-		if (m_position == 1) {
-			setpoint = Robot.m_intake.getP1Setpoint();
-		} else if (m_position == 2) {
-			setpoint = Robot.m_intake.getP2Setpoint();
-		} else if (m_position == 3) {
-			setpoint = Robot.m_intake.getP3Setpoint();
-		} else {
-			setpoint = Robot.m_intake.getP1Setpoint();
-		}
-		pid.setSetpoint(setpoint);
+		pid.setSetpoint(Robot.m_intake.getSetpoint(setpoint));
 		pid.enable();
 
 		Robot.m_telemetry.setCommandStatus("Starting CascadeLift" + ": " + pid.getSetpoint());

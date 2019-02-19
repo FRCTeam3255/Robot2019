@@ -14,7 +14,7 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 public class DriveToWall extends Command {
 
   private static SN_DoublePreference wallSpeed = new SN_DoublePreference("wallSpeed", 0.5);
-  private static SN_DoublePreference wallDecel = new SN_DoublePreference("wallDecel", -0.2);
+  private static SN_DoublePreference wallDecel = new SN_DoublePreference("wallDecel", 0.2);
 
   public DriveToWall() {
     // Use requires() here to declare subsystem dependencies
@@ -37,7 +37,7 @@ public class DriveToWall extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.m_navigation.getAccelerationX() <= wallDecel.getValue();
+    return Robot.m_navigation.getAccelerationX() >= wallDecel.getValue();
   }
 
   // Called once after isFinished returns true

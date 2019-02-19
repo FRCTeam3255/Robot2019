@@ -15,7 +15,7 @@ public class CascadeManualGroup extends CommandGroup {
 	 */
 	public CascadeManualGroup() {
 		addSequential(new CascadeShiftTo());
-		addSequential(new CascadeUnweight());
+		addSequential(new CascadeUnweightGroup());
 		addSequential(new CascadeManual());
 		addSequential(new CascadeLockDogtooth());
 	}

@@ -8,6 +8,9 @@
 package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.Cascade.CascadeLockDogtooth;
+import frc.robot.commands.Cascade.CascadePositionGroup;
+import frc.robot.subsystems.Intake.fieldHeights;
 
 public class IntakeRetractGroup extends CommandGroup {
 
@@ -17,5 +20,8 @@ public class IntakeRetractGroup extends CommandGroup {
   public IntakeRetractGroup() {
     addSequential(new IntakeEjectorRetract());
     addSequential(new IntakeRetract());
+    addSequential(new CascadePositionGroup(fieldHeights.LOW));
+    addSequential(new IntakeWaitForHatchGroup());
+    addSequential(new CascadeLockDogtooth());
   }
 }

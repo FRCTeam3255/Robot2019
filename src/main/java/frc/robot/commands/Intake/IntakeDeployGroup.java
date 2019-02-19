@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.Cascade.CascadeBottom;
 import frc.robot.commands.Cascade.CascadeLockDogtooth;
 import frc.robot.commands.Cascade.CascadeUnweight;
+import frc.robot.commands.Cascade.CascadeUnweightGroup;
 
 public class IntakeDeployGroup extends CommandGroup {
   /**
@@ -22,10 +23,11 @@ public class IntakeDeployGroup extends CommandGroup {
    */
   public IntakeDeployGroup() {
     addSequential(new IntakeEjectorRetract());
-    addSequential(new CascadeUnweight());
+    addSequential(new CascadeUnweightGroup());
     addSequential(new CascadeBottom());
     addSequential(new CascadeLockDogtooth());
     addSequential(new IntakeDeploy());
     addSequential(new IntakeHookDeploy());
+    addSequential(new IntakeWaitForHatchGroup());
   }
 }

@@ -15,7 +15,7 @@ public class CascadeBottomGroup extends CommandGroup {
 	 */
 	public CascadeBottomGroup() {
 		addSequential(new CascadeShiftTo());
-		addSequential(new CascadeUnweight());
+		addSequential(new CascadeUnweightGroup());
 		addSequential(new CascadeBottom());
 		addSequential(new CascadeLockDogtooth());
 	}

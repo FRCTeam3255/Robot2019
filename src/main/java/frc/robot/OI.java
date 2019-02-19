@@ -11,6 +11,7 @@ import frc.robot.commands.Cascade.*;
 import frc.robot.commands.Climber.*;
 import frc.robot.commands.Drive.*;
 import frc.robot.commands.Intake.*;
+import frc.robot.subsystems.Intake.fieldHeights;
 import frcteam3255.robotbase.Joystick.SN_DualActionStick;
 import frcteam3255.robotbase.Joystick.SN_Extreme3DStick;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
@@ -45,12 +46,12 @@ public class OI {
 		manipulatorStick.btn_4.whileHeld(new CascadeManualGroup());
 		manipulatorStick.btn_5.whenPressed(new IntakeRetractGroup());
 		manipulatorStick.btn_6.whenPressed(new IntakeDeployGroup());
-		// manipulatorStick.btn_7
-		manipulatorStick.btn_8.whenPressed(new CascadePositionGroup(3));
-		manipulatorStick.btn_9.whileHeld(new ClimbManual());
-		manipulatorStick.btn_10.whenPressed(new CascadePositionGroup(2));
-		// manipulatorStick.btn_11
-		manipulatorStick.btn_12.whenPressed(new CascadePositionGroup(1));
+		manipulatorStick.btn_7.whileHeld(new ClimbManual());
+		manipulatorStick.btn_8.whenPressed(new CascadePositionGroup(fieldHeights.HIGH));
+		// manipulatorStick.btn_9
+		manipulatorStick.btn_10.whenPressed(new CascadePositionGroup(fieldHeights.MED));
+		manipulatorStick.btn_11.whenPressed(new CascadePositionGroup(fieldHeights.CSHIP));
+		manipulatorStick.btn_12.whenPressed(new CascadePositionGroup(fieldHeights.LOW));
 
 		// Driver Stick
 		driverStick.btn_A.whenPressed(new IntakeFeederGroup());
