@@ -5,26 +5,22 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Intake;
+package frc.robot.commands.Vision;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class IntakeRetract extends InstantCommand {
-	/**
-	 * Retracts intake
-	 */
-	public IntakeRetract() {
-		super();
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
-		requires(Robot.m_intake);
-	}
+public class VisionToggleMode extends InstantCommand {
+  public VisionToggleMode() {
+    super();
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    requires(Robot.m_vision);
+  }
 
-	// Called once when the command executes
-	@Override
-	protected void initialize() {
-		Robot.m_intake.retractIntake();
-	}
-
+  // Called just before this Command runs the first time
+  @Override
+  protected void initialize() {
+    Robot.m_vision.toggleMode();
+  }
 }

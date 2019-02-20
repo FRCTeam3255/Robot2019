@@ -20,6 +20,8 @@ import frcteam3255.robotbase.SN_TalonSRX;
  * Subsytem containing the cascade devices and methoods
  */
 public class Cascade extends Subsystem {
+	// Speed
+	public double liftSpeed = 0.0;
 	// Talons
 	private SN_TalonSRX leftFrontTalon = null;
 	private SN_TalonSRX leftBackTalon = null;
@@ -160,6 +162,7 @@ public class Cascade extends Subsystem {
 	 * bottom switches. Reset the lift encoder at bottom.
 	 */
 	public void setLiftSpeed(double speed) {
+		liftSpeed = speed;
 		if (isShiftedCascade()) {
 			if (isBottomSwitchClosed()) {
 				resetLiftEncoder();
@@ -174,6 +177,10 @@ public class Cascade extends Subsystem {
 		leftBackTalon.set(speed);
 		rightFrontTalon.set(speed);
 		rightBackTalon.set(speed);
+	}
+
+	public double getLiftSpeed() {
+		return liftSpeed;
 	}
 
 	@Override

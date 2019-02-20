@@ -61,7 +61,8 @@ public class CascadePosition extends Command {
 		boolean distanceTarget = pid.onRawTarget();
 		double timeNow = timeSinceInitialized();
 		boolean finished = (distanceTarget || (timeNow >= expireTime)
-				|| ((speed > 0) && Robot.m_cascade.isTopSwitchClosed()));
+				|| ((speed > 0) && Robot.m_cascade.isTopSwitchClosed())
+				|| ((speed < 0) && Robot.m_cascade.isBottomSwitchClosed()));
 
 		return finished;
 	}

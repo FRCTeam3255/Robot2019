@@ -49,7 +49,7 @@ public class RobotPreferences {
 	public static final SN_DoublePreference CASCADE_BOTTOM = new SN_DoublePreference("cascadeBottom", 0.0);
 	public static final SN_DoublePreference CASCADE_BOTTOM_SPEED = new SN_DoublePreference("cascadeBottomSpeed", -0.2);
 	public static final SN_DoublePreference CASCADE_UNWEIGHT_SPEED = new SN_DoublePreference("cascadeUnweightSpeed",
-			0.5);
+			0.33);
 	public static final SN_DoublePreference CASCADE_UNWEIGHT_HEIGHT = new SN_DoublePreference("cascadeUnweightHeight",
 			0.8);
 	public static final SN_DoublePreference CASCADE_LIFT_FROM_FEEDER_HEIGHT = new SN_DoublePreference(

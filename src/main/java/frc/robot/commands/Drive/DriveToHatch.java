@@ -13,7 +13,7 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class DriveToHatch extends Command {
 
-  private static SN_DoublePreference hatchSpeed = new SN_DoublePreference("hatchSpeed", 0.5);
+  private static SN_DoublePreference hatchSpeed = new SN_DoublePreference("hatchSpeed", 0.3);
 
   public DriveToHatch() {
     // Use requires() here to declare subsystem dependencies

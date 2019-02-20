@@ -24,7 +24,10 @@ public abstract class SN_PID extends PIDSubsystem {
   protected static SN_DoublePreference default_tolerance = new SN_DoublePreference("SNPID_tol", 1.0);
   protected static SN_IntPreference default_targetCount = new SN_IntPreference("SNPID_targetCount", 1);
 
-  protected static SN_DoublePreference default_minOutput = new SN_DoublePreference("SNPID_minOutput", 0.0);
+  protected static SN_DoublePreference default_minOutputNegative = new SN_DoublePreference("SNPID_minOutputNegative",
+      0.0);
+  protected static SN_DoublePreference default_minOutputPositive = new SN_DoublePreference("SNPID_minOutputPositive",
+      0.0);
   protected static SN_DoublePreference default_maxOutputNegative = new SN_DoublePreference("SNPID_maxOutputNegative",
       1.0);
   protected static SN_DoublePreference default_maxOutputPositive = new SN_DoublePreference("SNPID_maxOutputPositive",
@@ -40,7 +43,8 @@ public abstract class SN_PID extends PIDSubsystem {
   protected SN_DoublePreference pref_tolerance = default_tolerance;
   protected SN_IntPreference pref_targetCount = default_targetCount;
 
-  protected SN_DoublePreference pref_minOutput = default_minOutput;
+  protected SN_DoublePreference pref_minOutputNegative = default_minOutputNegative;
+  protected SN_DoublePreference pref_minOutputPositive = default_minOutputPositive;
   protected SN_DoublePreference pref_maxOutputNegative = default_maxOutputNegative;
   protected SN_DoublePreference pref_maxOutputPositive = default_maxOutputPositive;
   protected SN_DoublePreference pref_maxOutputChange = default_maxOutputChange;
@@ -53,7 +57,8 @@ public abstract class SN_PID extends PIDSubsystem {
 
   // values used to cache output constraint preferences that will be used while
   // the PID is enabled
-  private double cached_minOutput = pref_minOutput.getValue();
+  private double cached_minOutputNegative = pref_minOutputNegative.getValue();
+  private double cached_minOutputPositive = pref_minOutputPositive.getValue();
   private double cached_maxOutputNegative = pref_maxOutputNegative.getValue();
   private double cached_maxOutputPositive = pref_maxOutputPositive.getValue();
   private double cached_maxOutputChange = pref_maxOutputChange.getValue();
@@ -105,8 +110,17 @@ public abstract class SN_PID extends PIDSubsystem {
   }
 
   // Set output constraints
+  public void setMinOutputPositive(SN_DoublePreference minOutputPositive) {
+    pref_minOutputPositive = minOutputPositive;
+  }
+
+  public void setMinOutputNegative(SN_DoublePreference minOutputNegative) {
+    pref_minOutputNegative = minOutputNegative;
+  }
+
   public void setMinOutput(SN_DoublePreference minOutput) {
-    pref_minOutput = minOutput;
+    setMinOutputPositive(minOutput);
+    setMinOutputPositive(minOutput);
   }
 
   public void setMaxOutputPositive(SN_DoublePreference maxOutputPositive) {
@@ -152,7 +166,8 @@ public abstract class SN_PID extends PIDSubsystem {
     cached_targetCount = pref_targetCount.getValue();
 
     // cache the output constraint preferences
-    cached_minOutput = pref_minOutput.getValue();
+    cached_minOutputNegative = pref_minOutputNegative.getValue();
+    cached_minOutputPositive = pref_minOutputPositive.getValue();
     cached_maxOutputNegative = pref_maxOutputNegative.getValue();
     cached_maxOutputPositive = pref_maxOutputPositive.getValue();
     cached_maxOutputChange = pref_maxOutputChange.getValue();
@@ -195,14 +210,14 @@ public abstract class SN_PID extends PIDSubsystem {
 
     // Clamping
     if (newOutput > 0) {
-      if (newOutput < cached_minOutput) {
-        newOutput = cached_minOutput;
+      if (newOutput < cached_minOutputPositive) {
+        newOutput = cached_minOutputPositive;
       } else if (newOutput > cached_maxOutputPositive) {
         newOutput = cached_maxOutputPositive;
       }
     } else if (newOutput < 0) {
-      if (newOutput > -cached_minOutput) {
-        newOutput = -cached_minOutput;
+      if (newOutput > -cached_minOutputNegative) {
+        newOutput = -cached_minOutputNegative;
       } else if (newOutput < -cached_maxOutputNegative) {
         newOutput = -cached_maxOutputNegative;
       }

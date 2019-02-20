@@ -23,6 +23,7 @@ public class Vision extends Subsystem {
 	 */
 	public Vision() {
 		visionData = NetworkTableInstance.getDefault().getTable("limelight");
+		setDriverMode();
 	}
 
 	/**
@@ -99,7 +100,7 @@ public class Vision extends Subsystem {
 	 * Toggle limelight LEDs
 	 */
 	public void toggleLEDs() {
-		if (visionData.getEntry("ledMode").getDouble(0) == 0) {
+		if (visionData.getEntry("ledMode").getDouble(0) <= 0.5) {
 			visionData.getEntry("ledMode").setDouble(1);
 		} else {
 			visionData.getEntry("ledMode").setDouble(0);
@@ -112,6 +113,18 @@ public class Vision extends Subsystem {
 
 	public void setVisionMode() {
 		visionData.getEntry("camMode").setDouble(0);
+	}
+
+	public double getMode() {
+		return visionData.getEntry("camMode").getDouble(1);
+	}
+
+	public void toggleMode() {
+		if (getMode() >= 0.5) {
+			setVisionMode();
+		} else {
+			setDriverMode();
+		}
 	}
 
 	@Override

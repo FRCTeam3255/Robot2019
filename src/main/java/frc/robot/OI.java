@@ -11,6 +11,7 @@ import frc.robot.commands.Cascade.*;
 import frc.robot.commands.Climber.*;
 import frc.robot.commands.Drive.*;
 import frc.robot.commands.Intake.*;
+import frc.robot.commands.Vision.VisionToggleMode;
 import frc.robot.subsystems.Intake.fieldHeights;
 import frcteam3255.robotbase.Joystick.SN_DualActionStick;
 import frcteam3255.robotbase.Joystick.SN_Extreme3DStick;
@@ -54,9 +55,10 @@ public class OI {
 		manipulatorStick.btn_12.whenPressed(new CascadePositionGroup(fieldHeights.LOW));
 
 		// Driver Stick
-		driverStick.btn_A.whenPressed(new IntakeFeederGroup());
-		driverStick.btn_B.whenPressed(new PlaceHatchGroup());
+		driverStick.btn_A.whileHeld(new IntakeFeederGroup());
+		driverStick.btn_B.whileHeld(new PlaceHatchGroup());
 		// driverStick.btn_RBump slow speed
+		driverStick.btn_LTrig.whenPressed(new VisionToggleMode());
 		driverStick.btn_RTrig
 				.whileHeld(new DriveDistanceRotateVision(VisDisSetpoint, VisRotSetpoint, "DistanceRotateVision"));
 

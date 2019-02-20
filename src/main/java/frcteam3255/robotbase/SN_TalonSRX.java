@@ -15,7 +15,7 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 	public SN_TalonSRX(int deviceNumber) {
 		super(deviceNumber);
 		configFactoryDefault();
-		setSafetyEnabled(true);
+		setSafetyEnabled(false);
 		setNeutralMode(NeutralMode.Brake);
 	}
 }

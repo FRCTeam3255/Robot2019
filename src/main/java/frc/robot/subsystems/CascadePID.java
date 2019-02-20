@@ -25,7 +25,8 @@ public class CascadePID extends SN_PID {
 	public static final SN_DoublePreference CASCADE_D = new SN_DoublePreference("cascadeD", 0.0);
 	public static final SN_DoublePreference CASCADE_TOL = new SN_DoublePreference("cascadeTol", 1.0);
 	public static final SN_IntPreference CASCADE_TARGET_COUNT = new SN_IntPreference("cascadeTargetCount", 1);
-	public static final SN_DoublePreference CASCADE_MINOUT = new SN_DoublePreference("cascadeMinSpeed", 0);
+	public static final SN_DoublePreference CASCADE_MINOUTDOWN = new SN_DoublePreference("cascadeMinSpeedDown", 0.0);
+	public static final SN_DoublePreference CASCADE_MINOUTUP = new SN_DoublePreference("cascadeMinSpeedUp", 0.33);
 	public static final SN_DoublePreference CASCADE_MAXOUTDOWN = new SN_DoublePreference("cascadeMaxSpeedDown", 0.1);
 	public static final SN_DoublePreference CASCADE_MAXOUTUP = new SN_DoublePreference("cascadeMaxSpeedUp", 0.5);
 	public static final SN_DoublePreference CASCADE_MAXCHANGE = new SN_DoublePreference("cascadeMaxChange", 1.0);
@@ -39,7 +40,7 @@ public class CascadePID extends SN_PID {
 		setPID(CASCADE_P, CASCADE_I, CASCADE_D);
 		setTolerance(CASCADE_TOL);
 		setTargetCount(CASCADE_TARGET_COUNT);
-		setMinOutput(CASCADE_MINOUT);
+		setMinOutputNegative(CASCADE_MINOUTDOWN);
 		setMaxOutputNegative(CASCADE_MAXOUTDOWN);
 		setMaxOutputPositive(CASCADE_MAXOUTUP);
 		setMaxOutputChange(CASCADE_MAXCHANGE);

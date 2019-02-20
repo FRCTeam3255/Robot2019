@@ -73,7 +73,7 @@ public class Drivetrain extends Subsystem {
 		encoder = new Encoder(RobotMap.DRIVETRAIN_ENCODER_A, RobotMap.DRIVETRAIN_ENCODER_B);
 
 		differentialDrive = new DifferentialDrive(leftTalons, rightTalons);
-		differentialDrive.setSafetyEnabled(true);
+		differentialDrive.setSafetyEnabled(false);
 	}
 
 	/**

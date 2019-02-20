@@ -70,6 +70,7 @@ public class DriveDistanceRotateVision extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
+		Robot.m_vision.setVisionMode();
 		Robot.m_telemetry.setCommandStatus("Starting DriveDistanceRotateVision " + name + ": "
 				+ distancePID.getSetpoint() + " " + rotatePID.getSetpoint());
 		expireTime = timeSinceInitialized() + pref_timeout.getValue();
@@ -133,6 +134,7 @@ public class DriveDistanceRotateVision extends Command {
 		distancePID.disable();
 		rotatePID.disable();
 		Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
+		Robot.m_vision.setDriverMode();
 	}
 
 	// Called when another command which requires one or more of the same
