@@ -22,6 +22,7 @@ public class IntakeRetractGroup extends CommandGroup {
     addSequential(new IntakeRetract());
     addSequential(new CascadePositionGroup(fieldHeights.LOW));
     addSequential(new IntakeWaitForHatchGroup());
+    addSequential(new CascadePositionGroup(fieldHeights.LOADED));
     addSequential(new CascadeLockDogtooth());
   }
 }

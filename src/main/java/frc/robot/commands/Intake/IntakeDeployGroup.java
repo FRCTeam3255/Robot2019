@@ -9,9 +9,9 @@ package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.Cascade.CascadeBottom;
-import frc.robot.commands.Cascade.CascadeLockDogtooth;
-import frc.robot.commands.Cascade.CascadeUnweight;
+import frc.robot.commands.Cascade.CascadePositionGroup;
 import frc.robot.commands.Cascade.CascadeUnweightGroup;
+import frc.robot.subsystems.Intake.fieldHeights;
 
 public class IntakeDeployGroup extends CommandGroup {
   /**
@@ -25,9 +25,9 @@ public class IntakeDeployGroup extends CommandGroup {
     addSequential(new IntakeEjectorRetract());
     addSequential(new CascadeUnweightGroup());
     addSequential(new CascadeBottom());
-    addSequential(new CascadeLockDogtooth());
     addSequential(new IntakeDeploy());
     addSequential(new IntakeHookDeploy());
     addSequential(new IntakeWaitForHatchGroup());
+    addSequential(new CascadePositionGroup(fieldHeights.LOW));
   }
 }

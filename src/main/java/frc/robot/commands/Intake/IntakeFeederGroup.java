@@ -8,12 +8,12 @@
 package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.Robot;
 import frc.robot.commands.DoDelay;
-import frc.robot.commands.Cascade.CascadeLockDogtooth;
-import frc.robot.commands.Cascade.CascadeUnweight;
-import frc.robot.commands.Cascade.CascadeUnweightGroup;
+import frc.robot.commands.Cascade.CascadePositionGroup;
 import frc.robot.commands.Drive.DriveDistance;
 import frc.robot.commands.Drive.DriveToHatch;
+import frc.robot.subsystems.Intake.fieldHeights;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class IntakeFeederGroup extends CommandGroup {
@@ -30,11 +30,14 @@ public class IntakeFeederGroup extends CommandGroup {
    * </ul>
    */
   public IntakeFeederGroup() {
+    requires(Robot.m_drivetrain);
+    addSequential(new IntakeRetract());
+    addSequential(new CascadePositionGroup(fieldHeights.LOW));
     addSequential(new IntakeHookDeploy());
     addSequential(new DriveToHatch());
     addSequential(new DoDelay(new SN_DoublePreference("AutoIntakeTimeout", 0.5)));
-    addSequential(new CascadeUnweightGroup());
-    addSequential(new CascadeLockDogtooth());
+    addSequential(new CascadePositionGroup(fieldHeights.LOADED));
     addSequential(new DriveDistance(AutoIntakeBackup, "AutoIntakeBackup"));
+    addSequential(new CascadePositionGroup(fieldHeights.LOW));
   }
 }

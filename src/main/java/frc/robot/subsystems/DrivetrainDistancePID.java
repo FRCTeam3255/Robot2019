@@ -25,6 +25,7 @@ public class DrivetrainDistancePID extends SN_PID {
 		super();
 
 		setPID(RobotPreferences.DRIVETRAIN_P, RobotPreferences.DRIVETRAIN_I, RobotPreferences.DRIVETRAIN_D);
+		setTolerance(RobotPreferences.DRIVETRAIN_TOLERANCE);
 	}
 
 	/**

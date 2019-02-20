@@ -22,7 +22,7 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 public class Intake extends Subsystem {
 
 	public static enum fieldHeights {
-		LOW, MED, HIGH, CSHIP
+		LOW, MED, HIGH, CSHIP, LOADED
 	};
 
 	// Talons
@@ -191,6 +191,8 @@ public class Intake extends Subsystem {
 				return RobotPreferences.HATCH_POSITION_1;
 			}
 			return RobotPreferences.CARGO_POSITION_SHIP;
+		case LOADED:
+			return RobotPreferences.HATCH_POSITION_LOADED;
 		default:
 			return RobotPreferences.CASCADE_BOTTOM;
 		}

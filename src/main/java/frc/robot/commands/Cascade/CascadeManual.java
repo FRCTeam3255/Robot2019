@@ -9,6 +9,8 @@ package frc.robot.commands.Cascade;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotPreferences;
+import frc.robot.subsystems.CascadePID;
 
 public class CascadeManual extends Command {
   double speed = 0.0;
@@ -29,13 +31,18 @@ public class CascadeManual extends Command {
   @Override
   protected void execute() {
     speed = Robot.m_oi.manipulatorStick.getYAxis();
+    if (speed > CascadePID.CASCADE_MAXOUTUP.getValue()) {
+      speed = CascadePID.CASCADE_MAXOUTUP.getValue();
+    } else if (speed < -CascadePID.CASCADE_MAXOUTDOWN.getValue()) {
+      speed = -CascadePID.CASCADE_MAXOUTDOWN.getValue();
+    }
     Robot.m_cascade.setLiftSpeed(speed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return ((speed > 0) && Robot.m_cascade.isTopSwitchClosed());
   }
 
   // Called once after isFinished returns true

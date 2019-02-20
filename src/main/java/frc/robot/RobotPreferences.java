@@ -41,6 +41,7 @@ public class RobotPreferences {
 	public static final SN_DoublePreference HATCH_POSITION_1 = new SN_DoublePreference("hatchPos1", 5.0);
 	public static final SN_DoublePreference HATCH_POSITION_2 = new SN_DoublePreference("hatchPos2", 31.0);
 	public static final SN_DoublePreference HATCH_POSITION_3 = new SN_DoublePreference("hatchPos3", 61.0);
+	public static final SN_DoublePreference HATCH_POSITION_LOADED = new SN_DoublePreference("hatchPosLoaded", 10.0);
 	public static final SN_DoublePreference CARGO_POSITION_1 = new SN_DoublePreference("cargoPos1", 24.0);
 	public static final SN_DoublePreference CARGO_POSITION_2 = new SN_DoublePreference("cargoPos2", 53.0);
 	public static final SN_DoublePreference CARGO_POSITION_3 = new SN_DoublePreference("cargoPos3", 72.0);
@@ -50,7 +51,9 @@ public class RobotPreferences {
 	public static final SN_DoublePreference CASCADE_UNWEIGHT_SPEED = new SN_DoublePreference("cascadeUnweightSpeed",
 			0.5);
 	public static final SN_DoublePreference CASCADE_UNWEIGHT_HEIGHT = new SN_DoublePreference("cascadeUnweightHeight",
-			0.3);
+			0.8);
+	public static final SN_DoublePreference CASCADE_LIFT_FROM_FEEDER_HEIGHT = new SN_DoublePreference(
+			"cascadeLiftFromFeeder", 5.0);
 
 	// Climber
 	public static final SN_DoublePreference CLIMBER_LIFT_SPEED = new SN_DoublePreference("climbLiftSpeed", 0.5);
@@ -60,6 +63,7 @@ public class RobotPreferences {
 	public static final SN_DoublePreference DRIVETRAIN_P = new SN_DoublePreference("driveP", 0.04);
 	public static final SN_DoublePreference DRIVETRAIN_I = new SN_DoublePreference("driveI", 0.0);
 	public static final SN_DoublePreference DRIVETRAIN_D = new SN_DoublePreference("driveD", 0.0);
+	public static final SN_DoublePreference DRIVETRAIN_TOLERANCE = new SN_DoublePreference("driveTol", 3.0);
 
 	// Yaw PID
 	public static final SN_DoublePreference YAW_P = new SN_DoublePreference("yawP", 0.02);

@@ -19,6 +19,7 @@ public class CascadePosition extends Command {
 	private SN_DoublePreference pref_timeout = new SN_DoublePreference("Lift Timeout", 100.0);
 	private double expireTime = 0.0;
 	private fieldHeights setpoint;
+	private double speed = 0;
 
 	public CascadePosition(fieldHeights position) {
 		// Use requires() here to declare subsystem dependencies
@@ -51,8 +52,8 @@ public class CascadePosition extends Command {
 	@Override
 	protected void execute() {
 		Robot.m_telemetry.setCommandStatus("Executing CascadeLift");
-
-		Robot.m_cascade.setLiftSpeed(pid.getOutput());
+		speed = pid.getOutput();
+		Robot.m_cascade.setLiftSpeed(speed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -60,7 +61,8 @@ public class CascadePosition extends Command {
 	protected boolean isFinished() {
 		boolean distanceTarget = pid.onRawTarget();
 		double timeNow = timeSinceInitialized();
-		boolean finished = (distanceTarget || (timeNow >= expireTime));
+		boolean finished = (distanceTarget || (timeNow >= expireTime)
+				|| ((speed > 0) && Robot.m_cascade.isTopSwitchClosed()));
 
 		return finished;
 	}
