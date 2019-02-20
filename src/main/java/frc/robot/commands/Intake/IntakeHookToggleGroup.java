@@ -8,7 +8,6 @@
 package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.Cascade.CascadePosition;
 import frc.robot.commands.Cascade.CascadePositionGroup;
 import frc.robot.subsystems.Intake.fieldHeights;
 

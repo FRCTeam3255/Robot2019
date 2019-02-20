@@ -9,7 +9,6 @@ package frc.robot.commands.Cascade;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotPreferences;
 import frc.robot.subsystems.CascadePID;
 
 public class CascadeManual extends Command {
