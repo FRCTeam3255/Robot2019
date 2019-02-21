@@ -10,6 +10,7 @@ package frc.robot.commands.Intake;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
 import frc.robot.commands.DoDelay;
+import frc.robot.commands.LightsAutoCommandFinish;
 import frc.robot.commands.Cascade.CascadePositionGroup;
 import frc.robot.commands.Drive.DriveDistance;
 import frc.robot.commands.Drive.DriveToHatch;
@@ -39,5 +40,6 @@ public class IntakeFeederGroup extends CommandGroup {
     addSequential(new CascadePositionGroup(fieldHeights.LOADED));
     addSequential(new DriveDistance(AutoIntakeBackup, "AutoIntakeBackup"));
     addSequential(new CascadePositionGroup(fieldHeights.LOW));
+    addSequential(new LightsAutoCommandFinish());
   }
 }

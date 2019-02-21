@@ -20,8 +20,8 @@ import frcteam3255.robotbase.SN_TalonSRX;
  * Subsytem containing the cascade devices and methoods
  */
 public class Cascade extends Subsystem {
-	// Speed
 	public double liftSpeed = 0.0;
+
 	// Talons
 	private SN_TalonSRX leftFrontTalon = null;
 	private SN_TalonSRX leftBackTalon = null;

@@ -13,12 +13,9 @@ import frc.robot.Robot;
 public class VisionToggleMode extends InstantCommand {
   public VisionToggleMode() {
     super();
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
     requires(Robot.m_vision);
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     Robot.m_vision.toggleMode();

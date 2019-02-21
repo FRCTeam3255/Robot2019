@@ -15,9 +15,6 @@ import frcteam3255.robotbase.SN_PID;
  * PID class based off the encoder distance
  */
 public class DrivetrainDistancePID extends SN_PID {
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
-
 	/**
 	 * Creates a DrivetrainDistancePID loop and sets PID values
 	 */

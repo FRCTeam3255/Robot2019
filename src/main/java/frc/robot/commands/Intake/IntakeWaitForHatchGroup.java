@@ -10,6 +10,7 @@ package frc.robot.commands.Intake;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
 import frc.robot.commands.DoDelay;
+import frc.robot.commands.LightsAutoCommandFinish;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class IntakeWaitForHatchGroup extends CommandGroup {
@@ -30,5 +31,6 @@ public class IntakeWaitForHatchGroup extends CommandGroup {
     addSequential(new IntakeHookRetract());
     addSequential(new DoDelay(new SN_DoublePreference("hatchPickUpDelay", 0.5)));
     addSequential(new IntakeRetract());
+    addSequential(new LightsAutoCommandFinish());
   }
 }

@@ -30,12 +30,16 @@ public class Lighting extends Subsystem {
   public static final double ORANGE = 0.63;
   public static final double OFF = 0.98;
   public static final double RED_LARSON = 0.0;
+  public static final double VIOLET = 0.91;
+  public static final double HOT_PINK = 0.57;
 
   public static SN_DoublePreference LIGHTS_HATCH = new SN_DoublePreference("lightsHatch", BLUE); // solid blue
   public static SN_DoublePreference LIGHTS_OFF = new SN_DoublePreference("lightsOff", RED_LARSON); // larson scanner red
   public static SN_DoublePreference LIGHTS_CARGO = new SN_DoublePreference("lightsCargo", ORANGE); // solid orange
   public static SN_DoublePreference LIGHTS_TARGET_FOUND = new SN_DoublePreference("lightsTargetFound", YELLOW);
   public static SN_DoublePreference LIGHTS_TARGET_NOT_FOUND = new SN_DoublePreference("lightsTargetNotFound", RED);
+  public static SN_DoublePreference LIGHTS_WAIT_FOR_HATCH = new SN_DoublePreference("WaitForHatch", VIOLET);
+  public static SN_DoublePreference LIGHTS_AUTO_COMMAND_FINISH = new SN_DoublePreference("autoCommandFinish", HOT_PINK);
 
   /**
    * Create the spark light controller
@@ -67,6 +71,7 @@ public class Lighting extends Subsystem {
     } else {
       setLighting(LIGHTS_OFF.getValue());
     }
+
   }
 
   @Override

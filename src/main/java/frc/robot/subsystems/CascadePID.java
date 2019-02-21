@@ -16,9 +16,6 @@ import frcteam3255.robotbase.Preferences.SN_IntPreference;
  * PID class based off the cascade distance
  */
 public class CascadePID extends SN_PID {
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
-
 	// Cascade PID
 	public static final SN_DoublePreference CASCADE_P = new SN_DoublePreference("cascadeP", 0.1);
 	public static final SN_DoublePreference CASCADE_I = new SN_DoublePreference("cascadeI", 0.0);

@@ -15,13 +15,10 @@ public class IntakeHookToggle extends InstantCommand {
    * Toggles hatch hook
    */
   public IntakeHookToggle() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
     super();
     requires(Robot.m_intake);
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     Robot.m_intake.toggleHook();

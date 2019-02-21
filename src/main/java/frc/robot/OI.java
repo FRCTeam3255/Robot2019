@@ -22,13 +22,6 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	//// CREATING BUTTONS
-	// One type of button is a joystick button which is any button on a
-	//// joystick.
-	// You create one by telling it which joystick it's on and which button
-	// number it is.
-	// Joystick stick = new Joystick(port);
-	// Button button = new JoystickButton(stick, buttonNumber);
 	public SN_DualActionStick driverStick = new SN_DualActionStick(0);
 	public SN_Extreme3DStick manipulatorStick = new SN_Extreme3DStick(1);
 	public SN_Extreme3DStick switchboardStick = new SN_Extreme3DStick(2);

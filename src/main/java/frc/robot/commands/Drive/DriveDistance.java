@@ -21,8 +21,6 @@ public class DriveDistance extends Command {
 	private String name;
 
 	public DriveDistance(SN_DoublePreference inches, String commandName) {
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
 		requires(Robot.m_drivetrain);
 
 		pid = new DrivetrainDistancePID();
@@ -38,7 +36,6 @@ public class DriveDistance extends Command {
 		return pid;
 	}
 
-	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
 		Robot.m_telemetry.setCommandStatus("Starting DriveDistance " + name + ": " + pid.getSetpoint() + " ");
@@ -49,7 +46,6 @@ public class DriveDistance extends Command {
 		pid.enable();
 	}
 
-	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		Robot.m_telemetry.setCommandStatus("Executing DriveDistance " + name + ": " + pid.getSetpoint() + " ");
@@ -64,7 +60,6 @@ public class DriveDistance extends Command {
 		}
 	}
 
-	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
 		boolean distanceTarget = pid.onRawTarget();
@@ -75,7 +70,6 @@ public class DriveDistance extends Command {
 		return finished;
 	}
 
-	// Called once after isFinished returns true
 	@Override
 	protected void end() {
 		Robot.m_telemetry.setCommandStatus("Finishing DriveDistance " + name + ": " + pid.getSetpoint() + "");
@@ -83,8 +77,6 @@ public class DriveDistance extends Command {
 		Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
 	}
 
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
 		end();

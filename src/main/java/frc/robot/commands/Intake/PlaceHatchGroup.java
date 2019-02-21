@@ -9,6 +9,7 @@ package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.DoDelay;
+import frc.robot.commands.LightsAutoCommandFinish;
 import frc.robot.commands.Drive.DriveDistance;
 import frc.robot.commands.Drive.DriveToWall;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
@@ -32,5 +33,6 @@ public class PlaceHatchGroup extends CommandGroup {
     addSequential(new DoDelay(new SN_DoublePreference("AutoPlaceTimeout", 0.5)));
     addSequential(new DriveDistance(AutoPlaceBackup, "AutoPlaceBackup"));
     addSequential(new IntakeEjectorRetract());
+    addSequential(new LightsAutoCommandFinish());
   }
 }

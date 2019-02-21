@@ -16,11 +16,8 @@ public class DriveResetEncoder extends InstantCommand {
 	 */
 	public DriveResetEncoder() {
 		super();
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
 	}
 
-	// Called once when the command executes
 	@Override
 	protected void initialize() {
 		Robot.m_drivetrain.resetEncoderCount();

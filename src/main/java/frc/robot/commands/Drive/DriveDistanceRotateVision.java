@@ -42,8 +42,6 @@ public class DriveDistanceRotateVision extends Command {
 	 * @param commandName
 	 */
 	public DriveDistanceRotateVision(SN_DoublePreference inches, SN_DoublePreference offset, String commandName) {
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
 		requires(Robot.m_drivetrain);
 		requires(Robot.m_lighting);
 
@@ -67,7 +65,6 @@ public class DriveDistanceRotateVision extends Command {
 		return rotatePID;
 	}
 
-	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
 		Robot.m_vision.setVisionMode();
@@ -79,15 +76,12 @@ public class DriveDistanceRotateVision extends Command {
 		rotatePID.enable();
 	}
 
-	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		Robot.m_telemetry.setCommandStatus("Executing DriveDistanceRotateVision " + name + ": "
 				+ distancePID.getSetpoint() + " " + rotatePID.getSetpoint());
 
 		if (distancePID.isOutputValid() == false || rotatePID.isOutputValid() == false) {
-			// get the moveSpeed from a joystick method that contains all the logic
-			// from arcade drive that computes moveSpeed from joystick input
 			moveSpeed = Robot.m_oi.driverStick.getArcadeMove();
 			rotateSpeed = Robot.m_oi.driverStick.getArcadeRotate();
 
@@ -114,7 +108,6 @@ public class DriveDistanceRotateVision extends Command {
 		}
 	}
 
-	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
 		boolean distanceTarget = distancePID.onRawTarget();
@@ -126,7 +119,6 @@ public class DriveDistanceRotateVision extends Command {
 		return finished;
 	}
 
-	// Called once after isFinished returns true
 	@Override
 	protected void end() {
 		Robot.m_telemetry.setCommandStatus("Finishing DriveDistanceRotateVision " + name + ": "
@@ -137,8 +129,6 @@ public class DriveDistanceRotateVision extends Command {
 		Robot.m_vision.setDriverMode();
 	}
 
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
 		end();

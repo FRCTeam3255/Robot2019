@@ -7,34 +7,18 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
+import frc.robot.subsystems.Lighting;
 
-public class UpdateLighting extends Command {
-  public UpdateLighting() {
-    requires(Robot.m_lighting);
+public class LightsAutoCommandFinish extends InstantCommand {
+  public LightsAutoCommandFinish() {
+    super();
   }
 
   @Override
   protected void initialize() {
+    Robot.m_lighting.setLighting(Lighting.HOT_PINK);
   }
 
-  @Override
-  protected void execute() {
-    Robot.m_lighting.update();
-  }
-
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
-
-  @Override
-  protected void end() {
-  }
-
-  @Override
-  protected void interrupted() {
-    end();
-  }
 }

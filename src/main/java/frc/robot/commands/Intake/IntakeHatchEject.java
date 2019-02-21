@@ -15,13 +15,10 @@ public class IntakeHatchEject extends InstantCommand {
    * Deploys hatch hook and ejector pistions
    */
   public IntakeHatchEject() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
     requires(Robot.m_intake);
     requires(Robot.m_cascade);
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     Robot.m_intake.deployHook();

@@ -22,8 +22,6 @@ public class CascadePosition extends Command {
 	private double speed = 0;
 
 	public CascadePosition(fieldHeights position) {
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
 		requires(Robot.m_cascade);
 		setpoint = position;
 		pid = new CascadePID();
@@ -37,7 +35,6 @@ public class CascadePosition extends Command {
 		return pid;
 	}
 
-	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
 		expireTime = timeSinceInitialized() + pref_timeout.getValue();
@@ -47,7 +44,6 @@ public class CascadePosition extends Command {
 		Robot.m_telemetry.setCommandStatus("Starting CascadeLift" + ": " + pid.getSetpoint());
 	}
 
-	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		Robot.m_telemetry.setCommandStatus("Executing CascadeLift");
@@ -55,7 +51,6 @@ public class CascadePosition extends Command {
 		Robot.m_cascade.setLiftSpeed(speed);
 	}
 
-	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
 		boolean distanceTarget = pid.onRawTarget();
@@ -67,7 +62,6 @@ public class CascadePosition extends Command {
 		return finished;
 	}
 
-	// Called once after isFinished returns true
 	@Override
 	protected void end() {
 		Robot.m_telemetry.setCommandStatus("Finishing CascadeLift" + ": " + pid.getSetpoint());
@@ -75,8 +69,6 @@ public class CascadePosition extends Command {
 		Robot.m_cascade.setLiftSpeed(0.0);
 	}
 
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
 		end();

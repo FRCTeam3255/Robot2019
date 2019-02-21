@@ -16,13 +16,10 @@ public class CascadeShiftTo extends InstantCommand {
 	 */
 	public CascadeShiftTo() {
 		super();
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
 		requires(Robot.m_cascade);
 
 	}
 
-	// Called once when the command executes
 	@Override
 	protected void initialize() {
 		Robot.m_cascade.shiftCascade();

@@ -16,12 +16,9 @@ public class DriveResetYaw extends InstantCommand {
 	 */
 	public DriveResetYaw() {
 		super();
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
 		requires(Robot.m_navigation);
 	}
 
-	// Called once when the command executes
 	@Override
 	protected void initialize() {
 		Robot.m_navigation.resetYaw();

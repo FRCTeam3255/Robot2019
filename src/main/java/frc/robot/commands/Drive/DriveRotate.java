@@ -20,8 +20,6 @@ public class DriveRotate extends Command {
 	double expireTime = 0.0;
 
 	public DriveRotate(double degrees) {
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
 		requires(Robot.m_drivetrain);
 		requires(Robot.m_navigation);
 
@@ -37,7 +35,6 @@ public class DriveRotate extends Command {
 		return pid;
 	}
 
-	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
 		expireTime = timeSinceInitialized() + pref_timeout.getValue();
@@ -47,7 +44,6 @@ public class DriveRotate extends Command {
 		pid.enable();
 	}
 
-	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		double rotateSpeed = pid.getOutput();
@@ -55,7 +51,6 @@ public class DriveRotate extends Command {
 		Robot.m_drivetrain.arcadeDrive(0.0, rotateSpeed);
 	}
 
-	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
 		boolean distanceTarget = pid.onRawTarget();
@@ -66,15 +61,12 @@ public class DriveRotate extends Command {
 		return finished;
 	}
 
-	// Called once after isFinished returns true
 	@Override
 	protected void end() {
 		pid.disable();
 		Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
 	}
 
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
 		end();

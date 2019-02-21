@@ -10,21 +10,15 @@ package frc.robot.commands.Cascade;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
 public class CascadeResetEncoder extends InstantCommand {
 	/**
 	 * Resets cascade encoder
 	 */
 	public CascadeResetEncoder() {
 		super();
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
 		requires(Robot.m_cascade);
 	}
 
-	// Called once when the command executes
 	@Override
 	protected void initialize() {
 		Robot.m_cascade.resetLiftEncoder();

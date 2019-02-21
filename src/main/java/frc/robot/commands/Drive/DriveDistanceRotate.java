@@ -24,8 +24,6 @@ public class DriveDistanceRotate extends Command {
 	private String name;
 
 	public DriveDistanceRotate(SN_DoublePreference inches, SN_DoublePreference degrees, String commandName) {
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
 		requires(Robot.m_drivetrain);
 		requires(Robot.m_navigation);
 
@@ -49,7 +47,6 @@ public class DriveDistanceRotate extends Command {
 		return rotatePID;
 	}
 
-	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
 		Robot.m_telemetry.setCommandStatus("Starting DriveDistanceRotate" + name + ": " + distancePID.getSetpoint()
@@ -63,7 +60,6 @@ public class DriveDistanceRotate extends Command {
 		rotatePID.enable();
 	}
 
-	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		double moveSpeed = distancePID.getOutput();
@@ -72,7 +68,6 @@ public class DriveDistanceRotate extends Command {
 		Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed);
 	}
 
-	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
 		boolean distanceTarget = distancePID.onRawTarget();
@@ -84,7 +79,6 @@ public class DriveDistanceRotate extends Command {
 		return finished;
 	}
 
-	// Called once after isFinished returns true
 	@Override
 	protected void end() {
 		Robot.m_telemetry.setCommandStatus("Finishing DriveDistanceRotate " + name + ": " + distancePID.getSetpoint()
@@ -94,8 +88,6 @@ public class DriveDistanceRotate extends Command {
 		Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
 	}
 
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
 		end();
