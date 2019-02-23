@@ -45,6 +45,9 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putData("Eject", new IntakeHatchEject());
 		SmartDashboard.putData("Ejector Retract", new IntakeEjectorRetract());
 
+		// Climb Commands
+		SmartDashboard.putData("Climb Deploy", new ClimbDeploy());
+
 		// Lighting Commands
 
 		// Navigation Commands

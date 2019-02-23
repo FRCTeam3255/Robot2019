@@ -29,6 +29,7 @@ public class Drivetrain extends Subsystem {
 	private static SN_DoublePreference FACTOR_AT_MAX_CASCADE = new SN_DoublePreference("factorAtMaxCascade", 0.2);
 
 	private static SN_DoublePreference CLIMB_DRIVE_SPEED = new SN_DoublePreference("climbDriveSpeed", 1.0);
+	private static SN_DoublePreference CLIMB_DEPLOY_SPEED = new SN_DoublePreference("climbDeploySpeed", -0.5);
 
 	// Talons
 	private SpeedControllerGroup leftTalons = null;
@@ -124,10 +125,17 @@ public class Drivetrain extends Subsystem {
 	}
 
 	/**
-	 * urn off the climb drive wheel
+	 * Turn off the climb drive wheel
 	 */
 	public void disableClimbDrive() {
 		climbDriveTalon.set(0.0);
+	}
+
+	/**
+	 * Flips the climber mechanism out
+	 */
+	public void deployClimb() {
+		climbDriveTalon.set(CLIMB_DEPLOY_SPEED.getValue());
 	}
 
 	@Override
