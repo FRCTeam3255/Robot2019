@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
 import frc.robot.commands.DoDelay;
 import frc.robot.commands.LightsAutoCommandFinish;
+import frc.robot.commands.Cascade.CascadeBottom;
 import frc.robot.commands.Cascade.CascadePositionGroup;
 import frc.robot.commands.Drive.DriveDistance;
 import frc.robot.commands.Drive.DriveToHatch;
@@ -33,7 +34,10 @@ public class IntakeFeederGroup extends CommandGroup {
   public IntakeFeederGroup() {
     requires(Robot.m_drivetrain);
     addSequential(new IntakeRetract());
-    addSequential(new CascadePositionGroup(fieldHeights.LOW));
+    // For Practice Bot
+    // addSequential(new CascadePositionGroup(fieldHeights.FEEDER));
+    // For Comp Bot
+    addSequential(new CascadeBottom());
     addSequential(new IntakeHookDeploy());
     addSequential(new DriveToHatch());
     addSequential(new DoDelay(new SN_DoublePreference("AutoIntakeTimeout", 0.5)));

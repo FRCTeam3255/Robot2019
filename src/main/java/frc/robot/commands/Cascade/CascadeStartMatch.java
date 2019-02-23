@@ -8,10 +8,19 @@
 package frc.robot.commands.Cascade;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.DoDelay;
+import frc.robot.commands.Intake.IntakeDeploy;
+import frc.robot.commands.Intake.IntakeRetract;
+import frc.robot.subsystems.Intake.fieldHeights;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class CascadeStartMatch extends CommandGroup {
 
   public CascadeStartMatch() {
-
+    addSequential(new CascadePositionGroup(fieldHeights.LOADED));
+    addSequential(new IntakeDeploy());
+    addSequential(new DoDelay(new SN_DoublePreference("CascadeStartMatch", 0.5)));
+    addSequential(new CascadePositionGroup(fieldHeights.LOW));
+    addSequential(new IntakeRetract());
   }
 }

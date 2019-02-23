@@ -22,7 +22,7 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 public class Intake extends Subsystem {
 
 	public static enum fieldHeights {
-		LOW, MED, HIGH, CSHIP, LOADED
+		LOW, MED, HIGH, CSHIP, LOADED, FEEDER
 	};
 
 	// Talons
@@ -83,8 +83,8 @@ public class Intake extends Subsystem {
 	/**
 	 * Spin the intake to eject cargo
 	 */
-	public void shootCargo() {
-		cargoTalon.set(RobotPreferences.CARGO_SHOOT_SPEED.getValue());
+	public void shootCargo(double speed) {
+		cargoTalon.set(speed);
 	}
 
 	/**
@@ -191,6 +191,8 @@ public class Intake extends Subsystem {
 				return RobotPreferences.HATCH_POSITION_1;
 			}
 			return RobotPreferences.CARGO_POSITION_SHIP;
+		case FEEDER:
+			return RobotPreferences.CASCADE_FEEDER;
 		case LOADED:
 			return RobotPreferences.HATCH_POSITION_LOADED;
 		default:

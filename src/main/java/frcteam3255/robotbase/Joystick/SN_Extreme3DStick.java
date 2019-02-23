@@ -76,7 +76,7 @@ public class SN_Extreme3DStick extends Joystick {
 	 * @return inverted position value of RawAxis({@value #AXIS_DIAL})
 	 */
 	public double getDialAxis() {
-		return -getRawAxis(AXIS_DIAL);
+		return (((getRawAxis(AXIS_DIAL) * -1) + 1) / 2);
 	}
 
 }

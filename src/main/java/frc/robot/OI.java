@@ -54,6 +54,7 @@ public class OI {
 		driverStick.btn_LTrig.whenPressed(new VisionToggleMode());
 		driverStick.btn_RTrig
 				.whileHeld(new DriveDistanceRotateVision(VisDisSetpoint, VisRotSetpoint, "DistanceRotateVision"));
+		driverStick.btn_Start.whenPressed(new CascadeStartMatch());
 
 		// Switchboard Stick
 		switchboardStick.btn_2.whenPressed(new CascadeResetEncoder());

@@ -17,6 +17,8 @@ public class HatchCargoEject extends Command {
 	 * <li>Retracts hatch hook/stops spinning intake in end</li>
 	 * </ul>
 	 */
+	double speed = 0.0;
+
 	public HatchCargoEject() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -35,7 +37,12 @@ public class HatchCargoEject extends Command {
 	@Override
 	protected void execute() {
 		if (!Robot.m_intake.isIntakeRetracted()) {
-			Robot.m_intake.shootCargo();
+			this.speed = Robot.m_oi.manipulatorStick.getDialAxis();
+
+			if (speed < 0.25) {
+				speed = 0.25;
+			}
+			Robot.m_intake.shootCargo(speed);
 		}
 	}
 
