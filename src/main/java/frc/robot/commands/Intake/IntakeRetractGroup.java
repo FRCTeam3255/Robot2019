@@ -20,10 +20,8 @@ public class IntakeRetractGroup extends CommandGroup {
    */
   public IntakeRetractGroup() {
     addSequential(new IntakeEjectorRetract());
+    addSequential(new IntakeHookRetract());
     addSequential(new IntakeRetract());
-    addSequential(new IntakeHookDeploy());
-    addSequential(new CascadePositionGroup(fieldHeights.LOW));
-    addSequential(new IntakeWaitForHatchGroup());
     addSequential(new CascadePositionGroup(fieldHeights.LOADED));
     addSequential(new CascadeLockDogtooth());
     addSequential(new LightsAutoCommandFinish());

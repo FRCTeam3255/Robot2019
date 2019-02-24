@@ -17,6 +17,7 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
  */
 public class RobotPreferences {
 	// Drivetrain preferences
+	// CompBot: 29 pulses per foot?
 	public static final SN_DoublePreference DRIVETRAIN_PULSES_PER_FOOT = new SN_DoublePreference(
 			"drivetrainPulsesPerFoot", 29.0);
 	public static final SN_DoublePreference DRIVETRAIN_CLIMB_SETPOINT = new SN_DoublePreference("drivetrainClimb",
@@ -36,6 +37,7 @@ public class RobotPreferences {
 	public static final SN_DoublePreference CARGO_SHOOT_SPEED = new SN_DoublePreference("cargoShootSpeed", -1.0);
 
 	// Cascade Preferences
+	// CompBot: 510 pulses per foot
 	public static final SN_DoublePreference CASCADE_PULSES_PER_FOOT = new SN_DoublePreference("cascadePulsesPerFoot",
 			510.0);
 	public static final SN_DoublePreference HATCH_POSITION_1 = new SN_DoublePreference("hatchPos1", 5.0);
