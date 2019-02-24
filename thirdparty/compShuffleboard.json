@@ -1,0 +1,533 @@
+{
+  "tabPane": [
+    {
+      "title": "Comp Mode",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "SmartDashboard/",
+      "widgetPane": {
+        "gridSize": 32.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "8,0": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Cascade Mode",
+              "_title": "Cascade Mode",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "8,2": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Intake Retracted",
+              "_title": "Intake Retracted",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "4,0": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Cascade Switches",
+              "Layout/Label position": "LEFT",
+              "_children": [
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Cascade Top Switch",
+                  "_title": "Top......",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Cascade Bottom Switch",
+                  "_title": "Bottom",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                }
+              ]
+            }
+          },
+          "0,0": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Collected",
+              "Layout/Label position": "LEFT",
+              "_children": [
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Cargo Collected",
+                  "_title": "Cargo",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Hatch Collected",
+                  "_title": "Hatch",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                }
+              ]
+            }
+          },
+          "0,4": {
+            "size": [
+              4,
+              3
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Encoder Distances",
+              "Layout/Label position": "LEFT",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Cascade Lift Distance",
+                  "_title": "Cascade Lift"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Drivetrain Encoder Distance",
+                  "_title": "Drivetrain"
+                }
+              ]
+            }
+          },
+          "14,0": {
+            "size": [
+              9,
+              8
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://limelight",
+              "_title": "Limelight",
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": false,
+              "Controls/Rotation": "NONE",
+              "compression": -1.0,
+              "fps": -1,
+              "imageWidth": -1,
+              "imageHeight": -1
+            }
+          },
+          "11,0": {
+            "size": [
+              3,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "navX",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Is Calibrating",
+                  "_title": "Is Calibrating",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Reset Yaw/running",
+                  "_title": "Reset Yaw/running",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                }
+              ]
+            }
+          },
+          "4,4": {
+            "size": [
+              10,
+              3
+            ],
+            "content": {
+              "_type": "Basic FMS Info",
+              "_title": "Basic FMS Info"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Commands",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "SmartDashBoard/",
+      "widgetPane": {
+        "gridSize": 32.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "10,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Command",
+              "_source0": "network_table:///SmartDashboard/Drive To Wall",
+              "_title": "Drive To Wall"
+            }
+          },
+          "10,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Command",
+              "_source0": "network_table:///SmartDashboard/Climb Deploy",
+              "_title": "Climb Deploy"
+            }
+          },
+          "0,0": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Intake",
+              "Layout/Label position": "HIDDEN",
+              "_children": [
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Deploy Intake",
+                  "_title": "Deploy Intake"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Retract Intake",
+                  "_title": "Retract Intake"
+                }
+              ]
+            }
+          },
+          "4,0": {
+            "size": [
+              5,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Dogtooth",
+              "Layout/Label position": "HIDDEN",
+              "_children": [
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Lock Dogtooth",
+                  "_title": "Lock Dogtooth"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Unlock Dogtooth",
+                  "_title": "Unlock Dogtooth"
+                }
+              ]
+            }
+          },
+          "9,0": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Hook",
+              "Layout/Label position": "HIDDEN",
+              "_children": [
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Deploy Hook",
+                  "_title": "Deploy Hook"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Retract Hook",
+                  "_title": "Retract Hook"
+                }
+              ]
+            }
+          },
+          "5,4": {
+            "size": [
+              5,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Camera Mode",
+              "Layout/Label position": "HIDDEN",
+              "_children": [
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Set Vision Mode",
+                  "_title": "Set Vision Mode"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Set Driver Mode",
+                  "_title": "Set Driver Mode"
+                }
+              ]
+            }
+          },
+          "0,4": {
+            "size": [
+              5,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Encoders",
+              "Layout/Label position": "HIDDEN",
+              "_children": [
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Reset Drive Encoder",
+                  "_title": "Reset Drive Encoder"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Reset Cascade Encoder",
+                  "_title": "Reset Cascade Encoder"
+                }
+              ]
+            }
+          },
+          "13,0": {
+            "size": [
+              5,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Ejectors",
+              "Layout/Label position": "HIDDEN",
+              "_children": [
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Eject",
+                  "_title": "Eject"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Ejector Retract",
+                  "_title": "Ejector Retract"
+                }
+              ]
+            }
+          },
+          "14,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Command",
+              "_source0": "network_table:///SmartDashboard/Shift Cascade",
+              "_title": "Shift Cascade"
+            }
+          },
+          "14,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Command",
+              "_source0": "network_table:///SmartDashboard/Shift Climb",
+              "_title": "Shift Climb"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Debug",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "SmartDashboard/",
+      "widgetPane": {
+        "gridSize": 32.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "0,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Limelight_PipelineName",
+              "_title": "Limelight_PipelineName"
+            }
+          },
+          "0,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Limelight_Interface",
+              "_title": "Limelight_Interface"
+            }
+          },
+          "0,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Limelight_Stream",
+              "_title": "Limelight_Stream"
+            }
+          },
+          "15,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Lift Speed",
+              "_title": "Lift Speed"
+            }
+          },
+          "15,6": {
+            "size": [
+              5,
+              3
+            ],
+            "content": {
+              "_type": "Simple Dial",
+              "_source0": "network_table:///SmartDashboard/Yaw",
+              "_title": "Yaw",
+              "Range/Min": -180.0,
+              "Range/Max": 180.0,
+              "Visuals/Show value": true
+            }
+          },
+          "4,0": {
+            "size": [
+              6,
+              9
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Acceleration ",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Graph",
+                  "_source0": "network_table:///SmartDashboard/Acceleration X",
+                  "_title": "Acceleration X",
+                  "Graph/Visible time": 30.0,
+                  "Visible data/SmartDashboard/Acceleration X": true
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Acceleration Z",
+                  "_title": "Acceleration Z"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Acceleration Y",
+                  "_title": "Acceleration Y"
+                }
+              ]
+            }
+          },
+          "15,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drivetrain Encoder Count",
+              "_title": "Drivetrain Encoder Count"
+            }
+          },
+          "15,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Cascade Lift Count",
+              "_title": "Cascade Lift Count"
+            }
+          },
+          "10,0": {
+            "size": [
+              5,
+              7
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Vision",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Vision Horizontal Offset",
+                  "_title": "Vision Horizontal Offset"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Vision Distance From Target",
+                  "_title": "Vision Distance From Target"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Vision Width",
+                  "_title": "Vision Width"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Vision Rotation",
+                  "_title": "Vision Rotation"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "windowGeometry": {
+    "x": -6.0,
+    "y": 2.0,
+    "width": 1345.0,
+    "height": 571.0
+  }
+}
