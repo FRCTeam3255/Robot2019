@@ -13,12 +13,20 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class DriveToWall extends Command {
 
-  private static SN_DoublePreference wallSpeed = new SN_DoublePreference("wallSpeed", 0.5);
-  private static SN_DoublePreference wallDecel = new SN_DoublePreference("wallDecel", 0.2);
+  private static SN_DoublePreference defaultWallSpeed = new SN_DoublePreference("wallSpeed", 0.5);
+  private static SN_DoublePreference defaultWallDecel = new SN_DoublePreference("wallDecel", 0.2);
+  private static SN_DoublePreference wallSpeed;
+  private static SN_DoublePreference wallDecel;
 
-  public DriveToWall() {
+  public DriveToWall(SN_DoublePreference speed, SN_DoublePreference decel) {
     requires(Robot.m_drivetrain);
     requires(Robot.m_navigation);
+    wallSpeed = speed;
+    wallDecel = decel;
+  }
+
+  public DriveToWall() {
+    this(defaultWallSpeed, defaultWallDecel);
   }
 
   @Override
@@ -32,7 +40,11 @@ public class DriveToWall extends Command {
 
   @Override
   protected boolean isFinished() {
-    return Robot.m_navigation.getAccelerationX() >= wallDecel.getValue();
+    if (wallSpeed.getValue() > 0.0) {
+      return Robot.m_navigation.getAccelerationX() >= wallDecel.getValue();
+    } else {
+      return Robot.m_navigation.getAccelerationX() <= -wallDecel.getValue();
+    }
   }
 
   @Override

@@ -40,9 +40,9 @@ public class OI {
 		manipulatorStick.btn_4.whileHeld(new CascadeManualGroup());
 		manipulatorStick.btn_5.whenPressed(new IntakeRetractGroup());
 		manipulatorStick.btn_6.whenPressed(new IntakeDeployGroup());
-		manipulatorStick.btn_7.whileHeld(new ClimbDeploy());
+		manipulatorStick.btn_7.whenPressed(new ClimbDeploy());
 		manipulatorStick.btn_8.whenPressed(new CascadePositionGroup(fieldHeights.HIGH));
-		manipulatorStick.btn_9.whenPressed(new ClimbManual());
+		manipulatorStick.btn_9.whileHeld(new ClimbManual());
 		manipulatorStick.btn_10.whenPressed(new CascadePositionGroup(fieldHeights.MED));
 		manipulatorStick.btn_11.whenPressed(new CascadePosition(fieldHeights.CSHIP));
 		manipulatorStick.btn_12.whenPressed(new CascadePositionGroup(fieldHeights.LOW));

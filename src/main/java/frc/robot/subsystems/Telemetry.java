@@ -47,6 +47,7 @@ public class Telemetry extends Subsystem {
 
 		// Climb Commands
 		SmartDashboard.putData("Climb Deploy", new ClimbDeploy());
+		SmartDashboard.putData("Climb Group", new ClimbGroup());
 
 		// Lighting Commands
 
