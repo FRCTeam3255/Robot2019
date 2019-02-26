@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Drive;
+package frc.robot.commands.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
@@ -15,7 +15,7 @@ import frc.robot.subsystems.VisionDistancePID;
 import frc.robot.subsystems.VisionRotatePID;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-public class DriveDistanceRotateVision extends Command {
+public class VisionDriveDistanceRotate extends Command {
 
 	private VisionDistancePID distancePID;
 	private VisionRotatePID rotatePID;
@@ -41,7 +41,7 @@ public class DriveDistanceRotateVision extends Command {
 	 * @param offset
 	 * @param commandName
 	 */
-	public DriveDistanceRotateVision(SN_DoublePreference inches, SN_DoublePreference offset, String commandName) {
+	public VisionDriveDistanceRotate(SN_DoublePreference inches, SN_DoublePreference offset, String commandName) {
 		requires(Robot.m_drivetrain);
 		requires(Robot.m_lighting);
 

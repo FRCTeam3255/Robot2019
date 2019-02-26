@@ -9,8 +9,8 @@ package frc.robot;
 
 import frc.robot.commands.Cascade.*;
 import frc.robot.commands.Climber.*;
-import frc.robot.commands.Drive.*;
 import frc.robot.commands.Intake.*;
+import frc.robot.commands.Vision.VisionDriveDistanceRotate;
 import frc.robot.commands.Vision.VisionToggleMode;
 import frc.robot.subsystems.Intake.fieldHeights;
 import frcteam3255.robotbase.Joystick.SN_DualActionStick;
@@ -34,7 +34,7 @@ public class OI {
 	 */
 	public OI() {
 		// Manipulator Stick
-		manipulatorStick.btn_1.whileHeld(new HatchCargoEject());
+		manipulatorStick.btn_1.whileHeld(new IntakeHatchCargoEject());
 		manipulatorStick.btn_2.whenPressed(new IntakeCargoCollectGroup());
 		manipulatorStick.btn_3.whenPressed(new IntakeHookToggle());
 		manipulatorStick.btn_4.whileHeld(new CascadeManualGroup());
@@ -49,11 +49,11 @@ public class OI {
 
 		// Driver Stick
 		driverStick.btn_A.whileHeld(new IntakeFeederGroup());
-		driverStick.btn_B.whileHeld(new PlaceHatchGroup());
+		driverStick.btn_B.whileHeld(new IntakePlaceHatchGroup());
 		// driverStick.btn_RBump slow speed
 		driverStick.btn_LTrig.whenPressed(new VisionToggleMode());
 		driverStick.btn_RTrig
-				.whileHeld(new DriveDistanceRotateVision(VisDisSetpoint, VisRotSetpoint, "DistanceRotateVision"));
+				.whileHeld(new VisionDriveDistanceRotate(VisDisSetpoint, VisRotSetpoint, "DistanceRotateVision"));
 		driverStick.btn_Start.whenPressed(new CascadeStartMatch());
 
 		// Switchboard Stick

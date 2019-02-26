@@ -14,7 +14,7 @@ import frc.robot.commands.Drive.DriveDistance;
 import frc.robot.commands.Drive.DriveToWall;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-public class PlaceHatchGroup extends CommandGroup {
+public class IntakePlaceHatchGroup extends CommandGroup {
 
   private SN_DoublePreference AutoPlaceBackup = new SN_DoublePreference("AutoPlaceBackup", -5.0);
 
@@ -27,7 +27,7 @@ public class PlaceHatchGroup extends CommandGroup {
    * <li>Retracts ejector pistions</li>
    * </ul>
    */
-  public PlaceHatchGroup() {
+  public IntakePlaceHatchGroup() {
     addSequential(new DriveToWall());
     addSequential(new IntakeHatchEject());
     addSequential(new DoDelay(new SN_DoublePreference("AutoPlaceTimeout", 0.5)));
