@@ -55,8 +55,6 @@ public class RobotPreferences {
 			0.33);
 	public static final SN_DoublePreference CASCADE_UNWEIGHT_HEIGHT = new SN_DoublePreference("cascadeUnweightHeight",
 			0.8);
-	public static final SN_DoublePreference CASCADE_LIFT_FROM_FEEDER_HEIGHT = new SN_DoublePreference(
-			"cascadeLiftFromFeeder", 5.0);
 
 	// Climber
 	public static final SN_DoublePreference CLIMBER_LIFT_SPEED = new SN_DoublePreference("climbLiftSpeed", 0.5);

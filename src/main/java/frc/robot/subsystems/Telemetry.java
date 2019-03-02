@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,6 +27,7 @@ public class Telemetry extends Subsystem {
 	 * Put command buttons on the board
 	 */
 	public Telemetry() {
+		PowerDistributionPanel pdp = new PowerDistributionPanel();
 		// Cascade Commands
 		SmartDashboard.putData("Lock Dogtooth", new CascadeLockDogtooth());
 		SmartDashboard.putData("Unlock Dogtooth", new CascadeUnlockDogtooth());
@@ -40,6 +42,7 @@ public class Telemetry extends Subsystem {
 		// Intake Commands
 		SmartDashboard.putData("Deploy Intake", new IntakeDeploy());
 		SmartDashboard.putData("Retract Intake", new IntakeRetract());
+
 		SmartDashboard.putData("Deploy Hook", new IntakeHookDeploy());
 		SmartDashboard.putData("Retract Hook", new IntakeHookRetract());
 		SmartDashboard.putData("Eject", new IntakeHatchEject());
