@@ -27,7 +27,7 @@ public class Telemetry extends Subsystem {
 	 * Put command buttons on the board
 	 */
 	public Telemetry() {
-		PowerDistributionPanel pdp = new PowerDistributionPanel();
+		// PowerDistributionPanel pdp = new PowerDistributionPanel();
 		// Cascade Commands
 		SmartDashboard.putData("Lock Dogtooth", new CascadeLockDogtooth());
 		SmartDashboard.putData("Unlock Dogtooth", new CascadeUnlockDogtooth());

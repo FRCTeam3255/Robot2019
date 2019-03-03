@@ -39,7 +39,7 @@ public class RobotPreferences {
 	// Cascade Preferences
 	// CompBot: 510 pulses per foot
 	public static final SN_DoublePreference CASCADE_PULSES_PER_FOOT = new SN_DoublePreference("cascadePulsesPerFoot",
-			510.0);
+			322.0);
 	public static final SN_DoublePreference HATCH_POSITION_1 = new SN_DoublePreference("hatchPos1", 5.0);
 	public static final SN_DoublePreference HATCH_POSITION_2 = new SN_DoublePreference("hatchPos2", 31.0);
 	public static final SN_DoublePreference HATCH_POSITION_3 = new SN_DoublePreference("hatchPos3", 61.0);
@@ -51,6 +51,10 @@ public class RobotPreferences {
 	public static final SN_DoublePreference CASCADE_BOTTOM = new SN_DoublePreference("cascadeBottom", 0.0);
 	public static final SN_DoublePreference CASCADE_FEEDER = new SN_DoublePreference("cascadeFeeder", 1.0);
 	public static final SN_DoublePreference CASCADE_BOTTOM_SPEED = new SN_DoublePreference("cascadeBottomSpeed", -0.2);
+	public static final SN_DoublePreference CASCADE_RELEASE_DISTANCE = new SN_DoublePreference("cascadeReleaseDist",
+			0.5);
+	public static final SN_DoublePreference CASCADE_RELEASE_SPEED = new SN_DoublePreference("cascadeReleaseSpeed",
+			0.33);
 	public static final SN_DoublePreference CASCADE_UNWEIGHT_SPEED = new SN_DoublePreference("cascadeUnweightSpeed",
 			0.33);
 	public static final SN_DoublePreference CASCADE_UNWEIGHT_HEIGHT = new SN_DoublePreference("cascadeUnweightHeight",
