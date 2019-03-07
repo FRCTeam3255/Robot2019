@@ -8,12 +8,6 @@
 package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.DoDelay;
-import frc.robot.commands.LightsAutoCommandFinish;
-import frc.robot.commands.Cascade.CascadeBottomGroup;
-import frc.robot.commands.Cascade.CascadePositionGroup;
-import frc.robot.subsystems.Intake.fieldHeights;
-import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class IntakeCargoCollectGroup extends CommandGroup {
   /**
