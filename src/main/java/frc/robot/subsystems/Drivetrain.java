@@ -8,6 +8,9 @@
 package frc.robot.subsystems;
 
 import frc.robot.Robot;
+
+import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,7 +20,9 @@ import frc.robot.RobotPreferences;
 import frc.robot.commands.Drive.DriveArcade;
 import frcteam3255.robotbase.SN_Math;
 import frcteam3255.robotbase.SN_TalonSRX;
+import frcteam3255.robotbase.Preferences.SN_BooleanPreference;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
+import frcteam3255.robotbase.Preferences.SN_IntPreference;
 
 /**
  * Subsytem containing the drivetrain devices and methoods
@@ -31,6 +36,16 @@ public class Drivetrain extends Subsystem {
 	private static SN_DoublePreference CLIMB_DRIVE_SPEED = new SN_DoublePreference("climbDriveSpeed", 1.0);
 	private static SN_DoublePreference CLIMB_DEPLOY_SPEED = new SN_DoublePreference("climbDeploySpeed", -0.75);
 
+	/** Current threshold to trigger current limit */
+	static final SN_IntPreference PEAK_CURRENT_AMPS = new SN_IntPreference("drivePeakCurrentAmps", 9);
+	/** Duration (Ms) after current exceed Peak Current to trigger current limit */
+	static final SN_IntPreference PEAK_TIME = new SN_IntPreference("drivePeakTimeMs", 5000);
+	/** Current to mantain once current limit has been triggered */
+	static final SN_IntPreference CONTIN_CURRENT_AMPS = new SN_IntPreference("driveContinCurrentAmps", 5);
+	/** Set if current is limited */
+	static final SN_BooleanPreference ENABLE_CURRENT_LIMITING = new SN_BooleanPreference("driveEnableCurrentAmps",
+			true);
+
 	// Talons
 	private SpeedControllerGroup leftTalons = null;
 	private SN_TalonSRX leftFrontTalon = null;
@@ -43,6 +58,8 @@ public class Drivetrain extends Subsystem {
 	private SN_TalonSRX rightBackTalon = null;
 
 	private SN_TalonSRX climbDriveTalon = null;
+
+	TalonSRXConfiguration currentLimitConfig;
 
 	private DifferentialDrive differentialDrive = null;
 
@@ -65,6 +82,26 @@ public class Drivetrain extends Subsystem {
 		rightTalons = new SpeedControllerGroup(rightFrontTalon, rightMidTalon, rightBackTalon);
 
 		climbDriveTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_CLIMB_TALON);
+
+		// Current Limiting Config
+		currentLimitConfig = new TalonSRXConfiguration();
+		currentLimitConfig.peakCurrentLimit = PEAK_CURRENT_AMPS.getValue();
+		currentLimitConfig.peakCurrentDuration = PEAK_TIME.getValue();
+		currentLimitConfig.continuousCurrentLimit = CONTIN_CURRENT_AMPS.getValue();
+		// Current Limiting Assignment
+		leftFrontTalon.configAllSettings(currentLimitConfig);
+		leftMidTalon.configAllSettings(currentLimitConfig);
+		leftBackTalon.configAllSettings(currentLimitConfig);
+		rightFrontTalon.configAllSettings(currentLimitConfig);
+		rightMidTalon.configAllSettings(currentLimitConfig);
+		rightBackTalon.configAllSettings(currentLimitConfig);
+		// Current Limiting Enable
+		leftFrontTalon.enableCurrentLimit(ENABLE_CURRENT_LIMITING.getValue());
+		leftMidTalon.enableCurrentLimit(ENABLE_CURRENT_LIMITING.getValue());
+		leftBackTalon.enableCurrentLimit(ENABLE_CURRENT_LIMITING.getValue());
+		rightFrontTalon.enableCurrentLimit(ENABLE_CURRENT_LIMITING.getValue());
+		rightMidTalon.enableCurrentLimit(ENABLE_CURRENT_LIMITING.getValue());
+		rightBackTalon.enableCurrentLimit(ENABLE_CURRENT_LIMITING.getValue());
 
 		// Encoders
 		encoder = new Encoder(RobotMap.DRIVETRAIN_ENCODER_A, RobotMap.DRIVETRAIN_ENCODER_B);

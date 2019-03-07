@@ -23,11 +23,14 @@ import frcteam3255.robotbase.Preferences.SN_Preferences;
  * Subsystem containing board telemetry methoods
  */
 public class Telemetry extends Subsystem {
+
+	PowerDistributionPanel pdp;
+
 	/**
 	 * Put command buttons on the board
 	 */
 	public Telemetry() {
-		PowerDistributionPanel pdp = new PowerDistributionPanel();
+		pdp = new PowerDistributionPanel();
 		// Cascade Commands
 		SmartDashboard.putData("Lock Dogtooth", new CascadeLockDogtooth());
 		SmartDashboard.putData("Unlock Dogtooth", new CascadeUnlockDogtooth());
