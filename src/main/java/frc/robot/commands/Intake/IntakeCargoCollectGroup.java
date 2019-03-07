@@ -26,11 +26,12 @@ public class IntakeCargoCollectGroup extends CommandGroup {
    * </ul>
    */
   public IntakeCargoCollectGroup() {
-    addSequential(new CascadeBottomGroup());
+    // addSequential(new CascadeBottomGroup());
     addSequential(new IntakeDeploy());
     addSequential(new IntakeCargoCollect());
-    addSequential(new DoDelay(new SN_DoublePreference("cargoCollectDelay", 0.5)));
-    addSequential(new CascadePositionGroup(fieldHeights.LOW));
-    addSequential(new LightsAutoCommandFinish());
+    // addSequential(new DoDelay(new SN_DoublePreference("cargoCollectDelay",
+    // 0.5)));
+    // addSequential(new CascadePositionGroup(fieldHeights.LOW));
+    // addSequential(new LightsAutoCommandFinish());
   }
 }
