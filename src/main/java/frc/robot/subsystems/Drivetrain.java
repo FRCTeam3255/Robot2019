@@ -37,14 +37,17 @@ public class Drivetrain extends Subsystem {
 	private static SN_DoublePreference CLIMB_DEPLOY_SPEED = new SN_DoublePreference("climbDeploySpeed", -0.75);
 
 	/** Current threshold to trigger current limit */
-	static final SN_IntPreference PEAK_CURRENT_AMPS = new SN_IntPreference("drivePeakCurrentAmps", 9);
-	/** Duration (Ms) after current exceed Peak Current to trigger current limit */
-	static final SN_IntPreference PEAK_TIME = new SN_IntPreference("drivePeakTimeMs", 5000);
+	private static final SN_IntPreference PEAK_CURRENT_AMPS = new SN_IntPreference("drivePeakCurrentAmps", 9);
+	/**
+	 * Duration (in miliseconds i.e. 5000ms = 5s) after current exceed Peak Current
+	 * to trigger current limit
+	 */
+	private static final SN_IntPreference PEAK_TIME = new SN_IntPreference("drivePeakTimeMs", 5000);
 	/** Current to mantain once current limit has been triggered */
-	static final SN_IntPreference CONTIN_CURRENT_AMPS = new SN_IntPreference("driveContinCurrentAmps", 5);
+	private static final SN_IntPreference CONTIN_CURRENT_AMPS = new SN_IntPreference("driveContinCurrentAmps", 5);
 	/** Set if current is limited */
-	static final SN_BooleanPreference ENABLE_CURRENT_LIMITING = new SN_BooleanPreference("driveEnableCurrentAmps",
-			true);
+	private static final SN_BooleanPreference ENABLE_CURRENT_LIMITING = new SN_BooleanPreference(
+			"driveEnableCurrentLimit", true);
 
 	// Talons
 	private SpeedControllerGroup leftTalons = null;
