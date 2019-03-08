@@ -13,7 +13,7 @@ import frc.robot.subsystems.DrivetrainDistancePID;
 import frc.robot.subsystems.NavXRotatePID;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-public class DriveStraightDistance extends Command {
+public class DriveRotateDistance extends Command {
   private DrivetrainDistancePID distancePID;
   private NavXRotatePID rotatePID;
   private SN_DoublePreference pref_timeout = new SN_DoublePreference("DriveDistance_timeout", 10.0);
@@ -21,14 +21,14 @@ public class DriveStraightDistance extends Command {
   private double expireTime = 0.0;
   private String name;
 
-  public DriveStraightDistance(SN_DoublePreference inches, String commandName) {
+  public DriveRotateDistance(SN_DoublePreference inches, SN_DoublePreference degrees, String commandName) {
     requires(Robot.m_drivetrain);
 
     distancePID = new DrivetrainDistancePID();
     rotatePID = new NavXRotatePID();
 
     distancePID.setSetpoint(inches);
-    rotatePID.setSetpoint(0.0);
+    rotatePID.setSetpoint(degrees);
     name = commandName;
   }
 
