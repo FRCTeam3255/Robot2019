@@ -37,14 +37,14 @@ public class Drivetrain extends Subsystem {
 	private static SN_DoublePreference CLIMB_DEPLOY_SPEED = new SN_DoublePreference("climbDeploySpeed", -0.75);
 
 	/** Current threshold to trigger current limit */
-	private static final SN_IntPreference PEAK_CURRENT_AMPS = new SN_IntPreference("drivePeakCurrentAmps", 9);
+	private static final SN_IntPreference PEAK_AMPS = new SN_IntPreference("drivePeakAmps", 9);
 	/**
 	 * Duration (in miliseconds i.e. 5000ms = 5s) after current exceed Peak Current
 	 * to trigger current limit
 	 */
 	private static final SN_IntPreference PEAK_TIME = new SN_IntPreference("drivePeakTimeMs", 5000);
 	/** Current to mantain once current limit has been triggered */
-	private static final SN_IntPreference CONTIN_CURRENT_AMPS = new SN_IntPreference("driveContinCurrentAmps", 5);
+	private static final SN_IntPreference LIMIT_AMPS = new SN_IntPreference("driveLimitAmps", 5);
 	/** Set if current is limited */
 	private static final SN_BooleanPreference ENABLE_CURRENT_LIMITING = new SN_BooleanPreference(
 			"driveEnableCurrentLimit", true);
@@ -86,25 +86,14 @@ public class Drivetrain extends Subsystem {
 
 		climbDriveTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_CLIMB_TALON);
 
-		// Current Limiting Config
-		currentLimitConfig = new TalonSRXConfiguration();
-		currentLimitConfig.peakCurrentLimit = PEAK_CURRENT_AMPS.getValue();
-		currentLimitConfig.peakCurrentDuration = PEAK_TIME.getValue();
-		currentLimitConfig.continuousCurrentLimit = CONTIN_CURRENT_AMPS.getValue();
 		// Current Limiting Assignment
-		leftFrontTalon.configAllSettings(currentLimitConfig);
-		leftMidTalon.configAllSettings(currentLimitConfig);
-		leftBackTalon.configAllSettings(currentLimitConfig);
-		rightFrontTalon.configAllSettings(currentLimitConfig);
-		rightMidTalon.configAllSettings(currentLimitConfig);
-		rightBackTalon.configAllSettings(currentLimitConfig);
-		// Current Limiting Enable
-		leftFrontTalon.enableCurrentLimit(ENABLE_CURRENT_LIMITING.getValue());
-		leftMidTalon.enableCurrentLimit(ENABLE_CURRENT_LIMITING.getValue());
-		leftBackTalon.enableCurrentLimit(ENABLE_CURRENT_LIMITING.getValue());
-		rightFrontTalon.enableCurrentLimit(ENABLE_CURRENT_LIMITING.getValue());
-		rightMidTalon.enableCurrentLimit(ENABLE_CURRENT_LIMITING.getValue());
-		rightBackTalon.enableCurrentLimit(ENABLE_CURRENT_LIMITING.getValue());
+		leftFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
+		leftMidTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
+		leftBackTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
+
+		rightFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
+		rightMidTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
+		rightBackTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
 
 		// Encoders
 		encoder = new Encoder(RobotMap.DRIVETRAIN_ENCODER_A, RobotMap.DRIVETRAIN_ENCODER_B);
