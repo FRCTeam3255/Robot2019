@@ -39,6 +39,9 @@ public class RobotMap {
 	// Spark
 	public static final int LIGHTING_SPARK = 0;
 
+	// Servo
+	public static final int DRIVETRAIN_SERVO = 1;
+
 	// Encoders
 	public static final int DRIVETRAIN_ENCODER_B = 0;
 	public static final int DRIVETRAIN_ENCODER_A = 1;

@@ -10,17 +10,22 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.RobotPreferences;
 import frcteam3255.robotbase.SN_TalonSRX;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 /**
  * Subsytem containing the cascade devices and methoods
  */
 public class Cascade extends Subsystem {
 	public double liftSpeed = 0.0;
+
+	// Servo
+	private Servo servo = null;
 
 	// Talons
 	private SN_TalonSRX leftFrontTalon = null;
@@ -51,6 +56,9 @@ public class Cascade extends Subsystem {
 	 * Creates the devices used in the cascade
 	 */
 	public Cascade() {
+		// Servo
+		servo = new Servo(RobotMap.DRIVETRAIN_SERVO);
+
 		// Talons
 		leftFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_FRONT_TALON);
 		leftBackTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_BACK_TALON);
@@ -76,6 +84,10 @@ public class Cascade extends Subsystem {
 		// Switches
 		topSwitch = new DigitalInput(RobotMap.CASCADE_TOP_SWITCH);
 		bottomSwitch = new DigitalInput(RobotMap.CASCADE_BOTTOM_SWITCH);
+	}
+
+	public void setServo(SN_DoublePreference angle) {
+		servo.setAngle(angle.getValue());
 	}
 
 	/**

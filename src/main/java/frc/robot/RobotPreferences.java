@@ -28,9 +28,9 @@ public class RobotPreferences {
 	public static final SN_DoublePreference SLOW_SPEED_ROTATE_FACTOR = new SN_DoublePreference("slowSpeedRotateFactor",
 			0.3);
 	public static final SN_DoublePreference HIGH_SPEED_MOVE_FACTOR = new SN_DoublePreference("highSpeedMoveFactor",
-			1.0);
+			0.8);
 	public static final SN_DoublePreference HIGH_SPEED_ROTATE_FACTOR = new SN_DoublePreference("highSpeedRotateFactor",
-			1.0);
+			0.7);
 
 	// Intake Preferences
 	public static final SN_DoublePreference CARGO_COLLECT_SPEED = new SN_DoublePreference("cargoCollectSpeed", 1.0);
