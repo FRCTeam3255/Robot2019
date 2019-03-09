@@ -15,19 +15,20 @@ import frc.robot.commands.Intake.IntakePlaceHatchGroup;
 import frc.robot.commands.Vision.VisionDriveDistanceRotate;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-public class AutoRocket extends CommandGroup {
+public class AutoShip extends CommandGroup {
   /**
    * Add your docs here.
    */
-
-  public SN_DoublePreference autoRocketD1() {
+  public SN_DoublePreference AutoShipD1() {
     String side = AutoPreferences.getSide();
     String pos = AutoPreferences.getPosition();
-    String name = "autoRocketD1";
+    String name = "autoShipD1";
     if (side == "L") {
       switch (pos) {
       case "F":
-        return new SN_DoublePreference(name + side, 50.0);
+        return new SN_DoublePreference(name + side, 0.0);
+      case "M":
+        return new SN_DoublePreference(name + side, 0.0);
       case "B":
         return new SN_DoublePreference(name + side, 0.0);
       default:
@@ -37,6 +38,8 @@ public class AutoRocket extends CommandGroup {
       switch (pos) {
       case "F":
         return new SN_DoublePreference(name + side, 0.0);
+      case "M":
+        return new SN_DoublePreference(name + side, 0.0);
       case "B":
         return new SN_DoublePreference(name + side, 0.0);
       default:
@@ -45,9 +48,9 @@ public class AutoRocket extends CommandGroup {
     }
   }
 
-  public SN_DoublePreference autoRocketR1() {
+  public SN_DoublePreference AutoShipR1() {
     String side = AutoPreferences.getSide();
-    String name = "autoRocketR1";
+    String name = "autoShipR1";
 
     switch (side) {
     case "L":
@@ -60,21 +63,31 @@ public class AutoRocket extends CommandGroup {
 
   }
 
-  public SN_DoublePreference autoRocketD2() {
+  public SN_DoublePreference AutoShipLocationD2() {
     String side = AutoPreferences.getSide();
-    String name = "autoRocketD2";
+    String name = "autoShipD2";
 
-    return new SN_DoublePreference(name + side, 0.0);
+    switch (side) {
+    case "L":
+      return new SN_DoublePreference(name + side, 0.0);
+    case "R":
+      return new SN_DoublePreference(name + side, 0.0);
+    default:
+      return new SN_DoublePreference(name + "default", 0.0);
+    }
   }
 
-  public SN_DoublePreference autoRocketR2() {
+  public SN_DoublePreference AutoShipR2() {
     String side = AutoPreferences.getSide();
     String pos = AutoPreferences.getPosition();
-    String name = "autoRocketR2";
+    String name = "autoShipR2";
+
     if (side == "L") {
       switch (pos) {
       case "F":
-        return new SN_DoublePreference(name + side, 90.0);
+        return new SN_DoublePreference(name + side, 0.0);
+      case "M":
+        return new SN_DoublePreference(name + side, 0.0);
       case "B":
         return new SN_DoublePreference(name + side, 0.0);
       default:
@@ -84,6 +97,8 @@ public class AutoRocket extends CommandGroup {
       switch (pos) {
       case "F":
         return new SN_DoublePreference(name + side, 0.0);
+      case "M":
+        return new SN_DoublePreference(name + side, 0.0);
       case "B":
         return new SN_DoublePreference(name + side, 0.0);
       default:
@@ -92,13 +107,13 @@ public class AutoRocket extends CommandGroup {
     }
   }
 
-  public AutoRocket() {
-    addSequential(new DriveRotateDistance(autoRocketD1(), autoRocketR1(), "RocketDriveRotateDistance1"));
+  public AutoShip() {
+    addSequential(new DriveRotateDistance(AutoShipD1(), AutoShipR1(), "autoShipDriveRotateDistance1"));
     addSequential(new DoDelay(RobotPreferences.AUTO_DELAY));
-    addSequential(new DriveRotateDistance(autoRocketD2(), autoRocketR2(), "RocketDriveRotateDistance2"));
+    addSequential(new DriveRotateDistance(AutoShipLocationD2(), AutoShipR2(), "autoShipDriveRoateDistance2"));
     addSequential(new DoDelay(RobotPreferences.AUTO_DELAY));
     addSequential(new VisionDriveDistanceRotate(RobotPreferences.AUTO_DISTANCE_ON_TARGET,
-        RobotPreferences.AUTO_ROTATE_ON_TARGET, "RocketVisionTarget"));
+        RobotPreferences.AUTO_ROTATE_ON_TARGET, "ShipVisionTarget"));
     addSequential(new DoDelay(RobotPreferences.AUTO_DELAY));
     addSequential(new IntakePlaceHatchGroup());
   }

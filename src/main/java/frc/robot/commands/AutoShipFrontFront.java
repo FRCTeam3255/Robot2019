@@ -9,7 +9,10 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.AutoPreferences;
+import frc.robot.RobotPreferences;
 import frc.robot.commands.Drive.DriveRotateDistance;
+import frc.robot.commands.Intake.IntakePlaceHatchGroup;
+import frc.robot.commands.Vision.VisionDriveDistanceRotate;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class AutoShipFrontFront extends CommandGroup {
@@ -27,7 +30,7 @@ public class AutoShipFrontFront extends CommandGroup {
     case "R":
       return new SN_DoublePreference(name + side, 0.0);
     default:
-      return new SN_DoublePreference(name + side, 0.0);
+      return new SN_DoublePreference(name + "default", 0.0);
     }
   }
 
@@ -40,7 +43,7 @@ public class AutoShipFrontFront extends CommandGroup {
 
   public SN_DoublePreference autoShipFFD2() {
     String side = AutoPreferences.getSide();
-    String name = "autoShipFFR1";
+    String name = "autoShipFFD1";
 
     return new SN_DoublePreference(name + side, 0.0);
   }
@@ -55,26 +58,18 @@ public class AutoShipFrontFront extends CommandGroup {
     case "R":
       return new SN_DoublePreference(name + side, 0.0);
     default:
-      return new SN_DoublePreference(name + side, 0.0);
+      return new SN_DoublePreference(name + "default", 0.0);
     }
   }
 
-  // Add Commands here:
-  // e.g. addSequential(new Command1());
-  // addSequential(new Command2());
-  // these will run in order.
-
-  // To run multiple commands at the same time,
-  // use addParallel()
-  // e.g. addParallel(new Command1());
-  // addSequential(new Command2());
-  // Command1 and Command2 will run in parallel.
-
-  // A command group will require all of the subsystems that each member
-  // would require.
-  // e.g. if Command1 requires chassis, and Command2 requires arm,
-  // a CommandGroup containing them would require both the chassis and the
-  // arm.
   public AutoShipFrontFront() {
+    addSequential(new DriveRotateDistance(autoShipFFD1(), autoShipFFR1(), "autoShipFFDriveRotateDistance1"));
+    addSequential(new DoDelay(RobotPreferences.AUTO_DELAY));
+    addSequential(new DriveRotateDistance(autoShipFFD2(), autoShipFFR2(), "autoShipFFDriveRotateDistance2"));
+    addSequential(new DoDelay(RobotPreferences.AUTO_DELAY));
+    addSequential(new VisionDriveDistanceRotate(RobotPreferences.AUTO_DISTANCE_ON_TARGET,
+        RobotPreferences.AUTO_ROTATE_ON_TARGET, "ShipFrontFrontVisionTarget"));
+    addSequential(new DoDelay(RobotPreferences.AUTO_DELAY));
+    addSequential(new IntakePlaceHatchGroup());
   }
 }

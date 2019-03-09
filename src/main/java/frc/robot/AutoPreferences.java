@@ -12,46 +12,45 @@ package frc.robot;
  */
 public class AutoPreferences {
 
-    public static boolean isDebug() {
+    public static boolean doRocket() {
         return Robot.m_oi.switchboardStick.btn_1.get();
     }
 
-    public static boolean doRocket() {
+    public static boolean doShipFrontFront() {
         return Robot.m_oi.switchboardStick.btn_2.get();
     }
 
-    public static boolean doShipFrontFront() {
+    public static boolean doShipSide() {
         return Robot.m_oi.switchboardStick.btn_3.get();
     }
 
-    public static boolean doShipSideFront() {
-        return Robot.m_oi.switchboardStick.btn_4.get();
-    }
-
-    public static boolean doShipSideMid() {
-        return Robot.m_oi.switchboardStick.btn_5.get();
-    }
-
-    public static boolean doShipSideBack() {
-        return Robot.m_oi.switchboardStick.btn_6.get();
-    }
-
     public static String getSide() {
-        String side;
-
-        if (Robot.m_oi.switchboardStick.btn_7.get()) {
-            side = "L";
-        } else if (Robot.m_oi.switchboardStick.btn_8.get()) {
-            side = "R";
+        if (Robot.m_oi.switchboardStick.btn_4.get()) {
+            System.out.println("left side");
+            return "L";
         } else {
-            side = "R";
+            System.out.println("left side");
+            return "R";
+        }
+    }
+
+    public static String getPosition() {
+        String position;
+
+        if (Robot.m_oi.switchboardStick.btn_5.get()) {
+            position = "F";
+        } else if (Robot.m_oi.switchboardStick.btn_6.get()) {
+            position = "M";
+        } else if (Robot.m_oi.switchboardStick.btn_7.get()) {
+            position = "B";
+        } else {
+            position = "F";
         }
 
-        return side;
+        return position;
     }
 
     public static boolean isReset() {
-        return Robot.m_oi.switchboardStick.btn_9.get();
+        return Robot.m_oi.switchboardStick.btn_8.get();
     }
-
 }

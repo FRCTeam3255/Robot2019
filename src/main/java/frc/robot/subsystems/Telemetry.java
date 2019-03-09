@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.commands.AutoRocket;
 import frc.robot.commands.Cascade.*;
 import frc.robot.commands.Climber.*;
 import frc.robot.commands.Drive.*;
@@ -24,13 +25,13 @@ import frcteam3255.robotbase.Preferences.SN_Preferences;
  */
 public class Telemetry extends Subsystem {
 
-	PowerDistributionPanel pdp;
+	// PowerDistributionPanel pdp;
 
 	/**
 	 * Put command buttons on the board
 	 */
 	public Telemetry() {
-		pdp = new PowerDistributionPanel();
+		// pdp = new PowerDistributionPanel();
 		// Cascade Commands
 		SmartDashboard.putData("Lock Dogtooth", new CascadeLockDogtooth());
 		SmartDashboard.putData("Unlock Dogtooth", new CascadeUnlockDogtooth());
@@ -63,6 +64,9 @@ public class Telemetry extends Subsystem {
 		// Vision Commands
 		SmartDashboard.putData("Set Driver Mode", new VisionSetDriverMode());
 		SmartDashboard.putData("Set Vision Mode", new VisionSetVisionMode());
+
+		// Autonomous
+		SmartDashboard.putData("AutoRocket", new AutoRocket());
 	}
 
 	/**
