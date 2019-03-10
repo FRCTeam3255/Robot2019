@@ -46,7 +46,7 @@ public class DriveRotateDistance extends Command {
 
   @Override
   protected void initialize() {
-    Robot.m_telemetry.setCommandStatus("Starting DriveDistance " + name + ": " + distancePID.getSetpoint() + " ");
+    Robot.m_telemetry.setCommandStatus("Starting " + name + ": " + distancePID.getSetpoint() + " ");
     expireTime = timeSinceInitialized() + pref_timeout.getValue();
 
     Robot.m_drivetrain.resetEncoderCount();
@@ -57,8 +57,8 @@ public class DriveRotateDistance extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_telemetry.setCommandStatus(
-        "Executing DriveDistance " + name + ": " + distancePID.getSetpoint() + " + rotatePID.getSetpoint()" + " ");
+    Robot.m_telemetry
+        .setCommandStatus("Executing " + name + ": D:" + distancePID.getSetpoint() + " + R:" + rotatePID.getSetpoint());
     double moveSpeed = distancePID.getOutput();
     double rotateSpeed = rotatePID.getOutput();
 
@@ -78,7 +78,7 @@ public class DriveRotateDistance extends Command {
 
   @Override
   protected void end() {
-    Robot.m_telemetry.setCommandStatus("Finishing DriveDistance " + name + ": " + distancePID.getSetpoint() + "");
+    Robot.m_telemetry.setCommandStatus("Finishing " + name + ": " + distancePID.getSetpoint() + "");
     distancePID.disable();
     rotatePID.disable();
     Robot.m_drivetrain.arcadeDrive(0.0, 0.0);

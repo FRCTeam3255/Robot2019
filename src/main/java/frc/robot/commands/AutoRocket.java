@@ -24,21 +24,22 @@ public class AutoRocket extends CommandGroup {
     String side = AutoPreferences.getSide();
     String pos = AutoPreferences.getPosition();
     String name = "autoRocketD1";
+    System.out.println(side);
     if (side == "L") {
       switch (pos) {
       case "F":
-        return new SN_DoublePreference(name + side, 50.0);
+        return new SN_DoublePreference(name + side, 20.0);
       case "B":
-        return new SN_DoublePreference(name + side, 0.0);
+        return new SN_DoublePreference(name + side, 21.0);
       default:
-        return new SN_DoublePreference(name + "default", 0.0);
+        return new SN_DoublePreference(name + "default", 53.0);
       }
     } else {
       switch (pos) {
       case "F":
-        return new SN_DoublePreference(name + side, 0.0);
+        return new SN_DoublePreference(name + side, 30.0);
       case "B":
-        return new SN_DoublePreference(name + side, 0.0);
+        return new SN_DoublePreference(name + side, 31.0);
       default:
         return new SN_DoublePreference(name + "default", 0.0);
       }
@@ -74,18 +75,18 @@ public class AutoRocket extends CommandGroup {
     if (side == "L") {
       switch (pos) {
       case "F":
-        return new SN_DoublePreference(name + side, 90.0);
+        return new SN_DoublePreference(name + side, 15.0);
       case "B":
-        return new SN_DoublePreference(name + side, 0.0);
+        return new SN_DoublePreference(name + side, 16.0);
       default:
         return new SN_DoublePreference(name + "default", 0.0);
       }
     } else {
       switch (pos) {
       case "F":
-        return new SN_DoublePreference(name + side, 0.0);
+        return new SN_DoublePreference(name + side, 20.0);
       case "B":
-        return new SN_DoublePreference(name + side, 0.0);
+        return new SN_DoublePreference(name + side, 21.0);
       default:
         return new SN_DoublePreference(name + "default", 0.0);
       }

@@ -23,9 +23,8 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	public static SN_DualActionStick driverStick = new SN_DualActionStick(0);
-	public static SN_Extreme3DStick manipulatorStick = new SN_Extreme3DStick(1);
-	public static SN_SwitchboardStick switchboardStick = new SN_SwitchboardStick(2);
+	public SN_DualActionStick driverStick = new SN_DualActionStick(0);
+	public SN_Extreme3DStick manipulatorStick = new SN_Extreme3DStick(1);
 
 	public static SN_DoublePreference VisDisSetpoint = new SN_DoublePreference("VisDisSetpoint", 10.0);
 	public static SN_DoublePreference VisRotSetpoint = new SN_DoublePreference("VisRotSetpoint", 0.2);

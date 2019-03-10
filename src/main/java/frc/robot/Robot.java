@@ -8,7 +8,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.commands.AutoRocket;
+import frc.robot.commands.Autonomous;
 import frc.robot.subsystems.Cascade;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
@@ -25,6 +28,8 @@ import frc.robot.subsystems.Vision;
  * project.
  */
 public class Robot extends TimedRobot {
+	Command m_autonomousCommand;
+
 	public static Drivetrain m_drivetrain = null;
 	public static Intake m_intake = null;
 	public static Cascade m_cascade = null;
@@ -72,6 +77,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
+		if (m_autonomousCommand != null) {
+			m_autonomousCommand.cancel();
+			m_autonomousCommand = null;
+		}
 	}
 
 	@Override
@@ -94,6 +103,12 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		m_autonomousCommand = new Autonomous();
+
+		// schedule the autonomous command (example)
+		if (m_autonomousCommand != null) {
+			m_autonomousCommand.start();
+		}
 	}
 
 	/**

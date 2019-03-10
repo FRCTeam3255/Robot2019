@@ -11,8 +11,11 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.AutoPreferences;
 import frc.robot.Robot;
 import frc.robot.commands.AutoRocket;
+import frc.robot.commands.AutoShip;
+import frc.robot.commands.AutoShipFrontFront;
 import frc.robot.commands.Cascade.*;
 import frc.robot.commands.Climber.*;
 import frc.robot.commands.Drive.*;
@@ -67,6 +70,9 @@ public class Telemetry extends Subsystem {
 
 		// Autonomous
 		SmartDashboard.putData("AutoRocket", new AutoRocket());
+		SmartDashboard.putData("AutoShip", new AutoShip());
+		SmartDashboard.putData("AutoShipFF", new AutoShipFrontFront());
+
 	}
 
 	/**
@@ -108,8 +114,10 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putNumber("Vision Width", Robot.m_vision.getWidth());
 
 		// Other Telemetry
-		SmartDashboard.putBoolean("Is Debug", !SN_Preferences.isUsingDefaults());
-		SmartDashboard.putData("Running Commands", Scheduler.getInstance());
+		SmartDashboard.putBoolean("Is Debug", AutoPreferences.isDebug());
+		SmartDashboard.putString("get Side", AutoPreferences.getSide());
+		SmartDashboard.putString("get position", AutoPreferences.getPosition());
+
 	}
 
 	@Override

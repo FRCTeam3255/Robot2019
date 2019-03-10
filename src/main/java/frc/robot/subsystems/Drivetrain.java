@@ -47,7 +47,7 @@ public class Drivetrain extends Subsystem {
 	private static final SN_IntPreference LIMIT_AMPS = new SN_IntPreference("driveLimitAmps", 5);
 	/** Set if current is limited */
 	private static final SN_BooleanPreference ENABLE_CURRENT_LIMITING = new SN_BooleanPreference(
-			"driveEnableCurrentLimit", true);
+			"driveEnableCurrentLimit", false);
 
 	// Talons
 	private SpeedControllerGroup leftTalons = null;

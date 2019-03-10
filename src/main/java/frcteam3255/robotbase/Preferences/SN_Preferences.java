@@ -1,5 +1,6 @@
 package frcteam3255.robotbase.Preferences;
 
+import frc.robot.AutoPreferences;
 import frc.robot.Robot;
 
 /**
@@ -12,16 +13,15 @@ public abstract class SN_Preferences {
 	/**
 	 * Set to use coded preference values //
 	 */
-	// public static void useDefaults() {
-	// useDefaults = true;
-	// }
+	public static void useDefaults() {
+		useDefaults = true;
+	}
 
 	/**
 	 * Set not to use coded preference values
 	 */
 	public static void usePreferences() {
-		// useDefaults = false;
-		useDefaults = Robot.m_oi.switchboardStick.btn_9.get();
+		useDefaults = false;
 	}
 
 	/**

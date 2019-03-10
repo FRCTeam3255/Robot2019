@@ -19,7 +19,7 @@ public class RobotPreferences {
 	// Drivetrain preferences
 	// CompBot: 29 pulses per foot?
 	public static final SN_DoublePreference DRIVETRAIN_PULSES_PER_FOOT = new SN_DoublePreference(
-			"drivetrainPulsesPerFoot", 29.0);
+			"drivetrainPulsesPerFoot", 400.0);
 	public static final SN_DoublePreference DRIVETRAIN_CLIMB_SETPOINT = new SN_DoublePreference("drivetrainClimb",
 			25.0);
 	public static final SN_DoublePreference DECELERATION_SPEED = new SN_DoublePreference("decelerationSpeed", 0.5);

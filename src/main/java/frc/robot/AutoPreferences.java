@@ -7,29 +7,32 @@
 
 package frc.robot;
 
+import frcteam3255.robotbase.Joystick.SN_SwitchboardStick;
+import frcteam3255.robotbase.Preferences.SN_Preferences;
+
 /**
  * Add your docs here.
  */
 public class AutoPreferences {
 
+    public static SN_SwitchboardStick switchboardStick = new SN_SwitchboardStick(2);
+
     public static boolean doRocket() {
-        return Robot.m_oi.switchboardStick.btn_1.get();
+        return switchboardStick.btn_1.get();
     }
 
     public static boolean doShipFrontFront() {
-        return Robot.m_oi.switchboardStick.btn_2.get();
+        return switchboardStick.btn_2.get();
     }
 
     public static boolean doShipSide() {
-        return Robot.m_oi.switchboardStick.btn_3.get();
+        return switchboardStick.btn_3.get();
     }
 
     public static String getSide() {
-        if (Robot.m_oi.switchboardStick.btn_4.get()) {
-            System.out.println("left side");
+        if (switchboardStick.btn_4.get()) {
             return "L";
         } else {
-            System.out.println("left side");
             return "R";
         }
     }
@@ -37,11 +40,11 @@ public class AutoPreferences {
     public static String getPosition() {
         String position;
 
-        if (Robot.m_oi.switchboardStick.btn_5.get()) {
+        if (switchboardStick.btn_5.get()) {
             position = "F";
-        } else if (Robot.m_oi.switchboardStick.btn_6.get()) {
+        } else if (switchboardStick.btn_6.get()) {
             position = "M";
-        } else if (Robot.m_oi.switchboardStick.btn_7.get()) {
+        } else if (switchboardStick.btn_7.get()) {
             position = "B";
         } else {
             position = "F";
@@ -50,7 +53,19 @@ public class AutoPreferences {
         return position;
     }
 
+    public static void setDebug() {
+        if (switchboardStick.btn_9.get()) {
+            SN_Preferences.usePreferences();
+        } else {
+            SN_Preferences.useDefaults();
+        }
+    }
+
+    public static boolean isDebug() {
+        return switchboardStick.btn_9.get();
+    }
+
     public static boolean isReset() {
-        return Robot.m_oi.switchboardStick.btn_8.get();
+        return switchboardStick.btn_8.get();
     }
 }
