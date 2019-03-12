@@ -38,10 +38,8 @@ public class OI {
 		manipulatorStick.btn_2.whenPressed(new IntakeCargoCollectGroup());
 		manipulatorStick.btn_3.whenPressed(new IntakeHookToggle());
 		manipulatorStick.btn_4.whileHeld(new CascadeManualGroup());
-		/*
-		 * manipulatorStick.btn_5.whenPressed(new IntakeRetractGroup());
-		 * manipulatorStick.btn_6.whenPressed(new IntakeDeployGroup());
-		 */
+		manipulatorStick.btn_5.whenPressed(new IntakeRetractGroup());
+		manipulatorStick.btn_6.whenPressed(new IntakeDeployGroup());
 		manipulatorStick.btn_7.whenPressed(new ClimbDeploy());
 		manipulatorStick.btn_8.whenPressed(new CascadePositionGroup(fieldHeights.HIGH));
 		manipulatorStick.btn_9.whileHeld(new ClimbManual());
