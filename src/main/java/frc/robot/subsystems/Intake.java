@@ -22,24 +22,19 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 public class Intake extends Subsystem {
 
 	public static enum fieldHeights {
-		LOW, MED, HIGH, CSHIP, LOADED, FEEDER
-	};
+		LOW, MED, HIGH, CSHIP, LOADED, FEEDER;
+	}
 
 	// Talons
 	private SN_TalonSRX cargoTalon = null;
 
 	// Solenoids
-	private DoubleSolenoid ejectorSolenoid = null;
 	private DoubleSolenoid intakeArmSolenoid = null;
 	private DoubleSolenoid hatchHookSolenoid = null;
 
 	// Swtiches
 	private DigitalInput hatchSwitch = null;
 	private DigitalInput cargoSwitch = null;
-
-	// Set the directions of the eject solenoid
-	private static final Value ejectorDeployedValue = Value.kReverse;
-	private static final Value ejectorRetractedValue = Value.kForward;
 
 	// Set the directions of the intakeArm solenoid
 	private static final Value intakeDeployedValue = Value.kReverse;
@@ -57,8 +52,6 @@ public class Intake extends Subsystem {
 		cargoTalon = new SN_TalonSRX(RobotMap.INTAKE_CARGO_TALON);
 
 		// Solenoids
-		ejectorSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_EJECTOR_SOLENOID_A,
-				RobotMap.INTAKE_EJECTOR_SOLENOID_B);
 		intakeArmSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_ARM_SOLENOID_A,
 				RobotMap.INTAKE_ARM_SOLENOID_B);
 		hatchHookSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_HOOK_SOLENOID_A,
@@ -68,7 +61,6 @@ public class Intake extends Subsystem {
 		hatchSwitch = new DigitalInput(RobotMap.INTAKE_HATCH_SWITCH);
 		cargoSwitch = new DigitalInput(RobotMap.INTAKE_CARGO_SWITCH);
 
-		retractEjector();
 		retractHook();
 		deployIntake();
 	}
@@ -146,48 +138,17 @@ public class Intake extends Subsystem {
 		return hatchHookSolenoid.get() == hookRetractedValue;
 	}
 
-	// /**
-	// * Eject the hatch by firing the pistons
-	// */
-	public void deployEjector() {
-		ejectorSolenoid.set(ejectorDeployedValue);
-	}
-
-	// /**
-	// * Retract the hatch ejecting pistons
-	// */
-	public void retractEjector() {
-		ejectorSolenoid.set(ejectorRetractedValue);
-	}
-
-	public boolean isEjectorDeployed() {
-		return ejectorSolenoid.get() == ejectorDeployedValue;
-	}
-
-	public boolean isEjectorRetracted() {
-		return ejectorSolenoid.get() == ejectorRetractedValue;
-	}
-
 	public SN_DoublePreference getSetpoint(fieldHeights position) {
 
 		switch (position) {
 		case LOW:
-			if (isIntakeRetracted()) {
-				return RobotPreferences.HATCH_POSITION_1;
-			}
 			return RobotPreferences.CARGO_POSITION_1;
 		case MED:
-			if (isIntakeRetracted()) {
-				return RobotPreferences.HATCH_POSITION_2;
-			}
 			return RobotPreferences.CARGO_POSITION_2;
 		case HIGH:
-			if (isIntakeRetracted()) {
-				return RobotPreferences.HATCH_POSITION_3;
-			}
 			return RobotPreferences.CARGO_POSITION_3;
 		case CSHIP:
-			if (isIntakeRetracted()) {
+			if (isHatchCollected()) {
 				return RobotPreferences.HATCH_POSITION_1;
 			}
 			return RobotPreferences.CARGO_POSITION_SHIP;

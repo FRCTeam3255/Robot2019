@@ -29,10 +29,8 @@ public class IntakePlaceHatchGroup extends CommandGroup {
    */
   public IntakePlaceHatchGroup() {
     addSequential(new DriveToWall());
-    addSequential(new IntakeHatchEject());
     addSequential(new DoDelay(new SN_DoublePreference("AutoPlaceTimeout", 0.5)));
     addSequential(new DriveDistance(AutoPlaceBackup, "AutoPlaceBackup"));
-    addSequential(new IntakeEjectorRetract());
     addSequential(new LightsAutoCommandFinish());
   }
 }

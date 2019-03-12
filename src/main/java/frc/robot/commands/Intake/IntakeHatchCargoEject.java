@@ -27,23 +27,20 @@ public class IntakeHatchCargoEject extends Command {
 
 	@Override
 	protected void initialize() {
-		if (Robot.m_intake.isIntakeRetracted()) {
+		if (Robot.m_intake.isHatchCollected()) {
 			Robot.m_intake.deployHook();
-			Robot.m_intake.deployEjector();
 		}
 
 	}
 
 	@Override
 	protected void execute() {
-		if (!Robot.m_intake.isIntakeRetracted()) {
-			this.speed = Robot.m_oi.manipulatorStick.getDialAxis();
+		this.speed = Robot.m_oi.manipulatorStick.getDialAxis();
 
-			if (speed < 0.25) {
-				speed = 0.25;
-			}
-			Robot.m_intake.shootCargo(-speed);
+		if (speed < 0.25) {
+			speed = 0.25;
 		}
+		Robot.m_intake.shootCargo(-speed);
 	}
 
 	@Override
@@ -53,11 +50,7 @@ public class IntakeHatchCargoEject extends Command {
 
 	@Override
 	protected void end() {
-		if (Robot.m_intake.isIntakeRetracted()) {
-			Robot.m_intake.retractEjector();
-		} else {
-			Robot.m_intake.holdCargo();
-		}
+		Robot.m_intake.holdCargo();
 	}
 
 	@Override

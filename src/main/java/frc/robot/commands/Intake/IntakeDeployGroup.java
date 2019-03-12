@@ -23,7 +23,6 @@ public class IntakeDeployGroup extends CommandGroup {
    * </ul>
    */
   public IntakeDeployGroup() {
-    addSequential(new IntakeEjectorRetract());
     addSequential(new CascadeUnweightGroup());
     addSequential(new CascadeBottom());
     addSequential(new IntakeDeploy());
