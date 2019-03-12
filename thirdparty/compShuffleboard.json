@@ -449,7 +449,8 @@
                   "_type": "Graph",
                   "_source0": "network_table:///SmartDashboard/Acceleration X",
                   "_title": "Acceleration X",
-                  "Graph/Visible time": 30.0
+                  "Graph/Visible time": 30.0,
+                  "Visible data/SmartDashboard/Acceleration X": true
                 },
                 {
                   "_type": "Text View",
