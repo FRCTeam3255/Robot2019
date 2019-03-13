@@ -50,10 +50,11 @@ public class OI {
 		// Driver Stick
 		driverStick.btn_A.whileHeld(new IntakeFeederGroup());
 		driverStick.btn_B.whileHeld(new IntakePlaceHatchGroup());
-		// driverStick.btn_RBump slow speed
-		driverStick.btn_LTrig.whenPressed(new VisionToggleMode());
+		// driverStick.btn_RBump slow speed hardcoded in drive arcade
 		driverStick.btn_RTrig
 				.whileHeld(new VisionDriveDistanceRotate(VisDisSetpoint, VisRotSetpoint, "DistanceRotateVision"));
 		driverStick.btn_Start.whenPressed(new CascadeStartMatch());
+		driverStick.btn_LTrig.whenPressed(new IntakeLinkageDeploy());
+		driverStick.btn_RTrig.whenPressed(new IntakeLinkageDeploy());
 	}
 }

@@ -10,18 +10,24 @@ package frc.robot.commands.Intake;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class IntakeHatchEject extends InstantCommand {
+/**
+ * Add your docs here.
+ */
+public class IntakeLinkageRetract extends InstantCommand {
   /**
-   * Deploys hatch hook and ejector pistions
+   * Add your docs here.
    */
-  public IntakeHatchEject() {
+  public IntakeLinkageRetract() {
+    super();
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
     requires(Robot.m_intake);
-    requires(Robot.m_cascade);
   }
 
+  // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.m_intake.deployHook();
+    Robot.m_intake.retractLinkage();
   }
 
 }

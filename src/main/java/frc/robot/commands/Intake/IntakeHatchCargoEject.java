@@ -29,7 +29,6 @@ public class IntakeHatchCargoEject extends Command {
 	protected void initialize() {
 		if (Robot.m_intake.isIntakeRetracted()) {
 			Robot.m_intake.deployHook();
-			Robot.m_intake.deployEjector();
 		}
 
 	}
@@ -53,9 +52,7 @@ public class IntakeHatchCargoEject extends Command {
 
 	@Override
 	protected void end() {
-		if (Robot.m_intake.isIntakeRetracted()) {
-			Robot.m_intake.retractEjector();
-		} else {
+		if (!Robot.m_intake.isIntakeRetracted()) {
 			Robot.m_intake.holdCargo();
 		}
 	}
