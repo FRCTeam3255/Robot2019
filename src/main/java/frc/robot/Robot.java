@@ -10,7 +10,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import frc.robot.commands.AutoRocket;
 import frc.robot.commands.Autonomous;
 import frc.robot.subsystems.Cascade;
 import frc.robot.subsystems.Drivetrain;

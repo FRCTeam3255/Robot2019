@@ -62,8 +62,8 @@ public class RobotMap {
 
 	// Solenoids
 	// Intake PCM
-	public static final int INTAKE_HOOK_SOLENOID_A = 0;
-	public static final int INTAKE_HOOK_SOLENOID_B = 1;
+	public static final int INTAKE_FINGER_SOLENOID_A = 0;
+	public static final int INTAKE_FINGER_SOLENOID_B = 1;
 	public static final int INTAKE_LINKAGE_SOLENOID_A = 2;
 	public static final int INTAKE_LINKAGE_SOLENOID_B = 3;
 	public static final int INTAKE_ARM_SOLENOID_A = 4;

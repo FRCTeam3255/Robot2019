@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.AutoPreferences;
@@ -21,7 +20,6 @@ import frc.robot.commands.Climber.*;
 import frc.robot.commands.Drive.*;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Vision.*;
-import frcteam3255.robotbase.Preferences.SN_Preferences;
 
 /**
  * Subsystem containing board telemetry methoods
@@ -50,8 +48,8 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putData("Deploy Intake", new IntakeDeploy());
 		SmartDashboard.putData("Retract Intake", new IntakeRetract());
 
-		SmartDashboard.putData("Deploy Hook", new IntakeHookDeploy());
-		SmartDashboard.putData("Retract Hook", new IntakeHookRetract());
+		SmartDashboard.putData("Deploy Finger", new IntakeFingerDeploy());
+		SmartDashboard.putData("Retract Finger", new IntakeFingerRetract());
 		SmartDashboard.putData("Eject", new IntakeHatchEject());
 
 		// Climb Commands
@@ -92,7 +90,8 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putNumber("Drivetrain Encoder Distance", Robot.m_drivetrain.getEncoderDistance());
 
 		// Intake Telemetry
-		SmartDashboard.putBoolean("Intake Retracted", Robot.m_intake.isIntakeRetracted());
+		// SmartDashboard.putBoolean("Intake Retracted",
+		// Robot.m_intake.isIntakeRetracted());
 		SmartDashboard.putBoolean("Hatch Collected", Robot.m_intake.isHatchCollected());
 		SmartDashboard.putBoolean("Cargo Collected", Robot.m_intake.isCargoCollected());
 

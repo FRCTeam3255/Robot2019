@@ -30,22 +30,22 @@ public class Intake extends Subsystem {
 
 	// Solenoids
 	private DoubleSolenoid linkageSolenoid = null;
-	private DoubleSolenoid intakeArmSolenoid = null;
-	private DoubleSolenoid hatchHookSolenoid = null;
+	// private DoubleSolenoid intakeArmSolenoid = null;
+	private DoubleSolenoid hatchFingerSolenoid = null;
 
 	// Swtiches
 	private DigitalInput hatchSwitch = null;
 	private DigitalInput cargoSwitch = null;
 
 	// Set the directions of the intakeArm solenoid
-	private static final Value intakeDeployedValue = Value.kReverse;
-	private static final Value intakeRetractedValue = Value.kForward;
+	// private static final Value intakeDeployedValue = Value.kReverse;
+	// private static final Value intakeRetractedValue = Value.kForward;
 	private static final Value linkageDeployedValue = Value.kReverse;
 	private static final Value linkageRetractedValue = Value.kForward;
 
-	// Set the directions of the hook solenoid
-	private static final Value hookDeployedValue = Value.kReverse;
-	private static final Value hookRetractedValue = Value.kForward;
+	// Set the directions of the finger solenoid
+	private static final Value fingerDeployedValue = Value.kReverse;
+	private static final Value fingerRetractedValue = Value.kForward;
 
 	/**
 	 * Creates the devices used in the intake
@@ -57,17 +57,18 @@ public class Intake extends Subsystem {
 		// Solenoids
 		linkageSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_LINKAGE_SOLENOID_A,
 				RobotMap.INTAKE_LINKAGE_SOLENOID_B);
-		intakeArmSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_ARM_SOLENOID_A,
-				RobotMap.INTAKE_ARM_SOLENOID_B);
-		hatchHookSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_HOOK_SOLENOID_A,
-				RobotMap.INTAKE_HOOK_SOLENOID_B);
+		// intakeArmSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM,
+		// RobotMap.INTAKE_ARM_SOLENOID_A,
+		// RobotMap.INTAKE_ARM_SOLENOID_B);
+		hatchFingerSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_FINGER_SOLENOID_A,
+				RobotMap.INTAKE_FINGER_SOLENOID_B);
 
 		// Switches
 		hatchSwitch = new DigitalInput(RobotMap.INTAKE_HATCH_SWITCH);
 		cargoSwitch = new DigitalInput(RobotMap.INTAKE_CARGO_SWITCH);
 
-		retractHook();
-		deployIntake();
+		retractFinger();
+		// deployIntake();
 	}
 
 	/**
@@ -116,77 +117,65 @@ public class Intake extends Subsystem {
 	/**
 	 * Set the intake down
 	 */
-	public void deployIntake() {
-		intakeArmSolenoid.set(intakeDeployedValue);
-	}
+	// public void deployIntake() {
+	// intakeArmSolenoid.set(intakeDeployedValue);
+	// }
 
-	public boolean isIntakeDeployed() {
-		return intakeArmSolenoid.get() == intakeDeployedValue;
-	}
+	// public boolean isIntakeDeployed() {
+	// return intakeArmSolenoid.get() == intakeDeployedValue;
+	// }
 
 	/**
 	 * Set the intake up
 	 */
-	public void retractIntake() {
-		intakeArmSolenoid.set(intakeRetractedValue);
-	}
+	// public void retractIntake() {
+	// intakeArmSolenoid.set(intakeRetractedValue);
+	// }
 
-	public boolean isIntakeRetracted() {
-		return intakeArmSolenoid.get() == intakeRetractedValue;
-	}
+	// public boolean isIntakeRetracted() {
+	// return intakeArmSolenoid.get() == intakeRetractedValue;
+	// }
 
 	/**
 	 * Deploy the piston to grab the hatch from the floor
 	 */
-	public void deployHook() {
-		hatchHookSolenoid.set(hookDeployedValue);
+	public void deployFinger() {
+		hatchFingerSolenoid.set(fingerDeployedValue);
 	}
 
 	/**
 	 * Retracts the piston to grab the hatch from the floor
 	 */
-	public void retractHook() {
-		hatchHookSolenoid.set(hookRetractedValue);
+	public void retractFinger() {
+		hatchFingerSolenoid.set(fingerRetractedValue);
 	}
 
-	public void toggleHook() {
-		if (isHookRetracted() == true) {
-			deployHook();
+	public void toggleFinger() {
+		if (isFingerRetracted() == true) {
+			deployFinger();
 		} else {
-			retractHook();
+			retractFinger();
 		}
 	}
 
-	public boolean isHookDeployed() {
-		return hatchHookSolenoid.get() == hookDeployedValue;
+	public boolean isFingerDeployed() {
+		return hatchFingerSolenoid.get() == fingerDeployedValue;
 	}
 
-	public boolean isHookRetracted() {
-		return hatchHookSolenoid.get() == hookRetractedValue;
+	public boolean isFingerRetracted() {
+		return hatchFingerSolenoid.get() == fingerRetractedValue;
 	}
 
 	public SN_DoublePreference getSetpoint(fieldHeights position) {
 
 		switch (position) {
 		case LOW:
-			if (isIntakeRetracted()) {
-				return RobotPreferences.HATCH_POSITION_1;
-			}
 			return RobotPreferences.CARGO_POSITION_1;
 		case MED:
-			if (isIntakeRetracted()) {
-				return RobotPreferences.HATCH_POSITION_2;
-			}
 			return RobotPreferences.CARGO_POSITION_2;
 		case HIGH:
-			if (isIntakeRetracted()) {
-				return RobotPreferences.HATCH_POSITION_3;
-			}
 			return RobotPreferences.CARGO_POSITION_3;
 		case CSHIP:
-			if (isIntakeRetracted()) {
-				return RobotPreferences.HATCH_POSITION_1;
-			}
 			return RobotPreferences.CARGO_POSITION_SHIP;
 		case FEEDER:
 			return RobotPreferences.CASCADE_FEEDER;

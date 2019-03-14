@@ -7,21 +7,16 @@
 
 package frc.robot.commands.Intake;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.LightsAutoCommandFinish;
+import frc.robot.commands.Cascade.CascadePositionGroup;
+import frc.robot.subsystems.Intake.fieldHeights;
 
-public class IntakeHookRetract extends InstantCommand {
-	/**
-	 * Retracts hatch hook
-	 */
-	public IntakeHookRetract() {
-		super();
-		requires(Robot.m_intake);
-	}
-
-	@Override
-	protected void initialize() {
-		Robot.m_intake.retractHook();
-	}
-
+public class IntakeFingerToggleGroup extends CommandGroup {
+  public IntakeFingerToggleGroup() {
+    addSequential(new IntakeFingerToggle());
+    addSequential(new IntakeWaitForHatchGroup());
+    addSequential(new CascadePositionGroup(fieldHeights.LOW));
+    addSequential(new LightsAutoCommandFinish());
+  }
 }

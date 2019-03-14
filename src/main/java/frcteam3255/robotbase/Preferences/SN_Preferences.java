@@ -1,8 +1,5 @@
 package frcteam3255.robotbase.Preferences;
 
-import frc.robot.AutoPreferences;
-import frc.robot.Robot;
-
 /**
  * SuperNURDs encapsulation of RobotPreferences
  */

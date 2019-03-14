@@ -24,8 +24,8 @@ public class IntakeFeederGroup extends CommandGroup {
 
   /**
    * <ul>
-   * <li>Deploys the hatch hook</li>
-   * <li>Drives until hatch is collected; retracts hatch hook automatically</li>
+   * <li>Deploys the hatch finger</li>
+   * <li>Drives until hatch is collected; retracts hatch finger automatically</li>
    * <li>Half-second delay</li>
    * <li>Moves cascade to position 1</li>
    * <li>Backs up the robot 5"</li>
@@ -33,12 +33,12 @@ public class IntakeFeederGroup extends CommandGroup {
    */
   public IntakeFeederGroup() {
     requires(Robot.m_drivetrain);
-    addSequential(new IntakeRetract());
+    // addSequential(new IntakeRetract());
     // For Practice Bot
     // addSequential(new CascadePositionGroup(fieldHeights.FEEDER));
     // For Comp Bot
     addSequential(new CascadeBottom());
-    addSequential(new IntakeHookDeploy());
+    addSequential(new IntakeFingerDeploy());
     addSequential(new DriveToHatch());
     addSequential(new DoDelay(new SN_DoublePreference("AutoIntakeTimeout", 0.5)));
     addSequential(new CascadePositionGroup(fieldHeights.LOADED));

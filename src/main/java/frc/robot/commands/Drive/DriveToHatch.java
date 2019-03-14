@@ -16,7 +16,7 @@ public class DriveToHatch extends Command {
   private static SN_DoublePreference hatchSpeed = new SN_DoublePreference("hatchSpeed", 0.3);
 
   public DriveToHatch() {
-  
+
     requires(Robot.m_drivetrain);
   }
 
@@ -37,7 +37,7 @@ public class DriveToHatch extends Command {
   @Override
   protected void end() {
     Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
-    Robot.m_intake.retractHook();
+    Robot.m_intake.retractFinger();
   }
 
   @Override

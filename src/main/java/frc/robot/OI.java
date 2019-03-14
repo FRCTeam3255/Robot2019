@@ -7,15 +7,23 @@
 
 package frc.robot;
 
-import frc.robot.commands.Cascade.*;
-import frc.robot.commands.Climber.*;
-import frc.robot.commands.Intake.*;
+import frc.robot.commands.Cascade.CascadeManualGroup;
+import frc.robot.commands.Cascade.CascadePosition;
+import frc.robot.commands.Cascade.CascadePositionGroup;
+import frc.robot.commands.Cascade.CascadeStartMatch;
+import frc.robot.commands.Climber.ClimbDeploy;
+import frc.robot.commands.Climber.ClimbManual;
+import frc.robot.commands.Intake.IntakeCargoCollectGroup;
+import frc.robot.commands.Intake.IntakeFeederGroup;
+import frc.robot.commands.Intake.IntakeFingerToggle;
+import frc.robot.commands.Intake.IntakeHatchCargoEject;
+import frc.robot.commands.Intake.IntakeLinkageDeploy;
+import frc.robot.commands.Intake.IntakeLinkageRetract;
+import frc.robot.commands.Intake.IntakePlaceHatchGroup;
 import frc.robot.commands.Vision.VisionDriveDistanceRotate;
-import frc.robot.commands.Vision.VisionToggleMode;
 import frc.robot.subsystems.Intake.fieldHeights;
 import frcteam3255.robotbase.Joystick.SN_DualActionStick;
 import frcteam3255.robotbase.Joystick.SN_Extreme3DStick;
-import frcteam3255.robotbase.Joystick.SN_SwitchboardStick;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 /**
@@ -36,10 +44,10 @@ public class OI {
 		// Manipulator Stick
 		manipulatorStick.btn_1.whileHeld(new IntakeHatchCargoEject());
 		manipulatorStick.btn_2.whenPressed(new IntakeCargoCollectGroup());
-		manipulatorStick.btn_3.whenPressed(new IntakeHookToggle());
+		manipulatorStick.btn_3.whenPressed(new IntakeFingerToggle());
 		manipulatorStick.btn_4.whileHeld(new CascadeManualGroup());
-		manipulatorStick.btn_5.whenPressed(new IntakeRetractGroup());
-		manipulatorStick.btn_6.whenPressed(new IntakeDeployGroup());
+		manipulatorStick.btn_5.whenPressed(new IntakeLinkageDeploy());
+		manipulatorStick.btn_6.whenPressed(new IntakeLinkageRetract());
 		manipulatorStick.btn_7.whenPressed(new ClimbDeploy());
 		manipulatorStick.btn_8.whenPressed(new CascadePositionGroup(fieldHeights.HIGH));
 		manipulatorStick.btn_9.whileHeld(new ClimbManual());
@@ -54,7 +62,5 @@ public class OI {
 		driverStick.btn_RTrig
 				.whileHeld(new VisionDriveDistanceRotate(VisDisSetpoint, VisRotSetpoint, "DistanceRotateVision"));
 		driverStick.btn_Start.whenPressed(new CascadeStartMatch());
-		driverStick.btn_LTrig.whenPressed(new IntakeLinkageDeploy());
-		driverStick.btn_RTrig.whenPressed(new IntakeLinkageDeploy());
 	}
 }

@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class IntakeHatchEject extends InstantCommand {
   /**
-   * Deploys hatch hook and ejector pistions
+   * Deploys hatch Finger and ejector pistions
    */
   public IntakeHatchEject() {
     requires(Robot.m_intake);
@@ -21,7 +21,7 @@ public class IntakeHatchEject extends InstantCommand {
 
   @Override
   protected void initialize() {
-    Robot.m_intake.deployHook();
+    Robot.m_intake.deployFinger();
   }
 
 }

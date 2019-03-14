@@ -10,18 +10,18 @@ package frc.robot.commands.Intake;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class IntakeHookToggle extends InstantCommand {
+public class IntakeFingerToggle extends InstantCommand {
   /**
-   * Toggles hatch hook
+   * Toggles hatch finger
    */
-  public IntakeHookToggle() {
+  public IntakeFingerToggle() {
     super();
     requires(Robot.m_intake);
   }
 
   @Override
   protected void initialize() {
-    Robot.m_intake.toggleHook();
+    Robot.m_intake.toggleFinger();
   }
 
 }

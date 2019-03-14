@@ -16,8 +16,8 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 public class IntakeWaitForHatchGroup extends CommandGroup {
   /**
    * <ul>
-   * <li>Waits until the hatch hook and intake is deployed</li>
-   * <li>Retracts hatch hook</li>
+   * <li>Waits until the hatch finger and intake is deployed</li>
+   * <li>Retracts hatch finger</li>
    * <li>Half-second delay</li>
    * <li>Retracts intake</li>
    * <li>Moves cascade to position 1</li>
@@ -28,9 +28,8 @@ public class IntakeWaitForHatchGroup extends CommandGroup {
     requires(Robot.m_intake);
 
     addSequential(new IntakeWaitForHatch());
-    addSequential(new IntakeHookRetract());
+    addSequential(new IntakeFingerRetract());
     addSequential(new DoDelay(new SN_DoublePreference("hatchPickUpDelay", 0.5)));
-    addSequential(new IntakeRetract());
     addSequential(new LightsAutoCommandFinish());
   }
 }

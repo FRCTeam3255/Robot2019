@@ -27,7 +27,7 @@ public class IntakeWaitForHatch extends Command {
 
   @Override
   protected boolean isFinished() {
-    return (Robot.m_intake.isHatchCollected() && (Robot.m_intake.isHookDeployed()));
+    return (Robot.m_intake.isHatchCollected() && (Robot.m_intake.isFingerDeployed()));
   }
 
   @Override

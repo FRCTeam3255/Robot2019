@@ -21,6 +21,6 @@ public class IntakeDeploy extends InstantCommand {
 
 	@Override
 	protected void initialize() {
-		Robot.m_intake.deployIntake();
+		// Robot.m_intake.deployIntake();
 	}
 }

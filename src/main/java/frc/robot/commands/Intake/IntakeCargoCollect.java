@@ -17,7 +17,7 @@ public class IntakeCargoCollect extends Command {
 
 	@Override
 	protected void initialize() {
-		Robot.m_intake.retractHook();
+		Robot.m_intake.retractFinger();
 	}
 
 	@Override

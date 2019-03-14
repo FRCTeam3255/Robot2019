@@ -14,7 +14,7 @@ public class IntakeHatchCargoEject extends Command {
 	/**
 	 * <ul>
 	 * <li>Ejects hatches/cargo depending on if intake is retracted</li>
-	 * <li>Retracts hatch hook/stops spinning intake in end</li>
+	 * <li>Retracts hatch finger/stops spinning intake in end</li>
 	 * </ul>
 	 */
 	double speed = 0.0;
@@ -27,15 +27,14 @@ public class IntakeHatchCargoEject extends Command {
 
 	@Override
 	protected void initialize() {
-		if (Robot.m_intake.isIntakeRetracted()) {
-			Robot.m_intake.deployHook();
+		if (!Robot.m_intake.isCargoCollected()) {
+			Robot.m_intake.deployFinger();
 		}
-
 	}
 
 	@Override
 	protected void execute() {
-		if (!Robot.m_intake.isIntakeRetracted()) {
+		if (!Robot.m_intake.isHatchCollected()) {
 			this.speed = Robot.m_oi.manipulatorStick.getDialAxis();
 
 			if (speed < 0.25) {
@@ -52,9 +51,7 @@ public class IntakeHatchCargoEject extends Command {
 
 	@Override
 	protected void end() {
-		if (!Robot.m_intake.isIntakeRetracted()) {
-			Robot.m_intake.holdCargo();
-		}
+		Robot.m_intake.holdCargo();
 	}
 
 	@Override
