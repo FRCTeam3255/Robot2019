@@ -57,9 +57,6 @@ public class Intake extends Subsystem {
 		// Solenoids
 		linkageSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_LINKAGE_SOLENOID_A,
 				RobotMap.INTAKE_LINKAGE_SOLENOID_B);
-		// intakeArmSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM,
-		// RobotMap.INTAKE_ARM_SOLENOID_A,
-		// RobotMap.INTAKE_ARM_SOLENOID_B);
 		hatchFingerSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_FINGER_SOLENOID_A,
 				RobotMap.INTAKE_FINGER_SOLENOID_B);
 

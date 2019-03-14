@@ -13,8 +13,8 @@ import frc.robot.Robot;
 public class IntakeHatchCargoEject extends Command {
 	/**
 	 * <ul>
-	 * <li>Ejects hatches/cargo depending on if intake is retracted</li>
-	 * <li>Retracts hatch finger/stops spinning intake in end</li>
+	 * <li>Ejects hatches/cargo depending on if hatches/cargo are collected</li>
+	 * <li>Stops spinning intake in end</li>
 	 * </ul>
 	 */
 	double speed = 0.0;

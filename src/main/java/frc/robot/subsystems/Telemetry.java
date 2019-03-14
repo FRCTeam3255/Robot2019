@@ -45,8 +45,10 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putData("Drive To Wall", new DriveToWall());
 
 		// Intake Commands
-		SmartDashboard.putData("Deploy Intake", new IntakeDeploy());
-		SmartDashboard.putData("Retract Intake", new IntakeRetract());
+		// SmartDashboard.putData("Deploy Intake", new IntakeDeploy());
+		// SmartDashboard.putData("Retract Intake", new IntakeRetract());
+		SmartDashboard.putData("Deploy Linkage", new IntakeLinkageDeploy());
+		SmartDashboard.putData("Retract Linkage", new IntakeLinkageRetract());
 
 		SmartDashboard.putData("Deploy Finger", new IntakeFingerDeploy());
 		SmartDashboard.putData("Retract Finger", new IntakeFingerRetract());
@@ -92,6 +94,7 @@ public class Telemetry extends Subsystem {
 		// Intake Telemetry
 		// SmartDashboard.putBoolean("Intake Retracted",
 		// Robot.m_intake.isIntakeRetracted());
+		SmartDashboard.putBoolean("Linkage Retracted", Robot.m_intake.isLinkageRetracted());
 		SmartDashboard.putBoolean("Hatch Collected", Robot.m_intake.isHatchCollected());
 		SmartDashboard.putBoolean("Cargo Collected", Robot.m_intake.isCargoCollected());
 

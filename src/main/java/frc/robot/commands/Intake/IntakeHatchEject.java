@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class IntakeHatchEject extends InstantCommand {
   /**
-   * Deploys hatch Finger and ejector pistions
+   * Deploys hatch Finger
    */
   public IntakeHatchEject() {
     requires(Robot.m_intake);

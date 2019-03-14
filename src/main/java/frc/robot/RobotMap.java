@@ -66,8 +66,9 @@ public class RobotMap {
 	public static final int INTAKE_FINGER_SOLENOID_B = 1;
 	public static final int INTAKE_LINKAGE_SOLENOID_A = 2;
 	public static final int INTAKE_LINKAGE_SOLENOID_B = 3;
-	public static final int INTAKE_ARM_SOLENOID_A = 4;
-	public static final int INTAKE_ARM_SOLENOID_B = 5;
+	// Removed
+	// public static final int INTAKE_ARM_SOLENOID_A = 4;
+	// public static final int INTAKE_ARM_SOLENOID_B = 5;
 
 	// Cascade PCM
 	public static final int CASCADE_LOCK_SOLENOID_A = 0;

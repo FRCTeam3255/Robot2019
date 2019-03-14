@@ -21,6 +21,7 @@ import frc.robot.commands.Intake.IntakeLinkageDeploy;
 import frc.robot.commands.Intake.IntakeLinkageRetract;
 import frc.robot.commands.Intake.IntakePlaceHatchGroup;
 import frc.robot.commands.Vision.VisionDriveDistanceRotate;
+import frc.robot.commands.Vision.VisionToggleMode;
 import frc.robot.subsystems.Intake.fieldHeights;
 import frcteam3255.robotbase.Joystick.SN_DualActionStick;
 import frcteam3255.robotbase.Joystick.SN_Extreme3DStick;
@@ -59,6 +60,7 @@ public class OI {
 		driverStick.btn_A.whileHeld(new IntakeFeederGroup());
 		driverStick.btn_B.whileHeld(new IntakePlaceHatchGroup());
 		// driverStick.btn_RBump slow speed hardcoded in drive arcade
+		driverStick.btn_LTrig.whenPressed(new VisionToggleMode());
 		driverStick.btn_RTrig
 				.whileHeld(new VisionDriveDistanceRotate(VisDisSetpoint, VisRotSetpoint, "DistanceRotateVision"));
 		driverStick.btn_Start.whenPressed(new CascadeStartMatch());
