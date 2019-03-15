@@ -24,7 +24,6 @@ public class IntakePlaceHatchGroup extends CommandGroup {
    * <li>Deploys hatch hook and ejects a hatch</li>
    * <li>Half-second delay</li>
    * <li>Backs up robot 5"</li>
-   * <li>Retracts ejector pistions</li>
    * </ul>
    */
   public IntakePlaceHatchGroup() {
