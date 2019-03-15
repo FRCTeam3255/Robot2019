@@ -89,4 +89,8 @@ public class RobotPreferences {
 	public static final SN_DoublePreference AUTO_DISTANCE_ON_TARGET = new SN_DoublePreference("autoDistanceVision",
 			10.0);
 	public static final SN_DoublePreference AUTO_ROTATE_ON_TARGET = new SN_DoublePreference("autoRotateVision", 0.0);
+	public static final SN_DoublePreference DRIVE_ROTATE_TEST_DISTANCE = new SN_DoublePreference(
+			"dirveRotateTestDistance", 25);
+	public static final SN_DoublePreference DRIVE_ROTATE_TEST_ANGLE = new SN_DoublePreference("dirveRotateTestRotate",
+			0);
 }

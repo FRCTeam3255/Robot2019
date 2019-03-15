@@ -32,7 +32,7 @@ public class AutoRocket extends CommandGroup {
       case "B":
         return new SN_DoublePreference(name + side, 21.0);
       default:
-        return new SN_DoublePreference(name + "default", 53.0);
+        return new SN_DoublePreference(name + "default", 20.0);
       }
     } else {
       switch (pos) {
@@ -41,7 +41,7 @@ public class AutoRocket extends CommandGroup {
       case "B":
         return new SN_DoublePreference(name + side, 31.0);
       default:
-        return new SN_DoublePreference(name + "default", 0.0);
+        return new SN_DoublePreference(name + "default", 30.0);
       }
     }
   }
@@ -75,18 +75,18 @@ public class AutoRocket extends CommandGroup {
     if (side == "L") {
       switch (pos) {
       case "F":
-        return new SN_DoublePreference(name + side, 15.0);
+        return new SN_DoublePreference(name + side, -45.0);
       case "B":
-        return new SN_DoublePreference(name + side, 16.0);
+        return new SN_DoublePreference(name + side, -135.0);
       default:
         return new SN_DoublePreference(name + "default", 0.0);
       }
     } else {
       switch (pos) {
       case "F":
-        return new SN_DoublePreference(name + side, 20.0);
+        return new SN_DoublePreference(name + side, 45.0);
       case "B":
-        return new SN_DoublePreference(name + side, 21.0);
+        return new SN_DoublePreference(name + side, 135.0);
       default:
         return new SN_DoublePreference(name + "default", 0.0);
       }

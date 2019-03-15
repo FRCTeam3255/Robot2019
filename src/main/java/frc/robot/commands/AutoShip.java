@@ -28,22 +28,22 @@ public class AutoShip extends CommandGroup {
       case "F":
         return new SN_DoublePreference(name + side, 40.0);
       case "M":
-        return new SN_DoublePreference(name + side, 60.0);
-      case "B":
         return new SN_DoublePreference(name + side, 50.0);
+      case "B":
+        return new SN_DoublePreference(name + side, 60.0);
       default:
-        return new SN_DoublePreference(name + "default", 0.0);
+        return new SN_DoublePreference(name + "default", 50.0);
       }
     } else {
       switch (pos) {
       case "F":
-        return new SN_DoublePreference(name + side, 5.0);
+        return new SN_DoublePreference(name + side, 40.0);
       case "M":
-        return new SN_DoublePreference(name + side, 10.0);
+        return new SN_DoublePreference(name + side, 50.0);
       case "B":
-        return new SN_DoublePreference(name + side, 15.0);
+        return new SN_DoublePreference(name + side, 60.0);
       default:
-        return new SN_DoublePreference(name + "default", 0.0);
+        return new SN_DoublePreference(name + "default", 50.0);
       }
     }
   }
@@ -85,24 +85,24 @@ public class AutoShip extends CommandGroup {
     if (side == "L") {
       switch (pos) {
       case "F":
-        return new SN_DoublePreference(name + side, 60.0);
+        return new SN_DoublePreference(name + side, 90.0);
       case "M":
-        return new SN_DoublePreference(name + side, 50.0);
+        return new SN_DoublePreference(name + side, 90.0);
       case "B":
-        return new SN_DoublePreference(name + side, 40.0);
+        return new SN_DoublePreference(name + side, 90.0);
       default:
-        return new SN_DoublePreference(name + "default", 0.0);
+        return new SN_DoublePreference(name + "default", 90.0);
       }
     } else {
       switch (pos) {
       case "F":
-        return new SN_DoublePreference(name + side, 20.0);
+        return new SN_DoublePreference(name + side, -90.0);
       case "M":
-        return new SN_DoublePreference(name + side, 22.0);
+        return new SN_DoublePreference(name + side, -90.0);
       case "B":
-        return new SN_DoublePreference(name + side, 23.0);
+        return new SN_DoublePreference(name + side, -90.0);
       default:
-        return new SN_DoublePreference(name + "default", 0.0);
+        return new SN_DoublePreference(name + "default", -90.0);
       }
     }
   }

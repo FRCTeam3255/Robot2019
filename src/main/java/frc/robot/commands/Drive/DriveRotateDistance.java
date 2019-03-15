@@ -50,6 +50,7 @@ public class DriveRotateDistance extends Command {
     expireTime = timeSinceInitialized() + pref_timeout.getValue();
 
     Robot.m_drivetrain.resetEncoderCount();
+    Robot.m_navigation.resetYaw();
 
     distancePID.enable();
     rotatePID.enable();
