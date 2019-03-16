@@ -26,24 +26,24 @@ public class AutoShip extends CommandGroup {
     if (side == "L") {
       switch (pos) {
       case "F":
-        return new SN_DoublePreference(name + side, 40.0);
+        return new SN_DoublePreference(name + side, 85.0);
       case "M":
-        return new SN_DoublePreference(name + side, 50.0);
+        return new SN_DoublePreference(name + side, 95.0);
       case "B":
-        return new SN_DoublePreference(name + side, 60.0);
+        return new SN_DoublePreference(name + side, 105.0);
       default:
-        return new SN_DoublePreference(name + "default", 50.0);
+        return new SN_DoublePreference(name + "default", 90.0);
       }
     } else {
       switch (pos) {
       case "F":
-        return new SN_DoublePreference(name + side, 40.0);
+        return new SN_DoublePreference(name + side, 80.0);
       case "M":
-        return new SN_DoublePreference(name + side, 50.0);
+        return new SN_DoublePreference(name + side, 90.0);
       case "B":
-        return new SN_DoublePreference(name + side, 60.0);
+        return new SN_DoublePreference(name + side, 100.0);
       default:
-        return new SN_DoublePreference(name + "default", 50.0);
+        return new SN_DoublePreference(name + "default", 90.0);
       }
     }
   }
@@ -110,7 +110,8 @@ public class AutoShip extends CommandGroup {
   public AutoShip() {
     addSequential(new DriveRotateDistance(AutoShipD1(), AutoShipR1(), "autoShipDriveRotateDistance1"));
     addSequential(new DoDelay(RobotPreferences.AUTO_DELAY));
-    addSequential(new DriveRotateDistance(AutoShipLocationD2(), AutoShipR2(), "autoShipDriveRoateDistance2"));
+    // addSequential(new DriveRotateDistance(AutoShipLocationD2(), AutoShipR2(),
+    // "autoShipDriveRoateDistance2"));
     addSequential(new DoDelay(RobotPreferences.AUTO_DELAY));
     addSequential(new VisionDriveDistanceRotate(RobotPreferences.AUTO_DISTANCE_ON_TARGET,
         RobotPreferences.AUTO_ROTATE_ON_TARGET, "ShipVisionTarget"));

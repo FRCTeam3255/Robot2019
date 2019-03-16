@@ -26,11 +26,11 @@ public class AutoShipFrontFront extends CommandGroup {
 
     switch (side) {
     case "L":
-      return new SN_DoublePreference(name + side, 45.0);
+      return new SN_DoublePreference(name + side, 50.0);
     case "R":
-      return new SN_DoublePreference(name + side, 45.0);
+      return new SN_DoublePreference(name + side, 50.0);
     default:
-      return new SN_DoublePreference(name + "default", 45.0);
+      return new SN_DoublePreference(name + "default", 50.0);
     }
   }
 
@@ -54,11 +54,11 @@ public class AutoShipFrontFront extends CommandGroup {
 
     switch (side) {
     case "L":
-      return new SN_DoublePreference(name + side, -30.0);
+      return new SN_DoublePreference(name + side, -22.0);
     case "R":
-      return new SN_DoublePreference(name + side, 30.0);
+      return new SN_DoublePreference(name + side, 22.0);
     default:
-      return new SN_DoublePreference(name + "default", 30.0);
+      return new SN_DoublePreference(name + "default", 0.0);
     }
   }
 
