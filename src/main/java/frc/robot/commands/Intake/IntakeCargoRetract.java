@@ -10,11 +10,11 @@ package frc.robot.commands.Intake;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class IntakeRetract extends InstantCommand {
+public class IntakeCargoRetract extends InstantCommand {
 	/**
-	 * Retracts intake
+	 * Retracts cargo intake
 	 */
-	public IntakeRetract() {
+	public IntakeCargoRetract() {
 		super();
 
 		requires(Robot.m_intake);
@@ -22,7 +22,7 @@ public class IntakeRetract extends InstantCommand {
 
 	@Override
 	protected void initialize() {
-		// Robot.m_intake.retractIntake();
+		Robot.m_intake.retractCargoIntake();
 	}
 
 }

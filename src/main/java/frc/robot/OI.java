@@ -17,8 +17,10 @@ import frc.robot.commands.Intake.IntakeCargoCollectGroup;
 import frc.robot.commands.Intake.IntakeFeederGroup;
 import frc.robot.commands.Intake.IntakeFingerToggle;
 import frc.robot.commands.Intake.IntakeHatchCargoEject;
+import frc.robot.commands.Intake.IntakeHatchCollectGroup;
 import frc.robot.commands.Intake.IntakeLinkageDeploy;
 import frc.robot.commands.Intake.IntakeLinkageRetract;
+import frc.robot.commands.Intake.IntakeLinkageToggle;
 import frc.robot.commands.Intake.IntakePlaceHatchGroup;
 import frc.robot.commands.Vision.VisionDriveDistanceRotate;
 import frc.robot.commands.Vision.VisionToggleMode;
@@ -47,10 +49,10 @@ public class OI {
 		// Manipulator Stick
 		manipulatorStick.btn_1.whileHeld(new IntakeHatchCargoEject());
 		manipulatorStick.btn_2.whenPressed(new IntakeCargoCollectGroup());
-		manipulatorStick.btn_3.whenPressed(new IntakeFingerToggle());
+		manipulatorStick.btn_3.whenPressed(new IntakeHatchCollectGroup());
 		manipulatorStick.btn_4.whileHeld(new CascadeManualGroup());
-		manipulatorStick.btn_5.whenPressed(new IntakeLinkageDeploy());
-		manipulatorStick.btn_6.whenPressed(new IntakeLinkageRetract());
+		manipulatorStick.btn_5.whenPressed(new IntakeFingerToggle());
+		manipulatorStick.btn_6.whenPressed(new IntakeLinkageToggle());
 		manipulatorStick.btn_7.whenPressed(new ClimbDeploy());
 		manipulatorStick.btn_8.whenPressed(new CascadePositionGroup(fieldHeights.HIGH));
 		manipulatorStick.btn_9.whileHeld(new ClimbManual());

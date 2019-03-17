@@ -10,17 +10,17 @@ package frc.robot.commands.Intake;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class IntakeDeploy extends InstantCommand {
-	/**
-	 * Deploys intake
-	 */
-	public IntakeDeploy() {
-		super();
-		requires(Robot.m_intake);
-	}
+public class IntakeLinkageToggle extends InstantCommand {
+  public IntakeLinkageToggle() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    requires(Robot.m_intake);
+  }
 
-	@Override
-	protected void initialize() {
-		// Robot.m_intake.deployIntake();
-	}
+  // Called just before this Command runs the first time
+  @Override
+  protected void initialize() {
+    Robot.m_intake.deployCargoIntake();
+    Robot.m_intake.toggleLinkage();
+  }
 }

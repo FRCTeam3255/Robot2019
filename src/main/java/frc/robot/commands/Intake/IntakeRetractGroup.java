@@ -19,10 +19,10 @@ public class IntakeRetractGroup extends CommandGroup {
    * Retracts hatch ejectors and intake
    */
   public IntakeRetractGroup() {
-    addSequential(new IntakeFingerRetract());
-    addSequential(new IntakeRetract());
-    addSequential(new CascadePositionGroup(fieldHeights.LOADED));
-    addSequential(new CascadeLockDogtooth());
-    addSequential(new LightsAutoCommandFinish());
+    // addSequential(new IntakeFingerRetract());
+    // addSequential(new IntakeCargoRetract());
+    // addSequential(new CascadePositionGroup(fieldHeights.LOADED));
+    // addSequential(new CascadeLockDogtooth());
+    // addSequential(new LightsAutoCommandFinish());
   }
 }

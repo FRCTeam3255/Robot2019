@@ -110,8 +110,8 @@ public class AutoShip extends CommandGroup {
   public AutoShip() {
     addSequential(new DriveRotateDistance(AutoShipD1(), AutoShipR1(), "autoShipDriveRotateDistance1"));
     addSequential(new DoDelay(RobotPreferences.AUTO_DELAY));
-    // addSequential(new DriveRotateDistance(AutoShipLocationD2(), AutoShipR2(),
-    // "autoShipDriveRoateDistance2"));
+    addSequential(new DriveRotateDistance(AutoShipLocationD2(), AutoShipR2(),
+    "autoShipDriveRoateDistance2"));
     addSequential(new DoDelay(RobotPreferences.AUTO_DELAY));
     addSequential(new VisionDriveDistanceRotate(RobotPreferences.AUTO_DISTANCE_ON_TARGET,
         RobotPreferences.AUTO_ROTATE_ON_TARGET, "ShipVisionTarget"));

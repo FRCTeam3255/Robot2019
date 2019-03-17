@@ -10,25 +10,21 @@ package frc.robot.commands.Intake;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.LightsAutoCommandFinish;
 import frc.robot.commands.Cascade.CascadeBottom;
+import frc.robot.commands.Cascade.CascadeBottomGroup;
 import frc.robot.commands.Cascade.CascadePositionGroup;
-import frc.robot.commands.Cascade.CascadeUnweightGroup;
 import frc.robot.subsystems.Intake.fieldHeights;
 
-public class IntakeDeployGroup extends CommandGroup {
+public class IntakeHatchCollectGroup extends CommandGroup {
   /**
-   * <ul>
-   * <li>Retracts hatch ejector pistons</li>
-   * <li>Unweights and locks cascade at bottom</li>
-   * <li>Deploys the intake and hatch finger</li>
-   * </ul>
+   * Add your docs here.
    */
-  public IntakeDeployGroup() {
-    // addSequential(new CascadeUnweightGroup());
-    // addSequential(new CascadeBottom());
-    // addSequential(new IntakeCargoDeploy());
-    // addSequential(new IntakeFingerDeploy());
-    // addSequential(new IntakeWaitForHatchGroup());
-    // addSequential(new CascadePositionGroup(fieldHeights.LOW));
-    // addSequential(new LightsAutoCommandFinish());
+  public IntakeHatchCollectGroup() {
+    addSequential(new CascadeBottomGroup());
+    addSequential(new IntakeLinkageDeploy());
+    addSequential(new IntakeCargoRetract());
+    addSequential(new IntakeFingerDeploy());
+    addSequential(new IntakeWaitForHatchGroup());
+    addSequential(new CascadePositionGroup(fieldHeights.LOW));
+    addSequential(new LightsAutoCommandFinish());
   }
 }

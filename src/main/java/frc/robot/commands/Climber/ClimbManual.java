@@ -26,6 +26,8 @@ public class ClimbManual extends Command {
   protected void initialize() {
     speed = 0.0;
     Robot.m_cascade.shiftClimb();
+    Robot.m_intake.deployCargoIntake();
+    Robot.m_intake.retractLinkage();
   }
 
   @Override

@@ -27,14 +27,14 @@ public class IntakeHatchCargoEject extends Command {
 
 	@Override
 	protected void initialize() {
-		if (!Robot.m_intake.isCargoCollected()) {
+		if (Robot.m_intake.isCargoIntakeRetracted()) {
 			Robot.m_intake.deployFinger();
 		}
 	}
 
 	@Override
 	protected void execute() {
-		if (!Robot.m_intake.isHatchCollected()) {
+		if (Robot.m_intake.isCargoIntakeDeployed()) {
 			this.speed = Robot.m_oi.manipulatorStick.getDialAxis();
 
 			if (speed < 0.25) {

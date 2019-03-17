@@ -33,7 +33,7 @@ public class IntakeFeederGroup extends CommandGroup {
    */
   public IntakeFeederGroup() {
     requires(Robot.m_drivetrain);
-    // addSequential(new IntakeRetract());
+    addSequential(new IntakeCargoRetract());
     // For Practice Bot
     // addSequential(new CascadePositionGroup(fieldHeights.FEEDER));
     // For Comp Bot

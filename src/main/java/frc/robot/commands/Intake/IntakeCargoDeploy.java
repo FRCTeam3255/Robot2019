@@ -7,16 +7,20 @@
 
 package frc.robot.commands.Intake;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.LightsAutoCommandFinish;
-import frc.robot.commands.Cascade.CascadePositionGroup;
-import frc.robot.subsystems.Intake.fieldHeights;
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.Robot;
 
-public class IntakeFingerToggleGroup extends CommandGroup {
-  public IntakeFingerToggleGroup() {
-    addSequential(new IntakeLinkageDeploy());
-    addSequential(new IntakeCargoRetract());
-    addSequential(new IntakeFingerToggle());
-    addSequential(new LightsAutoCommandFinish());
-  }
+public class IntakeCargoDeploy extends InstantCommand {
+	/**
+	 * Deploys cargo intake
+	 */
+	public IntakeCargoDeploy() {
+		super();
+		requires(Robot.m_intake);
+	}
+
+	@Override
+	protected void initialize() {
+		Robot.m_intake.deployCargoIntake();
+	}
 }

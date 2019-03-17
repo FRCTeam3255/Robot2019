@@ -30,16 +30,17 @@ public class Intake extends Subsystem {
 
 	// Solenoids
 	private DoubleSolenoid linkageSolenoid = null;
-	// private DoubleSolenoid intakeArmSolenoid = null;
+	private DoubleSolenoid cargoIntakeSolenoid = null;
 	private DoubleSolenoid hatchFingerSolenoid = null;
 
 	// Swtiches
 	private DigitalInput hatchSwitch = null;
 	private DigitalInput cargoSwitch = null;
 
-	// Set the directions of the intakeArm solenoid
-	// private static final Value intakeDeployedValue = Value.kReverse;
-	// private static final Value intakeRetractedValue = Value.kForward;
+	// Set the directions of the cargoIntake solenoid
+	private static final Value cargoIntakeDeployedValue = Value.kReverse;
+	private static final Value cargoIntakeRetractedValue = Value.kForward;
+
 	private static final Value linkageDeployedValue = Value.kReverse;
 	private static final Value linkageRetractedValue = Value.kForward;
 
@@ -59,12 +60,15 @@ public class Intake extends Subsystem {
 				RobotMap.INTAKE_LINKAGE_SOLENOID_B);
 		hatchFingerSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_FINGER_SOLENOID_A,
 				RobotMap.INTAKE_FINGER_SOLENOID_B);
+		cargoIntakeSolenoid = new DoubleSolenoid(RobotMap.INTAKE_PCM, RobotMap.INTAKE_CARGO_INTAKE_SOLENOID_A,
+				RobotMap.INTAKE_CARGO_INTAKE_SOLENOID_B);
 
 		// Switches
 		hatchSwitch = new DigitalInput(RobotMap.INTAKE_HATCH_SWITCH);
 		cargoSwitch = new DigitalInput(RobotMap.INTAKE_CARGO_SWITCH);
 
 		retractFinger();
+		retractCargoIntake();
 		// deployIntake();
 	}
 
@@ -72,14 +76,14 @@ public class Intake extends Subsystem {
 	 * Spin the intake to collect cargo
 	 */
 	public void collectCargo() {
-		cargoTalon.set(RobotPreferences.CARGO_COLLECT_SPEED.getValue());
+		cargoTalon.set(-RobotPreferences.CARGO_COLLECT_SPEED.getValue());
 	}
 
 	/**
 	 * Spin the intake to eject cargo
 	 */
 	public void shootCargo(double speed) {
-		cargoTalon.set(speed);
+		cargoTalon.set(-speed);
 	}
 
 	/**
@@ -111,27 +115,35 @@ public class Intake extends Subsystem {
 		return linkageSolenoid.get() == linkageRetractedValue;
 	}
 
-	/**
-	 * Set the intake down
-	 */
-	// public void deployIntake() {
-	// intakeArmSolenoid.set(intakeDeployedValue);
-	// }
-
-	// public boolean isIntakeDeployed() {
-	// return intakeArmSolenoid.get() == intakeDeployedValue;
-	// }
+	public void toggleLinkage() {
+		if (isLinkageRetracted() == true) {
+			deployLinkage();
+		} else {
+			retractLinkage();
+		}
+	}
 
 	/**
-	 * Set the intake up
+	 * Set the cargo intake down
 	 */
-	// public void retractIntake() {
-	// intakeArmSolenoid.set(intakeRetractedValue);
-	// }
+	public void deployCargoIntake() {
+		cargoIntakeSolenoid.set(cargoIntakeDeployedValue);
+	}
 
-	// public boolean isIntakeRetracted() {
-	// return intakeArmSolenoid.get() == intakeRetractedValue;
-	// }
+	public boolean isCargoIntakeDeployed() {
+		return cargoIntakeSolenoid.get() == cargoIntakeDeployedValue;
+	}
+
+	/**
+	 * Set the cargo intake up
+	 */
+	public void retractCargoIntake() {
+		cargoIntakeSolenoid.set(cargoIntakeRetractedValue);
+	}
+
+	public boolean isCargoIntakeRetracted() {
+		return cargoIntakeSolenoid.get() == cargoIntakeRetractedValue;
+	}
 
 	/**
 	 * Deploy the piston to grab the hatch from the floor
@@ -167,20 +179,27 @@ public class Intake extends Subsystem {
 
 		switch (position) {
 		case LOW:
+			if (isCargoIntakeRetracted()) {
+				return RobotPreferences.HATCH_POSITION_1;
+			}
 			return RobotPreferences.CARGO_POSITION_1;
 		case MED:
+			if (isCargoIntakeRetracted()) {
+				return RobotPreferences.HATCH_POSITION_2;
+			}
 			return RobotPreferences.CARGO_POSITION_2;
 		case HIGH:
+			if (isCargoIntakeRetracted()) {
+				return RobotPreferences.HATCH_POSITION_3;
+			}
 			return RobotPreferences.CARGO_POSITION_3;
 		case CSHIP:
+			if (isCargoIntakeRetracted()) {
+				return RobotPreferences.HATCH_POSITION_1;
+			}
 			return RobotPreferences.CARGO_POSITION_SHIP;
-		case FEEDER:
-			return RobotPreferences.CASCADE_FEEDER;
-		case LOADED:
-			return RobotPreferences.HATCH_POSITION_LOADED;
-		default:
-			return RobotPreferences.CASCADE_BOTTOM;
 		}
+		return RobotPreferences.CARGO_POSITION_SHIP;
 	}
 
 	/**
