@@ -5,15 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.AutoPreferences;
 
-public class AutoPlaceCargo extends CommandGroup {
+public class Autonomous extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public AutoPlaceCargo() {
+  public Autonomous() {
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
@@ -30,5 +31,12 @@ public class AutoPlaceCargo extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
+    if (AutoPreferences.doRocket()) {
+      addSequential(new AutoRocket());
+    } else if (AutoPreferences.doShipFrontFront()) {
+      addSequential(new AutoShipFrontFront());
+    } else if (AutoPreferences.doShipSide()) {
+      addSequential(new AutoShip());
+    }
   }
 }

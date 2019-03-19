@@ -14,12 +14,11 @@ import frc.robot.commands.Cascade.CascadeStartMatch;
 import frc.robot.commands.Climber.ClimbDeploy;
 import frc.robot.commands.Climber.ClimbManual;
 import frc.robot.commands.Intake.IntakeCargoCollectGroup;
+import frc.robot.commands.Intake.IntakeCargoEjectGroup;
 import frc.robot.commands.Intake.IntakeFeederGroup;
 import frc.robot.commands.Intake.IntakeFingerToggle;
 import frc.robot.commands.Intake.IntakeHatchCargoEject;
 import frc.robot.commands.Intake.IntakeHatchCollectGroup;
-import frc.robot.commands.Intake.IntakeLinkageDeploy;
-import frc.robot.commands.Intake.IntakeLinkageRetract;
 import frc.robot.commands.Intake.IntakeLinkageToggle;
 import frc.robot.commands.Intake.IntakePlaceHatchGroup;
 import frc.robot.commands.Vision.VisionDriveDistanceRotate;
@@ -63,6 +62,7 @@ public class OI {
 		// Driver Stick
 		driverStick.btn_A.whileHeld(new IntakeFeederGroup());
 		driverStick.btn_B.whileHeld(new IntakePlaceHatchGroup());
+		driverStick.btn_X.whileHeld(new IntakeCargoEjectGroup());
 		// driverStick.btn_RBump slow speed hardcoded in drive arcade
 		driverStick.btn_LTrig.whenPressed(new VisionToggleMode());
 		driverStick.btn_RTrig

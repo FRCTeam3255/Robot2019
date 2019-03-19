@@ -5,16 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.AutoPreferences;
+import frc.robot.commands.DoDelay;
+import frc.robot.commands.LightsAutoCommandFinish;
+import frc.robot.commands.Drive.DriveDistance;
+import frc.robot.commands.Drive.DriveToWall;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-public class Autonomous extends CommandGroup {
+public class IntakeCargoEjectGroup extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public Autonomous() {
+
+  private SN_DoublePreference AutoPlaceBackup = new SN_DoublePreference("AutoPlaceBackup", -5.0);
+
+  public IntakeCargoEjectGroup() {
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
@@ -31,12 +38,10 @@ public class Autonomous extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
-    if (AutoPreferences.doRocket()) {
-      addSequential(new AutoRocket());
-    } else if (AutoPreferences.doShipFrontFront()) {
-      addSequential(new AutoShipFrontFront());
-    } else if (AutoPreferences.doShipSide()) {
-      addSequential(new AutoShip());
-    }
+    addSequential(new DriveToWall());
+    addSequential(new IntakeCargoEject());
+    addSequential(new DoDelay(new SN_DoublePreference("AutoPlaceTimeout", 2.0)));
+    addSequential(new DriveDistance(AutoPlaceBackup, "AutoPlaceBackup"));
+    addSequential(new LightsAutoCommandFinish());
   }
 }

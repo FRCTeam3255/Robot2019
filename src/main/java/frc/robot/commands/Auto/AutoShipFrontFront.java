@@ -5,11 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.AutoPreferences;
 import frc.robot.RobotPreferences;
+import frc.robot.commands.DoDelay;
 import frc.robot.commands.Drive.DriveRotateDistance;
 import frc.robot.commands.Intake.IntakePlaceHatchGroup;
 import frc.robot.commands.Vision.VisionDriveDistanceRotate;

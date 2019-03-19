@@ -13,14 +13,29 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.AutoPreferences;
 import frc.robot.Robot;
 import frc.robot.RobotPreferences;
-import frc.robot.commands.AutoRocket;
-import frc.robot.commands.AutoShip;
-import frc.robot.commands.AutoShipFrontFront;
-import frc.robot.commands.Cascade.*;
-import frc.robot.commands.Climber.*;
-import frc.robot.commands.Drive.*;
-import frc.robot.commands.Intake.*;
-import frc.robot.commands.Vision.*;
+import frc.robot.commands.Auto.AutoRocket;
+import frc.robot.commands.Auto.AutoShip;
+import frc.robot.commands.Auto.AutoShipFrontFront;
+import frc.robot.commands.Cascade.CascadeLockDogtooth;
+import frc.robot.commands.Cascade.CascadeResetEncoder;
+import frc.robot.commands.Cascade.CascadeShiftTo;
+import frc.robot.commands.Cascade.CascadeUnlockDogtooth;
+import frc.robot.commands.Climber.ClimbDeploy;
+import frc.robot.commands.Climber.ClimbGroup;
+import frc.robot.commands.Climber.ClimbShiftTo;
+import frc.robot.commands.Drive.DriveResetEncoder;
+import frc.robot.commands.Drive.DriveResetYaw;
+import frc.robot.commands.Drive.DriveRotateDistance;
+import frc.robot.commands.Drive.DriveToWall;
+import frc.robot.commands.Intake.IntakeCargoDeploy;
+import frc.robot.commands.Intake.IntakeCargoRetract;
+import frc.robot.commands.Intake.IntakeFingerDeploy;
+import frc.robot.commands.Intake.IntakeFingerRetract;
+import frc.robot.commands.Intake.IntakeHatchEject;
+import frc.robot.commands.Intake.IntakeLinkageDeploy;
+import frc.robot.commands.Intake.IntakeLinkageRetract;
+import frc.robot.commands.Vision.VisionSetDriverMode;
+import frc.robot.commands.Vision.VisionSetVisionMode;
 
 /**
  * Subsystem containing board telemetry methoods

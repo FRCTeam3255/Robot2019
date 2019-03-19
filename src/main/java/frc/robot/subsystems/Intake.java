@@ -67,9 +67,13 @@ public class Intake extends Subsystem {
 		hatchSwitch = new DigitalInput(RobotMap.INTAKE_HATCH_SWITCH);
 		cargoSwitch = new DigitalInput(RobotMap.INTAKE_CARGO_SWITCH);
 
+		startMatch();
+	}
+
+	public void startMatch() {
 		retractFinger();
 		retractCargoIntake();
-		// deployIntake();
+		deployLinkage();
 	}
 
 	/**
