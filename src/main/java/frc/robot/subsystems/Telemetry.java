@@ -132,7 +132,6 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putNumber("Vision Width", Robot.m_vision.getWidth());
 
 		// Other Telemetry
-		SmartDashboard.putBoolean("Is Debug", AutoPreferences.isDebug());
 		SmartDashboard.putString("get Side", AutoPreferences.getSide());
 		SmartDashboard.putString("get position", AutoPreferences.getPosition());
 

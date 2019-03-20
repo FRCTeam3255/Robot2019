@@ -18,15 +18,15 @@ public class AutoPreferences {
     public static SN_SwitchboardStick switchboardStick = new SN_SwitchboardStick(2);
 
     public static boolean doRocket() {
-        return switchboardStick.btn_1.get();
+        return switchboardStick.btn_10.get();
     }
 
     public static boolean doShipFrontFront() {
-        return switchboardStick.btn_2.get();
+        return switchboardStick.btn_8.get();
     }
 
     public static boolean doShipSide() {
-        return switchboardStick.btn_3.get();
+        return switchboardStick.btn_6.get();
     }
 
     public static String getSide() {
@@ -40,11 +40,11 @@ public class AutoPreferences {
     public static String getPosition() {
         String position;
 
-        if (switchboardStick.btn_5.get()) {
+        if (switchboardStick.btn_9.get()) {
             position = "F";
-        } else if (switchboardStick.btn_6.get()) {
-            position = "M";
         } else if (switchboardStick.btn_7.get()) {
+            position = "M";
+        } else if (switchboardStick.btn_5.get()) {
             position = "B";
         } else {
             position = "F";
@@ -54,18 +54,14 @@ public class AutoPreferences {
     }
 
     public static void setDebug() {
-        if (switchboardStick.btn_9.get()) {
+        if (switchboardStick.btn_2.get()) {
             SN_Preferences.usePreferences();
         } else {
             SN_Preferences.useDefaults();
         }
     }
 
-    public static boolean isDebug() {
-        return switchboardStick.btn_9.get();
-    }
-
     public static boolean isReset() {
-        return switchboardStick.btn_8.get();
+        return switchboardStick.btn_1.get();
     }
 }
