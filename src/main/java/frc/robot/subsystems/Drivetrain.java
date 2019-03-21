@@ -12,7 +12,6 @@ import frc.robot.Robot;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
@@ -50,12 +49,10 @@ public class Drivetrain extends Subsystem {
 			"driveEnableCurrentLimit", false);
 
 	// Talons
-	private SpeedControllerGroup leftTalons = null;
 	private SN_TalonSRX leftFrontTalon = null;
 	private SN_TalonSRX leftMidTalon = null;
 	private SN_TalonSRX leftBackTalon = null;
 
-	private SpeedControllerGroup rightTalons = null;
 	private SN_TalonSRX rightFrontTalon = null;
 	private SN_TalonSRX rightMidTalon = null;
 	private SN_TalonSRX rightBackTalon = null;
@@ -77,14 +74,17 @@ public class Drivetrain extends Subsystem {
 		leftFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT_TALON);
 		leftMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_MID_TALON);
 		leftBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK_TALON);
-		leftTalons = new SpeedControllerGroup(leftFrontTalon, leftMidTalon, leftBackTalon);
 
 		rightFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT_TALON);
 		rightMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_MID_TALON);
 		rightBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK_TALON);
-		rightTalons = new SpeedControllerGroup(rightFrontTalon, rightMidTalon, rightBackTalon);
 
 		climbDriveTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_CLIMB_TALON);
+
+		leftMidTalon.follow(leftFrontTalon);
+		leftBackTalon.follow(leftFrontTalon);
+		rightMidTalon.follow(rightFrontTalon);
+		rightBackTalon.follow(rightFrontTalon);
 
 		// Current Limiting Assignment
 		leftFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
@@ -98,7 +98,7 @@ public class Drivetrain extends Subsystem {
 		// Encoders
 		encoder = new Encoder(RobotMap.DRIVETRAIN_ENCODER_A, RobotMap.DRIVETRAIN_ENCODER_B);
 
-		differentialDrive = new DifferentialDrive(leftTalons, rightTalons);
+		differentialDrive = new DifferentialDrive(leftFrontTalon, rightFrontTalon);
 		differentialDrive.setSafetyEnabled(false);
 	}
 

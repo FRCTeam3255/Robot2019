@@ -56,6 +56,9 @@ public class RobotMap {
 	public static final int CASCADE_TOP_SWITCH = 6;
 	public static final int CASCADE_BOTTOM_SWITCH = 7;
 
+	// public static final int CASCADE_TOP_CLIMB__SWITCH = 8;
+	// public static final int CASCADE_BOTTOM_CLIMB_SWITCH = 9;
+
 	// PCMs
 	public static final int INTAKE_PCM = 0;
 	public static final int CASCADE_PCM = 1;

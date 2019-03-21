@@ -8,15 +8,17 @@
 package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.RobotPreferences;
 import frc.robot.commands.DoDelay;
 import frc.robot.commands.LightsAutoCommandFinish;
 import frc.robot.commands.Drive.DriveDistance;
 import frc.robot.commands.Drive.DriveToWall;
+import frc.robot.commands.Vision.VisionRotate;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class IntakePlaceHatchGroup extends CommandGroup {
 
-  private SN_DoublePreference AutoPlaceBackup = new SN_DoublePreference("AutoPlaceBackup", -5.0);
+  private SN_DoublePreference AutoPlaceBackup = new SN_DoublePreference("AutoPlaceBackup", -12.0);
 
   /**
    * <ul>
@@ -27,6 +29,7 @@ public class IntakePlaceHatchGroup extends CommandGroup {
    * </ul>
    */
   public IntakePlaceHatchGroup() {
+    addSequential(new VisionRotate(RobotPreferences.VISION_ZERO_SETPOINT, "visionRotateZero"));
     addSequential(new DriveToWall());
     addSequential(new IntakeHatchEject());
     addSequential(new DoDelay(new SN_DoublePreference("AutoPlaceTimeout", 0.5)));

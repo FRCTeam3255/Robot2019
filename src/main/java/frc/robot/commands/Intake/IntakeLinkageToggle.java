@@ -20,7 +20,6 @@ public class IntakeLinkageToggle extends InstantCommand {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_intake.deployCargoIntake();
     Robot.m_intake.toggleLinkage();
   }
 }

@@ -16,7 +16,7 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 public class CascadeStartMatch extends CommandGroup {
 
   public CascadeStartMatch() {
-    addSequential(new CascadePositionGroup(fieldHeights.LOADED));
+    addSequential(new CascadePositionGroup(fieldHeights.LOW));
     addSequential(new IntakeLinkageDeploy());
     addSequential(new DoDelay(new SN_DoublePreference("CascadeStartMatch", 0.5)));
     addSequential(new CascadePositionGroup(fieldHeights.LOW));

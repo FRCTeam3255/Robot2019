@@ -9,13 +9,13 @@ package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
+import frc.robot.RobotPreferences;
 import frc.robot.commands.DoDelay;
 import frc.robot.commands.LightsAutoCommandFinish;
-import frc.robot.commands.Cascade.CascadeBottom;
-import frc.robot.commands.Cascade.CascadePositionGroup;
+import frc.robot.commands.Cascade.CascadeBottomGroup;
 import frc.robot.commands.Drive.DriveDistance;
 import frc.robot.commands.Drive.DriveToHatch;
-import frc.robot.subsystems.Intake.fieldHeights;
+import frc.robot.commands.Vision.VisionRotate;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class IntakeFeederGroup extends CommandGroup {
@@ -37,13 +37,16 @@ public class IntakeFeederGroup extends CommandGroup {
     // For Practice Bot
     // addSequential(new CascadePositionGroup(fieldHeights.FEEDER));
     // For Comp Bot
-    addSequential(new CascadeBottom());
+    addSequential(new CascadeBottomGroup());
+    addSequential(new VisionRotate(RobotPreferences.VISION_ZERO_SETPOINT, "visionRotateZero"));
     addSequential(new IntakeFingerDeploy());
     addSequential(new DriveToHatch());
-    addSequential(new DoDelay(new SN_DoublePreference("AutoIntakeTimeout", 0.5)));
-    addSequential(new CascadePositionGroup(fieldHeights.LOADED));
+    // addSequential(new DoDelay(new SN_DoublePreference("AutoIntakeTimeout",
+    // 0.5)));
+    // addSequential(new CascadePositionGroup(fieldHeights.LOADED));
     addSequential(new DriveDistance(AutoIntakeBackup, "AutoIntakeBackup"));
-    addSequential(new CascadePositionGroup(fieldHeights.LOW));
+    // addSequential(new CascadePositionGroup(fieldHeights.LOW));
     addSequential(new LightsAutoCommandFinish());
+    addSequential(new DoDelay(new SN_DoublePreference("AutoIntakeTimeout", 5.0)));
   }
 }

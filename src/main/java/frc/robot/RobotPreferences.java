@@ -67,8 +67,8 @@ public class RobotPreferences {
 	// Drive PID
 	public static final SN_DoublePreference DRIVETRAIN_P = new SN_DoublePreference("driveP", 0.04);
 	public static final SN_DoublePreference DRIVETRAIN_I = new SN_DoublePreference("driveI", 0.0);
-	public static final SN_DoublePreference DRIVETRAIN_D = new SN_DoublePreference("driveD", 0.0);
-	public static final SN_DoublePreference DRIVETRAIN_TOLERANCE = new SN_DoublePreference("driveTol", 3.0);
+	public static final SN_DoublePreference DRIVETRAIN_D = new SN_DoublePreference("driveD", 0.03);
+	public static final SN_DoublePreference DRIVETRAIN_TOLERANCE = new SN_DoublePreference("driveTol", 4.0);
 
 	// Yaw PID
 	public static final SN_DoublePreference YAW_P = new SN_DoublePreference("yawP", 0.02);
@@ -76,14 +76,15 @@ public class RobotPreferences {
 	public static final SN_DoublePreference YAW_D = new SN_DoublePreference("yawD", 0.0);
 
 	// Vision Distance PID
-	public static final SN_DoublePreference VISION_DISTANCE_P = new SN_DoublePreference("visionDistanceP", 0.08);
+	public static final SN_DoublePreference VISION_DISTANCE_P = new SN_DoublePreference("visionDistanceP", 0.02);
 	public static final SN_DoublePreference VISION_DISTANCE_I = new SN_DoublePreference("visionDistanceI", 0.0);
 	public static final SN_DoublePreference VISION_DISTANCE_D = new SN_DoublePreference("visionDistanceD", 0.0);
 
 	// Vision Rotate PID
-	public static final SN_DoublePreference VISION_ROTATE_P = new SN_DoublePreference("visionRotateP", 0.04);
+	public static final SN_DoublePreference VISION_ROTATE_P = new SN_DoublePreference("visionRotateP", 0.02);
 	public static final SN_DoublePreference VISION_ROTATE_I = new SN_DoublePreference("visionRotateI", 0.0);
 	public static final SN_DoublePreference VISION_ROTATE_D = new SN_DoublePreference("visionRotateD", 0.0);
+	public static final SN_DoublePreference VISION_ZERO_SETPOINT = new SN_DoublePreference("visionZeroSetpoint", 0.0);
 
 	// Autonomous
 	public static final SN_DoublePreference AUTO_DELAY = new SN_DoublePreference("autoDelay", 0.25);

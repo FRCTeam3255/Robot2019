@@ -8,10 +8,11 @@
 package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.RobotPreferences;
 import frc.robot.commands.DoDelay;
 import frc.robot.commands.LightsAutoCommandFinish;
 import frc.robot.commands.Drive.DriveDistance;
-import frc.robot.commands.Drive.DriveToWall;
+import frc.robot.commands.Vision.VisionDriveDistanceRotate;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class IntakeCargoEjectGroup extends CommandGroup {
@@ -20,6 +21,7 @@ public class IntakeCargoEjectGroup extends CommandGroup {
    */
 
   private SN_DoublePreference AutoPlaceBackup = new SN_DoublePreference("AutoPlaceBackup", -5.0);
+  private SN_DoublePreference AutoPlaceVisDis = new SN_DoublePreference("AutoPlaceVisDis", 10.0);
 
   public IntakeCargoEjectGroup() {
     // Add Commands here:
@@ -38,7 +40,7 @@ public class IntakeCargoEjectGroup extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
-    addSequential(new DriveToWall());
+    addSequential(new VisionDriveDistanceRotate(AutoPlaceVisDis, RobotPreferences.VISION_ZERO_SETPOINT, "CargoEject"));
     addSequential(new IntakeCargoEject());
     addSequential(new DoDelay(new SN_DoublePreference("AutoPlaceTimeout", 2.0)));
     addSequential(new DriveDistance(AutoPlaceBackup, "AutoPlaceBackup"));

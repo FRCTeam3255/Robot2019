@@ -87,6 +87,8 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putData("AutoRocket", new AutoRocket());
 		SmartDashboard.putData("AutoShip", new AutoShip());
 		SmartDashboard.putData("AutoShipFF", new AutoShipFrontFront());
+
+		// Test
 		SmartDashboard.putData("DriveRotateTest", new DriveRotateDistance(RobotPreferences.DRIVE_ROTATE_TEST_DISTANCE,
 				RobotPreferences.DRIVE_ROTATE_TEST_ANGLE, "DriveRotateDistanceTest"));
 

@@ -43,6 +43,8 @@ public class Cascade extends Subsystem {
 	// Switches
 	private DigitalInput topSwitch = null;
 	private DigitalInput bottomSwitch = null;
+	// private DigitalInput topClimbSwitch = null;
+	// private DigitalInput bottomClimbSwitch = null;
 
 	// Set the directions of the shift solenoid
 	private static final Value cascadeValue = Value.kReverse;
@@ -84,6 +86,8 @@ public class Cascade extends Subsystem {
 		// Switches
 		topSwitch = new DigitalInput(RobotMap.CASCADE_TOP_SWITCH);
 		bottomSwitch = new DigitalInput(RobotMap.CASCADE_BOTTOM_SWITCH);
+		// topClimbSwitch = new DigitalInput(RobotMap.CASCADE_TOP_CLIMB__SWITCH);
+		// bottomClimbSwitch = new DigitalInput(RobotMap.CASCADE_BOTTOM_CLIMB_SWITCH);
 	}
 
 	public void setServo(SN_DoublePreference angle) {
@@ -103,6 +107,21 @@ public class Cascade extends Subsystem {
 	public boolean isBottomSwitchClosed() {
 		return !bottomSwitch.get();
 	}
+
+	// /**
+	// * @return Check if the top switch is activated. Inverted to default as false
+	// */
+	// public boolean isTopClimbSwitchClosed() {
+	// return !topSwitch.get();
+	// }
+
+	// /**
+	// * @return Check if the bottom switch is activated. Inverted to default as
+	// false
+	// */
+	// public boolean isBottomClimbSwitchClosed() {
+	// return !bottomSwitch.get();
+	// }
 
 	/**
 	 * Shift the gearbox to cascade
