@@ -108,15 +108,15 @@ public class Vision extends Subsystem {
 	}
 
 	public void setDriverMode() {
-		visionData.getEntry("camMode").setDouble(1);
+		visionData.getEntry("pipeline").setDouble(1);
 	}
 
 	public void setVisionMode() {
-		visionData.getEntry("camMode").setDouble(0);
+		visionData.getEntry("pipeline").setDouble(0);
 	}
 
 	public double getMode() {
-		return visionData.getEntry("camMode").getDouble(1);
+		return visionData.getEntry("pipeline").getDouble(1);
 	}
 
 	public void toggleMode() {
