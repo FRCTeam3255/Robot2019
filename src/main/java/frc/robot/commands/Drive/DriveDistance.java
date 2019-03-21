@@ -51,7 +51,7 @@ public class DriveDistance extends Command {
 		Robot.m_telemetry.setCommandStatus("Executing DriveDistance " + name + ": " + pid.getSetpoint() + " ");
 		double moveSpeed = pid.getOutput();
 
-		Robot.m_drivetrain.arcadeDrive(moveSpeed, 0.0);
+		Robot.m_drivetrain.arcadeDrive(moveSpeed, 0.0, false);
 
 		if (Robot.m_cascade.isShiftedClimb() && (moveSpeed < 0.0)) {
 			Robot.m_drivetrain.enableClimbDrive();
@@ -74,7 +74,7 @@ public class DriveDistance extends Command {
 	protected void end() {
 		Robot.m_telemetry.setCommandStatus("Finishing DriveDistance " + name + ": " + pid.getSetpoint() + "");
 		pid.disable();
-		Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
+		Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
 	}
 
 	@Override

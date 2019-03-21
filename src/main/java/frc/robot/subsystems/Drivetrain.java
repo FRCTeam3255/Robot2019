@@ -106,7 +106,7 @@ public class Drivetrain extends Subsystem {
 	 * Drives the robot using a foward/backward (move) speed and a left right
 	 * (rotate) speed. Ramp the speed in cascade mode.
 	 */
-	public void arcadeDrive(double moveSpeed, double rotateSpeed) {
+	public void arcadeDrive(double moveSpeed, double rotateSpeed, boolean squaredInputs) {
 		double cascadeSpeedFactor = 1.0;
 
 		if (Robot.m_cascade.isShiftedCascade()) {
@@ -118,7 +118,7 @@ public class Drivetrain extends Subsystem {
 		moveSpeed = moveSpeed * cascadeSpeedFactor;
 		rotateSpeed = rotateSpeed * cascadeSpeedFactor;
 
-		differentialDrive.arcadeDrive(moveSpeed, rotateSpeed, false);
+		differentialDrive.arcadeDrive(moveSpeed, rotateSpeed, squaredInputs);
 	}
 
 	/**

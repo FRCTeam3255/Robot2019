@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.InvertType;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
@@ -43,8 +45,8 @@ public class Cascade extends Subsystem {
 	// Switches
 	private DigitalInput topSwitch = null;
 	private DigitalInput bottomSwitch = null;
-	// private DigitalInput topClimbSwitch = null;
-	// private DigitalInput bottomClimbSwitch = null;
+	private DigitalInput topClimbSwitch = null;
+	private DigitalInput bottomClimbSwitch = null;
 
 	// Set the directions of the shift solenoid
 	private static final Value cascadeValue = Value.kReverse;
@@ -71,6 +73,10 @@ public class Cascade extends Subsystem {
 		rightFrontTalon.setInverted(true);
 		rightBackTalon.setInverted(true);
 
+		// following
+		leftBackTalon.follow(leftFrontTalon);
+		rightBackTalon.follow(rightFrontTalon);
+
 		// Encoders
 		liftEncoder = new Encoder(RobotMap.CASCADE_LIFT_ENCODER_A, RobotMap.CASCADE_LIFT_ENCODER_B);
 
@@ -86,8 +92,8 @@ public class Cascade extends Subsystem {
 		// Switches
 		topSwitch = new DigitalInput(RobotMap.CASCADE_TOP_SWITCH);
 		bottomSwitch = new DigitalInput(RobotMap.CASCADE_BOTTOM_SWITCH);
-		// topClimbSwitch = new DigitalInput(RobotMap.CASCADE_TOP_CLIMB__SWITCH);
-		// bottomClimbSwitch = new DigitalInput(RobotMap.CASCADE_BOTTOM_CLIMB_SWITCH);
+		topClimbSwitch = new DigitalInput(RobotMap.CASCADE_TOP_CLIMB__SWITCH);
+		bottomClimbSwitch = new DigitalInput(RobotMap.CASCADE_BOTTOM_CLIMB_SWITCH);
 	}
 
 	public void setServo(SN_DoublePreference angle) {
@@ -108,20 +114,21 @@ public class Cascade extends Subsystem {
 		return !bottomSwitch.get();
 	}
 
-	// /**
-	// * @return Check if the top switch is activated. Inverted to default as false
-	// */
-	// public boolean isTopClimbSwitchClosed() {
-	// return !topSwitch.get();
-	// }
+	/**
+	 * @return Check if the top climb switch is activated. Inverted to default as
+	 *         false
+	 */
+	public boolean isTopClimbSwitchClosed() {
+		return !topSwitch.get();
+	}
 
-	// /**
-	// * @return Check if the bottom switch is activated. Inverted to default as
-	// false
-	// */
-	// public boolean isBottomClimbSwitchClosed() {
-	// return !bottomSwitch.get();
-	// }
+	/*
+	 * @return Check if the climb bottom switch is activated. Inverted to default as
+	 * false
+	 */
+	public boolean isBottomClimbSwitchClosed() {
+		return !bottomSwitch.get();
+	}
 
 	/**
 	 * Shift the gearbox to cascade
@@ -201,13 +208,13 @@ public class Cascade extends Subsystem {
 
 			if ((speed > 0 && isTopSwitchClosed()) || (speed < 0 && isBottomSwitchClosed()) || isCascadeLocked()) {
 				speed = 0.0;
+			} else if (isShiftedClimb() && (isTopClimbSwitchClosed() || isBottomClimbSwitchClosed())) {
+				speed = 0.0;
 			}
 		}
 
 		leftFrontTalon.set(speed);
-		leftBackTalon.set(speed);
 		rightFrontTalon.set(speed);
-		rightBackTalon.set(speed);
 	}
 
 	public double getLiftSpeed() {

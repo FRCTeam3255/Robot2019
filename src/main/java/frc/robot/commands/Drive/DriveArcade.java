@@ -32,7 +32,7 @@ public class DriveArcade extends Command {
 			moveSpeed = moveSpeed * RobotPreferences.HIGH_SPEED_MOVE_FACTOR.getValue();
 			rotateSpeed = rotateSpeed * RobotPreferences.HIGH_SPEED_ROTATE_FACTOR.getValue();
 		}
-		Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed);
+		Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed, true);
 
 		if (Robot.m_cascade.isShiftedClimb() && (moveSpeed < 0)) {
 			Robot.m_drivetrain.enableClimbDrive();
@@ -48,7 +48,7 @@ public class DriveArcade extends Command {
 
 	@Override
 	protected void end() {
-		Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
+		Robot.m_drivetrain.arcadeDrive(0.0, 0.0, true);
 	}
 
 	@Override

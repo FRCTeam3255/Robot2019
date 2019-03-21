@@ -26,7 +26,7 @@ public class DriveToHatch extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_drivetrain.arcadeDrive(hatchSpeed.getValue(), 0.0);
+    Robot.m_drivetrain.arcadeDrive(hatchSpeed.getValue(), 0.0, false);
   }
 
   @Override
@@ -36,7 +36,7 @@ public class DriveToHatch extends Command {
 
   @Override
   protected void end() {
-    Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
+    Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
     Robot.m_intake.retractFinger();
   }
 

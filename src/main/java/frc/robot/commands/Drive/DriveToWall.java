@@ -31,7 +31,7 @@ public class DriveToWall extends Command {
 
   @Override
   protected void initialize() {
-    Robot.m_drivetrain.arcadeDrive(wallSpeed.getValue(), 0.0);
+    Robot.m_drivetrain.arcadeDrive(wallSpeed.getValue(), 0.0, false);
   }
 
   @Override
@@ -49,7 +49,7 @@ public class DriveToWall extends Command {
 
   @Override
   protected void end() {
-    Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
+    Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
   }
 
   @Override

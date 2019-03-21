@@ -97,7 +97,7 @@ public class VisionDriveDistanceRotate extends Command {
 			rotateSpeed = rotatePID.getOutput();
 		}
 
-		Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed);
+		Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed, false);
 
 		if (distancePID.onRawTarget() && rotatePID.onRawTarget()) {
 			Robot.m_lighting.setLighting(Lighting.GREEN);
@@ -125,7 +125,7 @@ public class VisionDriveDistanceRotate extends Command {
 				+ distancePID.getSetpoint() + " " + rotatePID.getSetpoint());
 		distancePID.disable();
 		rotatePID.disable();
-		Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
+		Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
 		Robot.m_vision.setDriverMode();
 	}
 

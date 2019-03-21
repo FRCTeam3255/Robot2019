@@ -63,7 +63,7 @@ public class DriveRotateDistance extends Command {
     double moveSpeed = distancePID.getOutput();
     double rotateSpeed = rotatePID.getOutput();
 
-    Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed);
+    Robot.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed, false);
   }
 
   @Override
@@ -82,7 +82,7 @@ public class DriveRotateDistance extends Command {
     Robot.m_telemetry.setCommandStatus("Finishing " + name + ": " + distancePID.getSetpoint() + "");
     distancePID.disable();
     rotatePID.disable();
-    Robot.m_drivetrain.arcadeDrive(0.0, 0.0);
+    Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
   }
 
   @Override
