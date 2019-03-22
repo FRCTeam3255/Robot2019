@@ -18,7 +18,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.RobotPreferences;
 import frcteam3255.robotbase.SN_TalonSRX;
+import frcteam3255.robotbase.Preferences.SN_BooleanPreference;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
+import frcteam3255.robotbase.Preferences.SN_IntPreference;
 
 /**
  * Subsytem containing the cascade devices and methoods
@@ -48,6 +50,19 @@ public class Cascade extends Subsystem {
 	private DigitalInput topClimbSwitch = null;
 	private DigitalInput bottomClimbSwitch = null;
 
+	/** Current threshold to trigger current limit */
+	private static final SN_IntPreference PEAK_AMPS = new SN_IntPreference("drivePeakAmps", 17);
+	/**
+	 * Duration (in miliseconds i.e. 5000ms = 5s) after current exceed Peak Current
+	 * to trigger current limit
+	 */
+	private static final SN_IntPreference PEAK_TIME = new SN_IntPreference("drivePeakTimeMs", 5000);
+	/** Current to mantain once current limit has been triggered */
+	private static final SN_IntPreference LIMIT_AMPS = new SN_IntPreference("driveLimitAmps", 6);
+	/** Set if current is limited */
+	private static final SN_BooleanPreference ENABLE_CURRENT_LIMITING = new SN_BooleanPreference(
+			"driveEnableCurrentLimit", false);
+
 	// Set the directions of the shift solenoid
 	private static final Value cascadeValue = Value.kReverse;
 	private static final Value climbValue = Value.kForward;
@@ -68,14 +83,21 @@ public class Cascade extends Subsystem {
 		leftBackTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_BACK_TALON);
 		rightFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_FRONT_TALON);
 		rightBackTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_BACK_TALON);
-		leftFrontTalon.setInverted(false);
-		leftBackTalon.setInverted(false);
-		rightFrontTalon.setInverted(true);
-		rightBackTalon.setInverted(true);
 
-		// following
 		leftBackTalon.follow(leftFrontTalon);
-		rightBackTalon.follow(rightFrontTalon);
+		rightFrontTalon.follow(leftFrontTalon);
+		rightBackTalon.follow(leftFrontTalon);
+
+		leftFrontTalon.setInverted(false);
+		leftBackTalon.setInverted(InvertType.FollowMaster);
+		rightFrontTalon.setInverted(InvertType.OpposeMaster);
+		rightBackTalon.setInverted(InvertType.OpposeMaster);
+
+		// Current Limiting Assignment
+		leftFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
+		leftBackTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
+		rightFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
+		rightBackTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
 
 		// Encoders
 		liftEncoder = new Encoder(RobotMap.CASCADE_LIFT_ENCODER_A, RobotMap.CASCADE_LIFT_ENCODER_B);
@@ -119,7 +141,7 @@ public class Cascade extends Subsystem {
 	 *         false
 	 */
 	public boolean isTopClimbSwitchClosed() {
-		return !topSwitch.get();
+		return !topClimbSwitch.get();
 	}
 
 	/*
@@ -127,7 +149,7 @@ public class Cascade extends Subsystem {
 	 * false
 	 */
 	public boolean isBottomClimbSwitchClosed() {
-		return !bottomSwitch.get();
+		return !bottomClimbSwitch.get();
 	}
 
 	/**
@@ -208,13 +230,17 @@ public class Cascade extends Subsystem {
 
 			if ((speed > 0 && isTopSwitchClosed()) || (speed < 0 && isBottomSwitchClosed()) || isCascadeLocked()) {
 				speed = 0.0;
-			} else if (isShiftedClimb() && (isTopClimbSwitchClosed() || isBottomClimbSwitchClosed())) {
+			}
+		} else {
+			if (isTopClimbSwitchClosed() || isBottomClimbSwitchClosed()) {
 				speed = 0.0;
 			}
 		}
 
 		leftFrontTalon.set(speed);
+		leftBackTalon.set(speed);
 		rightFrontTalon.set(speed);
+		rightBackTalon.set(speed);
 	}
 
 	public double getLiftSpeed() {
