@@ -26,7 +26,7 @@ public class RobotPreferences {
 	public static final SN_DoublePreference SLOW_SPEED_MOVE_FACTOR = new SN_DoublePreference("slowSpeedMoveFactor",
 			0.5);
 	public static final SN_DoublePreference SLOW_SPEED_ROTATE_FACTOR = new SN_DoublePreference("slowSpeedRotateFactor",
-			0.3);
+			0.71);
 	public static final SN_DoublePreference HIGH_SPEED_MOVE_FACTOR = new SN_DoublePreference("highSpeedMoveFactor",
 			1.0);
 	public static final SN_DoublePreference HIGH_SPEED_ROTATE_FACTOR = new SN_DoublePreference("highSpeedRotateFactor",
@@ -47,7 +47,7 @@ public class RobotPreferences {
 	public static final SN_DoublePreference CARGO_POSITION_1 = new SN_DoublePreference("cargoPos1", 22.0);
 	public static final SN_DoublePreference CARGO_POSITION_2 = new SN_DoublePreference("cargoPos2", 52.0);
 	public static final SN_DoublePreference CARGO_POSITION_3 = new SN_DoublePreference("cargoPos3", 73.0);
-	public static final SN_DoublePreference CARGO_POSITION_SHIP = new SN_DoublePreference("cargoPosShip", 34.0);
+	public static final SN_DoublePreference CARGO_POSITION_SHIP = new SN_DoublePreference("cargoPosShip", 37.0);
 	public static final SN_DoublePreference CASCADE_BOTTOM = new SN_DoublePreference("cascadeBottom", 0.0);
 	public static final SN_DoublePreference CASCADE_FEEDER = new SN_DoublePreference("cascadeFeeder", 1.0);
 	public static final SN_DoublePreference CASCADE_BOTTOM_SPEED = new SN_DoublePreference("cascadeBottomSpeed", -0.2);

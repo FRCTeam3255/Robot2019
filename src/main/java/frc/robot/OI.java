@@ -56,7 +56,7 @@ public class OI {
 		manipulatorStick.btn_8.whenPressed(new CascadePositionGroup(fieldHeights.HIGH));
 		manipulatorStick.btn_9.whileHeld(new ClimbManual());
 		manipulatorStick.btn_10.whenPressed(new CascadePositionGroup(fieldHeights.MED));
-		manipulatorStick.btn_11.whenPressed(new CascadePosition(fieldHeights.CSHIP));
+		manipulatorStick.btn_11.whenPressed(new CascadePositionGroup(fieldHeights.CSHIP));
 		manipulatorStick.btn_12.whenPressed(new CascadePositionGroup(fieldHeights.LOW));
 
 		// Driver Stick

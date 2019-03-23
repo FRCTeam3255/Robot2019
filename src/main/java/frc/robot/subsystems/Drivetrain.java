@@ -27,10 +27,14 @@ import frcteam3255.robotbase.Preferences.SN_IntPreference;
  * Subsytem containing the drivetrain devices and methoods
  */
 public class Drivetrain extends Subsystem {
-	private static SN_DoublePreference MIN_CASCADE_HEIGHT = new SN_DoublePreference("minCascadeHeight", 0.0);
-	private static SN_DoublePreference MAX_CASCADE_HEIGHT = new SN_DoublePreference("maxCascadeHeight", 100.0);
-	private static SN_DoublePreference FACTOR_AT_MIN_CASCADE = new SN_DoublePreference("factorAtMinCascade", 1.0);
-	private static SN_DoublePreference FACTOR_AT_MAX_CASCADE = new SN_DoublePreference("factorAtMaxCascade", 0.4);
+	// private static SN_DoublePreference MIN_CASCADE_HEIGHT = new
+	// SN_DoublePreference("minCascadeHeight", 0.0);
+	// private static SN_DoublePreference MAX_CASCADE_HEIGHT = new
+	// SN_DoublePreference("maxCascadeHeight", 100.0);
+	// private static SN_DoublePreference FACTOR_AT_MIN_CASCADE = new
+	// SN_DoublePreference("factorAtMinCascade", 1.0);
+	// private static SN_DoublePreference FACTOR_AT_MAX_CASCADE = new
+	// SN_DoublePreference("factorAtMaxCascade", 0.8);
 
 	private static SN_DoublePreference CLIMB_DRIVE_SPEED = new SN_DoublePreference("climbDriveSpeed", 1.0);
 	private static SN_DoublePreference CLIMB_DEPLOY_SPEED = new SN_DoublePreference("climbDeploySpeed", -1.0);
@@ -109,11 +113,13 @@ public class Drivetrain extends Subsystem {
 	public void arcadeDrive(double moveSpeed, double rotateSpeed, boolean squaredInputs) {
 		double cascadeSpeedFactor = 1.0;
 
-		if (Robot.m_cascade.isShiftedCascade()) {
-			double cascadeHeight = Math.abs(Robot.m_cascade.getLiftEncoderDistance());
-			cascadeSpeedFactor = SN_Math.interpolate(cascadeHeight, MIN_CASCADE_HEIGHT.getValue(),
-					MAX_CASCADE_HEIGHT.getValue(), FACTOR_AT_MIN_CASCADE.getValue(), FACTOR_AT_MAX_CASCADE.getValue());
-		}
+		// if (Robot.m_cascade.isShiftedCascade()) {
+		// double cascadeHeight = Math.abs(Robot.m_cascade.getLiftEncoderDistance());
+		// cascadeSpeedFactor = SN_Math.interpolate(cascadeHeight,
+		// MIN_CASCADE_HEIGHT.getValue(),
+		// MAX_CASCADE_HEIGHT.getValue(), FACTOR_AT_MIN_CASCADE.getValue(),
+		// FACTOR_AT_MAX_CASCADE.getValue());
+		// }
 
 		moveSpeed = moveSpeed * cascadeSpeedFactor;
 		rotateSpeed = rotateSpeed * cascadeSpeedFactor;
