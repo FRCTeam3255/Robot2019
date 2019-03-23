@@ -232,7 +232,7 @@ public class Cascade extends Subsystem {
 				speed = 0.0;
 			}
 		} else {
-			if (isTopClimbSwitchClosed() || isBottomClimbSwitchClosed()) {
+			if ((speed > 0 && isTopClimbSwitchClosed()) || (speed < 0 && isBottomClimbSwitchClosed())) {
 				speed = 0.0;
 			}
 		}

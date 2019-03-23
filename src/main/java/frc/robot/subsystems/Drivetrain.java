@@ -30,7 +30,7 @@ public class Drivetrain extends Subsystem {
 	private static SN_DoublePreference MIN_CASCADE_HEIGHT = new SN_DoublePreference("minCascadeHeight", 0.0);
 	private static SN_DoublePreference MAX_CASCADE_HEIGHT = new SN_DoublePreference("maxCascadeHeight", 100.0);
 	private static SN_DoublePreference FACTOR_AT_MIN_CASCADE = new SN_DoublePreference("factorAtMinCascade", 1.0);
-	private static SN_DoublePreference FACTOR_AT_MAX_CASCADE = new SN_DoublePreference("factorAtMaxCascade", 0.2);
+	private static SN_DoublePreference FACTOR_AT_MAX_CASCADE = new SN_DoublePreference("factorAtMaxCascade", 0.4);
 
 	private static SN_DoublePreference CLIMB_DRIVE_SPEED = new SN_DoublePreference("climbDriveSpeed", 1.0);
 	private static SN_DoublePreference CLIMB_DEPLOY_SPEED = new SN_DoublePreference("climbDeploySpeed", -1.0);

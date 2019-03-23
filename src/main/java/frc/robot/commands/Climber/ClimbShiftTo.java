@@ -23,6 +23,7 @@ public class ClimbShiftTo extends InstantCommand {
 	@Override
 	protected void initialize() {
 		Robot.m_cascade.shiftClimb();
+		Robot.m_intake.retractLinkage();
 	}
 
 }
