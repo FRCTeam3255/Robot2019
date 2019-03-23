@@ -102,13 +102,13 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		m_autonomousCommand = new Autonomous();
 		m_intake.startMatch();
-		if (AutoPreferences.doRocket() || AutoPreferences.doShipFrontFront() || AutoPreferences.doShipSide()) {
-			m_autonomousCommand = new Autonomous();
-			// schedule the autonomous command (example)
-			if (m_autonomousCommand != null) {
-				m_autonomousCommand.start();
-			}
+		boolean isAuto = AutoPreferences.doRocket() || AutoPreferences.doShipFrontFront()
+				|| AutoPreferences.doShipSide();
+		// schedule the autonomous command (example)
+		if (m_autonomousCommand != null && isAuto) {
+			m_autonomousCommand.start();
 		}
 	}
 
