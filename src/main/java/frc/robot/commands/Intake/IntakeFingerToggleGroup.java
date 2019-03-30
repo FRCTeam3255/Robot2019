@@ -12,7 +12,7 @@ import frc.robot.commands.LightsAutoCommandFinish;
 
 public class IntakeFingerToggleGroup extends CommandGroup {
   public IntakeFingerToggleGroup() {
-    addSequential(new IntakeLinkageDeploy());
+    // addSequential(new IntakeLinkageDeploy());
     addSequential(new IntakeCargoRetract());
     addSequential(new IntakeFingerToggle());
     addSequential(new LightsAutoCommandFinish());

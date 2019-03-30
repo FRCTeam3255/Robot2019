@@ -27,7 +27,7 @@ public class IntakeCargoCollectGroup extends CommandGroup {
    */
   public IntakeCargoCollectGroup() {
     addSequential(new CascadeBottomGroup());
-    addSequential(new IntakeLinkageDeploy());
+    // addSequential(new IntakeLinkageDeploy());
     addSequential(new IntakeFingerRetract());
     addSequential(new IntakeCargoDeploy());
     addSequential(new IntakeCargoCollect());

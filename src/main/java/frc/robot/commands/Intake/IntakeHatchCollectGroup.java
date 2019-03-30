@@ -19,7 +19,7 @@ public class IntakeHatchCollectGroup extends CommandGroup {
    */
   public IntakeHatchCollectGroup() {
     addSequential(new CascadeBottomGroup());
-    addSequential(new IntakeLinkageDeploy());
+    // addSequential(new IntakeLinkageDeploy());
     addSequential(new IntakeCargoRetract());
     addSequential(new IntakeFingerDeploy());
     addSequential(new IntakeWaitForHatchGroup());

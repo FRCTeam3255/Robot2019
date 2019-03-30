@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.commands.Auto.Autonomous;
+import frc.robot.commands.Cascade.CascadeStartMatch;
 import frc.robot.subsystems.Cascade;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
@@ -28,6 +29,7 @@ import frc.robot.subsystems.Vision;
  */
 public class Robot extends TimedRobot {
 	Command m_autonomousCommand;
+	Command m_startMatch;
 
 	public static Drivetrain m_drivetrain = null;
 	public static Intake m_intake = null;
@@ -102,8 +104,9 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		m_startMatch = new CascadeStartMatch();
 		m_autonomousCommand = new Autonomous();
-		m_intake.startMatch();
+		m_startMatch.start();
 		boolean isAuto = AutoPreferences.doRocket() || AutoPreferences.doShipFrontFront()
 				|| AutoPreferences.doShipSide();
 		// schedule the autonomous command (example)
