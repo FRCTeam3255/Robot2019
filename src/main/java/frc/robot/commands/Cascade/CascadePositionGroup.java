@@ -18,8 +18,8 @@ public class CascadePositionGroup extends CommandGroup {
 	 */
 	public CascadePositionGroup(fieldHeights position) {
 		addSequential(new CascadeShiftTo());
-		addSequential(new CascadeUnweightGroup());
+		// addSequential(new CascadeUnweightGroup());
 		addSequential(new CascadePosition(position));
-		addSequential(new CascadeLockDogtooth());
+		// addSequential(new CascadeLockDogtooth());
 	}
 }

@@ -7,7 +7,10 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -15,6 +18,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.RobotPreferences;
 import frcteam3255.robotbase.SN_TalonSRX;
@@ -38,7 +42,7 @@ public class Cascade extends Subsystem {
 	private SN_TalonSRX rightBackTalon = null;
 
 	// Encoders
-	private Encoder liftEncoder = null;
+	// private Encoder liftEncoder = null;
 
 	// Solenoids
 	private DoubleSolenoid shiftSolenoid = null;
@@ -93,6 +97,42 @@ public class Cascade extends Subsystem {
 		rightFrontTalon.setInverted(InvertType.OpposeMaster);
 		rightBackTalon.setInverted(InvertType.OpposeMaster);
 
+		// untested talon pid code
+
+		leftFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, RobotPreferences.kPIDLoopIdx,
+				RobotPreferences.kTimeoutMs);
+		// leftFrontTalon.configSelectedFeedbackCoefficient(12.0 /
+		// RobotPreferences.CASCADE_PULSES_PER_FOOT.getValue());
+		leftFrontTalon.setSensorPhase(false);
+		leftFrontTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotPreferences.kTimeoutMs);
+		leftFrontTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotPreferences.kTimeoutMs);
+
+		/* Set the peak and nominal outputs */
+		leftFrontTalon.configNominalOutputForward(0, RobotPreferences.kTimeoutMs);
+		leftFrontTalon.configNominalOutputReverse(0, RobotPreferences.kTimeoutMs);
+		leftFrontTalon.configPeakOutputForward(.6, RobotPreferences.kTimeoutMs);
+		leftFrontTalon.configPeakOutputReverse(-.6, RobotPreferences.kTimeoutMs);
+
+		/* Set Motion Magic gains in slot0 - see documentation */
+		leftFrontTalon.selectProfileSlot(RobotPreferences.kSlotIdx, RobotPreferences.kPIDLoopIdx);
+		leftFrontTalon.config_kF(RobotPreferences.kSlotIdx, RobotPreferences.f.getValue(), RobotPreferences.kTimeoutMs);
+		leftFrontTalon.config_kP(RobotPreferences.kSlotIdx, RobotPreferences.p.getValue(), RobotPreferences.kTimeoutMs);
+		leftFrontTalon.config_kI(RobotPreferences.kSlotIdx, RobotPreferences.i.getValue(), RobotPreferences.kTimeoutMs);
+		leftFrontTalon.config_kD(RobotPreferences.kSlotIdx, RobotPreferences.d.getValue(), RobotPreferences.kTimeoutMs);
+
+		/* Set acceleration and vcruise velocity - see documentation */
+		leftFrontTalon.configMotionCruiseVelocity(RobotPreferences.velocity.getValue(), RobotPreferences.kTimeoutMs);
+		leftFrontTalon.configMotionAcceleration(RobotPreferences.acceleration.getValue(), RobotPreferences.kTimeoutMs);
+
+		// izone
+		leftFrontTalon.config_IntegralZone(RobotPreferences.kSlotIdx, RobotPreferences.iz.getValue());
+
+		/* Zero the sensor */
+		leftFrontTalon.setSelectedSensorPosition(0, RobotPreferences.kPIDLoopIdx, RobotPreferences.kTimeoutMs);
+
+		leftFrontTalon.configAllowableClosedloopError(RobotPreferences.kPIDLoopIdx, 1, RobotPreferences.kTimeoutMs);
+		// end of talon code
+
 		// Current Limiting Assignment
 		leftFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
 		leftBackTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
@@ -100,7 +140,8 @@ public class Cascade extends Subsystem {
 		rightBackTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
 
 		// Encoders
-		liftEncoder = new Encoder(RobotMap.CASCADE_LIFT_ENCODER_A, RobotMap.CASCADE_LIFT_ENCODER_B);
+		// liftEncoder = new Encoder(RobotMap.CASCADE_LIFT_ENCODER_A,
+		// RobotMap.CASCADE_LIFT_ENCODER_B);
 
 		// Solenoids
 		shiftSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_SHIFT_SOLENOID_A,
@@ -200,21 +241,23 @@ public class Cascade extends Subsystem {
 	 * @return Lift encoder distance in inches
 	 */
 	public double getLiftEncoderDistance() {
-		return (liftEncoder.get() / RobotPreferences.CASCADE_PULSES_PER_FOOT.getValue()) * 12.0;
+		return (((double) leftFrontTalon.getSensorCollection().getQuadraturePosition())
+				/ RobotPreferences.CASCADE_PULSES_PER_FOOT.getValue()) * 12.0;
 	}
 
 	/**
 	 * @return Default scaled lift encoder count
 	 */
 	public double getLiftEncoderCount() {
-		return liftEncoder.get();
+		return (double) leftFrontTalon.getSensorCollection().getQuadraturePosition();
 	}
 
 	/**
 	 * Set the lift encoder to zero
 	 */
 	public void resetLiftEncoder() {
-		liftEncoder.reset();
+		// leftFrontTalon.setSelectedSensorPosition(0, RobotPreferences.kPIDLoopIdx,
+		// RobotPreferences.kTimeoutMs);
 	}
 
 	/**
@@ -223,19 +266,24 @@ public class Cascade extends Subsystem {
 	 */
 	public void setLiftSpeed(double speed) {
 		liftSpeed = speed;
+		unlockCascade();
 		if (isShiftedCascade()) {
 			if (isBottomSwitchClosed()) {
+				System.out.println("BottomClosed");
 				resetLiftEncoder();
 			}
 
 			if ((speed > 0 && isTopSwitchClosed()) || (speed < 0 && isBottomSwitchClosed()) || isCascadeLocked()) {
+				System.out.println("topclosed");
 				speed = 0.0;
 			}
 		} else {
 			if ((speed > 0 && isTopClimbSwitchClosed()) || (speed < 0 && isBottomClimbSwitchClosed())) {
+				System.out.println("climbclosed");
 				speed = 0.0;
 			}
 		}
+		System.out.println(speed);
 
 		leftFrontTalon.set(speed);
 		leftBackTalon.set(speed);
@@ -243,8 +291,53 @@ public class Cascade extends Subsystem {
 		rightBackTalon.set(speed);
 	}
 
+	public void talonPid(double setpoint) {
+		unlockCascade();
+		// leftFrontTalon.configForwardSoftLimitThreshold(RobotPreferences.forwardSoftLimit.getValue());
+		// leftFrontTalon.configReverseSoftLimitThreshold(RobotPreferences.reverseSoftLimit.getValue());
+		// leftFrontTalon.configForwardSoftLimitEnable(true);
+		// leftFrontTalon.configReverseSoftLimitEnable(true);
+
+		/* Set Motion Magic gains in slot0 - see documentation */
+		leftFrontTalon.selectProfileSlot(RobotPreferences.kSlotIdx, RobotPreferences.kPIDLoopIdx);
+		leftFrontTalon.config_kF(RobotPreferences.kSlotIdx, RobotPreferences.f.getValue(), RobotPreferences.kTimeoutMs);
+		leftFrontTalon.config_kP(RobotPreferences.kSlotIdx, RobotPreferences.p.getValue(), RobotPreferences.kTimeoutMs);
+		leftFrontTalon.config_kI(RobotPreferences.kSlotIdx, RobotPreferences.i.getValue(), RobotPreferences.kTimeoutMs);
+		leftFrontTalon.config_kD(RobotPreferences.kSlotIdx, RobotPreferences.d.getValue(), RobotPreferences.kTimeoutMs);
+
+		/* Set acceleration and vcruise velocity - see documentation */
+		leftFrontTalon.configMotionCruiseVelocity(RobotPreferences.velocity.getValue(), RobotPreferences.kTimeoutMs);
+		leftFrontTalon.configMotionAcceleration(RobotPreferences.acceleration.getValue(), RobotPreferences.kTimeoutMs);
+
+		// izone
+		leftFrontTalon.config_IntegralZone(RobotPreferences.kSlotIdx, RobotPreferences.iz.getValue());
+
+		leftFrontTalon.set(ControlMode.Position, setpoint);
+		leftBackTalon.follow(leftFrontTalon);
+		rightFrontTalon.follow(leftFrontTalon);
+		rightBackTalon.follow(leftFrontTalon);
+
+		System.out.println(setpoint * RobotPreferences.CASCADE_PULSES_PER_FOOT.getValue() / 12);
+		leftFrontTalon.setInverted(false);
+		leftBackTalon.setInverted(InvertType.FollowMaster);
+		rightFrontTalon.setInverted(InvertType.OpposeMaster);
+		rightBackTalon.setInverted(InvertType.OpposeMaster);
+	}
+
+	public int talonPidError() {
+		return leftFrontTalon.getClosedLoopError();
+	}
+
+	public boolean talonPidEnd() {
+		return false;
+	}
+
 	public double getLiftSpeed() {
 		return liftSpeed;
+	}
+
+	public void runTalon() {
+		// Robot.m_cascade.leftFrontTalon.set(ControlMode.)
 	}
 
 	@Override

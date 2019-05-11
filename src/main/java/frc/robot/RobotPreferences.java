@@ -8,6 +8,7 @@
 package frc.robot;
 
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
+import frcteam3255.robotbase.Preferences.SN_IntPreference;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -16,6 +17,32 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
  * floating around.
  */
 public class RobotPreferences {
+	// untested talon pid stuff
+	public static final int kSlotIdx = 0;
+
+	public static final int kPIDLoopIdx = 0;
+
+	public static final int kTimeoutMs = 30;
+
+	public static boolean kSensorPhase = true;
+
+	public static boolean kMotorInvert = false;
+
+	public static final SN_DoublePreference p = new SN_DoublePreference("cP", 1);
+	public static final SN_DoublePreference i = new SN_DoublePreference("cI", 0);
+	public static final SN_DoublePreference d = new SN_DoublePreference("cD", 0);
+	public static final SN_DoublePreference f = new SN_DoublePreference("cF", 0);
+	public static final SN_DoublePreference setpoint = new SN_DoublePreference("cSetpoint", 1100);
+	public static final SN_IntPreference iz = new SN_IntPreference("Izone", 0);
+
+	public static final SN_IntPreference velocity = new SN_IntPreference("cVelocity", 10000);
+	public static final SN_IntPreference acceleration = new SN_IntPreference("cAcceleration", 10000);
+
+	public static final SN_IntPreference forwardSoftLimit = new SN_IntPreference("forSoftLimit", 1000);
+	public static final SN_IntPreference reverseSoftLimit = new SN_IntPreference("revSoftLimit", 0);
+
+	// end
+
 	// Drivetrain preferences
 	// CompBot: 29 pulses per foot?
 	public static final SN_DoublePreference DRIVETRAIN_PULSES_PER_FOOT = new SN_DoublePreference(
@@ -39,7 +66,7 @@ public class RobotPreferences {
 	// Cascade Preferences
 	// CompBot: 510 pulses per foot
 	public static final SN_DoublePreference CASCADE_PULSES_PER_FOOT = new SN_DoublePreference("cascadePulsesPerFoot",
-			322.0);
+			110.0);
 	public static final SN_DoublePreference HATCH_POSITION_1 = new SN_DoublePreference("hatchPos1", 0.0);
 	public static final SN_DoublePreference HATCH_POSITION_2 = new SN_DoublePreference("hatchPos2", 31.0);
 	public static final SN_DoublePreference HATCH_POSITION_3 = new SN_DoublePreference("hatchPos3", 60.0);
