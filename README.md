@@ -1,7 +1,7 @@
 # FRC Team 3255 SuperNURDs Presents
 
 <img src="https://github.com/FRCTeam3255/Graphics2019/raw/master/Exports/Kelex%20Logo-04.png" width="400px">
-# Summary
+## Summary
 This code is for the [FIRST Robotics Competition](http://www.firstinspires.org/robotics/frc) 2019 Game: FIRST Deep Space. 
 
 For more information on our team and [this year's game](https://www.frcteam3255.com/2019) please checkout our [website - www.SuperNURDs.com](http://www.frcteam3255.com/)
