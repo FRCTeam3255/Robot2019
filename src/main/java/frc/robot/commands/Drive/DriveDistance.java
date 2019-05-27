@@ -9,76 +9,52 @@ package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.DrivetrainDistancePID;
+import frc.robot.RobotPreferences;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class DriveDistance extends Command {
+  String name = null;
+  double setpoint = null;
 
-	private DrivetrainDistancePID pid;
-	private SN_DoublePreference pref_timeout = new SN_DoublePreference("DriveDistance_timeout", 10.0);
+  public DriveDistance(SN_DoublePreference inches, String string) {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    name = string;
+    setpoint = inches.getValue();
+  }
 
-	private double expireTime = 0.0;
-	private String name;
+  // Called just before this Command runs the first time
+  @Override
+  protected void initialize() {
 
-	public DriveDistance(SN_DoublePreference inches, String commandName) {
-		requires(Robot.m_drivetrain);
+    Robot.m_drivetrain.pid(setpoint);
+    Robot.m_telemetry.setCommandStatus("Starting DriveDistance " + name + ": " + Robot.m_drivetrain.pidError() + " ");
 
-		pid = new DrivetrainDistancePID();
-		pid.setSetpoint(inches);
-		name = commandName;
-	}
+  }
 
-	public void setTimeout(SN_DoublePreference timeout) {
-		pref_timeout = timeout;
-	}
+  // Called repeatedly when this Command is scheduled to run
+  @Override
+  protected void execute() {
+    Robot.m_telemetry.setCommandStatus("Executing DriveDistance: " + Robot.m_drivetrain.pidError());
+  }
 
-	public DrivetrainDistancePID getPID() {
-		return pid;
-	}
+  // Make this return true when this Command no longer needs to run execute()
+  @Override
+  protected boolean isFinished() {
+    return Robot.m_drivetrain.pidEnd();
+  }
 
-	@Override
-	protected void initialize() {
-		Robot.m_telemetry.setCommandStatus("Starting DriveDistance " + name + ": " + pid.getSetpoint() + " ");
-		expireTime = timeSinceInitialized() + pref_timeout.getValue();
+  // Called once after isFinished returns true
+  @Override
+  protected void end() {
+    Robot.m_drivetrain.talonReset();
+    Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
+  }
 
-		Robot.m_drivetrain.resetEncoderCount();
-
-		pid.enable();
-	}
-
-	@Override
-	protected void execute() {
-		Robot.m_telemetry.setCommandStatus("Executing DriveDistance " + name + ": " + pid.getSetpoint() + " ");
-		double moveSpeed = pid.getOutput();
-
-		Robot.m_drivetrain.arcadeDrive(moveSpeed, 0.0, false);
-
-		if (Robot.m_cascade.isShiftedClimb() && (moveSpeed < 0.0)) {
-			Robot.m_drivetrain.enableClimbDrive();
-		} else {
-			Robot.m_drivetrain.disableClimbDrive();
-		}
-	}
-
-	@Override
-	protected boolean isFinished() {
-		boolean distanceTarget = pid.onRawTarget();
-		double timeNow = timeSinceInitialized();
-
-		boolean finished = (distanceTarget || (timeNow >= expireTime));
-
-		return finished;
-	}
-
-	@Override
-	protected void end() {
-		Robot.m_telemetry.setCommandStatus("Finishing DriveDistance " + name + ": " + pid.getSetpoint() + "");
-		pid.disable();
-		Robot.m_drivetrain.arcadeDrive(0.0, 0.0, false);
-	}
-
-	@Override
-	protected void interrupted() {
-		end();
-	}
+  // Called when another command which requires one or more of the same
+  // subsystems is scheduled to run
+  @Override
+  protected void interrupted() {
+    end();
+  }
 }

@@ -10,13 +10,11 @@ package frc.robot.commands.Cascade;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotPreferences;
-import frc.robot.subsystems.CascadePID;
 import frc.robot.subsystems.Intake.fieldHeights;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class CascadePosition extends Command {
 
-	private CascadePID pid;
 	// private SN_DoublePreference pref_timeout = new SN_DoublePreference("Lift
 	// Timeout", 100.0);
 	private double expireTime = 0.0;

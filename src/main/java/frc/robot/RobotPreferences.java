@@ -17,16 +17,6 @@ import frcteam3255.robotbase.Preferences.SN_IntPreference;
  * floating around.
  */
 public class RobotPreferences {
-	// untested talon pid stuff
-	public static final int kSlotIdx = 0;
-
-	public static final int kPIDLoopIdx = 0;
-
-	public static final int kTimeoutMs = 30;
-
-	public static boolean kSensorPhase = true;
-
-	public static boolean kMotorInvert = false;
 
 	public static final SN_DoublePreference p = new SN_DoublePreference("cP", 1);
 	public static final SN_DoublePreference i = new SN_DoublePreference("cI", 0);
@@ -34,6 +24,7 @@ public class RobotPreferences {
 	public static final SN_DoublePreference f = new SN_DoublePreference("cF", 0);
 	public static final SN_DoublePreference setpoint = new SN_DoublePreference("cSetpoint", 1100);
 	public static final SN_IntPreference iz = new SN_IntPreference("Izone", 0);
+	public static final SN_IntPreference tol = new SN_IntPreference("Tolerance", 1);
 
 	public static final SN_IntPreference velocity = new SN_IntPreference("cVelocity", 10000);
 	public static final SN_IntPreference acceleration = new SN_IntPreference("cAcceleration", 10000);
@@ -95,12 +86,12 @@ public class RobotPreferences {
 	public static final SN_DoublePreference DRIVETRAIN_P = new SN_DoublePreference("driveP", 0.04);
 	public static final SN_DoublePreference DRIVETRAIN_I = new SN_DoublePreference("driveI", 0.0);
 	public static final SN_DoublePreference DRIVETRAIN_D = new SN_DoublePreference("driveD", 0.03);
-	public static final SN_DoublePreference DRIVETRAIN_TOLERANCE = new SN_DoublePreference("driveTol", 4.0);
+	public static final SN_DoublePreference DRIVETRAIN_F = new SN_DoublePreference("driveF", 0.0);
+	public static final SN_IntPreference DRIVETRAIN_IZONE = new SN_IntPreference("driveIZone", 0);
+	public static final SN_IntPreference DRIVETRAIN_TOLERANCE = new SN_IntPreference("driveTol", 4);
 
 	// Yaw PID
 	public static final SN_DoublePreference YAW_P = new SN_DoublePreference("yawP", 0.02);
-	public static final SN_DoublePreference YAW_I = new SN_DoublePreference("yawI", 0.0);
-	public static final SN_DoublePreference YAW_D = new SN_DoublePreference("yawD", 0.0);
 
 	// Vision Distance PID
 	public static final SN_DoublePreference VISION_DISTANCE_P = new SN_DoublePreference("visionDistanceP", 0.02);

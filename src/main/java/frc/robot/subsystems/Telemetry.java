@@ -72,7 +72,6 @@ public class Telemetry extends Subsystem {
 
 		// Climb Commands
 		SmartDashboard.putData("Climb Deploy", new ClimbDeploy());
-		SmartDashboard.putData("Climb Group", new ClimbGroup());
 
 		// Lighting Commands
 
@@ -87,10 +86,6 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putData("AutoRocket", new AutoRocket());
 		SmartDashboard.putData("AutoShip", new AutoShip());
 		SmartDashboard.putData("AutoShipFF", new AutoShipFrontFront());
-
-		// Test
-		SmartDashboard.putData("DriveRotateTest", new DriveRotateDistance(RobotPreferences.DRIVE_ROTATE_TEST_DISTANCE,
-				RobotPreferences.DRIVE_ROTATE_TEST_ANGLE, "DriveRotateDistanceTest"));
 
 	}
 
