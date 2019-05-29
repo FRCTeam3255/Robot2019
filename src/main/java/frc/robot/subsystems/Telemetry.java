@@ -21,7 +21,6 @@ import frc.robot.commands.Cascade.CascadeResetEncoder;
 import frc.robot.commands.Cascade.CascadeShiftTo;
 import frc.robot.commands.Cascade.CascadeUnlockDogtooth;
 import frc.robot.commands.Climber.ClimbDeploy;
-import frc.robot.commands.Climber.ClimbGroup;
 import frc.robot.commands.Climber.ClimbShiftTo;
 import frc.robot.commands.Drive.DriveResetEncoder;
 import frc.robot.commands.Drive.DriveResetYaw;
