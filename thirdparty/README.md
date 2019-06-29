@@ -67,7 +67,7 @@ https://www.revrobotics.com/content/sw/max/sdk/REVRobotics.json
 
 [WPILib - VSCode](https://github.com/wpilibsuite/allwpilib/releases)  
 *Includes VSCode and WPILib Tools: OutlineViewer, SmartDashboard, ShuffleBoard*  
-(v 2019.2.1) (released - 1/14/19)
+(v 2019.4.1) (released - 2/26/19)
 
 [Radio Configuration Utility](http://wpilib.screenstepslive.com/s/currentCS/m/getting_started/l/144986-programming-your-radio)  
 (v 19.1.1) (released - 1/25/19)
