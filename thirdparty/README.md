@@ -63,7 +63,7 @@ https://www.revrobotics.com/content/sw/max/sdk/REVRobotics.json
 
 [NI Software](http://wpilib.screenstepslive.com/s/currentCS/m/getting_started/l/1004055-installing-the-frc-update-suite-all-languages)  
 *Includes DriverStation (DS) software and roboRIO images*  
-(DS v 2019.1.0) (Rio Image v13) (released - 1/17/19)
+(DS v 2019.2.0) (Rio Image v14) (released - 2/26/19)
 
 [WPILib - VSCode](https://github.com/wpilibsuite/allwpilib/releases)  
 *Includes VSCode and WPILib Tools: OutlineViewer, SmartDashboard, ShuffleBoard*  
