@@ -14,15 +14,12 @@ import frc.robot.commands.Cascade.CascadeStartMatch;
 import frc.robot.commands.Climber.ClimbDeploy;
 import frc.robot.commands.Climber.ClimbManual;
 import frc.robot.commands.Intake.IntakeCargoCollectGroup;
-import frc.robot.commands.Intake.IntakeCargoEjectGroup;
-import frc.robot.commands.Intake.IntakeFeederGroup;
+
 import frc.robot.commands.Intake.IntakeFingerToggle;
 import frc.robot.commands.Intake.IntakeHatchCargoEject;
 import frc.robot.commands.Intake.IntakeHatchCollectGroup;
 import frc.robot.commands.Intake.IntakeLinkageToggle;
-import frc.robot.commands.Intake.IntakePlaceHatchGroup;
-import frc.robot.commands.Vision.VisionRotate;
-import frc.robot.commands.Vision.VisionToggleMode;
+
 import frc.robot.subsystems.Intake.fieldHeights;
 import frcteam3255.robotbase.Joystick.SN_DualActionStick;
 import frcteam3255.robotbase.Joystick.SN_Extreme3DStick;
@@ -60,12 +57,8 @@ public class OI {
 		manipulatorStick.btn_12.whenPressed(new CascadePositionGroup(fieldHeights.LOW));
 
 		// Driver Stick
-		driverStick.btn_A.whileHeld(new IntakeFeederGroup());
-		driverStick.btn_B.whileHeld(new IntakePlaceHatchGroup());
-		driverStick.btn_X.whileHeld(new IntakeCargoEjectGroup());
+
 		// driverStick.btn_RBump slow speed hardcoded in drive arcade
-		driverStick.btn_LTrig.whenPressed(new VisionToggleMode());
-		driverStick.btn_RTrig.whileHeld(new VisionRotate(VisRotSetpoint, "RotateVision"));
 		driverStick.btn_Start.whenPressed(new CascadeStartMatch());
 	}
 }

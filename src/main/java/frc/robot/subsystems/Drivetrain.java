@@ -7,8 +7,6 @@
 
 package frc.robot.subsystems;
 
-import frc.robot.Robot;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
@@ -19,7 +17,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.RobotPreferences;
 import frc.robot.commands.Drive.DriveArcade;
-import frcteam3255.robotbase.SN_Math;
 import frcteam3255.robotbase.SN_TalonSRX;
 import frcteam3255.robotbase.Preferences.SN_BooleanPreference;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
@@ -69,8 +66,7 @@ public class Drivetrain extends Subsystem {
 
 	private DifferentialDrive differentialDrive = null;
 
-	// Encoders
-	private Encoder encoder = null;
+	private int pidTarget = 0;
 
 	/**
 	 * Creates the devices used in the drivetrain
@@ -81,7 +77,7 @@ public class Drivetrain extends Subsystem {
 		leftMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_MID_TALON, leftFrontTalon, false);
 		leftBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK_TALON, leftFrontTalon, false);
 
-		rightFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT_TALON);
+		rightFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT_TALON, false);
 		rightMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_MID_TALON, rightFrontTalon, false);
 		rightBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK_TALON, rightFrontTalon, false);
 
@@ -90,7 +86,7 @@ public class Drivetrain extends Subsystem {
 		// Initialize pid on leftFrontTalon
 		leftFrontTalon.configurePositionPid(FeedbackDevice.QuadEncoder, RobotPreferences.DRIVETRAIN_P,
 				RobotPreferences.DRIVETRAIN_I, RobotPreferences.DRIVETRAIN_D, RobotPreferences.DRIVETRAIN_F,
-				RobotPreferences.DRIVETRAIN_IZONE, RobotPreferences.DRIVETRAIN_TOLERANCE);
+				RobotPreferences.DRIVETRAIN_IZONE, RobotPreferences.DRIVETRAIN_TOLERANCE, true);
 		// Current Limiting Assignment
 		leftFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
 		leftMidTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
@@ -147,7 +143,8 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public void pid(double setpoint) {
-		leftFrontTalon.set(ControlMode.Position, setpoint);
+		pidTarget += setpoint;
+		leftFrontTalon.set(ControlMode.Position, pidTarget);
 		leftMidTalon.follow(leftFrontTalon);
 		leftBackTalon.follow(leftFrontTalon);
 		rightFrontTalon.follow(leftFrontTalon);
@@ -158,14 +155,8 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public void talonReset() {
-		leftMidTalon.follow(leftFrontTalon);
-		leftBackTalon.follow(leftFrontTalon);
-		rightFrontTalon.configFactoryDefault();
-		rightFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT_TALON);
 		rightMidTalon.follow(rightFrontTalon);
 		rightBackTalon.follow(rightFrontTalon);
-		leftFrontTalon.setInverted(false);
-
 	}
 
 	public int pidError() {

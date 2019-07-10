@@ -91,7 +91,7 @@ public class Cascade extends Subsystem {
 
 		// Configure Position Pid
 		leftFrontTalon.configurePositionPid(FeedbackDevice.QuadEncoder, RobotPreferences.p, RobotPreferences.i,
-				RobotPreferences.d, RobotPreferences.f, RobotPreferences.iz, RobotPreferences.tol);
+				RobotPreferences.d, RobotPreferences.f, RobotPreferences.iz, RobotPreferences.tol, false);
 
 		// Current Limiting Assignment
 		leftFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);

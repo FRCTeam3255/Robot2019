@@ -18,13 +18,15 @@ import frcteam3255.robotbase.Preferences.SN_IntPreference;
  */
 public class RobotPreferences {
 
-	public static final SN_DoublePreference p = new SN_DoublePreference("cP", 1);
+	public static final SN_DoublePreference p = new SN_DoublePreference("cP", 10);
 	public static final SN_DoublePreference i = new SN_DoublePreference("cI", 0);
 	public static final SN_DoublePreference d = new SN_DoublePreference("cD", 0);
 	public static final SN_DoublePreference f = new SN_DoublePreference("cF", 0);
 	public static final SN_DoublePreference setpoint = new SN_DoublePreference("cSetpoint", 1100);
 	public static final SN_IntPreference iz = new SN_IntPreference("Izone", 0);
 	public static final SN_IntPreference tol = new SN_IntPreference("Tolerance", 1);
+
+	public static final SN_DoublePreference counts = new SN_DoublePreference("Counts", 10000);
 
 	public static final SN_IntPreference velocity = new SN_IntPreference("cVelocity", 10000);
 	public static final SN_IntPreference acceleration = new SN_IntPreference("cAcceleration", 10000);
@@ -83,12 +85,12 @@ public class RobotPreferences {
 	public static final SN_DoublePreference CLIMB_LIFT_DELAY = new SN_DoublePreference("climbLiftDelay", 0.5);
 
 	// Drive PID
-	public static final SN_DoublePreference DRIVETRAIN_P = new SN_DoublePreference("driveP", 0.04);
+	public static final SN_DoublePreference DRIVETRAIN_P = new SN_DoublePreference("driveP", 100.0);
 	public static final SN_DoublePreference DRIVETRAIN_I = new SN_DoublePreference("driveI", 0.0);
-	public static final SN_DoublePreference DRIVETRAIN_D = new SN_DoublePreference("driveD", 0.03);
+	public static final SN_DoublePreference DRIVETRAIN_D = new SN_DoublePreference("driveD", 0.0);
 	public static final SN_DoublePreference DRIVETRAIN_F = new SN_DoublePreference("driveF", 0.0);
 	public static final SN_IntPreference DRIVETRAIN_IZONE = new SN_IntPreference("driveIZone", 0);
-	public static final SN_IntPreference DRIVETRAIN_TOLERANCE = new SN_IntPreference("driveTol", 4);
+	public static final SN_IntPreference DRIVETRAIN_TOLERANCE = new SN_IntPreference("driveTol", 0);
 
 	// Yaw PID
 	public static final SN_DoublePreference YAW_P = new SN_DoublePreference("yawP", 0.02);

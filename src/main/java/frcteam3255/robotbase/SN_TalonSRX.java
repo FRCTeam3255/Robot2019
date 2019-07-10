@@ -36,6 +36,18 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 		setNeutralMode(NeutralMode.Brake);
 	}
 
+	public SN_TalonSRX(int deviceNumber, boolean invert) {
+		super(deviceNumber);
+		configFactoryDefault();
+		setSafetyEnabled(false);
+		setNeutralMode(NeutralMode.Brake);
+		if (invert) {
+			this.setInverted(true);
+		} else {
+			this.setInverted(false);
+		}
+	}
+
 	/**
 	 * SuperNURDs encapsulation of the TalonSRX class
 	 * <ul>
@@ -57,7 +69,7 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 		setNeutralMode(NeutralMode.Brake);
 		this.follow(master);
 		if (invert) {
-			this.setInverted(InvertType.OpposeMaster);
+			this.setInverted(true);
 		} else {
 			this.setInverted(false);
 		}
@@ -77,9 +89,10 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 	 * 
 	 */
 	public void configurePositionPid(FeedbackDevice encoder, SN_DoublePreference p, SN_DoublePreference i,
-			SN_DoublePreference d, SN_DoublePreference f, SN_IntPreference izone, SN_IntPreference tolerance) {
+			SN_DoublePreference d, SN_DoublePreference f, SN_IntPreference izone, SN_IntPreference tolerance,
+			boolean phase) {
 		this.configSelectedFeedbackSensor(encoder, kPIDLoopIdx, kTimeoutMs);
-		this.setSensorPhase(false);
+		this.setSensorPhase(phase);
 		this.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, kTimeoutMs);
 		this.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, kTimeoutMs);
 

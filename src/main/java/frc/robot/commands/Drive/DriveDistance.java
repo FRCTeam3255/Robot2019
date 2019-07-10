@@ -14,7 +14,7 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class DriveDistance extends Command {
   String name = null;
-  double setpoint = null;
+  double setpoint = 10000;
 
   public DriveDistance(SN_DoublePreference inches, String string) {
     // Use requires() here to declare subsystem dependencies
@@ -26,10 +26,9 @@ public class DriveDistance extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
-    Robot.m_drivetrain.pid(setpoint);
+    // Robot.m_drivetrain.resetEncoderCount();
+    Robot.m_drivetrain.pid(300);
     Robot.m_telemetry.setCommandStatus("Starting DriveDistance " + name + ": " + Robot.m_drivetrain.pidError() + " ");
-
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -41,7 +40,12 @@ public class DriveDistance extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.m_drivetrain.pidEnd();
+
+    if (Robot.m_drivetrain.pidError() > -100 && Robot.m_drivetrain.pidError() < 100) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   // Called once after isFinished returns true

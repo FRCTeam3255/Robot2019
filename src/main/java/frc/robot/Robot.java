@@ -10,7 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import frc.robot.commands.Auto.Autonomous;
+
 import frc.robot.commands.Cascade.CascadeStartMatch;
 import frc.robot.subsystems.Cascade;
 import frc.robot.subsystems.Drivetrain;
@@ -105,7 +105,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		m_startMatch = new CascadeStartMatch();
-		m_autonomousCommand = new Autonomous();
 		m_startMatch.start();
 		boolean isAuto = AutoPreferences.doRocket() || AutoPreferences.doShipFrontFront()
 				|| AutoPreferences.doShipSide();

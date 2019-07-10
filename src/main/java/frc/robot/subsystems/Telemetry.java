@@ -13,15 +13,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.AutoPreferences;
 import frc.robot.Robot;
 import frc.robot.RobotPreferences;
-import frc.robot.commands.Auto.AutoRocket;
-import frc.robot.commands.Auto.AutoShip;
-import frc.robot.commands.Auto.AutoShipFrontFront;
 import frc.robot.commands.Cascade.CascadeLockDogtooth;
 import frc.robot.commands.Cascade.CascadeResetEncoder;
 import frc.robot.commands.Cascade.CascadeShiftTo;
 import frc.robot.commands.Cascade.CascadeUnlockDogtooth;
 import frc.robot.commands.Climber.ClimbDeploy;
 import frc.robot.commands.Climber.ClimbShiftTo;
+import frc.robot.commands.Drive.DriveDistance;
 import frc.robot.commands.Drive.DriveResetEncoder;
 import frc.robot.commands.Drive.DriveResetYaw;
 import frc.robot.commands.Drive.DriveRotateDistance;
@@ -33,8 +31,6 @@ import frc.robot.commands.Intake.IntakeFingerRetract;
 import frc.robot.commands.Intake.IntakeHatchEject;
 import frc.robot.commands.Intake.IntakeLinkageDeploy;
 import frc.robot.commands.Intake.IntakeLinkageRetract;
-import frc.robot.commands.Vision.VisionSetDriverMode;
-import frc.robot.commands.Vision.VisionSetVisionMode;
 
 /**
  * Subsystem containing board telemetry methoods
@@ -58,6 +54,7 @@ public class Telemetry extends Subsystem {
 		// Drivetrain Commands
 		SmartDashboard.putData("Reset Drive Encoder", new DriveResetEncoder());
 		SmartDashboard.putData("Drive To Wall", new DriveToWall());
+		SmartDashboard.putData("Drive10kcounts", new DriveDistance(RobotPreferences.counts, "10000 Counts"));
 
 		// Intake Commands
 		SmartDashboard.putData("Deploy Cargo Intake", new IntakeCargoDeploy());
@@ -77,15 +74,6 @@ public class Telemetry extends Subsystem {
 		// Navigation Commands
 		SmartDashboard.putData("Reset Yaw", new DriveResetYaw());
 
-		// Vision Commands
-		SmartDashboard.putData("Set Driver Mode", new VisionSetDriverMode());
-		SmartDashboard.putData("Set Vision Mode", new VisionSetVisionMode());
-
-		// Autonomous
-		SmartDashboard.putData("AutoRocket", new AutoRocket());
-		SmartDashboard.putData("AutoShip", new AutoShip());
-		SmartDashboard.putData("AutoShipFF", new AutoShipFrontFront());
-
 	}
 
 	/**
@@ -104,7 +92,7 @@ public class Telemetry extends Subsystem {
 		// Drivetrain Telemetry
 		SmartDashboard.putNumber("Drivetrain Encoder Count", Robot.m_drivetrain.getEncoderCount());
 		SmartDashboard.putNumber("Drivetrain Encoder Distance", Robot.m_drivetrain.getEncoderDistance());
-
+		SmartDashboard.putNumber("Drivetrain Error", Robot.m_drivetrain.pidError());
 		// Intake Telemetry
 		SmartDashboard.putBoolean("Cargo Intake Retracted", Robot.m_intake.isCargoIntakeRetracted());
 		SmartDashboard.putBoolean("Linkage Retracted", Robot.m_intake.isLinkageRetracted());
