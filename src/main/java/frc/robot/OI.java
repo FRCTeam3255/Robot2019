@@ -8,7 +8,6 @@
 package frc.robot;
 
 import frc.robot.commands.Cascade.CascadeManualGroup;
-import frc.robot.commands.Cascade.CascadePosition;
 import frc.robot.commands.Cascade.CascadePositionGroup;
 import frc.robot.commands.Cascade.CascadeStartMatch;
 import frc.robot.commands.Climber.ClimbDeploy;
@@ -58,7 +57,9 @@ public class OI {
 
 		// Driver Stick
 
-		// driverStick.btn_RBump slow speed hardcoded in drive arcade
+		// driverStick.btn_RBump slow speed as well as general driving control found in
+		// drive arcade
+
 		driverStick.btn_Start.whenPressed(new CascadeStartMatch());
 	}
 }

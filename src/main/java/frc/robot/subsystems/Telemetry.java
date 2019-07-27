@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.AutoPreferences;
@@ -22,7 +21,6 @@ import frc.robot.commands.Climber.ClimbShiftTo;
 import frc.robot.commands.Drive.DriveDistance;
 import frc.robot.commands.Drive.DriveResetEncoder;
 import frc.robot.commands.Drive.DriveResetYaw;
-import frc.robot.commands.Drive.DriveRotateDistance;
 import frc.robot.commands.Drive.DriveToWall;
 import frc.robot.commands.Intake.IntakeCargoDeploy;
 import frc.robot.commands.Intake.IntakeCargoRetract;

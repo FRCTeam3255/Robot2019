@@ -86,8 +86,7 @@ public class Drivetrain extends Subsystem {
 		// Initialize pid on leftFrontTalon
 		leftFrontTalon.configurePositionPid(FeedbackDevice.QuadEncoder, RobotPreferences.DRIVETRAIN_P,
 				RobotPreferences.DRIVETRAIN_I, RobotPreferences.DRIVETRAIN_D, RobotPreferences.DRIVETRAIN_F,
-				RobotPreferences.DRIVETRAIN_IZONE, RobotPreferences.DRIVETRAIN_TOLERANCE);
-		leftFrontTalon.setSensorPhase(true);
+				RobotPreferences.DRIVETRAIN_IZONE, RobotPreferences.DRIVETRAIN_TOLERANCE, false);
 		// Current Limiting Assignment
 		leftFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
 		leftMidTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
