@@ -17,7 +17,6 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 	public static final int kSlotIdx = 0;
 	public static final int kPIDLoopIdx = 0;
 	public static final int kTimeoutMs = 30;
-	public static boolean kSensorPhase = true;
 	public static boolean kMotorInvert = false;
 
 	/**
@@ -94,7 +93,6 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 		this.setSensorPhase(phase);
 
 		this.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, kTimeoutMs);
-		this.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, kTimeoutMs);
 		// this.setSensorPhase(false);
 
 		/* Set the peak and nominal outputs */

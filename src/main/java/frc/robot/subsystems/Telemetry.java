@@ -53,6 +53,7 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putData("Reset Drive Encoder", new DriveResetEncoder());
 		SmartDashboard.putData("Drive To Wall", new DriveToWall());
 		SmartDashboard.putData("Drive10kcounts", new DriveDistance(RobotPreferences.counts, "10000 Counts"));
+		SmartDashboard.putData("Drive 5 ft", new DriveDistance(RobotPreferences.feet, "5 ft"));
 
 		// Intake Commands
 		SmartDashboard.putData("Deploy Cargo Intake", new IntakeCargoDeploy());
@@ -90,6 +91,7 @@ public class Telemetry extends Subsystem {
 		// Drivetrain Telemetry
 		SmartDashboard.putNumber("Drivetrain Encoder Count", Robot.m_drivetrain.getEncoderCount());
 		SmartDashboard.putNumber("Drivetrain Error", Robot.m_drivetrain.pidError());
+		SmartDashboard.putBoolean("Is Sensor Out of Phase", Robot.m_drivetrain.isOutOfPhase());
 		// Intake Telemetry
 		SmartDashboard.putBoolean("Cargo Intake Retracted", Robot.m_intake.isCargoIntakeRetracted());
 		SmartDashboard.putBoolean("Linkage Retracted", Robot.m_intake.isLinkageRetracted());

@@ -42,7 +42,7 @@ public class CascadeManual extends Command {
   @Override
   protected void end() {
     Robot.m_cascade.setLiftSpeed(0.0);
-    Robot.m_cascade.lockCascade();
+    // Robot.m_cascade.lockCascade();
   }
 
   @Override

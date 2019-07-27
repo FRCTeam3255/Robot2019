@@ -39,7 +39,7 @@ public class Cascade extends Subsystem {
 
 	// Solenoids
 	private DoubleSolenoid shiftSolenoid = null;
-	private DoubleSolenoid lockSolenoid = null;
+	// private DoubleSolenoid lockSolenoid = null;
 
 	// Switches
 	private DigitalInput topSwitch = null;
@@ -65,8 +65,8 @@ public class Cascade extends Subsystem {
 	private static final Value climbValue = Value.kForward;
 
 	// Set the directions of the shift solenoid
-	private static final Value lockValue = Value.kReverse;
-	private static final Value unlockValue = Value.kForward;
+	// private static final Value lockValue = Value.kReverse;
+	// private static final Value unlockValue = Value.kForward;
 
 	public static final SN_DoublePreference CASCADE_MINOUTDOWN = new SN_DoublePreference("cascadeMinSpeedDown", 0.0);
 	public static final SN_DoublePreference CASCADE_MINOUTUP = new SN_DoublePreference("cascadeMinSpeedUp", 0.33);
@@ -98,10 +98,11 @@ public class Cascade extends Subsystem {
 		// Solenoids
 		shiftSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_SHIFT_SOLENOID_A,
 				RobotMap.CASCADE_SHIFT_SOLENOID_B);
-		lockSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_LOCK_SOLENOID_A,
-				RobotMap.CASCADE_LOCK_SOLENOID_B);
+		// lockSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM,
+		// RobotMap.CASCADE_LOCK_SOLENOID_A,
+		// RobotMap.CASCADE_LOCK_SOLENOID_B);
 
-		unlockCascade();
+		// unlockCascade();
 		shiftCascade();
 
 		// Switches
@@ -166,24 +167,24 @@ public class Cascade extends Subsystem {
 	/**
 	 * Lock the cascade dogtooth
 	 */
-	public void lockCascade() {
-		lockSolenoid.set(lockValue);
-	}
+	// public void lockCascade() {
+	// lockSolenoid.set(lockValue);
+	// }
 
-	public boolean isCascadeLocked() {
-		return lockSolenoid.get() == lockValue;
-	}
+	// public boolean isCascadeLocked() {
+	// return lockSolenoid.get() == lockValue;
+	// }
 
 	/**
 	 * Unlock the cascade dogtooth
 	 */
-	public void unlockCascade() {
-		lockSolenoid.set(unlockValue);
-	}
+	// public void unlockCascade() {
+	// lockSolenoid.set(unlockValue);
+	// }
 
-	public boolean isCascadeUnlocked() {
-		return lockSolenoid.get() == unlockValue;
-	}
+	// public boolean isCascadeUnlocked() {
+	// return lockSolenoid.get() == unlockValue;
+	// }
 
 	/**
 	 * @return Lift encoder distance in inches
@@ -213,14 +214,14 @@ public class Cascade extends Subsystem {
 	 */
 	public void setLiftSpeed(double speed) {
 		liftSpeed = speed;
-		unlockCascade();
+		// unlockCascade();
 		if (isShiftedCascade()) {
 			if (isBottomSwitchClosed()) {
 				System.out.println("BottomClosed");
 				resetLiftEncoder();
 			}
 
-			if ((speed > 0 && isTopSwitchClosed()) || (speed < 0 && isBottomSwitchClosed()) || isCascadeLocked()) {
+			if ((speed > 0 && isTopSwitchClosed()) || (speed < 0 && isBottomSwitchClosed())) {
 				System.out.println("topclosed");
 				speed = 0.0;
 			}
@@ -230,7 +231,7 @@ public class Cascade extends Subsystem {
 				speed = 0.0;
 			}
 		}
-		System.out.println(speed);
+		// System.out.println(speed);
 
 		leftFrontTalon.set(speed);
 		leftBackTalon.set(speed);
@@ -239,7 +240,7 @@ public class Cascade extends Subsystem {
 	}
 
 	public void talonPid(double setpoint) {
-		unlockCascade();
+		// unlockCascade();
 		leftFrontTalon.set(ControlMode.Position, setpoint);
 		leftBackTalon.follow(leftFrontTalon);
 		rightFrontTalon.follow(leftFrontTalon);

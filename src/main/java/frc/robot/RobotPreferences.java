@@ -18,15 +18,16 @@ import frcteam3255.robotbase.Preferences.SN_IntPreference;
  */
 public class RobotPreferences {
 
-	public static final SN_DoublePreference p = new SN_DoublePreference("cP", 10);
+	public static final SN_DoublePreference p = new SN_DoublePreference("cP", .6);
 	public static final SN_DoublePreference i = new SN_DoublePreference("cI", 0);
 	public static final SN_DoublePreference d = new SN_DoublePreference("cD", 0);
 	public static final SN_DoublePreference f = new SN_DoublePreference("cF", 0);
-	public static final SN_DoublePreference setpoint = new SN_DoublePreference("cSetpoint", 1100);
+	public static final SN_DoublePreference setpoint = new SN_DoublePreference("cSetpoint", 2367);
 	public static final SN_IntPreference iz = new SN_IntPreference("Izone", 0);
 	public static final SN_IntPreference tol = new SN_IntPreference("Tolerance", 1);
 
 	public static final SN_IntPreference counts = new SN_IntPreference("Counts", 10000);
+	public static final SN_IntPreference feet = new SN_IntPreference("5ft", 4950);
 
 	public static final SN_IntPreference velocity = new SN_IntPreference("cVelocity", 10000);
 	public static final SN_IntPreference acceleration = new SN_IntPreference("cAcceleration", 10000);
@@ -86,9 +87,9 @@ public class RobotPreferences {
 
 	// Drive PID
 	public static final SN_DoublePreference DRIVETRAIN_P = new SN_DoublePreference("driveP", 10.0);
-	public static final SN_DoublePreference DRIVETRAIN_I = new SN_DoublePreference("driveI", 10.0);
+	public static final SN_DoublePreference DRIVETRAIN_I = new SN_DoublePreference("driveI", 0.0);
 	public static final SN_DoublePreference DRIVETRAIN_D = new SN_DoublePreference("driveD", 0.0);
-	public static final SN_DoublePreference DRIVETRAIN_F = new SN_DoublePreference("driveF", 5.0);
+	public static final SN_DoublePreference DRIVETRAIN_F = new SN_DoublePreference("driveF", 0.0);
 	public static final SN_IntPreference DRIVETRAIN_IZONE = new SN_IntPreference("driveIZone", 0);
 	public static final SN_IntPreference DRIVETRAIN_TOLERANCE = new SN_IntPreference("driveTol", 0);
 

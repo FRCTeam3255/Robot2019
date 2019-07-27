@@ -21,7 +21,7 @@ public class CascadeLockDogtooth extends InstantCommand {
 
 	@Override
 	protected void initialize() {
-		Robot.m_cascade.lockCascade();
+		// Robot.m_cascade.lockCascade();
 	}
 
 }

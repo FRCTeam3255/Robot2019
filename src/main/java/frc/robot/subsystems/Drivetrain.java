@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.Faults;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
@@ -62,11 +63,10 @@ public class Drivetrain extends Subsystem {
 
 	private SN_TalonSRX climbDriveTalon = null;
 
+	private Faults faults = new Faults();
 	TalonSRXConfiguration currentLimitConfig;
 
 	private DifferentialDrive differentialDrive = null;
-
-	private int pidTarget = 0;
 
 	/**
 	 * Creates the devices used in the drivetrain
@@ -87,7 +87,7 @@ public class Drivetrain extends Subsystem {
 		// Configure Position PID loop
 		leftFrontTalon.configurePositionPid(FeedbackDevice.QuadEncoder, RobotPreferences.DRIVETRAIN_P,
 				RobotPreferences.DRIVETRAIN_I, RobotPreferences.DRIVETRAIN_D, RobotPreferences.DRIVETRAIN_F,
-				RobotPreferences.DRIVETRAIN_IZONE, RobotPreferences.DRIVETRAIN_TOLERANCE, false);
+				RobotPreferences.DRIVETRAIN_IZONE, RobotPreferences.DRIVETRAIN_TOLERANCE, true);
 
 		// Current Limiting Assignment
 		leftFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
@@ -116,7 +116,7 @@ public class Drivetrain extends Subsystem {
 	 * @return Default scaled encoder count
 	 */
 	public double getEncoderCount() {
-		return leftFrontTalon.getSensorCollection().getQuadraturePosition();
+		return leftFrontTalon.getSelectedSensorPosition();
 	}
 
 	/**
@@ -136,10 +136,9 @@ public class Drivetrain extends Subsystem {
 	// }
 
 	// Method to begin PID loop mode on Talons
-	public void pid(int setpoint) {
+	public void pid(double setpoint) {
 		resetEncoderCount();
-		pidTarget = setpoint;
-		leftFrontTalon.set(ControlMode.Position, pidTarget);
+		leftFrontTalon.set(ControlMode.Position, setpoint);
 		leftFrontTalon.setInverted(false);
 		leftMidTalon.follow(leftFrontTalon);
 		leftBackTalon.follow(leftFrontTalon);
@@ -153,12 +152,18 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public void talonReset() {
+		leftFrontTalon.set(0);
 		rightFrontTalon.setInverted(false);
 		rightMidTalon.follow(rightFrontTalon);
 		rightMidTalon.setInverted(false);
 		rightBackTalon.follow(rightFrontTalon);
 		rightBackTalon.setInverted(false);
 
+	}
+
+	public boolean isOutOfPhase() {
+		leftFrontTalon.getFaults(faults);
+		return faults.SensorOutOfPhase;
 	}
 
 	public int pidError() {
