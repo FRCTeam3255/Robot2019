@@ -9,7 +9,6 @@ package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotPreferences;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class DriveDistance extends Command {
