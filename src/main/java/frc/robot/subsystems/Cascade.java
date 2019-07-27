@@ -262,10 +262,6 @@ public class Cascade extends Subsystem {
 		return liftSpeed;
 	}
 
-	public void runTalon() {
-		// Robot.m_cascade.leftFrontTalon.set(ControlMode.)
-	}
-
 	@Override
 	public void initDefaultCommand() {
 	}

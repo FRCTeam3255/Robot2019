@@ -72,7 +72,8 @@ public class Drivetrain extends Subsystem {
 	 * Creates the devices used in the drivetrain
 	 */
 	public Drivetrain() {
-		// Talons
+
+		// Initializes talons
 		leftFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT_TALON);
 		leftMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_MID_TALON, leftFrontTalon, false);
 		leftBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK_TALON, leftFrontTalon, false);
@@ -83,10 +84,11 @@ public class Drivetrain extends Subsystem {
 
 		climbDriveTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_CLIMB_TALON);
 
-		// Initialize pid on leftFrontTalon
+		// Configure Position PID loop
 		leftFrontTalon.configurePositionPid(FeedbackDevice.QuadEncoder, RobotPreferences.DRIVETRAIN_P,
 				RobotPreferences.DRIVETRAIN_I, RobotPreferences.DRIVETRAIN_D, RobotPreferences.DRIVETRAIN_F,
 				RobotPreferences.DRIVETRAIN_IZONE, RobotPreferences.DRIVETRAIN_TOLERANCE, false);
+
 		// Current Limiting Assignment
 		leftFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
 		leftMidTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
@@ -96,27 +98,16 @@ public class Drivetrain extends Subsystem {
 		rightMidTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
 		rightBackTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
 
+		// Differential Drive initialization
 		differentialDrive = new DifferentialDrive(leftFrontTalon, rightFrontTalon);
 		differentialDrive.setSafetyEnabled(false);
 	}
 
 	/**
 	 * Drives the robot using a foward/backward (move) speed and a left right
-	 * (rotate) speed. Ramp the speed in cascade mode.
+	 * (rotate) speed.
 	 */
 	public void arcadeDrive(double moveSpeed, double rotateSpeed, boolean squaredInputs) {
-		double cascadeSpeedFactor = 1.0;
-
-		// if (Robot.m_cascade.isShiftedCascade()) {
-		// double cascadeHeight = Math.abs(Robot.m_cascade.getLiftEncoderDistance());
-		// cascadeSpeedFactor = SN_Math.interpolate(cascadeHeight,
-		// MIN_CASCADE_HEIGHT.getValue(),
-		// MAX_CASCADE_HEIGHT.getValue(), FACTOR_AT_MIN_CASCADE.getValue(),
-		// FACTOR_AT_MAX_CASCADE.getValue());
-		// }
-
-		moveSpeed = moveSpeed * cascadeSpeedFactor;
-		rotateSpeed = rotateSpeed * cascadeSpeedFactor;
 
 		differentialDrive.arcadeDrive(moveSpeed, rotateSpeed, squaredInputs);
 	}
@@ -135,16 +126,21 @@ public class Drivetrain extends Subsystem {
 		leftFrontTalon.resetEncoder();
 	}
 
-	/**
-	 * @return Encoder distance in inches
-	 */
-	public double getEncoderDistance() {
-		return (getEncoderCount() / RobotPreferences.DRIVETRAIN_PULSES_PER_FOOT.getValue()) * 12;
-	}
+	// Encoder distance scaled to inches. Commented out for testing
+	// /**
+	// * @return Encoder distance in inches
+	// */
+	// public double getEncoderDistance() {
+	// return (getEncoderCount() /
+	// RobotPreferences.DRIVETRAIN_PULSES_PER_FOOT.getValue()) * 12;
+	// }
 
-	public void pid(double setpoint) {
-		pidTarget += setpoint;
+	// Method to begin PID loop mode on Talons
+	public void pid(int setpoint) {
+		resetEncoderCount();
+		pidTarget = setpoint;
 		leftFrontTalon.set(ControlMode.Position, pidTarget);
+		leftFrontTalon.setInverted(false);
 		leftMidTalon.follow(leftFrontTalon);
 		leftBackTalon.follow(leftFrontTalon);
 		rightFrontTalon.follow(leftFrontTalon);
@@ -153,7 +149,6 @@ public class Drivetrain extends Subsystem {
 		rightMidTalon.setInverted(InvertType.OpposeMaster);
 		rightBackTalon.follow(leftFrontTalon);
 		rightBackTalon.setInverted(InvertType.OpposeMaster);
-		leftFrontTalon.setInverted(false);
 
 	}
 

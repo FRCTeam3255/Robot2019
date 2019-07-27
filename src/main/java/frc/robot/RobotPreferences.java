@@ -26,7 +26,7 @@ public class RobotPreferences {
 	public static final SN_IntPreference iz = new SN_IntPreference("Izone", 0);
 	public static final SN_IntPreference tol = new SN_IntPreference("Tolerance", 1);
 
-	public static final SN_DoublePreference counts = new SN_DoublePreference("Counts", 10000);
+	public static final SN_IntPreference counts = new SN_IntPreference("Counts", 10000);
 
 	public static final SN_IntPreference velocity = new SN_IntPreference("cVelocity", 10000);
 	public static final SN_IntPreference acceleration = new SN_IntPreference("cAcceleration", 10000);

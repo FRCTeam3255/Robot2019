@@ -89,7 +89,6 @@ public class Telemetry extends Subsystem {
 
 		// Drivetrain Telemetry
 		SmartDashboard.putNumber("Drivetrain Encoder Count", Robot.m_drivetrain.getEncoderCount());
-		SmartDashboard.putNumber("Drivetrain Encoder Distance", Robot.m_drivetrain.getEncoderDistance());
 		SmartDashboard.putNumber("Drivetrain Error", Robot.m_drivetrain.pidError());
 		// Intake Telemetry
 		SmartDashboard.putBoolean("Cargo Intake Retracted", Robot.m_intake.isCargoIntakeRetracted());

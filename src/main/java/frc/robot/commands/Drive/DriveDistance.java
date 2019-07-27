@@ -9,13 +9,13 @@ package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frcteam3255.robotbase.Preferences.SN_DoublePreference;
+import frcteam3255.robotbase.Preferences.SN_IntPreference;
 
 public class DriveDistance extends Command {
   String name = null;
   double setpoint = 10000;
 
-  public DriveDistance(SN_DoublePreference inches, String string) {
+  public DriveDistance(SN_IntPreference inches, String string) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     name = string;
@@ -26,7 +26,7 @@ public class DriveDistance extends Command {
   @Override
   protected void initialize() {
     // Robot.m_drivetrain.resetEncoderCount();
-    Robot.m_drivetrain.pid(300);
+    Robot.m_drivetrain.pid((int) setpoint);
     Robot.m_telemetry.setCommandStatus("Starting DriveDistance " + name + ": " + Robot.m_drivetrain.pidError() + " ");
   }
 
