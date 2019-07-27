@@ -85,10 +85,10 @@ public class RobotPreferences {
 	public static final SN_DoublePreference CLIMB_LIFT_DELAY = new SN_DoublePreference("climbLiftDelay", 0.5);
 
 	// Drive PID
-	public static final SN_DoublePreference DRIVETRAIN_P = new SN_DoublePreference("driveP", 100.0);
-	public static final SN_DoublePreference DRIVETRAIN_I = new SN_DoublePreference("driveI", 0.0);
+	public static final SN_DoublePreference DRIVETRAIN_P = new SN_DoublePreference("driveP", 10.0);
+	public static final SN_DoublePreference DRIVETRAIN_I = new SN_DoublePreference("driveI", 10.0);
 	public static final SN_DoublePreference DRIVETRAIN_D = new SN_DoublePreference("driveD", 0.0);
-	public static final SN_DoublePreference DRIVETRAIN_F = new SN_DoublePreference("driveF", 0.0);
+	public static final SN_DoublePreference DRIVETRAIN_F = new SN_DoublePreference("driveF", 5.0);
 	public static final SN_IntPreference DRIVETRAIN_IZONE = new SN_IntPreference("driveIZone", 0);
 	public static final SN_IntPreference DRIVETRAIN_TOLERANCE = new SN_IntPreference("driveTol", 0);
 

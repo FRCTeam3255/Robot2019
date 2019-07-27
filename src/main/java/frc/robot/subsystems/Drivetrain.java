@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -77,7 +78,7 @@ public class Drivetrain extends Subsystem {
 		leftMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_MID_TALON, leftFrontTalon, false);
 		leftBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK_TALON, leftFrontTalon, false);
 
-		rightFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT_TALON, false);
+		rightFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT_TALON);
 		rightMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_MID_TALON, rightFrontTalon, false);
 		rightBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK_TALON, rightFrontTalon, false);
 
@@ -86,7 +87,8 @@ public class Drivetrain extends Subsystem {
 		// Initialize pid on leftFrontTalon
 		leftFrontTalon.configurePositionPid(FeedbackDevice.QuadEncoder, RobotPreferences.DRIVETRAIN_P,
 				RobotPreferences.DRIVETRAIN_I, RobotPreferences.DRIVETRAIN_D, RobotPreferences.DRIVETRAIN_F,
-				RobotPreferences.DRIVETRAIN_IZONE, RobotPreferences.DRIVETRAIN_TOLERANCE, true);
+				RobotPreferences.DRIVETRAIN_IZONE, RobotPreferences.DRIVETRAIN_TOLERANCE);
+		leftFrontTalon.setSensorPhase(true);
 		// Current Limiting Assignment
 		leftFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
 		leftMidTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
@@ -148,15 +150,22 @@ public class Drivetrain extends Subsystem {
 		leftMidTalon.follow(leftFrontTalon);
 		leftBackTalon.follow(leftFrontTalon);
 		rightFrontTalon.follow(leftFrontTalon);
+		rightFrontTalon.setInverted(InvertType.OpposeMaster);
 		rightMidTalon.follow(leftFrontTalon);
+		rightMidTalon.setInverted(InvertType.OpposeMaster);
 		rightBackTalon.follow(leftFrontTalon);
+		rightBackTalon.setInverted(InvertType.OpposeMaster);
 		leftFrontTalon.setInverted(false);
 
 	}
 
 	public void talonReset() {
+		rightFrontTalon.setInverted(false);
 		rightMidTalon.follow(rightFrontTalon);
+		rightMidTalon.setInverted(false);
 		rightBackTalon.follow(rightFrontTalon);
+		rightBackTalon.setInverted(false);
+
 	}
 
 	public int pidError() {

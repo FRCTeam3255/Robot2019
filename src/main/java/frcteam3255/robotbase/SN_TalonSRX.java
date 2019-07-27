@@ -89,18 +89,18 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 	 * 
 	 */
 	public void configurePositionPid(FeedbackDevice encoder, SN_DoublePreference p, SN_DoublePreference i,
-			SN_DoublePreference d, SN_DoublePreference f, SN_IntPreference izone, SN_IntPreference tolerance,
-			boolean phase) {
+			SN_DoublePreference d, SN_DoublePreference f, SN_IntPreference izone, SN_IntPreference tolerance) {
 		this.configSelectedFeedbackSensor(encoder, kPIDLoopIdx, kTimeoutMs);
-		this.setSensorPhase(phase);
+
 		this.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, kTimeoutMs);
 		this.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, kTimeoutMs);
+		// this.setSensorPhase(false);
 
 		/* Set the peak and nominal outputs */
 		this.configNominalOutputForward(0, kTimeoutMs);
 		this.configNominalOutputReverse(0, kTimeoutMs);
-		this.configPeakOutputForward(.6, kTimeoutMs);
-		this.configPeakOutputReverse(-.6, kTimeoutMs);
+		this.configPeakOutputForward(1, kTimeoutMs);
+		this.configPeakOutputReverse(-1, kTimeoutMs);
 
 		/* Set Motion Magic gains in slot0 - see documentation */
 		this.selectProfileSlot(kSlotIdx, kPIDLoopIdx);
@@ -138,7 +138,7 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 			SN_DoublePreference d, SN_DoublePreference f, SN_IntPreference izone, SN_IntPreference tolerance,
 			SN_IntPreference cv, SN_IntPreference accel) {
 		this.configSelectedFeedbackSensor(encoder, kPIDLoopIdx, kTimeoutMs);
-		this.setSensorPhase(false);
+		this.setSensorPhase(true);
 		this.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, kTimeoutMs);
 		this.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, kTimeoutMs);
 
