@@ -43,8 +43,8 @@ public class Telemetry extends Subsystem {
 	public Telemetry() {
 		// pdp = new PowerDistributionPanel();
 		// Cascade Commands
-		SmartDashboard.putData("Lock Dogtooth", new CascadeLockDogtooth());
-		SmartDashboard.putData("Unlock Dogtooth", new CascadeUnlockDogtooth());
+		// SmartDashboard.putData("Lock Dogtooth", new CascadeLockDogtooth());
+		// SmartDashboard.putData("Unlock Dogtooth", new CascadeUnlockDogtooth());
 		SmartDashboard.putData("Shift Cascade", new CascadeShiftTo());
 		SmartDashboard.putData("Shift Climb", new ClimbShiftTo());
 		SmartDashboard.putData("Reset Cascade Encoder", new CascadeResetEncoder());
@@ -86,6 +86,7 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putBoolean("Cascade Top Switch", Robot.m_cascade.isTopSwitchClosed());
 		SmartDashboard.putBoolean("Cascade Bottom Switch", Robot.m_cascade.isBottomSwitchClosed());
 		SmartDashboard.putBoolean("Cascade Mode", Robot.m_cascade.isShiftedCascade());
+		SmartDashboard.putNumber("Cascade Lift Error", Robot.m_cascade.talonPidError());
 		SmartDashboard.putNumber("Lift Speed", Robot.m_cascade.liftSpeed);
 
 		// Drivetrain Telemetry

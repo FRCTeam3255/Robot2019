@@ -239,9 +239,24 @@ public class Cascade extends Subsystem {
 		rightBackTalon.set(speed);
 	}
 
-	public void talonPid(double setpoint) {
+	public void talonPid(double speed) {
+
+		double position = speed;
 		// unlockCascade();
-		leftFrontTalon.set(ControlMode.Position, setpoint);
+		if (isShiftedCascade()) {
+			if (isBottomSwitchClosed() && position < 0) {
+				System.out.println("BottomClosed");
+				position = 0;
+				resetLiftEncoder();
+			}
+
+			if ((position >= 7700 || isTopSwitchClosed())) {
+				System.out.println("topclosed");
+				position = 7700;
+			}
+		}
+		// unlockCascade();
+		leftFrontTalon.set(ControlMode.Position, position);
 		leftBackTalon.follow(leftFrontTalon);
 		rightFrontTalon.follow(leftFrontTalon);
 		rightBackTalon.follow(leftFrontTalon);

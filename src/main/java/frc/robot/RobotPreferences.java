@@ -18,8 +18,8 @@ import frcteam3255.robotbase.Preferences.SN_IntPreference;
  */
 public class RobotPreferences {
 
-	public static final SN_DoublePreference p = new SN_DoublePreference("cP", .6);
-	public static final SN_DoublePreference i = new SN_DoublePreference("cI", 0);
+	public static final SN_DoublePreference p = new SN_DoublePreference("cP", .7);
+	public static final SN_DoublePreference i = new SN_DoublePreference("cI", 0.0003);
 	public static final SN_DoublePreference d = new SN_DoublePreference("cD", 0);
 	public static final SN_DoublePreference f = new SN_DoublePreference("cF", 0);
 	public static final SN_DoublePreference setpoint = new SN_DoublePreference("cSetpoint", 2367);
