@@ -239,9 +239,9 @@ public class Cascade extends Subsystem {
 		rightBackTalon.set(speed);
 	}
 
-	public void talonPid(double speed) {
+	public void talonPid(double inputPosition) {
 
-		double position = speed;
+		double position = inputPosition;
 		// unlockCascade();
 		if (isShiftedCascade()) {
 			if (isBottomSwitchClosed() && position < 0) {
@@ -250,10 +250,10 @@ public class Cascade extends Subsystem {
 				resetLiftEncoder();
 			}
 
-			if ((position >= 7700 || isTopSwitchClosed())) {
-				System.out.println("topclosed");
-				position = 7700;
-			}
+			// if ((position >= 7700 || isTopSwitchClosed())) {
+			// System.out.println("topclosed");
+			// position = 7700;
+			// }
 		}
 		// unlockCascade();
 		leftFrontTalon.set(ControlMode.Position, position);

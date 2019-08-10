@@ -29,7 +29,9 @@ public class CascadeManual extends Command {
 
   @Override
   protected void execute() {
-    position += (100 * Robot.m_oi.manipulatorStick.getYAxis());
+    if (!Robot.m_cascade.isTopSwitchClosed()) {
+      position += (100 * Robot.m_oi.manipulatorStick.getYAxis());
+    }
 
     Robot.m_cascade.talonPid(position);
     Robot.m_telemetry.setCommandStatus("Executing CascadeLift: " + Robot.m_cascade.talonPidError());

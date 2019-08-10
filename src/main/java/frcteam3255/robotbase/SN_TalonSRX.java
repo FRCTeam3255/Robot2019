@@ -35,15 +35,8 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 	}
 
 	public SN_TalonSRX(int deviceNumber, boolean invert) {
-		super(deviceNumber);
-		configFactoryDefault();
-		setSafetyEnabled(false);
-		setNeutralMode(NeutralMode.Brake);
-		if (invert) {
-			this.setInverted(true);
-		} else {
-			this.setInverted(false);
-		}
+		this(deviceNumber);
+		this.setInverted(invert);
 	}
 
 	/**
@@ -62,15 +55,8 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 
 	public SN_TalonSRX(int deviceNumber, SN_TalonSRX master, boolean invert) {
 		super(deviceNumber);
-		configFactoryDefault();
-		setSafetyEnabled(false);
-		setNeutralMode(NeutralMode.Brake);
 		this.follow(master);
-		if (invert) {
-			this.setInverted(true);
-		} else {
-			this.setInverted(false);
-		}
+		this.setInverted(invert);
 	}
 
 	/**
@@ -189,10 +175,10 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 	 */
 	public void setCurrentLimiting(SN_IntPreference peakAmps, SN_IntPreference timeAtPeak, SN_IntPreference ampsLimit,
 			SN_BooleanPreference isEnabled) {
-		super.configPeakCurrentLimit(peakAmps.getValue());
-		super.configPeakCurrentDuration(timeAtPeak.getValue());
-		super.configContinuousCurrentLimit(ampsLimit.getValue());
-		super.enableCurrentLimit(isEnabled.getValue());
+		this.configPeakCurrentLimit(peakAmps.getValue());
+		this.configPeakCurrentDuration(timeAtPeak.getValue());
+		this.configContinuousCurrentLimit(ampsLimit.getValue());
+		this.enableCurrentLimit(isEnabled.getValue());
 	}
 
 	public void setDefaultCurrentLimiting(SN_BooleanPreference isEnabled) {
