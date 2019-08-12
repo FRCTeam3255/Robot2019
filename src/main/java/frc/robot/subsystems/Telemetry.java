@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.AutoPreferences;
 import frc.robot.Robot;
 import frc.robot.RobotPreferences;
-import frc.robot.commands.Cascade.CascadeLockDogtooth;
 import frc.robot.commands.Cascade.CascadeResetEncoder;
 import frc.robot.commands.Cascade.CascadeShiftTo;
 import frc.robot.commands.Cascade.CascadeUnlockDogtooth;
@@ -21,7 +20,6 @@ import frc.robot.commands.Climber.ClimbShiftTo;
 import frc.robot.commands.Drive.DriveDistance;
 import frc.robot.commands.Drive.DriveResetEncoder;
 import frc.robot.commands.Drive.DriveResetYaw;
-import frc.robot.commands.Drive.DriveToWall;
 import frc.robot.commands.Intake.IntakeCargoDeploy;
 import frc.robot.commands.Intake.IntakeCargoRetract;
 import frc.robot.commands.Intake.IntakeFingerDeploy;
@@ -51,7 +49,6 @@ public class Telemetry extends Subsystem {
 
 		// Drivetrain Commands
 		SmartDashboard.putData("Reset Drive Encoder", new DriveResetEncoder());
-		SmartDashboard.putData("Drive To Wall", new DriveToWall());
 		SmartDashboard.putData("Drive10kcounts", new DriveDistance(RobotPreferences.counts, "10000 Counts"));
 		SmartDashboard.putData("Drive 5 ft", new DriveDistance(RobotPreferences.feet, "5 ft"));
 

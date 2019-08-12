@@ -108,8 +108,14 @@ public class Drivetrain extends Subsystem {
 	 * (rotate) speed.
 	 */
 	public void arcadeDrive(double moveSpeed, double rotateSpeed, boolean squaredInputs) {
-
 		differentialDrive.arcadeDrive(moveSpeed, rotateSpeed, squaredInputs);
+	}
+
+	public double rotationPid(double yaw, double goal, double p) {
+		double output = 0;
+		output = ((goal - yaw) * p);
+
+		return output;
 	}
 
 	/**
