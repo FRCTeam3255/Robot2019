@@ -47,8 +47,6 @@ public class CascadeManual extends Command {
   protected void end() {
     Robot.m_cascade.talonPid(position);
     Robot.m_telemetry.setCommandStatus("Finishing CascadeLift" + ": " + Robot.m_cascade.talonPidError());
-
-    // Robot.m_cascade.lockCascade();
   }
 
   @Override

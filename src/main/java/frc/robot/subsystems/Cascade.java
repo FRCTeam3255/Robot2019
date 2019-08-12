@@ -98,9 +98,6 @@ public class Cascade extends Subsystem {
 		// Solenoids
 		shiftSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_SHIFT_SOLENOID_A,
 				RobotMap.CASCADE_SHIFT_SOLENOID_B);
-		// lockSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM,
-		// RobotMap.CASCADE_LOCK_SOLENOID_A,
-		// RobotMap.CASCADE_LOCK_SOLENOID_B);
 
 		// unlockCascade();
 		shiftCascade();
@@ -108,7 +105,7 @@ public class Cascade extends Subsystem {
 		// Switches
 		topSwitch = new DigitalInput(RobotMap.CASCADE_TOP_SWITCH);
 		bottomSwitch = new DigitalInput(RobotMap.CASCADE_BOTTOM_SWITCH);
-		topClimbSwitch = new DigitalInput(RobotMap.CASCADE_TOP_CLIMB__SWITCH);
+		topClimbSwitch = new DigitalInput(RobotMap.CASCADE_TOP_CLIMB_SWITCH);
 		bottomClimbSwitch = new DigitalInput(RobotMap.CASCADE_BOTTOM_CLIMB_SWITCH);
 	}
 
@@ -165,28 +162,6 @@ public class Cascade extends Subsystem {
 	}
 
 	/**
-	 * Lock the cascade dogtooth
-	 */
-	// public void lockCascade() {
-	// lockSolenoid.set(lockValue);
-	// }
-
-	// public boolean isCascadeLocked() {
-	// return lockSolenoid.get() == lockValue;
-	// }
-
-	/**
-	 * Unlock the cascade dogtooth
-	 */
-	// public void unlockCascade() {
-	// lockSolenoid.set(unlockValue);
-	// }
-
-	// public boolean isCascadeUnlocked() {
-	// return lockSolenoid.get() == unlockValue;
-	// }
-
-	/**
 	 * @return Lift encoder distance in inches
 	 */
 	public double getLiftEncoderDistance() {
@@ -231,7 +206,6 @@ public class Cascade extends Subsystem {
 				speed = 0.0;
 			}
 		}
-		// System.out.println(speed);
 
 		leftFrontTalon.set(speed);
 		leftBackTalon.set(speed);
@@ -242,20 +216,14 @@ public class Cascade extends Subsystem {
 	public void talonPid(double inputPosition) {
 
 		double position = inputPosition;
-		// unlockCascade();
+
 		if (isShiftedCascade()) {
 			if (isBottomSwitchClosed() && position < 0) {
 				System.out.println("BottomClosed");
 				position = 0;
 				resetLiftEncoder();
 			}
-
-			// if ((position >= 7700 || isTopSwitchClosed())) {
-			// System.out.println("topclosed");
-			// position = 7700;
-			// }
 		}
-		// unlockCascade();
 		leftFrontTalon.set(ControlMode.Position, position);
 		leftBackTalon.follow(leftFrontTalon);
 		rightFrontTalon.follow(leftFrontTalon);

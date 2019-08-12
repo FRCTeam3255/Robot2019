@@ -39,12 +39,9 @@ public class RobotMap {
 	// Spark
 	public static final int LIGHTING_SPARK = 0;
 
-	// Servo
-	public static final int DRIVETRAIN_SERVO = 1;
-
 	// Encoders
-	public static final int DRIVETRAIN_ENCODER_B = 0;
 	public static final int DRIVETRAIN_ENCODER_A = 1;
+	public static final int DRIVETRAIN_ENCODER_B = 0;
 
 	public static final int CASCADE_LIFT_ENCODER_A = 2;
 	public static final int CASCADE_LIFT_ENCODER_B = 3;
@@ -56,7 +53,7 @@ public class RobotMap {
 	public static final int CASCADE_TOP_SWITCH = 6;
 	public static final int CASCADE_BOTTOM_SWITCH = 7;
 
-	public static final int CASCADE_TOP_CLIMB__SWITCH = 8;
+	public static final int CASCADE_TOP_CLIMB_SWITCH = 8;
 	public static final int CASCADE_BOTTOM_CLIMB_SWITCH = 9;
 
 	// PCMs
