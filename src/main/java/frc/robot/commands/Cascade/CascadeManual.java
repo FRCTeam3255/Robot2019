@@ -9,8 +9,6 @@ package frc.robot.commands.Cascade;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotPreferences;
-import frc.robot.subsystems.Cascade;
 
 public class CascadeManual extends Command {
   double speed = 0.0;
@@ -30,13 +28,12 @@ public class CascadeManual extends Command {
 
   @Override
   protected void execute() {
-    speed = Robot.m_oi.manipulatorStick.getYAxis();
-    if (speed > RobotPreferences.CASCADE_MAXOUTUP.getValue()) {
-      speed = RobotPreferences.CASCADE_MAXOUTUP.getValue();
-    } else if (speed < -RobotPreferences.CASCADE_MAXOUTDOWN.getValue()) {
-      speed = -RobotPreferences.CASCADE_MAXOUTDOWN.getValue();
+    if (!Robot.m_cascade.isTopSwitchClosed()) {
+      position += (100 * Robot.m_oi.manipulatorStick.getYAxis());
     }
-    Robot.m_cascade.setLiftSpeed(speed);
+
+    Robot.m_cascade.talonPid(position);
+    Robot.m_telemetry.setCommandStatus("Executing CascadeLift: " + Robot.m_cascade.talonPidError());
   }
 
   @Override
@@ -46,7 +43,7 @@ public class CascadeManual extends Command {
 
   @Override
   protected void end() {
-    Robot.m_cascade.talonPid(Robot.m_cascade.getLiftEncoderCount());
+    Robot.m_cascade.talonPid(position);
     Robot.m_telemetry.setCommandStatus("Finishing CascadeLift" + ": " + Robot.m_cascade.talonPidError());
   }
 

@@ -19,7 +19,6 @@ import frc.robot.RobotMap;
 import frc.robot.RobotPreferences;
 import frcteam3255.robotbase.SN_TalonSRX;
 import frcteam3255.robotbase.Preferences.SN_BooleanPreference;
-import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 import frcteam3255.robotbase.Preferences.SN_IntPreference;
 
 /**
@@ -67,12 +66,6 @@ public class Cascade extends Subsystem {
 	// Set the directions of the shift solenoid
 	// private static final Value lockValue = Value.kReverse;
 	// private static final Value unlockValue = Value.kForward;
-
-	public static final SN_DoublePreference CASCADE_MINOUTDOWN = new SN_DoublePreference("cascadeMinSpeedDown", 0.0);
-	public static final SN_DoublePreference CASCADE_MINOUTUP = new SN_DoublePreference("cascadeMinSpeedUp", 0.33);
-	public static final SN_DoublePreference CASCADE_MAXOUTDOWN = new SN_DoublePreference("cascadeMaxSpeedDown", 0.1);
-	public static final SN_DoublePreference CASCADE_MAXOUTUP = new SN_DoublePreference("cascadeMaxSpeedUp", 0.6);
-	public static final SN_DoublePreference CASCADE_MAXCHANGE = new SN_DoublePreference("cascadeMaxChange", 1.0);
 
 	/**
 	 * Creates the devices used in the cascade
@@ -213,6 +206,14 @@ public class Cascade extends Subsystem {
 		rightBackTalon.set(speed);
 	}
 
+	public void reset() {
+		leftFrontTalon.set(0);
+		leftBackTalon.set(0);
+		rightFrontTalon.set(0);
+		rightBackTalon.set(0);
+
+	}
+
 	public void talonPid(double inputPosition) {
 
 		double position = inputPosition;
@@ -248,5 +249,6 @@ public class Cascade extends Subsystem {
 
 	@Override
 	public void initDefaultCommand() {
+
 	}
 }
