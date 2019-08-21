@@ -87,7 +87,7 @@ public class RobotPreferences {
 	public static final SN_DoublePreference CASCADE_RELEASE_SPEED = new SN_DoublePreference("cascadeReleaseSpeed",
 			0.33);
 	public static final SN_DoublePreference CASCADE_UNWEIGHT_SPEED = new SN_DoublePreference("cascadeUnweightSpeed",
-			0.4);
+			0.6);
 	public static final SN_DoublePreference CASCADE_UNWEIGHT_HEIGHT = new SN_DoublePreference("cascadeUnweightHeight",
 			100);
 

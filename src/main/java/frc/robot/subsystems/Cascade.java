@@ -92,8 +92,11 @@ public class Cascade extends Subsystem {
 		// Solenoids
 		shiftSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_SHIFT_SOLENOID_A,
 				RobotMap.CASCADE_SHIFT_SOLENOID_B);
+				
+		lockSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_LOCK_SOLENOID_A,
+				RobotMap.CASCADE_LOCK_SOLENOID_B);
 
-		// unlockCascade();
+		unlockCascade();
 		shiftCascade();
 
 		// Switches
