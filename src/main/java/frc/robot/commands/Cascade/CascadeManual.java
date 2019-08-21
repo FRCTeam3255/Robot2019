@@ -9,10 +9,10 @@ package frc.robot.commands.Cascade;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotPreferences;
 
 public class CascadeManual extends Command {
   double speed = 0.0;
-  double position = 0.0;
 
   public CascadeManual() {
     requires(Robot.m_cascade);
@@ -20,20 +20,18 @@ public class CascadeManual extends Command {
 
   @Override
   protected void initialize() {
-    position = Robot.m_cascade.getLiftEncoderCount();
-    Robot.m_cascade.talonPid(position);
-    Robot.m_telemetry.setCommandStatus("Starting CascadeLift" + ": " + Robot.m_cascade.talonPidError());
-
+    speed = 0.0;
   }
 
   @Override
   protected void execute() {
-    if (!Robot.m_cascade.isTopSwitchClosed()) {
-      position += (100 * Robot.m_oi.manipulatorStick.getYAxis());
+    speed = Robot.m_oi.manipulatorStick.getYAxis();
+    if (speed > RobotPreferences.CASCADE_MAXOUTUP.getValue()) {
+      speed = RobotPreferences.CASCADE_MAXOUTUP.getValue();
+    } else if (speed < -RobotPreferences.CASCADE_MAXOUTDOWN.getValue()) {
+      speed = -RobotPreferences.CASCADE_MAXOUTDOWN.getValue();
     }
-
-    Robot.m_cascade.talonPid(position);
-    Robot.m_telemetry.setCommandStatus("Executing CascadeLift: " + Robot.m_cascade.talonPidError());
+    Robot.m_cascade.setLiftSpeed(speed);
   }
 
   @Override
@@ -43,8 +41,8 @@ public class CascadeManual extends Command {
 
   @Override
   protected void end() {
-    Robot.m_cascade.talonPid(position);
-    Robot.m_telemetry.setCommandStatus("Finishing CascadeLift" + ": " + Robot.m_cascade.talonPidError());
+    Robot.m_cascade.setLiftSpeed(0.0);
+    Robot.m_cascade.lockCascade();
   }
 
   @Override

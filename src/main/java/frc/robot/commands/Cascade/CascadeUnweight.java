@@ -33,7 +33,7 @@ public class CascadeUnweight extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return Robot.m_cascade.getLiftEncoderDistance() >= previousEncoder
+		return Robot.m_cascade.getLiftEncoderCount() >= previousEncoder
 				+ RobotPreferences.CASCADE_UNWEIGHT_HEIGHT.getValue();
 	}
 

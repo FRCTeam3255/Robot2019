@@ -19,6 +19,7 @@ import frc.robot.RobotMap;
 import frc.robot.RobotPreferences;
 import frcteam3255.robotbase.SN_TalonSRX;
 import frcteam3255.robotbase.Preferences.SN_BooleanPreference;
+import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 import frcteam3255.robotbase.Preferences.SN_IntPreference;
 
 /**
@@ -38,7 +39,7 @@ public class Cascade extends Subsystem {
 
 	// Solenoids
 	private DoubleSolenoid shiftSolenoid = null;
-	// private DoubleSolenoid lockSolenoid = null;
+	private DoubleSolenoid lockSolenoid = null;
 
 	// Switches
 	private DigitalInput topSwitch = null;
@@ -64,8 +65,8 @@ public class Cascade extends Subsystem {
 	private static final Value climbValue = Value.kForward;
 
 	// Set the directions of the shift solenoid
-	// private static final Value lockValue = Value.kReverse;
-	// private static final Value unlockValue = Value.kForward;
+	private static final Value lockValue = Value.kReverse;
+	private static final Value unlockValue = Value.kForward;
 
 	/**
 	 * Creates the devices used in the cascade
@@ -160,6 +161,28 @@ public class Cascade extends Subsystem {
 	public double getLiftEncoderDistance() {
 		return (((double) leftFrontTalon.getSensorCollection().getQuadraturePosition())
 				/ RobotPreferences.CASCADE_PULSES_PER_FOOT.getValue()) * 12.0;
+	}
+
+	/**
+	 * Lock the cascade dogtooth
+	 */
+	public void lockCascade() {
+		lockSolenoid.set(lockValue);
+	}
+
+	public boolean isCascadeLocked() {
+		return lockSolenoid.get() == lockValue;
+	}
+
+	/**
+	 * Unlock the cascade dogtooth
+	 */
+	public void unlockCascade() {
+		lockSolenoid.set(unlockValue);
+	}
+
+	public boolean isCascadeUnlocked() {
+		return lockSolenoid.get() == unlockValue;
 	}
 
 	/**

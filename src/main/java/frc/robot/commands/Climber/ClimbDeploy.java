@@ -13,7 +13,7 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 public class ClimbDeploy extends Command {
 
-  private SN_DoublePreference timeout = new SN_DoublePreference("climbDeployTimeout", 1.0);
+  private SN_DoublePreference timeout = new SN_DoublePreference("climbDeployTimeout", 0.1);
   private double expireTime = 0.0;
 
   public ClimbDeploy() {
