@@ -34,9 +34,29 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 		setNeutralMode(NeutralMode.Brake);
 	}
 
+	public SN_TalonSRX(int deviceNumber, double peakF, double peakR, double nomF, double nomR) {
+		super(deviceNumber);
+		configFactoryDefault();
+		setSafetyEnabled(false);
+		setNeutralMode(NeutralMode.Brake);
+		this.configNominalOutputForward(nomF, kTimeoutMs);
+		this.configNominalOutputReverse(nomR, kTimeoutMs);
+		this.configPeakOutputForward(peakF, kTimeoutMs);
+		this.configPeakOutputReverse(peakR, kTimeoutMs);
+	}
+
 	public SN_TalonSRX(int deviceNumber, boolean invert) {
 		this(deviceNumber);
 		this.setInverted(invert);
+	}
+
+	public SN_TalonSRX(int deviceNumber, boolean invert, double peakF, double peakR, double nomF, double nomR) {
+		this(deviceNumber);
+		this.setInverted(invert);
+		this.configNominalOutputForward(nomF, kTimeoutMs);
+		this.configNominalOutputReverse(nomR, kTimeoutMs);
+		this.configPeakOutputForward(peakF, kTimeoutMs);
+		this.configPeakOutputReverse(peakR, kTimeoutMs);
 	}
 
 	/**
@@ -57,6 +77,19 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 		super(deviceNumber);
 		this.follow(master);
 		this.setInverted(invert);
+
+	}
+
+	public SN_TalonSRX(int deviceNumber, SN_TalonSRX master, boolean invert, double peakF, double peakR, double nomF,
+			double nomR) {
+		super(deviceNumber);
+		this.follow(master);
+		this.setInverted(invert);
+
+		this.configNominalOutputForward(nomF, kTimeoutMs);
+		this.configNominalOutputReverse(nomR, kTimeoutMs);
+		this.configPeakOutputForward(peakF, kTimeoutMs);
+		this.configPeakOutputReverse(peakR, kTimeoutMs);
 	}
 
 	/**
@@ -79,13 +112,6 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 		this.setSensorPhase(phase);
 
 		this.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, kTimeoutMs);
-		// this.setSensorPhase(false);
-
-		/* Set the peak and nominal outputs */
-		this.configNominalOutputForward(0, kTimeoutMs);
-		this.configNominalOutputReverse(0, kTimeoutMs);
-		this.configPeakOutputForward(1, kTimeoutMs);
-		this.configPeakOutputReverse(-1, kTimeoutMs);
 
 		/* Set Motion Magic gains in slot0 - see documentation */
 		this.selectProfileSlot(kSlotIdx, kPIDLoopIdx);

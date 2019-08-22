@@ -74,19 +74,22 @@ public class Cascade extends Subsystem {
 	public Cascade() {
 
 		// Initialize Talons
-		leftFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_FRONT_TALON);
-		leftBackTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_BACK_TALON, leftFrontTalon, false);
-		rightFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_FRONT_TALON, leftFrontTalon, true);
-		rightBackTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_BACK_TALON, leftFrontTalon, true);
+		leftFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_FRONT_TALON,
+				RobotPreferences.CASCADE_MAXOUTUP.getValue(), RobotPreferences.CASCADE_MAXOUTDOWN.getValue(),
+				RobotPreferences.CASCADE_MINOUTUP.getValue(), RobotPreferences.CASCADE_MINOUTDOWN.getValue());
+		leftBackTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_BACK_TALON, leftFrontTalon, false,
+				RobotPreferences.CASCADE_MAXOUTUP.getValue(), RobotPreferences.CASCADE_MAXOUTDOWN.getValue(),
+				RobotPreferences.CASCADE_MINOUTUP.getValue(), RobotPreferences.CASCADE_MINOUTDOWN.getValue());
+		rightFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_FRONT_TALON, leftFrontTalon, true,
+				RobotPreferences.CASCADE_MAXOUTUP.getValue(), RobotPreferences.CASCADE_MAXOUTDOWN.getValue(),
+				RobotPreferences.CASCADE_MINOUTUP.getValue(), RobotPreferences.CASCADE_MINOUTDOWN.getValue());
+		rightBackTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_BACK_TALON, leftFrontTalon, true,
+				RobotPreferences.CASCADE_MAXOUTUP.getValue(), RobotPreferences.CASCADE_MAXOUTDOWN.getValue(),
+				RobotPreferences.CASCADE_MINOUTUP.getValue(), RobotPreferences.CASCADE_MINOUTDOWN.getValue());
 
 		// Configure Position Pid
 		leftFrontTalon.configurePositionPid(FeedbackDevice.QuadEncoder, RobotPreferences.p, RobotPreferences.i,
 				RobotPreferences.d, RobotPreferences.f, RobotPreferences.iz, RobotPreferences.tol, false);
-
-		leftFrontTalon.configNominalOutputForward(RobotPreferences.CASCADE_MINOUTUP.getValue());
-		leftFrontTalon.configNominalOutputReverse(RobotPreferences.CASCADE_MINOUTDOWN.getValue());
-		leftFrontTalon.configPeakOutputForward(RobotPreferences.CASCADE_MAXOUTUP.getValue());
-		leftFrontTalon.configPeakOutputReverse(RobotPreferences.CASCADE_MAXOUTDOWN.getValue());
 
 		leftFrontTalon.selectProfileSlot(0, 0);
 		leftFrontTalon.config_kF(0, RobotPreferences.f.getValue());
@@ -244,6 +247,7 @@ public class Cascade extends Subsystem {
 		leftBackTalon.set(speed);
 		rightFrontTalon.set(speed);
 		rightBackTalon.set(speed);
+
 	}
 
 	public void reset() {
@@ -266,6 +270,7 @@ public class Cascade extends Subsystem {
 			}
 		}
 		leftFrontTalon.set(ControlMode.Position, position);
+
 		leftBackTalon.follow(leftFrontTalon);
 		rightFrontTalon.follow(leftFrontTalon);
 		rightBackTalon.follow(leftFrontTalon);

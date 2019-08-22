@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.AutoPreferences;
 import frc.robot.Robot;
 import frc.robot.RobotPreferences;
+import frc.robot.commands.Cascade.CascadeLockDogtooth;
 import frc.robot.commands.Cascade.CascadePositionGroup;
 import frc.robot.commands.Cascade.CascadeResetEncoder;
 import frc.robot.commands.Cascade.CascadeShiftTo;
@@ -42,8 +43,8 @@ public class Telemetry extends Subsystem {
 	public Telemetry() {
 		// pdp = new PowerDistributionPanel();
 		// Cascade Commands
-		// SmartDashboard.putData("Lock Dogtooth", new CascadeLockDogtooth());
-		// SmartDashboard.putData("Unlock Dogtooth", new CascadeUnlockDogtooth());
+		SmartDashboard.putData("Lock Dogtooth", new CascadeLockDogtooth());
+		SmartDashboard.putData("Unlock Dogtooth", new CascadeUnlockDogtooth());
 		SmartDashboard.putData("Shift Cascade", new CascadeShiftTo());
 		SmartDashboard.putData("Shift Climb", new ClimbShiftTo());
 		SmartDashboard.putData("Reset Cascade Encoder", new CascadeResetEncoder());
