@@ -83,6 +83,16 @@ public class Cascade extends Subsystem {
 		leftFrontTalon.configurePositionPid(FeedbackDevice.QuadEncoder, RobotPreferences.p, RobotPreferences.i,
 				RobotPreferences.d, RobotPreferences.f, RobotPreferences.iz, RobotPreferences.tol, false);
 
+		leftFrontTalon.configNominalOutputForward(RobotPreferences.CASCADE_MINOUTUP.getValue());
+		leftFrontTalon.configNominalOutputReverse(RobotPreferences.CASCADE_MINOUTDOWN.getValue());
+		leftFrontTalon.configPeakOutputForward(RobotPreferences.CASCADE_MAXOUTUP.getValue());
+		leftFrontTalon.configPeakOutputReverse(RobotPreferences.CASCADE_MAXOUTDOWN.getValue());
+
+		leftFrontTalon.selectProfileSlot(0, 0);
+		leftFrontTalon.config_kF(0, RobotPreferences.f.getValue());
+		leftFrontTalon.config_kP(0, RobotPreferences.p.getValue());
+		leftFrontTalon.config_kI(0, RobotPreferences.i.getValue());
+		leftFrontTalon.config_kD(0, RobotPreferences.d.getValue());
 		// Current Limiting Assignment
 		leftFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
 		leftBackTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
@@ -92,7 +102,7 @@ public class Cascade extends Subsystem {
 		// Solenoids
 		shiftSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_SHIFT_SOLENOID_A,
 				RobotMap.CASCADE_SHIFT_SOLENOID_B);
-				
+
 		lockSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_LOCK_SOLENOID_A,
 				RobotMap.CASCADE_LOCK_SOLENOID_B);
 
@@ -156,6 +166,10 @@ public class Cascade extends Subsystem {
 
 	public boolean isShiftedClimb() {
 		return shiftSolenoid.get() == climbValue;
+	}
+
+	public String getPIDValues() {
+		return " ";
 	}
 
 	/**

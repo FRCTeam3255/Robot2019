@@ -30,19 +30,20 @@ public class CascadePosition extends Command {
 
 	@Override
 	protected void execute() {
+		Robot.m_cascade.talonPid(Robot.m_intake.getSetpoint(setpoint).getValue());
+
 		Robot.m_telemetry.setCommandStatus("Executing CascadeLift: " + Robot.m_cascade.talonPidError());
 	}
 
 	@Override
 	protected boolean isFinished() {
-		if (Robot.m_cascade.talonPidError() > -3 && Robot.m_cascade.talonPidError() < 3) {
+		if (Robot.m_cascade.talonPidError() > -30 && Robot.m_cascade.talonPidError() < 30) {
 			return true;
 		}
 
 		if (Robot.m_cascade.isTopSwitchClosed() || Robot.m_cascade.isBottomSwitchClosed()) {
 			return true;
 		}
-
 		return false;
 
 	}

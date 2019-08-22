@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.AutoPreferences;
 import frc.robot.Robot;
 import frc.robot.RobotPreferences;
+import frc.robot.commands.Cascade.CascadePositionGroup;
 import frc.robot.commands.Cascade.CascadeResetEncoder;
 import frc.robot.commands.Cascade.CascadeShiftTo;
 import frc.robot.commands.Cascade.CascadeUnlockDogtooth;
@@ -85,6 +86,7 @@ public class Telemetry extends Subsystem {
 		SmartDashboard.putBoolean("Cascade Mode", Robot.m_cascade.isShiftedCascade());
 		SmartDashboard.putNumber("Cascade Lift Error", Robot.m_cascade.talonPidError());
 		SmartDashboard.putNumber("Lift Speed", Robot.m_cascade.liftSpeed);
+		SmartDashboard.putString("Cascade Lift Count", Robot.m_cascade.getPIDValues());
 
 		// Drivetrain Telemetry
 		SmartDashboard.putNumber("Drivetrain Encoder Count", Robot.m_drivetrain.getEncoderCount());

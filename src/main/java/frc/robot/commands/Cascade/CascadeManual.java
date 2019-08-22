@@ -9,7 +9,6 @@ package frc.robot.commands.Cascade;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotPreferences;
 
 public class CascadeManual extends Command {
   double speed = 0.0;
@@ -26,11 +25,11 @@ public class CascadeManual extends Command {
   @Override
   protected void execute() {
     speed = Robot.m_oi.manipulatorStick.getYAxis();
-    if (speed > RobotPreferences.CASCADE_MAXOUTUP.getValue()) {
-      speed = RobotPreferences.CASCADE_MAXOUTUP.getValue();
-    } else if (speed < -RobotPreferences.CASCADE_MAXOUTDOWN.getValue()) {
-      speed = -RobotPreferences.CASCADE_MAXOUTDOWN.getValue();
-    }
+    // if (speed > RobotPreferences.CASCADE_MAXOUTUP.getValue()) {
+    // speed = RobotPreferences.CASCADE_MAXOUTUP.getValue();
+    // } else if (speed < -RobotPreferences.CASCADE_MAXOUTDOWN.getValue()) {
+    // speed = -RobotPreferences.CASCADE_MAXOUTDOWN.getValue();
+    // }
     Robot.m_cascade.setLiftSpeed(speed);
   }
 
