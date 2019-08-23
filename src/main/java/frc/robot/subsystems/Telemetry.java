@@ -7,7 +7,11 @@
 
 package frc.robot.subsystems;
 
+import java.util.Map;
+
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.shuffleboard.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.AutoPreferences;
 import frc.robot.Robot;
@@ -35,6 +39,64 @@ import frc.robot.commands.Intake.IntakeLinkageRetract;
  */
 public class Telemetry extends Subsystem {
 
+	private ShuffleboardTab commandTab = Shuffleboard.getTab("Commands");
+	private ShuffleboardTab dataTab = Shuffleboard.getTab("Data");
+	private ShuffleboardLayout cascadeCommands = Shuffleboard.getTab("Commands")
+			.getLayout("Cascade Commands", BuiltInLayouts.kList).withSize(3, 5);
+	private ShuffleboardLayout dtCommands = Shuffleboard.getTab("Commands")
+			.getLayout("Drivetrain Commands", BuiltInLayouts.kList).withSize(3, 5);
+	private ShuffleboardLayout intakeCommands = Shuffleboard.getTab("Commands")
+			.getLayout("Intake Commands", BuiltInLayouts.kList).withSize(3, 5);
+	private ShuffleboardLayout climbCommands = Shuffleboard.getTab("Commands")
+			.getLayout("Climb Commands", BuiltInLayouts.kList).withSize(3, 5);
+	private ShuffleboardLayout navCommands = Shuffleboard.getTab("Commands")
+			.getLayout("Navigation Commands", BuiltInLayouts.kList).withSize(3, 5);
+
+	// Cascade Telemetry
+	NetworkTableEntry cascadeLiftCount = dataTab.add("Cascade Lift Count", Robot.m_cascade.getLiftEncoderCount())
+			.getEntry();
+	NetworkTableEntry cascadeLiftDistance = dataTab
+			.add("Cascade Lift Distance", Robot.m_cascade.getLiftEncoderDistance()).getEntry();
+	NetworkTableEntry cascadeTopSwitch = dataTab.add("Cascade Top Switch", Robot.m_cascade.isTopSwitchClosed())
+			.getEntry();
+	NetworkTableEntry cascadeBottomSwitch = dataTab.add("Cascade Bottom Switch", Robot.m_cascade.isBottomSwitchClosed())
+			.getEntry();
+	NetworkTableEntry cascadeMode = dataTab.add("Cascade Mode", Robot.m_cascade.isShiftedCascade()).getEntry();
+	NetworkTableEntry cascadeLiftErr = dataTab.add("Cascade Lift Error", Robot.m_cascade.talonPidError()).getEntry();
+	NetworkTableEntry cascadeLiftSpeed = dataTab.add("Lift Speed", Robot.m_cascade.liftSpeed).getEntry();
+
+	// Drivetrain Telemetry
+	NetworkTableEntry dtEncoderCount = dataTab.add("Drivetrain Encoder Count", Robot.m_drivetrain.getEncoderCount())
+			.getEntry();
+	NetworkTableEntry dtError = dataTab.add("Drivetrain Error", Robot.m_drivetrain.pidError()).getEntry();
+	NetworkTableEntry dtSensorPhase = dataTab.add("Is Sensor Out of Phase", Robot.m_drivetrain.isOutOfPhase())
+			.getEntry();
+	// Intake Telemetry
+	NetworkTableEntry intakeCargoRetracted = dataTab
+			.add("Cargo Intake Retracted", Robot.m_intake.isCargoIntakeRetracted()).getEntry();
+	NetworkTableEntry intakeLinkageRetracted = dataTab.add("Linkage Retracted", Robot.m_intake.isLinkageRetracted())
+			.getEntry();
+	NetworkTableEntry intakeHatchCollected = dataTab.add("Hatch Collected", Robot.m_intake.isHatchCollected())
+			.getEntry();
+	NetworkTableEntry intakeCargoCollected = dataTab.add("Cargo Collected", Robot.m_intake.isCargoCollected())
+			.getEntry();
+
+	// Lighting Telemetry
+
+	// Vision Telemetry
+	NetworkTableEntry visionTargetFound = dataTab.add("Target Found", Robot.m_vision.targetFound()).getEntry();
+	NetworkTableEntry visionDistance = dataTab.add("Vision Distance From Target", Robot.m_vision.getDistance())
+			.getEntry();
+	NetworkTableEntry visionRotation = dataTab.add("Vision Rotation", Robot.m_vision.getRotation()).getEntry();
+	NetworkTableEntry visionOffset = dataTab.add("Vision Horizontal Offset", Robot.m_vision.getHorizontalOffset())
+			.getEntry();
+	NetworkTableEntry visionWidth = dataTab.add("Vision Width", Robot.m_vision.getWidth()).getEntry();
+
+	// Other Telemetry
+	NetworkTableEntry autoGetSide = dataTab.add("get Side", AutoPreferences.getSide()).getEntry();
+	NetworkTableEntry autoGetPos = dataTab.add("get position", AutoPreferences.getPosition()).getEntry();
+	NetworkTableEntry cmdStatus = dataTab.add("Command Status", "none").getEntry();
+
 	// PowerDistributionPanel pdp;
 
 	/**
@@ -43,34 +105,36 @@ public class Telemetry extends Subsystem {
 	public Telemetry() {
 		// pdp = new PowerDistributionPanel();
 		// Cascade Commands
-		SmartDashboard.putData("Lock Dogtooth", new CascadeLockDogtooth());
-		SmartDashboard.putData("Unlock Dogtooth", new CascadeUnlockDogtooth());
-		SmartDashboard.putData("Shift Cascade", new CascadeShiftTo());
-		SmartDashboard.putData("Shift Climb", new ClimbShiftTo());
-		SmartDashboard.putData("Reset Cascade Encoder", new CascadeResetEncoder());
+		cascadeCommands.add("Lock Dogtooth", new CascadeLockDogtooth());
+		cascadeCommands.add("Unlock Dogtooth", new CascadeUnlockDogtooth());
+		cascadeCommands.add("Shift Cascade", new CascadeShiftTo());
+		cascadeCommands.add("Shift Climb", new ClimbShiftTo());
+		cascadeCommands.add("Reset Cascade Encoder", new CascadeResetEncoder());
 
 		// Drivetrain Commands
-		SmartDashboard.putData("Reset Drive Encoder", new DriveResetEncoder());
-		SmartDashboard.putData("Drive10kcounts", new DriveDistance(RobotPreferences.counts, "10000 Counts"));
-		SmartDashboard.putData("Drive 5 ft", new DriveDistance(RobotPreferences.feet, "5 ft"));
+		dtCommands.add("Reset Drive Encoder", new DriveResetEncoder());
+		dtCommands.add("Drive10kcounts", new DriveDistance(RobotPreferences.counts, "10000 Counts"));
+		dtCommands.add("Drive 5 ft", new DriveDistance(RobotPreferences.feet, "5 ft"));
 
 		// Intake Commands
-		SmartDashboard.putData("Deploy Cargo Intake", new IntakeCargoDeploy());
-		SmartDashboard.putData("Retract Cargo Intake", new IntakeCargoRetract());
-		SmartDashboard.putData("Deploy Linkage", new IntakeLinkageDeploy());
-		SmartDashboard.putData("Retract Linkage", new IntakeLinkageRetract());
+		intakeCommands.add("Deploy Cargo Intake", new IntakeCargoDeploy());
+		intakeCommands.add("Retract Cargo Intake", new IntakeCargoRetract());
+		intakeCommands.add("Deploy Linkage", new IntakeLinkageDeploy());
+		intakeCommands.add("Retract Linkage", new IntakeLinkageRetract());
 
-		SmartDashboard.putData("Deploy Finger", new IntakeFingerDeploy());
-		SmartDashboard.putData("Retract Finger", new IntakeFingerRetract());
-		SmartDashboard.putData("Eject", new IntakeHatchEject());
+		intakeCommands.add("Deploy Finger", new IntakeFingerDeploy());
+		intakeCommands.add("Retract Finger", new IntakeFingerRetract());
+		intakeCommands.add("Eject", new IntakeHatchEject());
 
 		// Climb Commands
-		SmartDashboard.putData("Climb Deploy", new ClimbDeploy());
+		climbCommands.add("Climb Deploy", new ClimbDeploy());
 
 		// Lighting Commands
 
 		// Navigation Commands
-		SmartDashboard.putData("Reset Yaw", new DriveResetYaw());
+		navCommands.add("Reset Yaw", new DriveResetYaw());
+
+		// noncommands------
 
 	}
 
@@ -79,45 +143,38 @@ public class Telemetry extends Subsystem {
 	 * updated
 	 */
 	public void update() {
+
 		// Cascade Telemetry
-		SmartDashboard.putNumber("Cascade Lift Count", Robot.m_cascade.getLiftEncoderCount());
-		SmartDashboard.putNumber("Cascade Lift Distance", Robot.m_cascade.getLiftEncoderDistance());
-		SmartDashboard.putBoolean("Cascade Top Switch", Robot.m_cascade.isTopSwitchClosed());
-		SmartDashboard.putBoolean("Cascade Bottom Switch", Robot.m_cascade.isBottomSwitchClosed());
-		SmartDashboard.putBoolean("Cascade Mode", Robot.m_cascade.isShiftedCascade());
-		SmartDashboard.putNumber("Cascade Lift Error", Robot.m_cascade.talonPidError());
-		SmartDashboard.putNumber("Lift Speed", Robot.m_cascade.liftSpeed);
-		SmartDashboard.putString("Cascade Lift Count", Robot.m_cascade.getPIDValues());
+		cascadeLiftCount.setDouble(Robot.m_cascade.getLiftEncoderCount());
+		cascadeLiftDistance.setDouble(Robot.m_cascade.getLiftEncoderDistance());
+		cascadeTopSwitch.setBoolean(Robot.m_cascade.isTopSwitchClosed());
+		cascadeBottomSwitch.setBoolean(Robot.m_cascade.isBottomSwitchClosed());
+		cascadeMode.setBoolean(Robot.m_cascade.isShiftedCascade());
+		cascadeLiftErr.setDouble(Robot.m_cascade.talonPidError());
+		cascadeLiftSpeed.setDouble(Robot.m_cascade.liftSpeed);
 
 		// Drivetrain Telemetry
-		SmartDashboard.putNumber("Drivetrain Encoder Count", Robot.m_drivetrain.getEncoderCount());
-		SmartDashboard.putNumber("Drivetrain Error", Robot.m_drivetrain.pidError());
-		SmartDashboard.putBoolean("Is Sensor Out of Phase", Robot.m_drivetrain.isOutOfPhase());
+		dtEncoderCount.setDouble(Robot.m_drivetrain.getEncoderCount());
+		dtError.setDouble(Robot.m_drivetrain.pidError());
+		dtSensorPhase.setBoolean(Robot.m_drivetrain.isOutOfPhase());
 		// Intake Telemetry
-		SmartDashboard.putBoolean("Cargo Intake Retracted", Robot.m_intake.isCargoIntakeRetracted());
-		SmartDashboard.putBoolean("Linkage Retracted", Robot.m_intake.isLinkageRetracted());
-		SmartDashboard.putBoolean("Hatch Collected", Robot.m_intake.isHatchCollected());
-		SmartDashboard.putBoolean("Cargo Collected", Robot.m_intake.isCargoCollected());
+		intakeCargoRetracted.setBoolean(Robot.m_intake.isCargoIntakeRetracted());
+		intakeLinkageRetracted.setBoolean(Robot.m_intake.isLinkageRetracted());
+		intakeHatchCollected.setBoolean(Robot.m_intake.isHatchCollected());
+		intakeCargoCollected.setBoolean(Robot.m_intake.isCargoCollected());
 
 		// Lighting Telemetry
 
-		// Navigation Telemetry
-		SmartDashboard.putBoolean("Is Calibrating", Robot.m_navigation.isCalibrating());
-		SmartDashboard.putNumber("Yaw", Robot.m_navigation.getYaw());
-		SmartDashboard.putNumber("Acceleration X", Robot.m_navigation.getAccelerationX());
-		SmartDashboard.putNumber("Acceleration Y", Robot.m_navigation.getAccelerationY());
-		SmartDashboard.putNumber("Acceleration Z", Robot.m_navigation.getAccelerationZ());
-
 		// Vision Telemetry
-		SmartDashboard.putBoolean("Target Found", Robot.m_vision.targetFound());
-		SmartDashboard.putNumber("Vision Distance From Target", Robot.m_vision.getDistance());
-		SmartDashboard.putNumber("Vision Rotation", Robot.m_vision.getRotation());
-		SmartDashboard.putNumber("Vision Horizontal Offset", Robot.m_vision.getHorizontalOffset());
-		SmartDashboard.putNumber("Vision Width", Robot.m_vision.getWidth());
+		visionTargetFound.setBoolean(Robot.m_vision.targetFound());
+		visionDistance.setDouble(Robot.m_vision.getDistance());
+		visionRotation.setDouble(Robot.m_vision.getRotation());
+		visionOffset.setDouble(Robot.m_vision.getHorizontalOffset());
+		visionWidth.setDouble(Robot.m_vision.getWidth());
 
 		// Other Telemetry
-		SmartDashboard.putString("get Side", AutoPreferences.getSide());
-		SmartDashboard.putString("get position", AutoPreferences.getPosition());
+		autoGetSide.setString(AutoPreferences.getSide());
+		autoGetPos.setString(AutoPreferences.getPosition());
 
 	}
 
@@ -131,6 +188,6 @@ public class Telemetry extends Subsystem {
 	 * @param autonomousState The current autonomous operation happening
 	 */
 	public void setCommandStatus(String commandState) {
-		SmartDashboard.putString("Command Status", commandState);
+		cmdStatus.setString(commandState);
 	}
 }
