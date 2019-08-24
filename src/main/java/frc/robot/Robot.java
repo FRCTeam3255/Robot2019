@@ -104,7 +104,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_cascade.reset();
+		m_cascade.stopMotors();
 		m_startMatch = new CascadeStartMatch();
 		m_startMatch.start();
 		boolean isAuto = AutoPreferences.doRocket() || AutoPreferences.doShipFrontFront()
@@ -126,7 +126,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		m_cascade.reset();
+		m_cascade.stopMotors();
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove

@@ -16,7 +16,7 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 	protected static SN_IntPreference default_ampsLimit = new SN_IntPreference("SNTTALON_AMPS_LIMIT", 10);
 	public static final int kSlotIdx = 0;
 	public static final int kPIDLoopIdx = 0;
-	public static final int kTimeoutMs = 30;
+	public static final int kTimeoutMs = 0;
 	public static boolean kMotorInvert = false;
 
 	/**
@@ -34,29 +34,33 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 		setNeutralMode(NeutralMode.Brake);
 	}
 
-	public SN_TalonSRX(int deviceNumber, double peakF, double peakR, double nomF, double nomR) {
-		super(deviceNumber);
-		configFactoryDefault();
-		setSafetyEnabled(false);
-		setNeutralMode(NeutralMode.Brake);
-		this.configNominalOutputForward(nomF, kTimeoutMs);
-		this.configNominalOutputReverse(nomR, kTimeoutMs);
-		this.configPeakOutputForward(peakF, kTimeoutMs);
-		this.configPeakOutputReverse(peakR, kTimeoutMs);
-	}
-
 	public SN_TalonSRX(int deviceNumber, boolean invert) {
 		this(deviceNumber);
 		this.setInverted(invert);
 	}
 
-	public SN_TalonSRX(int deviceNumber, boolean invert, double peakF, double peakR, double nomF, double nomR) {
+	public SN_TalonSRX(int deviceNumber, SN_TalonSRX master, boolean invert) {
+		this(deviceNumber, invert);
+		this.follow(master);
+	}
+
+	public SN_TalonSRX(int deviceNumber, double peakF, double peakR, double nomF, double nomR) {
 		this(deviceNumber);
-		this.setInverted(invert);
-		this.configNominalOutputForward(nomF, kTimeoutMs);
-		this.configNominalOutputReverse(nomR, kTimeoutMs);
 		this.configPeakOutputForward(peakF, kTimeoutMs);
 		this.configPeakOutputReverse(peakR, kTimeoutMs);
+		this.configNominalOutputForward(nomF, kTimeoutMs);
+		this.configNominalOutputReverse(nomR, kTimeoutMs);
+	}
+
+	public SN_TalonSRX(int deviceNumber, boolean invert, double peakF, double peakR, double nomF, double nomR) {
+		this(deviceNumber, peakF, peakR, nomF, nomR);
+		this.setInverted(invert);
+	}
+
+	public SN_TalonSRX(int deviceNumber, SN_TalonSRX master, boolean invert, double peakF, double peakR, double nomF,
+			double nomR) {
+		this(deviceNumber, invert, peakF, peakR, nomF, nomR);
+		this.follow(master);
 	}
 
 	/**
@@ -71,25 +75,6 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 	public SN_TalonSRX(int deviceNumber, SN_BooleanPreference enableCurrentLimiting) {
 		this(deviceNumber);
 		setDefaultCurrentLimiting(enableCurrentLimiting);
-	}
-
-	public SN_TalonSRX(int deviceNumber, SN_TalonSRX master, boolean invert) {
-		super(deviceNumber);
-		this.follow(master);
-		this.setInverted(invert);
-
-	}
-
-	public SN_TalonSRX(int deviceNumber, SN_TalonSRX master, boolean invert, double peakF, double peakR, double nomF,
-			double nomR) {
-		super(deviceNumber);
-		this.follow(master);
-		this.setInverted(invert);
-
-		this.configNominalOutputForward(nomF, kTimeoutMs);
-		this.configNominalOutputReverse(nomR, kTimeoutMs);
-		this.configPeakOutputForward(peakF, kTimeoutMs);
-		this.configPeakOutputReverse(peakR, kTimeoutMs);
 	}
 
 	/**

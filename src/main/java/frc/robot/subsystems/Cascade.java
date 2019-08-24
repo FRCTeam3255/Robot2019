@@ -26,7 +26,7 @@ import frcteam3255.robotbase.Preferences.SN_IntPreference;
  * Subsytem containing the cascade devices and methoods
  */
 public class Cascade extends Subsystem {
-	public double liftSpeed = 0.0;
+	private double liftSpeed = 0.0;
 
 	// Talons
 	private SN_TalonSRX leftFrontTalon = null;
@@ -91,11 +91,11 @@ public class Cascade extends Subsystem {
 		leftFrontTalon.configurePositionPid(FeedbackDevice.QuadEncoder, RobotPreferences.p, RobotPreferences.i,
 				RobotPreferences.d, RobotPreferences.f, RobotPreferences.iz, RobotPreferences.tol, false);
 
-		leftFrontTalon.selectProfileSlot(0, 0);
-		leftFrontTalon.config_kF(0, RobotPreferences.f.getValue());
-		leftFrontTalon.config_kP(0, RobotPreferences.p.getValue());
-		leftFrontTalon.config_kI(0, RobotPreferences.i.getValue());
-		leftFrontTalon.config_kD(0, RobotPreferences.d.getValue());
+		// leftFrontTalon.selectProfileSlot(0, 0);
+		// leftFrontTalon.config_kF(0, RobotPreferences.f.getValue());
+		// leftFrontTalon.config_kP(0, RobotPreferences.p.getValue());
+		// leftFrontTalon.config_kI(0, RobotPreferences.i.getValue());
+		// leftFrontTalon.config_kD(0, RobotPreferences.d.getValue());
 		// Current Limiting Assignment
 		leftFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
 		leftBackTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
@@ -176,11 +176,17 @@ public class Cascade extends Subsystem {
 	}
 
 	/**
+	 * @return Default scaled lift encoder count
+	 */
+	public double getLiftEncoderCount() {
+		return (double) leftFrontTalon.getSensorCollection().getQuadraturePosition();
+	}
+
+	/**
 	 * @return Lift encoder distance in inches
 	 */
 	public double getLiftEncoderDistance() {
-		return (((double) leftFrontTalon.getSensorCollection().getQuadraturePosition())
-				/ RobotPreferences.CASCADE_PULSES_PER_FOOT.getValue()) * 12.0;
+		return (getLiftEncoderCount() / RobotPreferences.CASCADE_PULSES_PER_FOOT.getValue()) * 12.0;
 	}
 
 	/**
@@ -203,13 +209,6 @@ public class Cascade extends Subsystem {
 
 	public boolean isCascadeUnlocked() {
 		return lockSolenoid.get() == unlockValue;
-	}
-
-	/**
-	 * @return Default scaled lift encoder count
-	 */
-	public double getLiftEncoderCount() {
-		return (double) leftFrontTalon.getSensorCollection().getQuadraturePosition();
 	}
 
 	/**
@@ -250,7 +249,8 @@ public class Cascade extends Subsystem {
 
 	}
 
-	public void reset() {
+	// TODO: examine all uses
+	public void stopMotors() {
 		leftFrontTalon.set(0);
 		leftBackTalon.set(0);
 		rightFrontTalon.set(0);
