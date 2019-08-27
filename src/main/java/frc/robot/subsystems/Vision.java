@@ -23,7 +23,7 @@ public class Vision extends Subsystem {
 	 */
 	public Vision() {
 		visionData = NetworkTableInstance.getDefault().getTable("limelight");
-		setDriverMode();
+		setVisionMode();
 	}
 
 	/**
