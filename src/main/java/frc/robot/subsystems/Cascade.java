@@ -51,17 +51,17 @@ public class Cascade extends Subsystem {
 	private DigitalInput bottomClimbSwitch = null;
 
 	/** Current threshold to trigger current limit */
-	private static final SN_IntPreference PEAK_AMPS = new SN_IntPreference("drivePeakAmps", 17);
+	private static final SN_IntPreference PEAK_AMPS = new SN_IntPreference("cascadePeakAmps", 17);
 	/**
 	 * Duration (in miliseconds i.e. 5000ms = 5s) after current exceed Peak Current
 	 * to trigger current limit
 	 */
-	private static final SN_IntPreference PEAK_TIME = new SN_IntPreference("drivePeakTimeMs", 5000);
+	private static final SN_IntPreference PEAK_TIME = new SN_IntPreference("cascadePeakTimeMs", 5000);
 	/** Current to mantain once current limit has been triggered */
-	private static final SN_IntPreference LIMIT_AMPS = new SN_IntPreference("driveLimitAmps", 6);
+	private static final SN_IntPreference LIMIT_AMPS = new SN_IntPreference("cascadeLimitAmps", 6);
 	/** Set if current is limited */
 	private static final SN_BooleanPreference ENABLE_CURRENT_LIMITING = new SN_BooleanPreference(
-			"driveEnableCurrentLimit", false);
+			"cascadeEnableCurrentLimit", false);
 
 	// Set the directions of the shift solenoid
 	private static final Value cascadeValue = Value.kReverse;
