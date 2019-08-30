@@ -54,10 +54,10 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 	 */
 	public void setCurrentLimiting(SN_IntPreference peakAmps, SN_IntPreference timeAtPeak, SN_IntPreference ampsLimit,
 			SN_BooleanPreference isEnabled) {
-		super.configPeakCurrentLimit(peakAmps.getValue());
-		super.configPeakCurrentDuration(timeAtPeak.getValue());
-		super.configContinuousCurrentLimit(ampsLimit.getValue());
-		super.enableCurrentLimit(isEnabled.getValue());
+		this.configPeakCurrentLimit(peakAmps.getValue());
+		this.configPeakCurrentDuration(timeAtPeak.getValue());
+		this.configContinuousCurrentLimit(ampsLimit.getValue());
+		this.enableCurrentLimit(isEnabled.getValue());
 	}
 
 	public void setDefaultCurrentLimiting(SN_BooleanPreference isEnabled) {
