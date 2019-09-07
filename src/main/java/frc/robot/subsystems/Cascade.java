@@ -243,6 +243,10 @@ public class Cascade extends Subsystem {
 
 	}
 
+	public double getLiftSpeed() {
+		return liftSpeed;
+	}
+
 	// TODO: examine all uses
 	public void stopMotors() {
 		leftFrontTalon.set(0);

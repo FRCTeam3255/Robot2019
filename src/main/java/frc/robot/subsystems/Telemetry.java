@@ -63,7 +63,7 @@ public class Telemetry extends Subsystem {
 			.getEntry();
 	NetworkTableEntry cascadeMode = dataTab.add("Cascade Mode", Robot.m_cascade.isShiftedCascade()).getEntry();
 	NetworkTableEntry cascadeLiftErr = dataTab.add("Cascade Lift Error", Robot.m_cascade.talonPidError()).getEntry();
-	NetworkTableEntry cascadeLiftSpeed = dataTab.add("Lift Speed", Robot.m_cascade.liftSpeed).getEntry();
+	NetworkTableEntry cascadeLiftSpeed = dataTab.add("Lift Speed", Robot.m_cascade.getLiftSpeed()).getEntry();
 
 	// Drivetrain Telemetry
 	NetworkTableEntry dtEncoderCount = dataTab.add("Drivetrain Encoder Count", Robot.m_drivetrain.getEncoderCount())
@@ -114,7 +114,7 @@ public class Telemetry extends Subsystem {
 		// Drivetrain Commands
 		dtCommands.add("Reset Drive Encoder", new DriveResetEncoder());
 		dtCommands.add("Drive10kcounts", new DriveDistance(RobotPreferences.counts, "10000 Counts"));
-		dtCommands.add("Drive 5 ft", new DriveDistance(RobotPreferences.feet, "5 ft"));
+		dtCommands.add("Drive 5 ft", new DriveDistance(RobotPreferences.feet, "5ft"));
 
 		// Intake Commands
 		intakeCommands.add("Deploy Cargo Intake", new IntakeCargoDeploy());
@@ -134,8 +134,6 @@ public class Telemetry extends Subsystem {
 		// Navigation Commands
 		navCommands.add("Reset Yaw", new DriveResetYaw());
 
-		// noncommands------
-
 	}
 
 	/**
@@ -151,7 +149,7 @@ public class Telemetry extends Subsystem {
 		cascadeBottomSwitch.setBoolean(Robot.m_cascade.isBottomSwitchClosed());
 		cascadeMode.setBoolean(Robot.m_cascade.isShiftedCascade());
 		cascadeLiftErr.setDouble(Robot.m_cascade.talonPidError());
-		cascadeLiftSpeed.setDouble(Robot.m_cascade.liftSpeed);
+		cascadeLiftSpeed.setDouble(Robot.m_cascade.getLiftSpeed());
 
 		// Drivetrain Telemetry
 		dtEncoderCount.setDouble(Robot.m_drivetrain.getEncoderCount());
