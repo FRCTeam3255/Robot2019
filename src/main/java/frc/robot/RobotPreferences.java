@@ -42,7 +42,7 @@ public class RobotPreferences {
 			322.0);
 	public static final SN_DoublePreference HATCH_POSITION_1 = new SN_DoublePreference("hatchPos1", 0.0);
 	public static final SN_DoublePreference HATCH_POSITION_2 = new SN_DoublePreference("hatchPos2", 31.0);
-	public static final SN_DoublePreference HATCH_POSITION_3 = new SN_DoublePreference("hatchPos3", 57.0);
+	public static final SN_DoublePreference HATCH_POSITION_3 = new SN_DoublePreference("hatchPos3", 60.0);
 	public static final SN_DoublePreference HATCH_POSITION_LOADED = new SN_DoublePreference("hatchPosLoaded", 10.0);
 	public static final SN_DoublePreference CARGO_POSITION_1 = new SN_DoublePreference("cargoPos1", 22.0);
 	public static final SN_DoublePreference CARGO_POSITION_2 = new SN_DoublePreference("cargoPos2", 51.2);
@@ -50,7 +50,7 @@ public class RobotPreferences {
 	public static final SN_DoublePreference CARGO_POSITION_SHIP = new SN_DoublePreference("cargoPosShip", 37.0);
 	public static final SN_DoublePreference CASCADE_BOTTOM = new SN_DoublePreference("cascadeBottom", 0.0);
 	public static final SN_DoublePreference CASCADE_FEEDER = new SN_DoublePreference("cascadeFeeder", 1.0);
-	public static final SN_DoublePreference CASCADE_BOTTOM_SPEED = new SN_DoublePreference("cascadeBottomSpeed", -0.2);
+	public static final SN_DoublePreference CASCADE_BOTTOM_SPEED = new SN_DoublePreference("cascadeBottomSpeed", -0.4);
 	public static final SN_DoublePreference CASCADE_RELEASE_DISTANCE = new SN_DoublePreference("cascadeReleaseDist",
 			0.5);
 	public static final SN_DoublePreference CASCADE_RELEASE_SPEED = new SN_DoublePreference("cascadeReleaseSpeed",

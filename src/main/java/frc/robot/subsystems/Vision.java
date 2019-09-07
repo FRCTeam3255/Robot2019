@@ -112,7 +112,7 @@ public class Vision extends Subsystem {
 	}
 
 	public void setVisionMode() {
-		visionData.getEntry("pipeline").setDouble(0);
+		visionData.getEntry("pipeline").setDouble(1);
 	}
 
 	public double getMode() {
