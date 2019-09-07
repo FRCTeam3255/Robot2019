@@ -14,9 +14,9 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 	protected static SN_IntPreference default_peakAmps = new SN_IntPreference("SNTALON_PEAK_AMPS", 15);
 	protected static SN_IntPreference default_timeAtPeak = new SN_IntPreference("SNTALON_TIME_AT_PEAK", 3000);
 	protected static SN_IntPreference default_ampsLimit = new SN_IntPreference("SNTTALON_AMPS_LIMIT", 10);
-	public static final int kSlotIdx = 0;
-	public static final int kPIDLoopIdx = 0;
-	public static final int kTimeoutMs = 0;
+	public static final int PID_SLOT_INDEX = 0;
+	public static final int PID_LOOP_INDEX = 0;
+	public static final int PID_TIMEOUT_MS = 0;
 	public static boolean kMotorInvert = false;
 
 	/**
@@ -46,10 +46,10 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 
 	public SN_TalonSRX(int deviceNumber, double peakF, double peakR, double nomF, double nomR) {
 		this(deviceNumber);
-		this.configPeakOutputForward(peakF, kTimeoutMs);
-		this.configPeakOutputReverse(peakR, kTimeoutMs);
-		this.configNominalOutputForward(nomF, kTimeoutMs);
-		this.configNominalOutputReverse(nomR, kTimeoutMs);
+		this.configPeakOutputForward(peakF, PID_TIMEOUT_MS);
+		this.configPeakOutputReverse(peakR, PID_TIMEOUT_MS);
+		this.configNominalOutputForward(nomF, PID_TIMEOUT_MS);
+		this.configNominalOutputReverse(nomR, PID_TIMEOUT_MS);
 	}
 
 	public SN_TalonSRX(int deviceNumber, boolean invert, double peakF, double peakR, double nomF, double nomR) {
@@ -93,25 +93,24 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 	public void configurePositionPid(FeedbackDevice encoder, SN_DoublePreference p, SN_DoublePreference i,
 			SN_DoublePreference d, SN_DoublePreference f, SN_IntPreference izone, SN_IntPreference tolerance,
 			boolean phase) {
-		this.configSelectedFeedbackSensor(encoder, kPIDLoopIdx, kTimeoutMs);
+		this.configSelectedFeedbackSensor(encoder, PID_LOOP_INDEX, PID_TIMEOUT_MS);
 		this.setSensorPhase(phase);
 
-		this.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, kTimeoutMs);
+		this.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, PID_TIMEOUT_MS);
 
 		/* Set Motion Magic gains in slot0 - see documentation */
-		this.selectProfileSlot(kSlotIdx, kPIDLoopIdx);
-		this.config_kF(kSlotIdx, f.getValue(), kTimeoutMs);
-		this.config_kP(kSlotIdx, p.getValue(), kTimeoutMs);
-		this.config_kI(kSlotIdx, i.getValue(), kTimeoutMs);
-		this.config_kD(kSlotIdx, d.getValue(), kTimeoutMs);
+		this.selectProfileSlot(PID_SLOT_INDEX, PID_LOOP_INDEX);
+		this.config_kF(PID_SLOT_INDEX, f.getValue(), PID_TIMEOUT_MS);
+		this.config_kP(PID_SLOT_INDEX, p.getValue(), PID_TIMEOUT_MS);
+		this.config_kI(PID_SLOT_INDEX, i.getValue(), PID_TIMEOUT_MS);
+		this.config_kD(PID_SLOT_INDEX, d.getValue(), PID_TIMEOUT_MS);
 
 		// izone
-		this.config_IntegralZone(kSlotIdx, izone.getValue());
+		this.config_IntegralZone(PID_SLOT_INDEX, izone.getValue());
 
-		// Zero the sensor
-		this.setSelectedSensorPosition(0, kPIDLoopIdx, kTimeoutMs);
+		resetEncoder();
 
-		this.configAllowableClosedloopError(kPIDLoopIdx, tolerance.getValue(), kTimeoutMs);
+		this.configAllowableClosedloopError(PID_LOOP_INDEX, tolerance.getValue(), PID_TIMEOUT_MS);
 
 	}
 
@@ -170,7 +169,7 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 	// }
 
 	public void resetEncoder() {
-		this.setSelectedSensorPosition(0, kPIDLoopIdx, kTimeoutMs);
+		this.setSelectedSensorPosition(0, PID_LOOP_INDEX, PID_TIMEOUT_MS);
 	}
 
 	/**
@@ -194,5 +193,43 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 
 	public void setDefaultCurrentLimiting(SN_BooleanPreference isEnabled) {
 		setCurrentLimiting(default_peakAmps, default_timeAtPeak, default_ampsLimit, isEnabled);
+	}
+
+	// TODO: finish these stub routines
+	public void setPositionMode() {
+		// set talon mode to PID
+	}
+
+	public void setPositionSetPoint(double s) {
+		// set the setpoint for the position PID
+	}
+
+	// return the setpoint of the cascade
+	public double getPositionSetPoint() {
+	}
+
+	// return the current position of the cascade
+	public double getPosition() {
+	}
+
+	public void setSpeedMode() {
+		// set talon mode to speed mode
+		// set speed to 0
+	}
+
+	public void setSpeed(double s) {
+		// update the commanded speed variable
+
+		// set the speed on the talon
+	}
+
+	// note, this routine only returns the last commanded speed when in speed mode,
+	// not the commanded speed from a PID
+	public double getCommandedSpeed() {
+		// return the commanded speed variable
+	}
+
+	public double getSpeed() {
+		// return the speed from the talon
 	}
 }

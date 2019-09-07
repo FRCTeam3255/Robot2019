@@ -18,9 +18,10 @@ import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
 /**
  * Subsytem consisting of the intake devices and methoods
- */
 public class Intake extends Subsystem {
 
+	// TODO: These should be part of the cascade class, and the cascade can look at
+	// the intake to determine switch states as needed
 	public static enum fieldHeights {
 		LOW, MED, HIGH, CSHIP, LOADED, FEEDER
 	};

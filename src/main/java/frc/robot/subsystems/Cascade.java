@@ -33,6 +33,7 @@ public class Cascade extends Subsystem {
 	private SN_TalonSRX leftBackTalon = null;
 	private SN_TalonSRX rightFrontTalon = null;
 	private SN_TalonSRX rightBackTalon = null;
+	private SN_TalonSRX masterTalon = null;
 
 	// Encoders
 	// private Encoder liftEncoder = null;
@@ -74,21 +75,17 @@ public class Cascade extends Subsystem {
 	public Cascade() {
 
 		// Initialize Talons
+		// TODO: move prefrences out of contsructor into enable methods
 		leftFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_FRONT_TALON,
 				RobotPreferences.CASCADE_MAXOUTUP.getValue(), RobotPreferences.CASCADE_MAXOUTDOWN.getValue(),
 				RobotPreferences.CASCADE_MINOUTUP.getValue(), RobotPreferences.CASCADE_MINOUTDOWN.getValue());
-		leftBackTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_BACK_TALON, leftFrontTalon, false,
-				RobotPreferences.CASCADE_MAXOUTUP.getValue(), RobotPreferences.CASCADE_MAXOUTDOWN.getValue(),
-				RobotPreferences.CASCADE_MINOUTUP.getValue(), RobotPreferences.CASCADE_MINOUTDOWN.getValue());
-		rightFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_FRONT_TALON, leftFrontTalon, true,
-				RobotPreferences.CASCADE_MAXOUTUP.getValue(), RobotPreferences.CASCADE_MAXOUTDOWN.getValue(),
-				RobotPreferences.CASCADE_MINOUTUP.getValue(), RobotPreferences.CASCADE_MINOUTDOWN.getValue());
-		rightBackTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_BACK_TALON, leftFrontTalon, true,
-				RobotPreferences.CASCADE_MAXOUTUP.getValue(), RobotPreferences.CASCADE_MAXOUTDOWN.getValue(),
-				RobotPreferences.CASCADE_MINOUTUP.getValue(), RobotPreferences.CASCADE_MINOUTDOWN.getValue());
+		masterTalon = leftFrontTalon;
+		leftBackTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_BACK_TALON, masterTalon, false);
+		rightFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_FRONT_TALON, masterTalon, true);
+		rightBackTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_BACK_TALON, masterTalon, true);
 
 		// Configure Position Pid
-		leftFrontTalon.configurePositionPid(FeedbackDevice.QuadEncoder, RobotPreferences.p, RobotPreferences.i,
+		masterTalon.configurePositionPid(FeedbackDevice.QuadEncoder, RobotPreferences.p, RobotPreferences.i,
 				RobotPreferences.d, RobotPreferences.f, RobotPreferences.iz, RobotPreferences.tol, false);
 
 		// leftFrontTalon.selectProfileSlot(0, 0);
@@ -97,10 +94,7 @@ public class Cascade extends Subsystem {
 		// leftFrontTalon.config_kI(0, RobotPreferences.i.getValue());
 		// leftFrontTalon.config_kD(0, RobotPreferences.d.getValue());
 		// Current Limiting Assignment
-		leftFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
-		leftBackTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
-		rightFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
-		rightBackTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
+		masterTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
 
 		// Solenoids
 		shiftSolenoid = new DoubleSolenoid(RobotMap.CASCADE_PCM, RobotMap.CASCADE_SHIFT_SOLENOID_A,
@@ -290,6 +284,47 @@ public class Cascade extends Subsystem {
 
 	public double getLiftSpeed() {
 		return liftSpeed;
+	}
+
+	// TODO: finish these stub routines
+	public void setPositionMode() {
+		// set talon mode to PID
+		masterTalon.setPositionMode();
+	}
+
+	public void setPositionSetPoint(double s) {
+		// set the setpoint for the position PID
+	}
+
+	// return the setpoint of the cascade
+	public double getPositionSetPoint() {
+	}
+
+	// return the current position of the cascade
+	public double getPosition() {
+	}
+
+	public void setSpeedMode() {
+		// set talon mode to speed mode
+
+		// set speed to 0
+		setSpeed(0.0);
+	}
+
+	public void setSpeed(double s) {
+		// update the commanded speed variable
+
+		// set the speed on the talon
+	}
+
+	// note, this routine only returns the last commanded speed when in speed mode,
+	// not the commanded speed from a PID
+	public double getCommandedSpeed() {
+		// return the commanded speed variable
+	}
+
+	public double getSpeed() {
+		// return the speed from the talon
 	}
 
 	@Override
