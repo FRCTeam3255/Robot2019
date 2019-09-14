@@ -36,6 +36,9 @@ public class RobotMap {
 
 	public static final int DRIVETRAIN_CLIMB_TALON = 12;
 
+	// Pigeon
+	public static final int PIGEON = 0;
+
 	// Spark
 	public static final int LIGHTING_SPARK = 0;
 

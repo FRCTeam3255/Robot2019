@@ -11,7 +11,9 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.Faults;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.RemoteSensorSource;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
+import com.ctre.phoenix.sensors.PigeonIMU;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -56,10 +58,14 @@ public class Drivetrain extends Subsystem {
 	private SN_TalonSRX leftFrontTalon = null;
 	private SN_TalonSRX leftMidTalon = null;
 	private SN_TalonSRX leftBackTalon = null;
+	private SN_TalonSRX leftMaster = null;
 
 	private SN_TalonSRX rightFrontTalon = null;
 	private SN_TalonSRX rightMidTalon = null;
 	private SN_TalonSRX rightBackTalon = null;
+	private SN_TalonSRX rightMaster = null;
+
+	private PigeonIMU pigeon = null;
 
 	private SN_TalonSRX climbDriveTalon = null;
 
@@ -77,29 +83,43 @@ public class Drivetrain extends Subsystem {
 		leftFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT_TALON);
 		leftMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_MID_TALON, leftFrontTalon);
 		leftBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK_TALON, leftFrontTalon);
+		leftMaster = leftFrontTalon;
 
 		rightFrontTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT_TALON);
 		rightMidTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_MID_TALON, rightFrontTalon);
 		rightBackTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK_TALON, rightFrontTalon);
+		rightMaster = rightFrontTalon;
 
 		climbDriveTalon = new SN_TalonSRX(RobotMap.DRIVETRAIN_CLIMB_TALON);
 
+		pigeon = new PigeonIMU(RobotMap.PIGEON);
 		// Configure Position PID loop
-		leftFrontTalon.configurePositionPid(FeedbackDevice.QuadEncoder, RobotPreferences.DRIVETRAIN_P,
-				RobotPreferences.DRIVETRAIN_I, RobotPreferences.DRIVETRAIN_D, RobotPreferences.DRIVETRAIN_F,
-				RobotPreferences.DRIVETRAIN_IZONE, RobotPreferences.DRIVETRAIN_TOLERANCE, true);
 
+		/* Configure the left Talon's selected sensor as local QuadEncoder */
+		leftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, // Local Feedback Source
+				0, // PID Slot for Source [0, 1]
+				30); // Configuration Timeout
+
+		/*
+		 * Configure the Remote Talon's selected sensor as a remote sensor for the right
+		 * Talon
+		 */
+		rightMaster.configRemoteFeedbackFilter(leftMaster.getDeviceID(), // Device ID of Source
+				RemoteSensorSource.TalonSRX_SelectedSensor, // Remote Feedback Source
+				0, // Source number [0, 1]
+				30); // Configuration Timeout
+
+		/* Configure the Pigeon IMU to the other Remote Slot on the Right Talon */
+		rightMaster.configRemoteFeedbackFilter(pigeon.getDeviceID(), RemoteSensorSource.Pigeon_Yaw, 1, 30);
+
+		// TODO: finish implementation of PIGEON with TALONSRX
 		// Current Limiting Assignment
-		leftFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
-		leftMidTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
-		leftBackTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
+		leftMaster.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
 
-		rightFrontTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
-		rightMidTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
-		rightBackTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
+		rightMaster.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
 
 		// Differential Drive initialization
-		differentialDrive = new DifferentialDrive(leftFrontTalon, rightFrontTalon);
+		differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
 		differentialDrive.setSafetyEnabled(false);
 	}
 
@@ -122,14 +142,14 @@ public class Drivetrain extends Subsystem {
 	 * @return Default scaled encoder count
 	 */
 	public double getEncoderCount() {
-		return leftFrontTalon.getSelectedSensorPosition();
+		return leftMaster.getSelectedSensorPosition();
 	}
 
 	/**
 	 * Resets the encoder to zero
 	 */
 	public void resetEncoderCount() {
-		leftFrontTalon.resetEncoder();
+		leftMaster.resetEncoder();
 	}
 
 	// Encoder distance scaled to inches. Commented out for testing
@@ -144,40 +164,20 @@ public class Drivetrain extends Subsystem {
 	// Method to begin PID loop mode on Talons
 	public void pid(double setpoint) {
 		resetEncoderCount();
-		leftFrontTalon.set(ControlMode.Position, setpoint);
-		leftFrontTalon.setInverted(false);
-		leftMidTalon.follow(leftFrontTalon);
-		leftBackTalon.follow(leftFrontTalon);
-		rightFrontTalon.follow(leftFrontTalon);
-		rightFrontTalon.setInverted(InvertType.OpposeMaster);
-		rightMidTalon.follow(leftFrontTalon);
-		rightMidTalon.setInverted(InvertType.OpposeMaster);
-		rightBackTalon.follow(leftFrontTalon);
-		rightBackTalon.setInverted(InvertType.OpposeMaster);
+		leftMaster.set(ControlMode.Position, setpoint);
+		rightMaster.follow(leftMaster);
+		rightMaster.setInverted(InvertType.OpposeMaster);
 
 	}
 
 	public void talonReset() {
 		leftFrontTalon.set(0);
-		rightFrontTalon.setInverted(false);
-		rightMidTalon.follow(rightFrontTalon);
-		rightMidTalon.setInverted(false);
-		rightBackTalon.follow(rightFrontTalon);
-		rightBackTalon.setInverted(false);
+		rightMaster.set(0);
 
 	}
 
-	public boolean isOutOfPhase() {
-		leftFrontTalon.getFaults(faults);
-		return faults.SensorOutOfPhase;
-	}
-
-	public int pidError() {
-		return leftFrontTalon.getClosedLoopError();
-	}
-
-	public boolean pidEnd() {
-		return false;
+	public double pidError() {
+		return leftMaster.getError();
 	}
 
 	/**

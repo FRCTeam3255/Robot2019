@@ -67,8 +67,7 @@ public class Telemetry extends Subsystem {
 	NetworkTableEntry dtEncoderCount = dataTab.add("Drivetrain Encoder Count", Robot.m_drivetrain.getEncoderCount())
 			.getEntry();
 	NetworkTableEntry dtError = dataTab.add("Drivetrain Error", Robot.m_drivetrain.pidError()).getEntry();
-	NetworkTableEntry dtSensorPhase = dataTab.add("Is Sensor Out of Phase", Robot.m_drivetrain.isOutOfPhase())
-			.getEntry();
+
 	// Intake Telemetry
 	NetworkTableEntry intakeCargoRetracted = dataTab
 			.add("Cargo Intake Retracted", Robot.m_intake.isCargoIntakeRetracted()).getEntry();
@@ -151,7 +150,6 @@ public class Telemetry extends Subsystem {
 		// Drivetrain Telemetry
 		dtEncoderCount.setDouble(Robot.m_drivetrain.getEncoderCount());
 		dtError.setDouble(Robot.m_drivetrain.pidError());
-		dtSensorPhase.setBoolean(Robot.m_drivetrain.isOutOfPhase());
 		// Intake Telemetry
 		intakeCargoRetracted.setBoolean(Robot.m_intake.isCargoIntakeRetracted());
 		intakeLinkageRetracted.setBoolean(Robot.m_intake.isLinkageRetracted());
