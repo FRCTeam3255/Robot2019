@@ -53,17 +53,15 @@ public class Telemetry extends Subsystem {
 			.getLayout("Navigation Commands", BuiltInLayouts.kList).withSize(3, 5);
 
 	// Cascade Telemetry
-	NetworkTableEntry cascadeLiftCount = dataTab.add("Cascade Lift Count", Robot.m_cascade.getLiftEncoderCount())
-			.getEntry();
-	NetworkTableEntry cascadeLiftDistance = dataTab
-			.add("Cascade Lift Distance", Robot.m_cascade.getLiftEncoderDistance()).getEntry();
+	NetworkTableEntry cascadeLiftCount = dataTab.add("Cascade Lift Count", Robot.m_cascade.getPosition()).getEntry();
+
 	NetworkTableEntry cascadeTopSwitch = dataTab.add("Cascade Top Switch", Robot.m_cascade.isTopSwitchClosed())
 			.getEntry();
 	NetworkTableEntry cascadeBottomSwitch = dataTab.add("Cascade Bottom Switch", Robot.m_cascade.isBottomSwitchClosed())
 			.getEntry();
 	NetworkTableEntry cascadeMode = dataTab.add("Cascade Mode", Robot.m_cascade.isShiftedCascade()).getEntry();
-	NetworkTableEntry cascadeLiftErr = dataTab.add("Cascade Lift Error", Robot.m_cascade.talonPidError()).getEntry();
-	NetworkTableEntry cascadeLiftSpeed = dataTab.add("Lift Speed", Robot.m_cascade.getLiftSpeed()).getEntry();
+	NetworkTableEntry cascadeLiftErr = dataTab.add("Cascade Lift Error", Robot.m_cascade.getError()).getEntry();
+	NetworkTableEntry cascadeLiftSpeed = dataTab.add("Lift Speed", Robot.m_cascade.getSpeed()).getEntry();
 
 	// Drivetrain Telemetry
 	NetworkTableEntry dtEncoderCount = dataTab.add("Drivetrain Encoder Count", Robot.m_drivetrain.getEncoderCount())
@@ -143,13 +141,12 @@ public class Telemetry extends Subsystem {
 	public void update() {
 
 		// Cascade Telemetry
-		cascadeLiftCount.setDouble(Robot.m_cascade.getLiftEncoderCount());
-		cascadeLiftDistance.setDouble(Robot.m_cascade.getLiftEncoderDistance());
+		cascadeLiftCount.setDouble(Robot.m_cascade.getPosition());
 		cascadeTopSwitch.setBoolean(Robot.m_cascade.isTopSwitchClosed());
 		cascadeBottomSwitch.setBoolean(Robot.m_cascade.isBottomSwitchClosed());
 		cascadeMode.setBoolean(Robot.m_cascade.isShiftedCascade());
-		cascadeLiftErr.setDouble(Robot.m_cascade.talonPidError());
-		cascadeLiftSpeed.setDouble(Robot.m_cascade.getLiftSpeed());
+		cascadeLiftErr.setDouble(Robot.m_cascade.getError());
+		cascadeLiftSpeed.setDouble(Robot.m_cascade.getSpeed());
 
 		// Drivetrain Telemetry
 		dtEncoderCount.setDouble(Robot.m_drivetrain.getEncoderCount());

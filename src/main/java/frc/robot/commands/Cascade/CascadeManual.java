@@ -20,6 +20,7 @@ public class CascadeManual extends Command {
   @Override
   protected void initialize() {
     speed = 0.0;
+    Robot.m_cascade.setSpeedMode();
   }
 
   @Override
@@ -30,7 +31,7 @@ public class CascadeManual extends Command {
     // } else if (speed < -RobotPreferences.CASCADE_MAXOUTDOWN.getValue()) {
     // speed = -RobotPreferences.CASCADE_MAXOUTDOWN.getValue();
     // }
-    Robot.m_cascade.setLiftSpeed(speed);
+    Robot.m_cascade.setSpeed(speed);
   }
 
   @Override
@@ -40,7 +41,7 @@ public class CascadeManual extends Command {
 
   @Override
   protected void end() {
-    Robot.m_cascade.setLiftSpeed(0.0);
+    Robot.m_cascade.setSpeedMode();
     Robot.m_cascade.lockCascade();
   }
 

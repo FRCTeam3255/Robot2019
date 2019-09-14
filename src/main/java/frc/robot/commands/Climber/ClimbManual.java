@@ -33,7 +33,7 @@ public class ClimbManual extends Command {
   @Override
   protected void execute() {
     speed = Robot.m_oi.manipulatorStick.getYAxis();
-    Robot.m_cascade.setLiftSpeed(speed);
+    Robot.m_cascade.setSpeed(speed);
   }
 
   @Override
@@ -43,7 +43,7 @@ public class ClimbManual extends Command {
 
   @Override
   protected void end() {
-    Robot.m_cascade.setLiftSpeed(0.0);
+    Robot.m_cascade.setSpeed(0.0);
   }
 
   @Override

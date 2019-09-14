@@ -27,6 +27,7 @@ import frcteam3255.robotbase.Preferences.SN_IntPreference;
  */
 public class Cascade extends Subsystem {
 	private double liftSpeed = 0.0;
+	private double setpoint = 0.0;
 
 	// Talons
 	private SN_TalonSRX leftFrontTalon = null;
@@ -75,25 +76,24 @@ public class Cascade extends Subsystem {
 	public Cascade() {
 
 		// Initialize Talons
-		// TODO: move prefrences out of contsructor into enable methods
-		leftFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_FRONT_TALON,
-				RobotPreferences.CASCADE_MAXOUTUP.getValue(), RobotPreferences.CASCADE_MAXOUTDOWN.getValue(),
-				RobotPreferences.CASCADE_MINOUTUP.getValue(), RobotPreferences.CASCADE_MINOUTDOWN.getValue());
+		leftFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_FRONT_TALON);
 		masterTalon = leftFrontTalon;
-		leftBackTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_BACK_TALON, masterTalon, false);
-		rightFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_FRONT_TALON, masterTalon, true);
-		rightBackTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_BACK_TALON, masterTalon, true);
+		leftBackTalon = new SN_TalonSRX(RobotMap.CASCADE_LEFT_BACK_TALON, masterTalon);
+		rightFrontTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_FRONT_TALON, masterTalon);
+		rightBackTalon = new SN_TalonSRX(RobotMap.CASCADE_RIGHT_BACK_TALON, masterTalon);
 
+		leftBackTalon.setInverted(InvertType.FollowMaster);
+		rightFrontTalon.setInverted(InvertType.OpposeMaster);
+		rightBackTalon.setInverted(InvertType.OpposeMaster);
+
+		// outputs
+		masterTalon.setOutputs(RobotPreferences.CASCADE_MAXOUTUP.getValue(),
+				RobotPreferences.CASCADE_MAXOUTDOWN.getValue(), RobotPreferences.CASCADE_MINOUTUP.getValue(),
+				RobotPreferences.CASCADE_MINOUTDOWN.getValue());
 		// Configure Position Pid
 		masterTalon.configurePositionPid(FeedbackDevice.QuadEncoder, RobotPreferences.p, RobotPreferences.i,
 				RobotPreferences.d, RobotPreferences.f, RobotPreferences.iz, RobotPreferences.tol, false);
 
-		// leftFrontTalon.selectProfileSlot(0, 0);
-		// leftFrontTalon.config_kF(0, RobotPreferences.f.getValue());
-		// leftFrontTalon.config_kP(0, RobotPreferences.p.getValue());
-		// leftFrontTalon.config_kI(0, RobotPreferences.i.getValue());
-		// leftFrontTalon.config_kD(0, RobotPreferences.d.getValue());
-		// Current Limiting Assignment
 		masterTalon.setCurrentLimiting(PEAK_AMPS, PEAK_TIME, LIMIT_AMPS, ENABLE_CURRENT_LIMITING);
 
 		// Solenoids
@@ -170,20 +170,6 @@ public class Cascade extends Subsystem {
 	}
 
 	/**
-	 * @return Default scaled lift encoder count
-	 */
-	public double getLiftEncoderCount() {
-		return (double) leftFrontTalon.getSensorCollection().getQuadraturePosition();
-	}
-
-	/**
-	 * @return Lift encoder distance in inches
-	 */
-	public double getLiftEncoderDistance() {
-		return (getLiftEncoderCount() / RobotPreferences.CASCADE_PULSES_PER_FOOT.getValue()) * 12.0;
-	}
-
-	/**
 	 * Lock the cascade dogtooth
 	 */
 	public void lockCascade() {
@@ -209,14 +195,39 @@ public class Cascade extends Subsystem {
 	 * Set the lift encoder to zero
 	 */
 	public void resetLiftEncoder() {
-		leftFrontTalon.resetEncoder();
+		masterTalon.resetEncoder();
 	}
 
-	/**
-	 * Set the speed for the lift motors. Can not move the lift past the top or
-	 * bottom switches. Reset the lift encoder at bottom.
-	 */
-	public void setLiftSpeed(double speed) {
+	public void setPositionMode() {
+		// set talon mode to PID
+		masterTalon.setPositionMode();
+	}
+
+	public void setPositionSetpoint(double s) {
+		// set the setpoint for the position PID
+		setpoint = s;
+		masterTalon.setPositionSetpoint(s);
+	}
+
+	// return the setpoint of the cascade
+	public double getPositionSetpoint() {
+		return setpoint;
+	}
+
+	// return the current position of the cascade
+	public int getPosition() {
+		return masterTalon.getSensorCollection().getQuadraturePosition();
+	}
+
+	public void setSpeedMode() {
+		masterTalon.setSpeedMode();
+	}
+
+	public int getError() {
+		return this.getError();
+	}
+
+	public void setSpeed(double speed) {
 		liftSpeed = speed;
 		// unlockCascade();
 		if (isShiftedCascade()) {
@@ -236,99 +247,11 @@ public class Cascade extends Subsystem {
 			}
 		}
 
-		leftFrontTalon.set(speed);
-		leftBackTalon.set(speed);
-		rightFrontTalon.set(speed);
-		rightBackTalon.set(speed);
-
-	}
-
-	public double getLiftSpeed() {
-		return liftSpeed;
-	}
-
-	// TODO: examine all uses
-	public void stopMotors() {
-		leftFrontTalon.set(0);
-		leftBackTalon.set(0);
-		rightFrontTalon.set(0);
-		rightBackTalon.set(0);
-
-	}
-
-	public void talonPid(double inputPosition) {
-
-		double position = inputPosition;
-
-		if (isShiftedCascade()) {
-			if (isBottomSwitchClosed() && position < 0) {
-				System.out.println("BottomClosed");
-				position = 0;
-				resetLiftEncoder();
-			}
-		}
-		leftFrontTalon.set(ControlMode.Position, position);
-
-		leftBackTalon.follow(leftFrontTalon);
-		rightFrontTalon.follow(leftFrontTalon);
-		rightBackTalon.follow(leftFrontTalon);
-		leftFrontTalon.setInverted(false);
-		leftBackTalon.setInverted(InvertType.FollowMaster);
-		rightFrontTalon.setInverted(InvertType.OpposeMaster);
-		rightBackTalon.setInverted(InvertType.OpposeMaster);
-	}
-
-	public int talonPidError() {
-		return leftFrontTalon.getClosedLoopError();
-	}
-
-	public boolean talonPidEnd() {
-		return false;
-	}
-
-	public double getLiftSpeed() {
-		return liftSpeed;
-	}
-
-	// TODO: finish these stub routines
-	public void setPositionMode() {
-		// set talon mode to PID
-		masterTalon.setPositionMode();
-	}
-
-	public void setPositionSetPoint(double s) {
-		// set the setpoint for the position PID
-	}
-
-	// return the setpoint of the cascade
-	public double getPositionSetPoint() {
-	}
-
-	// return the current position of the cascade
-	public double getPosition() {
-	}
-
-	public void setSpeedMode() {
-		// set talon mode to speed mode
-
-		// set speed to 0
-		setSpeed(0.0);
-	}
-
-	public void setSpeed(double s) {
-		// update the commanded speed variable
-
-		// set the speed on the talon
-	}
-
-	// note, this routine only returns the last commanded speed when in speed mode,
-	// not the commanded speed from a PID
-	public double getCommandedSpeed() {
-		// return the commanded speed variable
+		masterTalon.setSpeed(speed);
 	}
 
 	public double getSpeed() {
-		// return the speed from the talon
+		return masterTalon.getSpeed();
 	}
 
 	@Override

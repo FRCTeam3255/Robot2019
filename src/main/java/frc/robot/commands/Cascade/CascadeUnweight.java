@@ -22,24 +22,24 @@ public class CascadeUnweight extends Command {
 	@Override
 	protected void initialize() {
 		Robot.m_telemetry.setCommandStatus("Starting CascadeUnweight");
-		previousEncoder = Robot.m_cascade.getLiftEncoderCount();
+		previousEncoder = Robot.m_cascade.getPosition();
 	}
 
 	@Override
 	protected void execute() {
-		Robot.m_cascade.setLiftSpeed(.5);
+		Robot.m_cascade.setSpeed(.5);
 		Robot.m_telemetry.setCommandStatus("Executing CascadeUnweight");
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return (Robot.m_cascade.getLiftEncoderCount() >= (previousEncoder + 5));
+		return (Robot.m_cascade.getPosition() >= (previousEncoder + 5));
 	}
 
 	@Override
 	protected void end() {
 		Robot.m_telemetry.setCommandStatus("Finishing CascadeUnweight");
-		Robot.m_cascade.setLiftSpeed(0.0);
+		Robot.m_cascade.setSpeed(0.0);
 	}
 
 	@Override

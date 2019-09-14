@@ -22,7 +22,7 @@ public class CascadeBottom extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_cascade.setLiftSpeed(RobotPreferences.CASCADE_BOTTOM_SPEED.getValue());
+    Robot.m_cascade.setSpeed(RobotPreferences.CASCADE_BOTTOM_SPEED.getValue());
   }
 
   @Override
@@ -32,12 +32,12 @@ public class CascadeBottom extends Command {
 
   @Override
   protected void end() {
-    Robot.m_cascade.setLiftSpeed(0.0);
+    Robot.m_cascade.setSpeed(0.0);
     Robot.m_cascade.resetLiftEncoder();
   }
 
   @Override
   protected void interrupted() {
-    Robot.m_cascade.setLiftSpeed(0.0);
+    Robot.m_cascade.setSpeed(0.0);
   }
 }

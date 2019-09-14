@@ -1,5 +1,6 @@
 package frcteam3255.robotbase;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
@@ -18,14 +19,13 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 	public static final int PID_LOOP_INDEX = 0;
 	public static final int PID_TIMEOUT_MS = 0;
 	public static boolean kMotorInvert = false;
+	private int setpoint;
 
 	/**
-	 * SuperNURDs encapsulation of the TalonSRX class
-	 * <ul>
-	 * <li>Resets to Factory defaults</li>
-	 * <li>Disables safety</li>
-	 * <li>Enables breaking</li>
-	 * </ul>
+	 * SN wrapper for talon SRX
+	 * 
+	 * @param deviceNumber : Device number attached to TalonSRX through Pheonix
+	 *                     Tuner tool
 	 */
 	public SN_TalonSRX(int deviceNumber) {
 		super(deviceNumber);
@@ -34,60 +34,63 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 		setNeutralMode(NeutralMode.Brake);
 	}
 
-	public SN_TalonSRX(int deviceNumber, boolean invert) {
+	/**
+	 * SN wrapper for talon SRX
+	 * 
+	 * @param deviceNumber : Device number attached to TalonSRX through Pheonix
+	 *                     Tuner tool
+	 * @param master       : SN_TalonSRX object for this Talon to follow
+	 */
+	public SN_TalonSRX(int deviceNumber, SN_TalonSRX master) {
 		this(deviceNumber);
-		this.setInverted(invert);
-	}
-
-	public SN_TalonSRX(int deviceNumber, SN_TalonSRX master, boolean invert) {
-		this(deviceNumber, invert);
-		this.follow(master);
-	}
-
-	public SN_TalonSRX(int deviceNumber, double peakF, double peakR, double nomF, double nomR) {
-		this(deviceNumber);
-		this.configPeakOutputForward(peakF, PID_TIMEOUT_MS);
-		this.configPeakOutputReverse(peakR, PID_TIMEOUT_MS);
-		this.configNominalOutputForward(nomF, PID_TIMEOUT_MS);
-		this.configNominalOutputReverse(nomR, PID_TIMEOUT_MS);
-	}
-
-	public SN_TalonSRX(int deviceNumber, boolean invert, double peakF, double peakR, double nomF, double nomR) {
-		this(deviceNumber, peakF, peakR, nomF, nomR);
-		this.setInverted(invert);
-	}
-
-	public SN_TalonSRX(int deviceNumber, SN_TalonSRX master, boolean invert, double peakF, double peakR, double nomF,
-			double nomR) {
-		this(deviceNumber, invert, peakF, peakR, nomF, nomR);
 		this.follow(master);
 	}
 
 	/**
-	 * SuperNURDs encapsulation of the TalonSRX class
-	 * <ul>
-	 * <li>Resets to Factory defaults</li>
-	 * <li>Disables safety</li>
-	 * <li>Enables breaking</li>
-	 * <li>Enables current limiting with the default values</li>
-	 * </ul>
+	 * Enable Current Limiting
+	 * 
+	 * @param enableCurrentLimiting : Takes an SN_BooleanPreference
 	 */
-	public SN_TalonSRX(int deviceNumber, SN_BooleanPreference enableCurrentLimiting) {
-		this(deviceNumber);
-		setDefaultCurrentLimiting(enableCurrentLimiting);
+	public void enableCurrentLimiting(SN_BooleanPreference enableCurrentLimiting) {
+		this.setDefaultCurrentLimiting(enableCurrentLimiting);
+	}
+
+	/**
+	 * Condigure Position PID on TalonSRX
+	 * 
+	 * @param p         : P coefficient
+	 * @param i         : i coefficient
+	 * @param d         : d coefficient
+	 * @param f         : f coefficient
+	 * @param izone     : I Zone - zone to max out integral
+	 * @param tolerance : tolerance - allowable error
+	 * 
+	 */
+	public void setPid(SN_DoublePreference p, SN_DoublePreference i, SN_DoublePreference d, SN_DoublePreference f,
+			SN_IntPreference izone, SN_IntPreference tolerance) {
+		this.selectProfileSlot(PID_SLOT_INDEX, PID_LOOP_INDEX);
+		this.config_kF(PID_SLOT_INDEX, f.getValue(), PID_TIMEOUT_MS);
+		this.config_kP(PID_SLOT_INDEX, p.getValue(), PID_TIMEOUT_MS);
+		this.config_kI(PID_SLOT_INDEX, i.getValue(), PID_TIMEOUT_MS);
+		this.config_kD(PID_SLOT_INDEX, d.getValue(), PID_TIMEOUT_MS);
+
+		this.config_IntegralZone(PID_SLOT_INDEX, izone.getValue());
+
+		this.configAllowableClosedloopError(PID_LOOP_INDEX, tolerance.getValue(), PID_TIMEOUT_MS);
 	}
 
 	/**
 	 * Condigure Position PID on TalonSRX
 	 * 
 	 * @param encoder   : encoder type for PID to use/ encoder type hooked up to
-	 *                  talon
+	 *                  talon/auxillary
 	 * @param p         : P coefficient
 	 * @param i         : i coefficient
 	 * @param d         : d coefficient
 	 * @param f         : f coefficient
-	 * @param izone     : I Zone
-	 * @param tolerance : tolerance
+	 * @param izone     : I Zone - zone to max out integral
+	 * @param tolerance : tolerance - allowable error
+	 * @param phase     : sensor phase - takes boolean for encoder direction
 	 * 
 	 */
 	public void configurePositionPid(FeedbackDevice encoder, SN_DoublePreference p, SN_DoublePreference i,
@@ -98,14 +101,12 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 
 		this.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, PID_TIMEOUT_MS);
 
-		/* Set Motion Magic gains in slot0 - see documentation */
 		this.selectProfileSlot(PID_SLOT_INDEX, PID_LOOP_INDEX);
 		this.config_kF(PID_SLOT_INDEX, f.getValue(), PID_TIMEOUT_MS);
 		this.config_kP(PID_SLOT_INDEX, p.getValue(), PID_TIMEOUT_MS);
 		this.config_kI(PID_SLOT_INDEX, i.getValue(), PID_TIMEOUT_MS);
 		this.config_kD(PID_SLOT_INDEX, d.getValue(), PID_TIMEOUT_MS);
 
-		// izone
 		this.config_IntegralZone(PID_SLOT_INDEX, izone.getValue());
 
 		resetEncoder();
@@ -114,62 +115,27 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 
 	}
 
-	// /**
-	// * Condigure Magic Motion PID on TalonSRX
-	// *
-	// * @param encoder : encoder type for PID to use/ encoder type hooked up to
-	// * talon
-	// * @param p : P coefficient
-	// * @param i : i coefficient
-	// * @param d : d coefficient
-	// * @param f : f coefficient
-	// * @param izone : I Zone
-	// * @param tolerance : tolerance
-	// * @param cv : cruise velocity
-	// * @param accel : accelleration
-	// *
-	// */
-	// public void configureMMPid(FeedbackDevice encoder, SN_DoublePreference p,
-	// SN_DoublePreference i,
-	// SN_DoublePreference d, SN_DoublePreference f, SN_IntPreference izone,
-	// SN_IntPreference tolerance,
-	// SN_IntPreference cv, SN_IntPreference accel) {
-	// this.configSelectedFeedbackSensor(encoder, kPIDLoopIdx, kTimeoutMs);
-	// this.setSensorPhase(true);
-	// this.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10,
-	// kTimeoutMs);
-	// this.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10,
-	// kTimeoutMs);
-
-	// /* Set the peak and nominal outputs */
-	// this.configNominalOutputForward(0, kTimeoutMs);
-	// this.configNominalOutputReverse(0, kTimeoutMs);
-	// this.configPeakOutputForward(.6, kTimeoutMs);
-	// this.configPeakOutputReverse(-.6, kTimeoutMs);
-
-	// /* Set Motion Magic gains in slot0 - see documentation */
-	// this.selectProfileSlot(kSlotIdx, kPIDLoopIdx);
-	// this.config_kF(kSlotIdx, f.getValue(), kTimeoutMs);
-	// this.config_kP(kSlotIdx, p.getValue(), kTimeoutMs);
-	// this.config_kI(kSlotIdx, i.getValue(), kTimeoutMs);
-	// this.config_kD(kSlotIdx, d.getValue(), kTimeoutMs);
-
-	// // izone
-	// this.config_IntegralZone(kSlotIdx, izone.getValue());
-
-	// // Zero the sensor
-	// this.setSelectedSensorPosition(0, kPIDLoopIdx, kTimeoutMs);
-
-	// this.configAllowableClosedloopError(kPIDLoopIdx, tolerance.getValue(),
-	// kTimeoutMs);
-
-	// this.configMotionCruiseVelocity(cv.getValue(), kTimeoutMs);
-	// this.configMotionAcceleration(accel.getValue(), kTimeoutMs);
-
-	// }
-
 	public void resetEncoder() {
 		this.setSelectedSensorPosition(0, PID_LOOP_INDEX, PID_TIMEOUT_MS);
+	}
+
+	public void invert() {
+		this.setInverted(true);
+	}
+
+	/**
+	 * Set Peak/Nominal outputs
+	 * 
+	 * @param peakF : Peak Forward value (default 1)
+	 * @param peakR : peak reverse value (default -1)
+	 * @param nomF  : nominal forward value (default 0)
+	 * @param nomR  : nominal reverse value (default 0)
+	 */
+	public void setOutputs(double peakF, double peakR, double nomF, double nomR) {
+		this.configPeakOutputForward(peakF, PID_TIMEOUT_MS);
+		this.configPeakOutputReverse(peakR, PID_TIMEOUT_MS);
+		this.configNominalOutputForward(nomF, PID_TIMEOUT_MS);
+		this.configNominalOutputReverse(nomR, PID_TIMEOUT_MS);
 	}
 
 	/**
@@ -191,45 +157,51 @@ public class SN_TalonSRX extends WPI_TalonSRX {
 		this.enableCurrentLimit(isEnabled.getValue());
 	}
 
+	/**
+	 * Sets current limiting with the default values
+	 * 
+	 * @param isEnabled : SN_BooleanPreference to enable/disable
+	 */
 	public void setDefaultCurrentLimiting(SN_BooleanPreference isEnabled) {
 		setCurrentLimiting(default_peakAmps, default_timeAtPeak, default_ampsLimit, isEnabled);
 	}
 
-	// TODO: finish these stub routines
-	public void setPositionMode() {
-		// set talon mode to PID
-	}
-
-	public void setPositionSetPoint(double s) {
+	public void setPositionSetpoint(double s) {
 		// set the setpoint for the position PID
+		this.set(ControlMode.Position, s);
 	}
 
-	// return the setpoint of the cascade
-	public double getPositionSetPoint() {
+	public void setPositionMode() {
+		this.set(ControlMode.Position, setpoint);
+	}
+
+	// return the error of the PID loop
+	public double getError() {
+		return this.getClosedLoopError();
 	}
 
 	// return the current position of the cascade
-	public double getPosition() {
+	public int getPosition() {
+		return this.getSensorCollection().getQuadraturePosition();
 	}
 
 	public void setSpeedMode() {
 		// set talon mode to speed mode
 		// set speed to 0
+		this.set(0);
 	}
 
 	public void setSpeed(double s) {
 		// update the commanded speed variable
 
 		// set the speed on the talon
+		this.set(s);
 	}
 
 	// note, this routine only returns the last commanded speed when in speed mode,
 	// not the commanded speed from a PID
-	public double getCommandedSpeed() {
-		// return the commanded speed variable
-	}
-
 	public double getSpeed() {
-		// return the speed from the talon
+		// return the commanded speed variable
+		return this.get();
 	}
 }

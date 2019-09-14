@@ -16,8 +16,6 @@ import frc.robot.RobotPreferences;
 import frcteam3255.robotbase.SN_TalonSRX;
 import frcteam3255.robotbase.Preferences.SN_DoublePreference;
 
-/**
- * Subsytem consisting of the intake devices and methoods
 public class Intake extends Subsystem {
 
 	// TODO: These should be part of the cascade class, and the cascade can look at
